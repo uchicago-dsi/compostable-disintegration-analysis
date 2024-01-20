@@ -1,0 +1,22 @@
+item_id,product_name,product_brand,product_material,material_i,material_ii,material_iii,certification,product_size,product_weight_init_g
+1,12 oz Hot cup / Soup bowl,BÉSICS®,"Paper, PLA lining, adhesive, ink",Fiber,Lined fiber,PLA lined Paper,BPI,"3’’ diameter, 2.5’’ H",8.11
+2,Hot cup lid,BÉSICS® ,CPLA based bio-polymer,Biopolymer,Rigid biopolymer,CPLA,BPI,"3.5’’ diameter, 0.5’’ H",3.57
+3,16 oz PLA cold cup,Greenware® ,"PLA, ink",Biopolymer,Rigid biopolymer,PLA,BPI,"2.5’’ diameter at base, 4’’ diameter at mouth, 5.75’’ H",14.58
+4,Cutlery,BÉSICS®,"CPLA, talc",Biopolymer,Rigid biopolymer,CPLA,BPI,6.5’’ x 1.53’’ (max) x 3/8’’,4.75
+5,"PLA-lined fibre bowl, white ",BÉSICS®,"PLA, bagasse (sugarcane fibre)",,,,,5.5’’ x 5.5’’ x 2’’,10.52
+6,Uncoated paper food tray ,BÉSICS®,"Paper, adhesive, ink",,,,,2 3/16’’ x 3 1/8’’ 5.75’’,11.87
+7,Lined paper food tray with lid,BÉSICS®,"Paper, wax spray coating, adhesive, ink",Fiber,Lined fiber,PLA-lined fibre,,4.75’’ x 6’’ x 3.25’’,29.76
+8,Kraft control,No name,1-ply kraft paper,Positive Control,Fiber,Kraft paper,,10’’ x 5 1/8’’ x N/A,2.85
+9,"Fiber Clamshell, Lined 9x9x3 SKU TO-SC-U9L-LF",World Centric™,"78% sugarcane bagasse, 20% bamboo, 2% PLA",Fiber,Lined fiber,PLA-lined mixed fiber,BPI,"18""x9""x3""",47.78
+10,16oz NoTree Paper Hot Cup SKU CU-SU-16,World Centric™,"90% bamboo, 10% PLA",Fiber,Lined fiber,PLA-lined bamboo paper,BPI,"5.5""x2.5""x3.5""",13.52
+11,14oz PLA Cold Cup SKU CP-CS-14,World Centric™,100% PLA,Bioopolymer,Rigid biopolymer,PLA,BPI,"4.5""2.5""x4""",10.17
+12,PLA Lid: 32oz Burrito Bowl SKU BOL-CS-UBB,World Centric™,100% PLA,Biopolymer,Rigid biopolymer,PLA,BPI,"10""x6.5""x1.25",15.14
+13,"Fiber Cutlery, Spoon SP-FB-6-LF",World Centric™,"80% sugarcane bagasse, 20% bamboo",Fiber,Unlined fiber,Mixed fiber,BPI,"6""x1.25""1.25""",3.99
+14,3Gallon Food Scrap Bag BG-CS-3,World Centric™,"70% PBAT, 30% starch",Biopolymer,Film,PBAT and cornstarch,BPI,"8.75""x15""x0.1""",7.16
+15,"8"" Kraft straw ST-PA-8-K",World Centric™,100% unbleached FSC paper,Fiber,Unlined fiber,Paper,BPI,"8""x0.25""0.25""",1.07
+16,TPLA Spoon SP-PS-6,World Centric™,"70% PLA, 30% Talc",Biopolymer,Rigid biopolymer,TPLA,BPI,"6""x1.25""0.375""",4.97
+17,Wrapper for TPLA Spoon SP-PS-I,World Centric™,"60% PBAT, 30% starch, 10% PLA",Biopolymer,Film,Mixed biopolymer,BPI,"8.25""x2""x0.1""",0.82
+18,Large brown bag,Sun & Swell/ Elevate,Bio resin & wood cellulose,Biopolymer,Film,Not disclosed,"ASTM D6400, EN13432. The zipper is additionally certified compostable by TUV.",10’’ x 6.75’’ x N/A,12.72
+19,Small zippered clear colour bag,Sun & Swell / Elevate,Bio resin & wood cellulose,Biopolymer,Film,Not disclosed,"ASTM D6400, EN13432. The zipper is additionally certified compostable by TUV.",5 7/8’’ x 4 5/8’’ x N/A,4.83
+20,Printed small bag with brown background and logo,Sun & Swell / TIPA,Bio based & fossil based polymers,Biopolymer,Film,Not disclosed,"EN 13432, ASTM D6400, AS 4736/AS 5810 and TÜV OK Compost Home",4 7/8’’ x 4 1/8’’ x N/A,4.57
+21,Large natural clear colour bag,Sun & Swell / Elk,Bio-based carbon ,Biopolymer,Film,Not disclosed,Not yet certified (has gone through the process but doesn't have paperwork settled yet),8’’ x 6’’ x N/A,8.4

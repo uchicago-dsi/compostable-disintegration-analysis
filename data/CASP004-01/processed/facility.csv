@@ -1,0 +1,6 @@
+facility_id,facility_name,facility_type,volume_per_year,volume_per_year_unit,calculated_volume_per_year_range,min_pfrp_duration_days,max_pfrp_duration_days,min_active_composting,max_active_composting,min_curing,max_curing,comments_on_process__duration,how_is_temp_checked,how_often,moisture,moisture_checked_frequency,c_to_n,maturity,moisture_control
+44547,CASP004-01,,90000,tons,,22,30,22,30,30,40,"Covered Aerated Static Pile (CASP) with positive aeration. Biofilter cover. System was built by ECS  1.5 years ago. Target 22 days active CASP / 40 days curing 
+Practically, CASP residence is from 22 to 30 days depending on moving the material after the 22nd day. 
+Material has to be cured for 30 days, so a minimum of 62 days total unless the material is proven stable enough to screen before this (permitting requirement). 
+
+",Instrumentation,"Daily during PFRP, weekly thereafter",Sprinkling,"Entering CASP, or between CASP and curing",Lab,Lab,Squeeze test
