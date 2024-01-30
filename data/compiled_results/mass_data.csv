@@ -1,0 +1,239 @@
+Facility Name,Trial Stage,Bag Set,Bag number,Lined Hot Cup D,Hot Cup Lid A,Molded Fiber Bowl C,Spoon C,Coffee Pod,Spoon A,Straw A,Momlded Fiber Bowl B,Cold Cup B,Fiber Clamshell,Butcher Paper,Navel orange peel,Cellulose bag,Lined Hot Cup D.1,Hot Cup Lid A.1,Bag B,Molded Fiber Bowl C.1,Cold Cup Lid B,Spoon C.1
+Facility 1 ( Windrow),First Removal,A (blue),10,,,,,0.059,0.026,0.231,0.909,,,0.986,,0.546,,,,,,
+Facility 1 ( Windrow),First Removal,A (blue),6,,,,,0.022,0.175,0.443,0.78,,,0.696,0.007,0.572,,,,,,
+Facility 1 ( Windrow),First Removal,A (blue),7,,,,,0.018,0.013,0.096,0.972,,,0.933,0.023,0.313,,,,,,
+Facility 1 ( Windrow),First Removal,A (blue),8,,,,,0.22,0.424,0.859,0.897,,,0.909,0,0.412,,,,,,
+Facility 1 ( Windrow),First Removal,A (blue),9,,,,,0.028,0.015,0.075,,,,0.928,0.05,0.65,,,,,,
+Facility 1 ( Windrow),First Removal,B (green),10,0.9226075460185091,,0.8761277242777497,,,,,,0,0.924,0.476,0.02,0.387,0.923,,1.017,0.876,,
+Facility 1 ( Windrow),First Removal,B (green),6,0.7427234821519374,,1.033654333502281,,,,,,0,0.603,0.603,0.059,0.38,0.743,,,1.034,,
+Facility 1 ( Windrow),First Removal,B (green),7,0.8319943048916913,,0.9576279776989358,,,,,,0,0.871,0.506,0.06,0.588,0.832,,,0.958,,
+Facility 1 ( Windrow),First Removal,B (green),8,0.9921692260754601,,0.8314242270653825,,,,,,0,0.946,1.249,0.06,0.566,0.992,,,0.831,,
+Facility 1 ( Windrow),First Removal,B (green),9,0.7904098444015053,,0.758134820070958,,,,,,0,0.848,0.888,0.05,0.718,0.79,,,0.758,,
+Facility 1 ( Windrow),First Removal,C (yellow),10,,0,,0.02494194147700882,,,,,,,0.909,0.028,0.526,,0,,,0,0.025
+Facility 1 ( Windrow),First Removal,C (yellow),6,,0,,0.003971202972596376,,,,,,,1.016,0.03,0.484,,0,,,0,0.004
+Facility 1 ( Windrow),First Removal,C (yellow),7,,0,,0,,,,,,,1.002,0.057,0.682,,0,,,0,0
+Facility 1 ( Windrow),First Removal,C (yellow),8,,0,,0.013341848583372038,,,,,,,1.057,0.038,0.652,,0,,,0,0.013
+Facility 1 ( Windrow),First Removal,C (yellow),9,,0.6870854467420991,,0.9506502554575009,,,,,,,0.712,0.001,0.618,,0.687,,,0,0.951
+Facility 1 ( Windrow),Second Removal,A (blue),1,,,,,0.042,0.014,0.051,1.039,,,0.705,0.017,0.265,,,,,,
+Facility 1 ( Windrow),Second Removal,A (blue),2,,,,,0.018,0.013,0.077,0.953,,,1.075,0.04,,,,,,,
+Facility 1 ( Windrow),Second Removal,A (blue),3,,,,,0,0.017,0.105,1.092,,,0.903,0.049,0.8,,,,,,
+Facility 1 ( Windrow),Second Removal,A (blue),4,,,,,0.03,0.006,0.056,0.703,,,,0.046,0.627,,,,,,
+Facility 1 ( Windrow),Second Removal,A (blue),5,,,,,,0.055,0.252,0.612,,,,0.014,0.317,,,,,,
+Facility 1 ( Windrow),Second Removal,B (green),1,0,,0.7343537759756716,,,,,,0,0.766,0.456,0.042,0.094,0,0,0.949,0.734,,
+Facility 1 ( Windrow),Second Removal,B (green),2,1.0028475541543784,,0,,,,,,0,0.566,0.792,0.072,0.417,1.003,0,0.595,0,,
+Facility 1 ( Windrow),Second Removal,B (green),3,,,0,,,,,,0,0.16,,0.018,0.075,,0,1.053,0,,
+Facility 1 ( Windrow),Second Removal,B (green),4,0.7340892911624124,,0,,,,,,0,0.495,0,0.035,0.363,0.734,0,0.998,0,,
+Facility 1 ( Windrow),Second Removal,B (green),5,0.881694294721855,,0.7617840851495186,,,,,,0,0.794,0.414,0.041,0.482,0.882,0,0.73,0.762,,
+Facility 1 ( Windrow),Second Removal,C (yellow),1,,0,,0.5318625174175567,,,,,,,0.448,0,0.315,,,,,0,0.532
+Facility 1 ( Windrow),Second Removal,C (yellow),2,,0,,0,,,,,,,0.849,0.036,0,,,,,0,0
+Facility 1 ( Windrow),Second Removal,C (yellow),3,,0,,0.5797607988852763,,,,,,,0,0.029,0,,,,,0,0.58
+Facility 1 ( Windrow),Second Removal,C (yellow),4,,0,,0,,,,,,,1.041,0.023,0,,,,,0,0
+Facility 1 ( Windrow),Second Removal,C (yellow),5,,0,,0.45365768694844394,,,,,,,0.88,0.021,0.435,,,,,0,0.454
+Facility 2 (CASP),First Removal,A (blue),2,,,,,0.013,0.011,0,1.456,,,1.764,0,1.162,,,,,,
+Facility 2 (CASP),First Removal,A (blue),4,,,,,0.04,0.051,0.013,1.168,,,0,0.092,1.198,,,,,,
+Facility 2 (CASP),First Removal,A (blue),5,,,,,0.033,0.069,0.013,1.193,,,1.299,0.033,1.071,,,,,,
+Facility 2 (CASP),First Removal,A (blue),7,,,,,0,0.036,0.003,0.951,,,1.102,0.044,0.88,,,,,,
+Facility 2 (CASP),First Removal,A (blue),9,,,,,0.072,0.048,0.005,1.12,,,1.017,0,0.908,,,,,,
+Facility 2 (CASP),First Removal,B (green),(blank),,,,,,,,,,0.725,,,,,,0.013,,,
+Facility 2 (CASP),First Removal,B (green),1,1.2914675073731314,0,1.6151039026862646,,,,,,0,1.983,1.523,0.13,0.937,1.291,0,0,1.615,,
+Facility 2 (CASP),First Removal,B (green),2,0.832116342926879,0,1.5332083122149014,,,,,,0,1.797,1.576,0,1.119,0.832,0,0,1.533,,
+Facility 2 (CASP),First Removal,B (green),4,1.384490999694905,0,1.27636087176888,,,,,,0,1.352,1.045,0,0.784,1.384,0,,1.276,,
+Facility 2 (CASP),First Removal,B (green),5,0.9315773416048002,0,1.0631525595539788,,,,,,0,1.077,1.047,0.039,1.024,0.932,0,0.134,1.063,,
+Facility 2 (CASP),First Removal,B (green),8,0.8882538391131903,0,1.2401419158641664,,,,,,0,1.065,1.112,0,0.941,0.888,0,0.077,1.24,,
+Facility 2 (CASP),First Removal,C (yellow),1,,,,0.005155596841616349,,,,,,,1.311,0.055,0.873,,,,,0,0.005
+Facility 2 (CASP),First Removal,C (yellow),2,,,,0,,,,,,,1.184,0.02,0.946,,,,,0,0
+Facility 2 (CASP),First Removal,C (yellow),4,,,,0,,,,,,,1.772,0.08,1.041,,,,,0,0
+Facility 2 (CASP),First Removal,C (yellow),5,,,,0,,,,,,,1.224,0.021,0.063,,,,,0,0
+Facility 2 (CASP),First Removal,C (yellow),9,,,,0,,,,,,,1.349,0,0.984,,,,,0.016,0
+Facility 2 (CASP),Second Removal,A (blue),10,,,,,0,0,0,0.882,,,1.071,0,0.891,,,,,,
+Facility 2 (CASP),Second Removal,A (blue),3,,,,,0.006,,0,1.249,,,1.344,0,1.076,,,,,,
+Facility 2 (CASP),Second Removal,A (blue),6,,,,,0,0,0,1.112,,,1.166,0,0.975,,,,,,
+Facility 2 (CASP),Second Removal,A (blue),8,,,,,0,0,0,0.995,,,1.088,0,,,,,,,
+Facility 2 (CASP),Second Removal,B (green),3,1.1199735584257096,0,1.0951748606183478,,,,,,0,1.728,1.342,0,1.008,1.12,0,0,1.095,,
+Facility 2 (CASP),Second Removal,B (green),6,1.0006813790297977,0,1.573563101875317,,,,,,0,1.278,1.309,0,0.856,1.001,0,0,1.574,,
+Facility 2 (CASP),Second Removal,B (green),7,0.9472287196176145,0,1.0853218449062343,,,,,,0,1.267,1.173,0,1.066,0.947,0,0,1.085,,
+Facility 2 (CASP),Second Removal,B (green),9,0.890084409641005,0,1.1253117080587938,,,,,,0,1.298,0.992,0,1.226,0.89,0,0,1.125,,
+Facility 2 (CASP),Second Removal,C (yellow),10,,,,0,,,,,,,0.783,0,0.808,,,,,0,0
+Facility 2 (CASP),Second Removal,C (yellow),3,,,,0,,,,,,,1.384,0,0.841,,,,,0,0
+Facility 2 (CASP),Second Removal,C (yellow),6,,,,0,,,,,,,1.409,0,0.632,,,,,0,0
+Facility 2 (CASP),Second Removal,C (yellow),7,,,,0,,,,,,,1.245,0,0,,,,,0,0
+Facility 2 (CASP),Second Removal,C (yellow),8,,,,0,,,,,,,0.72,0,0.883,,,,,0,0
+Facility 5 (EASP),First Removal,A (blue),1,,,,,0.001,0.008,0,1.15,,,1.097,0.099,0.657,,,,,,
+Facility 5 (EASP),First Removal,A (blue),10,,,,,0.053,0.08,0.002,1.058,,,1.163,0.133,0.509,,,,,,
+Facility 5 (EASP),First Removal,A (blue),4,,,,,0.018,0.019,0,1.069,,,1.183,0.131,0.583,,,,,,
+Facility 5 (EASP),First Removal,A (blue),6,,,,,0.005,0.023,0,1.154,,,1.16,0.096,0.874,,,,,,
+Facility 5 (EASP),First Removal,A (blue),8,,,,,0.003,0.005,0.003,0.911,,,1.183,0.12,0.779,,,,,,
+Facility 5 (EASP),First Removal,B (green),2,1.0449506762941116,0,1.068018246325393,,,,,,0,0.112,1.068,0.108,0.948,1.045,0,0.215,1.068,,
+Facility 5 (EASP),First Removal,B (green),5,0.9586087663988612,0,1.1267105930055754,,,,,,0,1.192,1.212,0.123,0.936,0.959,0,0.225,1.127,,
+Facility 5 (EASP),First Removal,B (green),6,1.123055018814197,0,1.3255955397871262,,,,,,0,1.205,1.306,0.128,0.886,1.123,0,0.185,1.326,,
+Facility 5 (EASP),First Removal,B (green),7,1.0470863419098952,0,1.2051697921946276,,,,,,0,1.317,1.17,0.089,0.469,1.047,0,0.015,1.205,,
+Facility 5 (EASP),First Removal,B (green),8,1.0583748601647516,0,1.625139381652306,,,,,,0,1.153,1.228,0.12,0.883,1.058,0,0.036,1.625,,
+Facility 5 (EASP),First Removal,C (yellow),10,,,,1.0050627032048305,,,,,,,1.268,0.128,0.744,,,,,0,1.005
+Facility 5 (EASP),First Removal,C (yellow),3,,,,0.08175801207617277,,,,,,,1.14,0.122,0.747,,,,,0,0.082
+Facility 5 (EASP),First Removal,C (yellow),7,,,,0.3552136553646074,,,,,,,1.165,0.106,0.877,,,,,0,0.355
+Facility 5 (EASP),First Removal,C (yellow),8,,,,0.5745355318160704,,,,,,,1.1,0.114,0.699,,,,,0.331,0.575
+Facility 5 (EASP),First Removal,C (yellow),9,,,,0.7363098002786808,,,,,,,1.183,0.143,0.685,,,,,0,0.736
+Facility 5 (EASP),Second Removal,A (blue),2,,,,,0.012,0,0.011,0.372,,,0.073,0,0.126,,,,,,
+Facility 5 (EASP),Second Removal,A (blue),3,,,,,0.02,,0.017,0.739,,,1.421,0.038,0.408,,,,,,
+Facility 5 (EASP),Second Removal,A (blue),5,,,,,0.005,0,0,0.683,,,1.606,0.069,0.027,,,,,,
+Facility 5 (EASP),Second Removal,A (blue),7,,,,,0,0,0,0.269,,,0,0.063,0.302,,,,,,
+Facility 5 (EASP),Second Removal,A (blue),9,,,,,0.009,0,0,0.043,,,0.138,0.029,0.257,,,,,,
+Facility 5 (EASP),Second Removal,B (green),1,0.33661141055629007,0,0,,,,,,0,0.77,0,0,0.085,0.337,0,0,0,,
+Facility 5 (EASP),Second Removal,B (green),10,0,0,0.19322858590978206,,,,,,0,0.455,0,0,0.24,0,0,0,0.193,,
+Facility 5 (EASP),Second Removal,B (green),3,0.732167192108207,0,0,,,,,,0,0.64,1.051,0.078,0.159,0.732,0,0,0,,
+Facility 5 (EASP),Second Removal,B (green),4,0.716576833112987,0,1.0198479472883935,,,,,,0,0.31,,0.039,0.214,0.717,0,0,1.02,,
+Facility 5 (EASP),Second Removal,B (green),8,0,0,0.3116776482513939,,,,,,0,0.45,0.272,0.022,0.182,0,0,0,0.312,,
+Facility 5 (EASP),Second Removal,C (yellow),1,,,,0,,,,,,,0,0.074,0,,,,,0,0
+Facility 5 (EASP),Second Removal,C (yellow),2,,,,0,,,,,,,0.015,0,0.027,,,,,0,0
+Facility 5 (EASP),Second Removal,C (yellow),4,,,,0,,,,,,,0.19,0.07,0,,,,,0,0
+Facility 5 (EASP),Second Removal,C (yellow),5,,,,0,,,,,,,0.714,0.058,0.36,,,,,0,0
+Facility 5 (EASP),Second Removal,C (yellow),6,,,,0,,,,,,,0.51,0.004,0.207,,,,,0,0
+Facility 6 (CASP),First Removal,A (blue),10,,,,,0,0.004,0,1.3,,,1.441,0.018,1.001,,,,,,
+Facility 6 (CASP),First Removal,A (blue),6,,,,,0.008,0,0,1.192,,,1.09,0.022,0.135,,,,,,
+Facility 6 (CASP),First Removal,A (blue),7,,,,,0.01,0.125,0.154,1.628,,,1.254,0.103,0.925,,,,,,
+Facility 6 (CASP),First Removal,A (blue),8,,,,,0,0,0,1.178,,,1.278,0.096,0.839,,,,,,
+Facility 6 (CASP),First Removal,A (blue),9,,,,,0.005,0.032,0.007,1.325,,,1.249,0.073,0.859,,,,,,
+Facility 6 (CASP),First Removal,B (green),10,0.6540628495881217,,1.138449062341612,,,,,,0,1.095,1.585,0.049,0.944,0.654,,0.724,1.138,,
+Facility 6 (CASP),First Removal,B (green),6,1.245245601545815,,1.4080385200202739,,,,,,2.144,1.797,1.129,0.115,0.632,1.245,,2.636,1.408,,
+Facility 6 (CASP),First Removal,B (green),7,0.9234313027560256,,0.7801824632539281,,,,,,0,1.426,1.259,0.079,0.12,0.923,,0,0.78,,
+Facility 6 (CASP),First Removal,B (green),8,1.1376995830367131,,1.3362392295995946,,,,,,0,1.206,1.445,0.06,0.687,1.138,,0,1.336,,
+Facility 6 (CASP),First Removal,B (green),9,1.0843689616597174,,1.3741307653319819,,,,,,0,1.712,1.114,0.091,0.949,1.084,,0.411,1.374,,
+Facility 6 (CASP),First Removal,C (yellow),10,,0.983222785797893,,1.0439386901997212,,,,,,,1.235,0.094,0.929,,0.983,,,0,1.044
+Facility 6 (CASP),First Removal,C (yellow),6,,0.4454935622317597,,1.034254528564793,,,,,,,1.396,0.228,0.695,,0.445,,,0.229,1.034
+Facility 6 (CASP),First Removal,C (yellow),7,,0.3877877487319548,,0.7413957268927076,,,,,,,1.454,0.135,0.903,,0.388,,,0,0.741
+Facility 6 (CASP),First Removal,C (yellow),8,,0.03183769020678892,,0.8243032977241056,,,,,,,1.2,0.096,0.4,,0.032,,,0,0.824
+Facility 6 (CASP),First Removal,C (yellow),9,,0.3557159578618806,,1.0048536925220621,,,,,,,1.241,0.122,0.578,,0.356,,,0,1.005
+Facility 6 (CASP),Second Removal,A (blue),1,,,,,0,0,0,1.5,,,,0.004,0.581,,,,,,
+Facility 6 (CASP),Second Removal,A (blue),2,,,,,0,0,0,0.488,,,1.064,0,0.614,,,,,,
+Facility 6 (CASP),Second Removal,A (blue),4,,,,,0,0.018,0,1.146,,,1.27,0,0.059,,,,,,
+Facility 6 (CASP),Second Removal,A (blue),5,,,,,0,0,0,0,,,,0.037,,,,,,,
+Facility 6 (CASP),Second Removal,B (green),1,0,,0,,,,,,0,0.284,0,0,0,0,0,0.182,0,,
+Facility 6 (CASP),Second Removal,B (green),2,0,,1.3928940699442474,,,,,,0,0.708,1.369,0.041,0,0,0,0,1.393,,
+Facility 6 (CASP),Second Removal,B (green),3,0.18513169937963997,,0,,,,,,0,0.945,1.283,0.017,,0.185,0,0,0,,
+Facility 6 (CASP),Second Removal,B (green),4,0,,1.0747085656360873,,,,,,0,0.562,0,0,,0,0,0,1.075,,
+Facility 6 (CASP),Second Removal,B (green),5,0,,0,,,,,,0,1.62,1.181,0.029,0.064,0,0,0,0,,
+Facility 6 (CASP),Second Removal,C (yellow),1,,0,,0,,,,,,,0,0.024,0.382,,,,,0,0
+Facility 6 (CASP),Second Removal,C (yellow),2,,0,,0,,,,,,,1.101,0,0.911,,,,,0,0
+Facility 6 (CASP),Second Removal,C (yellow),3,,0,,0,,,,,,,1.376,0.074,0,,,,,0,0
+Facility 6 (CASP),Second Removal,C (yellow),4,,0,,0,,,,,,,0,0.041,0,,,,,0,0
+Facility 6 (CASP),Second Removal,C (yellow),5,,0,,0,,,,,,,1.163,0.043,1.373,,,,,0,0
+Facility 7 (CASP),First Removal,A (blue),1,,,,,0.473,0.808,0.553,0.372,,,0.421,,0.477,,,,,,
+Facility 7 (CASP),First Removal,A (blue),10,,,,,0.877,1.001,0.781,0.668,,,0.405,,0.475,,,,,,
+Facility 7 (CASP),First Removal,A (blue),4,,,,,0.369,0.299,0.442,0.527,,,0.567,,0.46,,,,,,
+Facility 7 (CASP),First Removal,A (blue),5,,,,,0.587,0.814,0.616,0.886,,,0.619,,0.697,,,,,,
+Facility 7 (CASP),First Removal,A (blue),7,,,,,0.378,0.774,0.824,0.915,,,0.866,,0.75,,,,,,
+Facility 7 (CASP),First Removal,B (green),2,0.30567476863622495,0.24241123683183768,0.40871768879878356,,,,,,,0.18,0.6,,0.436,0.306,0,0.971,0.409,,
+Facility 7 (CASP),First Removal,B (green),3,0.6736194447269399,0,0.5510086163203244,,,,,,0.977,0.659,0.133,,0.768,0.674,0,1.01,0.551,,
+Facility 7 (CASP),First Removal,B (green),4,0.7024204210312215,0,1.1232742017232642,,,,,,0,0.409,0,,0.121,0.702,0,,1.123,,
+Facility 7 (CASP),First Removal,B (green),8,0,0,0.3925088697415104,,,,,,0,0.213,0.673,,0.43,0,0,0,0.393,,
+Facility 7 (CASP),First Removal,B (green),9,0.7223736397843995,0,0.8618347693867209,,,,,,0.88,,,,,0.722,0,1.043,0.862,,
+Facility 7 (CASP),First Removal,C (yellow),10,,,,0,,,,,,,1.335,,0.871,,,,,0,0
+Facility 7 (CASP),First Removal,C (yellow),5,,,,0.18173478866697626,,,,,,,0.25,,0.748,,,,,0,0.182
+Facility 7 (CASP),First Removal,C (yellow),7,,,,0,,,,,,,1.165,,0.91,,,,,0,0
+Facility 7 (CASP),First Removal,C (yellow),8,,,,0.14397352531351598,,,,,,,0.866,,0.169,,,,,0.026,0.144
+Facility 7 (CASP),Second Removal,A (blue),2,,,,,0,0.247,0.37,0.172,,,1.637,,0.27,,,,,,
+Facility 7 (CASP),Second Removal,A (blue),3,,,,,0.983,0.824,0.319,0.673,,,0.692,,0.43,,,,,,
+Facility 7 (CASP),Second Removal,A (blue),6,,,,,0,0,0,0.461,,,0.49,,0,,,,,,
+Facility 7 (CASP),Second Removal,A (blue),8,,,,,1.025,0.924,0.251,0.254,,,0.707,,0.412,,,,,,
+Facility 7 (CASP),Second Removal,A (blue),9,,,,,0,0.1,0.049,0.5,,,0.393,,0.499,,,,,,
+Facility 7 (CASP),Second Removal,B (green),1,0,0,1.3094779523568172,,,,,,0,0,0.505,,0,0,0,1.025,1.309,,
+Facility 7 (CASP),Second Removal,B (green),5,0.5130478999288113,0,0.9710086163203244,,,,,,0,0.509,0.312,,0,0.513,0,1.023,0.971,,
+Facility 7 (CASP),Second Removal,B (green),6,0.457520593918438,0,0,,,,,,0,0,1.736,,0,0.458,0,0.68,0,,
+Facility 7 (CASP),Second Removal,B (green),7,0,0,0,,,,,,0,0.362,0,,0.122,0,0,0,0,,
+Facility 7 (CASP),Second Removal,C (yellow),1,,,,0,,,,,,,0,,0,,,,,0,0
+Facility 7 (CASP),Second Removal,C (yellow),2,,,,0,,,,,,,1.091,,0,,,,,0,0
+Facility 7 (CASP),Second Removal,C (yellow),3,,,,0,,,,,,,1.183,,0,,,,,0,0
+Facility 7 (CASP),Second Removal,C (yellow),6,,,,0,,,,,,,0.914,,0.131,,,,,0,0
+Facility 7 (CASP),Second Removal,C (yellow),9,,,,0,,,,,,,1.482,,0,,,,,0,0
+Facility 8 (ASP),First Removal,A (blue),1,,,,,,0.105,0,1.212,,,1.172,0.092,0.737,,,,,,
+Facility 8 (ASP),First Removal,A (blue),2,,,,,0.094,0.188,0,1.24,,,1.229,0.169,,,,,,,
+Facility 8 (ASP),First Removal,A (blue),3,,,,,0.092,0.076,0,0.913,,,1.124,0.099,0.806,,,,,,
+Facility 8 (ASP),First Removal,A (blue),4,,,,,0.045,0.159,0,1.219,,,,0.162,0.852,,,,,,
+Facility 8 (ASP),First Removal,A (blue),5,,,,,0,0.069,0,1.249,,,1.21,0.166,0.394,,,,,,
+Facility 8 (ASP),First Removal,B (green),1,1.019322688904709,0,1.1136340598074,,,,,,0,0.66,,0.122,,1.019,0,,1.114,,
+Facility 8 (ASP),First Removal,B (green),2,0.9015559849486424,0,1.1860111505321846,,,,,,0.169,1.115,,0.176,,0.902,0,,1.186,,
+Facility 8 (ASP),First Removal,B (green),3,0.984236753788264,0,0,,,,,,0,,,0.165,,0.984,0,0,0,,
+Facility 8 (ASP),First Removal,B (green),4,1.0660022373639786,0,1.0391282311201218,,,,,,0,1.316,1.239,0.132,,1.066,0,,1.039,,
+Facility 8 (ASP),First Removal,B (green),5,0.9152852639072512,0,0,,,,,,0,1.129,,0.094,,0.915,0,,0,,
+Facility 8 (ASP),First Removal,C (yellow),1,,,,0.443729679516953,,,,,,,1.181,0.095,0.894,,,,,0,0.444
+Facility 8 (ASP),First Removal,C (yellow),2,,,,0.3845448211797492,,,,,,,1.169,0.098,0.753,,,,,0,0.385
+Facility 8 (ASP),First Removal,C (yellow),3,,,,0.5736646539712029,,,,,,,1.157,0.132,0.939,,,,,0,0.574
+Facility 8 (ASP),First Removal,C (yellow),4,,,,0.5272294472828611,,,,,,,1.215,0.109,0.937,,,,,0,0.527
+Facility 8 (ASP),First Removal,C (yellow),5,,,,0.7705527171388759,,,,,,,1.111,0.1,0.957,,,,,0,0.771
+Facility 8 (ASP),Second Removal,A (blue),10,,,,,0.074,0,0,1.132,,,,0.101,0.798,,,,,,
+Facility 8 (ASP),Second Removal,A (blue),6,,,,,0,0,0,1.112,,,0.475,0.054,0.189,,,,,,
+Facility 8 (ASP),Second Removal,A (blue),7,,,,,0.054,0,0,1.085,,,0,0.072,,,,,,,
+Facility 8 (ASP),Second Removal,A (blue),8,,,,,0,0,0,1.123,,,1.152,0.105,,,,,,,
+Facility 8 (ASP),Second Removal,A (blue),9,,,,,0.067,0,0,1.136,,,1.184,0.054,,,,,,,
+Facility 8 (ASP),Second Removal,B (green),10,0.7767720939692871,0,1.0725798276735936,,,,,,0,1.08,0.816,0.094,,0.777,0,0,1.073,,
+Facility 8 (ASP),Second Removal,B (green),6,0.955252720431201,0,1.1238520020273697,,,,,,0,1.072,1.136,0.126,,0.955,0,0,1.124,,
+Facility 8 (ASP),Second Removal,B (green),7,0.6763958100274586,0,0.8913329954384187,,,,,,0,1.074,0.721,0.071,0.242,0.676,0,0,0.891,,
+Facility 8 (ASP),Second Removal,B (green),8,0.8466388691142074,0,1.1270146984287888,,,,,,0,0.67,1.213,0.088,0.055,0.847,0,0,1.127,,
+Facility 8 (ASP),Second Removal,B (green),9,0.8512152954337436,0,1.368474404460213,,,,,,0,0.992,0.974,0.076,0.461,0.851,0,0,1.368,,
+Facility 8 (ASP),Second Removal,C (yellow),10,,,,0.2341267998142127,,,,,,,1.094,0.086,0.78,,,,,0,0.234
+Facility 8 (ASP),Second Removal,C (yellow),6,,,,0.06667440780306548,,,,,,,0.979,0.097,0.337,,,,,0,0.067
+Facility 8 (ASP),Second Removal,C (yellow),7,,,,0.03633302368787737,,,,,,,0.971,0.076,0.283,,,,,0,0.036
+Facility 8 (ASP),Second Removal,C (yellow),8,,,,0,,,,,,,0.962,0.131,0.881,,,,,0,0
+Facility 8 (ASP),Second Removal,C (yellow),9,,,,0.010241523455643288,,,,,,,1.056,0.097,0.955,,,,,0.028,0.01
+Facility 9 (EASP),First Removal,A (blue),10,,,,,0,0.014,0,0.978,,,1.706,0,0.684,,,,,,
+Facility 9 (EASP),First Removal,A (blue),2,,,,,0.024,0.028,0.022,0.769,,,1.028,0,0.824,,,,,,
+Facility 9 (EASP),First Removal,A (blue),4,,,,,0.049,0.059,0,,,,0,0,0.957,,,,,,
+Facility 9 (EASP),First Removal,A (blue),6,,,,,0.006,0.267,0.053,0.994,,,1.033,0.096,0.823,,,,,,
+Facility 9 (EASP),First Removal,A (blue),9,,,,,0.019,0.367,0.048,1.098,,,1.401,0,0.908,,,,,,
+Facility 9 (EASP),First Removal,B (green),1,0.9683718092138718,0,1.1431322858590978,,,,,,0,1.103,1.083,0.147,0.907,0.968,0,0,1.143,,
+Facility 9 (EASP),First Removal,B (green),2,1.0197498220278656,0,1.0164419665484035,,,,,,0,1.177,1.152,0.096,0.91,1.02,0,0,1.016,,
+Facility 9 (EASP),First Removal,B (green),4,1.0113902166175128,0,1.111109984794729,,,,,,0,1.414,1.058,0.067,0.996,1.011,0,0,1.111,,
+Facility 9 (EASP),First Removal,B (green),5,1.0195972744838808,0,1.144835276229093,,,,,,0,1.19,1.12,0.218,0.982,1.02,0,0,1.145,,
+Facility 9 (EASP),First Removal,B (green),6,0.9140953930641718,0,1.0191180942726814,,,,,,0,0.662,1.091,0.055,0.535,0.914,0,0,1.019,,
+Facility 9 (EASP),First Removal,C (yellow),1,,,,0,,,,,,,1.178,0.081,0.615,,,,,0,0
+Facility 9 (EASP),First Removal,C (yellow),2,,,,0,,,,,,,1.082,0.115,0.902,,,,,0,0
+Facility 9 (EASP),First Removal,C (yellow),3,,,,0,,,,,,,1.073,0.186,0.969,,,,,0,0
+Facility 9 (EASP),First Removal,C (yellow),4,,,,0,,,,,,,1.208,0.157,0.838,,,,,0,0
+Facility 9 (EASP),First Removal,C (yellow),5,,,,0.024767765908035293,,,,,,,1.292,0.156,0.769,,,,,0,0.025
+Facility 9 (EASP),Second Removal,A (blue),1,,,,,0.034,0.237,0.066,1.09,,,1.116,0.052,0.983,,,,,,
+Facility 9 (EASP),Second Removal,A (blue),3,,,,,0.018,0.074,0,1.131,,,1.12,0.134,0.855,,,,,,
+Facility 9 (EASP),Second Removal,A (blue),5,,,,,0,0,0.003,1.133,,,1.252,0.148,0.391,,,,,,
+Facility 9 (EASP),Second Removal,A (blue),7,,,,,0.022,0.027,0,1.09,,,1.23,0.048,,,,,,,
+Facility 9 (EASP),Second Removal,A (blue),8,,,,,0.006,0,0,1.08,,,1.148,0.075,0.146,,,,,,
+Facility 9 (EASP),Second Removal,B (green),10,0.8450828841655649,0,1.0438114546376078,,,,,,0,1.04,1.015,0.04,0.313,0.845,0,0,1.044,,
+Facility 9 (EASP),Second Removal,B (green),3,0.8746465981897692,0,1.0933502280790675,,,,,,0,1.068,1.167,0.043,0.313,0.875,0,0,1.093,,
+Facility 9 (EASP),Second Removal,B (green),7,0.8652496694803214,0,0.8231221490116575,,,,,,0,1.117,1.132,0.059,0.186,0.865,0,0,0.823,,
+Facility 9 (EASP),Second Removal,B (green),8,0.8605206956168006,0,0.9758438925494172,,,,,,0,1.087,1.006,0.166,0.489,0.861,0,0,0.976,,
+Facility 9 (EASP),Second Removal,B (green),9,0.8835858842672634,0,0.8604967055245819,,,,,,0,1.099,1.046,0.124,0.235,0.884,0,0,0.86,,
+Facility 9 (EASP),Second Removal,C (yellow),10,,,,0,,,,,,,1.111,0.051,0.717,,,,,0,0
+Facility 9 (EASP),Second Removal,C (yellow),6,,,,0,,,,,,,1.072,0.108,0.835,,,,,0,0
+Facility 9 (EASP),Second Removal,C (yellow),7,,,,0,,,,,,,0,0.103,0.939,,,,,0,0
+Facility 9 (EASP),Second Removal,C (yellow),8,,,,0,,,,,,,1.269,0.106,0.991,,,,,0,0
+Facility 9 (EASP),Second Removal,C (yellow),9,,,,0,,,,,,,,0.121,0.925,,,,,0,0
+Facility 10 (Windrow),First Removal,A (blue),2,,,,,0.067,0.023,0,0.918,,,1.596,0.071,,,,,,,
+Facility 10 (Windrow),First Removal,A (blue),4,,,,,0.525,0.673,0.056,0.049,,,0.235,0.095,0.696,,,,,,
+Facility 10 (Windrow),First Removal,A (blue),6,,,,,0.761,0.412,0.378,0.424,,,1.397,0.027,0.784,,,,,,
+Facility 10 (Windrow),First Removal,A (blue),7,,,,,0.021,0,0,0,,,0.952,0.04,0.846,,,,,,
+Facility 10 (Windrow),First Removal,A (blue),9,,,,,0.198,,0,0.872,,,1.009,0.04,0.863,,,,,,
+Facility 10 (Windrow),First Removal,B (green),10,0.43183158751144113,0,0,,,,,,0,0.386,0.131,0.061,0.667,0.432,0,0.984,0,,
+Facility 10 (Windrow),First Removal,B (green),2,0.5049018610800367,0,0.918520020273695,,,,,,0,0.469,0.826,0,0.237,0.505,0,0.377,0.919,,
+Facility 10 (Windrow),First Removal,B (green),4,0.497152445845622,0,0,,,,,,0.98,0.212,,0.047,0.757,0.497,0,1.28,0,,
+Facility 10 (Windrow),First Removal,B (green),6,0.16404962880097634,0,0,,,,,,0,0.146,0.39,0.095,0.593,0.164,0,1.024,0,,
+Facility 10 (Windrow),First Removal,B (green),7,0.23367232787552125,0,0.5708667004561581,,,,,,0,0,0,0.007,0.501,0.234,0,0.4,0.571,,
+Facility 10 (Windrow),First Removal,C (yellow),1,,,,0,,,,,,,0.217,0.062,0.161,,,,,0,0
+Facility 10 (Windrow),First Removal,C (yellow),3,,,,0.9714119832791452,,,,,,,0,0.033,0.109,,,,,0,0.971
+Facility 10 (Windrow),First Removal,C (yellow),5,,,,0.6632605666511843,,,,,,,0,0,0.051,,,,,0,0.663
+Facility 10 (Windrow),First Removal,C (yellow),6,,,,0.02239897816999535,,,,,,,0.711,0,0.489,,,,,0.031,0.022
+Facility 10 (Windrow),First Removal,C (yellow),7,,,,0.011356247097073849,,,,,,,0.916,0.061,0.625,,,,,0,0.011
+Facility 10 (Windrow),Second Removal,A (blue),1,,,,,0,0.001,0,0,,,0,0,0.189,,,,,,
+Facility 10 (Windrow),Second Removal,A (blue),10,,,,,0.012,0,0,0.041,,,0,0,0.291,,,,,,
+Facility 10 (Windrow),Second Removal,A (blue),3,,,,,0,0,0,0,,,0.014,0,0.111,,,,,,
+Facility 10 (Windrow),Second Removal,A (blue),5,,,,,0,0,0,,,,0.015,0.065,0.443,,,,,,
+Facility 10 (Windrow),Second Removal,A (blue),8,,,,,0.01,0,0,0.25,,,0.534,0.056,,,,,,,
+Facility 10 (Windrow),Second Removal,B (green),1,0,0,0,,,,,,0,0,0,0,0.183,0,0,0.253,0,,
+Facility 10 (Windrow),Second Removal,B (green),3,0,0,0,,,,,,0,0,0.152,0,0.012,0,0,0.041,0,,
+Facility 10 (Windrow),Second Removal,B (green),5,0,0,0,,,,,,0,0.12,0,0,0.167,0,0,,0,,
+Facility 10 (Windrow),Second Removal,B (green),9,0,0,0.09293461733400912,,,,,,0,0.019,0.117,0.046,0.179,0,0,0,0.093,,
+Facility 10 (Windrow),Second Removal,C (yellow),10,,,,0,,,,,,,1.104,0.037,,,,,,0,0
+Facility 10 (Windrow),Second Removal,C (yellow),2,,,,0,,,,,,,0,0,0.005,,,,,0,0
+Facility 10 (Windrow),Second Removal,C (yellow),4,,,,0,,,,,,,0,0,0.47,,,,,0.218,0
+Facility 10 (Windrow),Second Removal,C (yellow),9,,,,0,,,,,,,1.494,0,0.938,,,,,0,0
+Facility 3 (EASP),First Removal,(blank),(blank),0.049195775711558684,0.0021591870175817394,0.3557284852977888,0,0.006,0.026,0.009,0.287,0,0.122,0.065,,0.111,0.049,0.002,0.079,0.356,0,0
+Facility 3 (EASP),Second Removal,(blank),(blank),0.25223689186918674,0,0.3554295690443257,0,0,0,0,0.228,0,0.078,0.189,,0.026,0.252,0,0,0.355,0,0
+Facility 4 (In-Vessel),First Removal,(blank),(blank),0,0.031515466576000815,0,0.08160835036455552,0,0.036,0.116,0,0.387,0,0.106,,0.014,0,0.032,0.112,0,0,0.082
+Facility 4 (In-Vessel),Second Removal,(blank),(blank),0,0.0034807752159299148,0,0.028900108794739712,0,0.004,0,0,0,0,0,,0,0,0.003,0.011,0,0,0.029

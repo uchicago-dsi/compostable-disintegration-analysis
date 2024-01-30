@@ -1,0 +1,16 @@
+Item ID - Trial,Item Description From Trial,Item Description Refined,Material Class I,Material Class II,Material Class II,Item Format,Item Size,Item Capacity,Item Capacity Units,Item Length,Item Length Units,Certification Status at Time of Testing
+N,Lined Hot Cup D,BESICS 12oz Hot Cup,Fiber,Lined Fiber,PLA-lined Tree Fiber,Hot Cup,12oz,12,oz,,,Certified BPI
+Q,Molded Fiber Bowl C,BESICS 250mL Leaf Bowl,Fiber,Lined Fiber,PLA-lined Sugarcane Fibre (bagasse),Bowl,250mL,250,mL,,,Component Materials Certified by BPI
+O,Hot Cup Lid A,BESICS 8oz Hot cup lid,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,Hot Cup Lid,8oz,8,oz,,,Certified BPI
+V,Spoon C,"BESICS 6"" Spoon",Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,Spoon,"6""",,,6,inches,Certified BPI
+K1,Butcher Paper,Kraft butcher paper,Positive Control,Positive Control - Fiber,Positive Control - Unlined Paper,Positive Control - Fiber,"8 3/4"" x 13""",,,,,n/a
+K2,Navel orange peel,Navel orange peel,Positive Control,Positive Control - Food Scraps,Positive Control - Food Scraps,Positive Control - Food Scraps,Medium orange,,,,,n/a
+K3,Cellulose bag,Cellulose bag ,Positive Control,Positive Control - Film,Positive Control - Cellulose Film,Positive Control - Film,TBD,,,,,Certified BPI and/or TUV
+B,Coffee Pod,Coffee Pod,Mixed Materials,Mixed Materials,PLA Film & CPLA & Fiber,Coffee Pod,One-size,,,,,Certified BPI and/or TUV
+I,Molded Fiber Bowl B,Moulded fiber bowl 16oz,Fiber,Unlined Fiber,Unlined Molded Fiber (mixed fibers),Bowl,16oz ,,,,,Certified BPI and/or TUV
+K,Fiber Clamshell,Bagasse Clamshell 9x9,Fiber,Unlined Fiber,Unlined Sugarcane Fibre (bagasse) PFAS Free,Clamshell,"9x9""",,,,,Certified BPI and/or TUV
+D,Spoon A,"Spoon PLA 6""",Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,Spoon,"6""",,,,,In process for certification
+H,Straw A,"Straw PHA 8""",Biopolymer,Rigid Biopolymer (< 0.75mm),PHA,Straw,"8""",,,,,In process for certification
+J,Cold Cup B,PLA Cold Cup 12oz,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,Cold Cup,12oz,,,,,Excluded
+P,Bag B,Bin Liner Bag 2.5 gal,Biopolymer,Bag,PBAT & Other Multilaminate Film,Bag,"16'' x 17'', 2.5 gal/9.5 liter",,,,,Certified BPI or TUV; CMA passed
+S,Cold Cup Lid C,PLA Cold Cup Lid 8oz,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,Cold Cup,8oz,,,,,Certified BPI and/or TUV
