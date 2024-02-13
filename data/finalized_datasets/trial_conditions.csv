@@ -1,0 +1,1722 @@
+trial_id,trial_stage,day,condition,value,unit,method
+WR004-01,,1,temperature,112.8,F,field
+WR004-01,,2,temperature,117.0,F,field
+WR004-01,,3,temperature,125.2,F,field
+WR004-01,,4,temperature,128.0,F,field
+WR004-01,,5,temperature,,F,field
+WR004-01,,6,temperature,,F,field
+WR004-01,,7,temperature,134.0,F,field
+WR004-01,,8,temperature,135.8,F,field
+WR004-01,,9,temperature,136.4,F,field
+WR004-01,,10,temperature,139.2,F,field
+WR004-01,,11,temperature,135.8,F,field
+WR004-01,,12,temperature,,F,field
+WR004-01,,13,temperature,,F,field
+WR004-01,,14,temperature,138.2,F,field
+WR004-01,,15,temperature,135.8,F,field
+WR004-01,,16,temperature,136.6,F,field
+WR004-01,,17,temperature,135.8,F,field
+WR004-01,,18,temperature,136.6,F,field
+WR004-01,,19,temperature,,F,field
+WR004-01,,20,temperature,,F,field
+WR004-01,,21,temperature,136.4,F,field
+WR004-01,,22,temperature,137.2,F,field
+WR004-01,,23,temperature,139.6,F,field
+WR004-01,,24,temperature,138.8,F,field
+WR004-01,,25,temperature,136.0,F,field
+WR004-01,,26,temperature,,F,field
+WR004-01,,27,temperature,,F,field
+WR004-01,,28,temperature,136.6,F,field
+WR004-01,,29,temperature,136.0,F,field
+WR004-01,,30,temperature,135.6,F,field
+WR004-01,,31,temperature,133.8,F,field
+WR004-01,,32,temperature,135.0,F,field
+WR004-01,,33,temperature,,F,field
+WR004-01,,34,temperature,,F,field
+WR004-01,,35,temperature,,F,field
+WR004-01,,36,temperature,135.3,F,field
+WR004-01,,37,temperature,135.1,F,field
+WR004-01,,38,temperature,135.2,F,field
+WR004-01,,39,temperature,135.2,F,field
+WR004-01,,40,temperature,,F,field
+WR004-01,,41,temperature,,F,field
+WR004-01,,42,temperature,135.0,F,field
+WR004-01,,43,temperature,134.9,F,field
+WR004-01,,44,temperature,136.2,F,field
+WR004-01,,45,temperature,136.8,F,field
+WR004-01,,46,temperature,128.4,F,field
+WR004-01,,47,temperature,,F,field
+WR004-01,,48,temperature,,F,field
+WR004-01,,49,temperature,124.4,F,field
+WR004-01,,50,temperature,124.9,F,field
+WR004-01,,51,temperature,123.7,F,field
+WR004-01,,52,temperature,122.2,F,field
+WR004-01,,53,temperature,117.8,F,field
+WR004-01,,54,temperature,,F,field
+WR004-01,,55,temperature,,F,field
+WR004-01,,56,temperature,114.3,F,field
+WR004-01,,57,temperature,110.7,F,field
+WR004-01,,58,temperature,114.4,F,field
+WR004-01,,59,temperature,112.4,F,field
+WR004-01,,60,temperature,109.4,F,field
+WR004-01,,61,temperature,,F,field
+WR004-01,,62,temperature,,F,field
+WR004-01,,63,temperature,105.1,F,field
+WR004-01,,64,temperature,106.9,F,field
+WR004-01,,65,temperature,102.3,F,field
+WR004-01,,66,temperature,101.7,F,field
+WR004-01,,67,temperature,96.3,F,field
+WR004-01,,68,temperature,,F,field
+WR004-01,,69,temperature,,F,field
+WR004-01,,70,temperature,,F,field
+WR004-01,,71,temperature,,F,field
+WR004-01,,72,temperature,,F,field
+WR004-01,,73,temperature,,F,field
+WR004-01,,74,temperature,,F,field
+WR004-01,,75,temperature,,F,field
+WR004-01,,76,temperature,,F,field
+WR004-01,,77,temperature,,F,field
+WR004-01,,78,temperature,,F,field
+WR004-01,,79,temperature,,F,field
+WR004-01,,80,temperature,,F,field
+WR004-01,,81,temperature,,F,field
+WR004-01,,82,temperature,,F,field
+WR004-01,,83,temperature,,F,field
+WR004-01,,84,temperature,,F,field
+WR004-01,,85,temperature,,F,field
+WR004-01,,86,temperature,,F,field
+WR004-01,,87,temperature,,F,field
+WR004-01,,88,temperature,,F,field
+WR004-01,,89,temperature,,F,field
+WR004-01,,90,temperature,,F,field
+WR004-01,,91,temperature,,F,field
+WR004-01,,92,temperature,,F,field
+WR004-01,,93,temperature,,F,field
+WR004-01,,94,temperature,,F,field
+WR004-01,,95,temperature,,F,field
+WR004-01,,96,temperature,,F,field
+WR004-01,,97,temperature,,F,field
+CASP005-01,,1,temperature,128.8,F,field
+CASP005-01,,2,temperature,137.6,F,field
+CASP005-01,,3,temperature,140.8,F,field
+CASP005-01,,4,temperature,,F,field
+CASP005-01,,5,temperature,,F,field
+CASP005-01,,6,temperature,142.6,F,field
+CASP005-01,,7,temperature,143.4,F,field
+CASP005-01,,8,temperature,144.6,F,field
+CASP005-01,,9,temperature,131.2,F,field
+CASP005-01,,10,temperature,156.6,F,field
+CASP005-01,,11,temperature,,F,field
+CASP005-01,,12,temperature,,F,field
+CASP005-01,,13,temperature,163.0,F,field
+CASP005-01,,14,temperature,164.6,F,field
+CASP005-01,,15,temperature,166.0,F,field
+CASP005-01,,16,temperature,166.2,F,field
+CASP005-01,,17,temperature,168.2,F,field
+CASP005-01,,18,temperature,,F,field
+CASP005-01,,19,temperature,,F,field
+CASP005-01,,20,temperature,,F,field
+CASP005-01,,21,temperature,150.6,F,field
+CASP005-01,,22,temperature,150.8,F,field
+CASP005-01,,23,temperature,153.6,F,field
+CASP005-01,,24,temperature,155.6,F,field
+CASP005-01,,25,temperature,,F,field
+CASP005-01,,26,temperature,,F,field
+CASP005-01,,27,temperature,160.8,F,field
+CASP005-01,,28,temperature,163.4,F,field
+CASP005-01,,29,temperature,165.6,F,field
+CASP005-01,,30,temperature,167.8,F,field
+CASP005-01,,31,temperature,169.0,F,field
+CASP005-01,,32,temperature,,F,field
+CASP005-01,,33,temperature,,F,field
+CASP005-01,,34,temperature,169.6,F,field
+CASP005-01,,35,temperature,169.8,F,field
+CASP005-01,,36,temperature,169.8,F,field
+CASP005-01,,37,temperature,168.0,F,field
+CASP005-01,,38,temperature,169.2,F,field
+CASP005-01,,39,temperature,,F,field
+CASP005-01,,40,temperature,,F,field
+CASP005-01,,41,temperature,,F,field
+CASP005-01,,42,temperature,168.4,F,field
+CASP005-01,,43,temperature,169.0,F,field
+CASP005-01,,44,temperature,170.2,F,field
+CASP005-01,,45,temperature,169.6,F,field
+CASP005-01,,46,temperature,,F,field
+CASP005-01,,47,temperature,,F,field
+CASP005-01,,48,temperature,,F,field
+CASP005-01,,49,temperature,,F,field
+CASP005-01,,50,temperature,,F,field
+CASP005-01,,51,temperature,,F,field
+CASP005-01,,52,temperature,,F,field
+CASP005-01,,53,temperature,,F,field
+CASP005-01,,54,temperature,,F,field
+CASP005-01,,55,temperature,,F,field
+CASP005-01,,56,temperature,,F,field
+CASP005-01,,57,temperature,,F,field
+CASP005-01,,58,temperature,,F,field
+CASP005-01,,59,temperature,,F,field
+CASP005-01,,60,temperature,,F,field
+CASP005-01,,61,temperature,,F,field
+CASP005-01,,62,temperature,,F,field
+CASP005-01,,63,temperature,,F,field
+CASP005-01,,64,temperature,,F,field
+CASP005-01,,65,temperature,,F,field
+CASP005-01,,66,temperature,,F,field
+CASP005-01,,67,temperature,,F,field
+CASP005-01,,68,temperature,,F,field
+CASP005-01,,69,temperature,,F,field
+CASP005-01,,70,temperature,,F,field
+CASP005-01,,71,temperature,,F,field
+CASP005-01,,72,temperature,,F,field
+CASP005-01,,73,temperature,,F,field
+CASP005-01,,74,temperature,,F,field
+CASP005-01,,75,temperature,,F,field
+CASP005-01,,76,temperature,,F,field
+CASP005-01,,77,temperature,,F,field
+CASP005-01,,78,temperature,,F,field
+CASP005-01,,79,temperature,,F,field
+CASP005-01,,80,temperature,,F,field
+CASP005-01,,81,temperature,,F,field
+CASP005-01,,82,temperature,,F,field
+CASP005-01,,83,temperature,,F,field
+CASP005-01,,84,temperature,,F,field
+CASP005-01,,85,temperature,,F,field
+CASP005-01,,86,temperature,,F,field
+CASP005-01,,87,temperature,,F,field
+CASP005-01,,88,temperature,,F,field
+CASP005-01,,89,temperature,,F,field
+CASP005-01,,90,temperature,,F,field
+CASP005-01,,91,temperature,,F,field
+CASP005-01,,92,temperature,,F,field
+CASP005-01,,93,temperature,,F,field
+CASP005-01,,94,temperature,,F,field
+CASP005-01,,95,temperature,,F,field
+CASP005-01,,96,temperature,,F,field
+CASP005-01,,97,temperature,,F,field
+EASP001-01,,1,temperature,92.16333333333334,F,field
+EASP001-01,,2,temperature,133.09,F,field
+EASP001-01,,3,temperature,116.84666666666668,F,field
+EASP001-01,,4,temperature,156.8,F,field
+EASP001-01,,5,temperature,161.97,F,field
+EASP001-01,,6,temperature,140.29999999999998,F,field
+EASP001-01,,7,temperature,162.1,F,field
+EASP001-01,,8,temperature,166.95,F,field
+EASP001-01,,9,temperature,170.01,F,field
+EASP001-01,,10,temperature,143.47375,F,field
+EASP001-01,,11,temperature,169.03,F,field
+EASP001-01,,12,temperature,169.77,F,field
+EASP001-01,,13,temperature,140.04375,F,field
+EASP001-01,,14,temperature,171.12,F,field
+EASP001-01,,15,temperature,134.94375,F,field
+EASP001-01,,16,temperature,172.48,F,field
+EASP001-01,,17,temperature,138.24625,F,field
+EASP001-01,,18,temperature,167.4,F,field
+EASP001-01,,19,temperature,166.56,F,field
+EASP001-01,,20,temperature,127.5975,F,field
+EASP001-01,,21,temperature,170.6,F,field
+EASP001-01,,22,temperature,127.2025,F,field
+EASP001-01,,23,temperature,168.09,F,field
+EASP001-01,,24,temperature,123.42857142857143,F,field
+EASP001-01,,25,temperature,165.61,F,field
+EASP001-01,,26,temperature,164.11,F,field
+EASP001-01,,27,temperature,162.11,F,field
+EASP001-01,,28,temperature,118.28571428571429,F,field
+EASP001-01,,29,temperature,118.57142857142857,F,field
+EASP001-01,,30,temperature,130.28571428571428,F,field
+EASP001-01,,31,temperature,130.28571428571428,F,field
+EASP001-01,,32,temperature,158.16,F,field
+EASP001-01,,33,temperature,157.88,F,field
+EASP001-01,,34,temperature,129.42857142857142,F,field
+EASP001-01,,35,temperature,130.57142857142858,F,field
+EASP001-01,,36,temperature,131.14285714285714,F,field
+EASP001-01,,37,temperature,154.04,F,field
+EASP001-01,,38,temperature,126.85714285714286,F,field
+EASP001-01,,39,temperature,153.07,F,field
+EASP001-01,,40,temperature,152.23,F,field
+EASP001-01,,41,temperature,126.85714285714286,F,field
+EASP001-01,,42,temperature,149.89,F,field
+EASP001-01,,43,temperature,125.42857142857143,F,field
+EASP001-01,,44,temperature,150.0,F,field
+EASP001-01,,45,temperature,125.14285714285714,F,field
+EASP001-01,,46,temperature,,F,field
+EASP001-01,,47,temperature,,F,field
+EASP001-01,,48,temperature,,F,field
+EASP001-01,,49,temperature,,F,field
+EASP001-01,,50,temperature,,F,field
+EASP001-01,,51,temperature,,F,field
+EASP001-01,,52,temperature,,F,field
+EASP001-01,,53,temperature,,F,field
+EASP001-01,,54,temperature,,F,field
+EASP001-01,,55,temperature,,F,field
+EASP001-01,,56,temperature,,F,field
+EASP001-01,,57,temperature,,F,field
+EASP001-01,,58,temperature,,F,field
+EASP001-01,,59,temperature,,F,field
+EASP001-01,,60,temperature,,F,field
+EASP001-01,,61,temperature,,F,field
+EASP001-01,,62,temperature,,F,field
+EASP001-01,,63,temperature,,F,field
+EASP001-01,,64,temperature,,F,field
+EASP001-01,,65,temperature,,F,field
+EASP001-01,,66,temperature,,F,field
+EASP001-01,,67,temperature,,F,field
+EASP001-01,,68,temperature,,F,field
+EASP001-01,,69,temperature,,F,field
+EASP001-01,,70,temperature,,F,field
+EASP001-01,,71,temperature,,F,field
+EASP001-01,,72,temperature,,F,field
+EASP001-01,,73,temperature,,F,field
+EASP001-01,,74,temperature,,F,field
+EASP001-01,,75,temperature,,F,field
+EASP001-01,,76,temperature,,F,field
+EASP001-01,,77,temperature,,F,field
+EASP001-01,,78,temperature,,F,field
+EASP001-01,,79,temperature,,F,field
+EASP001-01,,80,temperature,,F,field
+EASP001-01,,81,temperature,,F,field
+EASP001-01,,82,temperature,,F,field
+EASP001-01,,83,temperature,,F,field
+EASP001-01,,84,temperature,,F,field
+EASP001-01,,85,temperature,,F,field
+EASP001-01,,86,temperature,,F,field
+EASP001-01,,87,temperature,,F,field
+EASP001-01,,88,temperature,,F,field
+EASP001-01,,89,temperature,,F,field
+EASP001-01,,90,temperature,,F,field
+EASP001-01,,91,temperature,,F,field
+EASP001-01,,92,temperature,,F,field
+EASP001-01,,93,temperature,,F,field
+EASP001-01,,94,temperature,,F,field
+EASP001-01,,95,temperature,,F,field
+EASP001-01,,96,temperature,,F,field
+EASP001-01,,97,temperature,,F,field
+IV002-01,,1,temperature,103.625,F,field
+IV002-01,,2,temperature,118.25,F,field
+IV002-01,,3,temperature,117.875,F,field
+IV002-01,,4,temperature,118.42857142857143,F,field
+IV002-01,,5,temperature,118.0,F,field
+IV002-01,,6,temperature,117.66666666666667,F,field
+IV002-01,,7,temperature,118.85714285714286,F,field
+IV002-01,,8,temperature,119.28571428571429,F,field
+IV002-01,,9,temperature,121.88888888888889,F,field
+IV002-01,,10,temperature,120.14285714285714,F,field
+IV002-01,,11,temperature,119.57142857142857,F,field
+IV002-01,,12,temperature,119.14285714285714,F,field
+IV002-01,,13,temperature,118.57142857142857,F,field
+IV002-01,,14,temperature,117.85714285714286,F,field
+IV002-01,,15,temperature,117.57142857142857,F,field
+IV002-01,,16,temperature,117.57142857142857,F,field
+IV002-01,,17,temperature,119.0,F,field
+IV002-01,,18,temperature,117.28571428571429,F,field
+IV002-01,,19,temperature,118.14285714285714,F,field
+IV002-01,,20,temperature,117.71428571428571,F,field
+IV002-01,,21,temperature,118.57142857142857,F,field
+IV002-01,,22,temperature,141.85714285714286,F,field
+IV002-01,,23,temperature,141.14285714285714,F,field
+IV002-01,,24,temperature,143.57142857142858,F,field
+IV002-01,,25,temperature,144.14285714285714,F,field
+IV002-01,,26,temperature,145.28571428571428,F,field
+IV002-01,,27,temperature,146.85714285714286,F,field
+IV002-01,,28,temperature,148.57142857142858,F,field
+IV002-01,,29,temperature,148.71428571428572,F,field
+IV002-01,,30,temperature,151.0,F,field
+IV002-01,,31,temperature,149.85714285714286,F,field
+IV002-01,,32,temperature,135.14285714285714,F,field
+IV002-01,,33,temperature,137.85714285714286,F,field
+IV002-01,,34,temperature,142.42857142857142,F,field
+IV002-01,,35,temperature,151.85714285714286,F,field
+IV002-01,,36,temperature,148.28571428571428,F,field
+IV002-01,,37,temperature,150.0,F,field
+IV002-01,,38,temperature,157.14285714285714,F,field
+IV002-01,,39,temperature,151.14285714285714,F,field
+IV002-01,,40,temperature,150.0,F,field
+IV002-01,,41,temperature,150.71428571428572,F,field
+IV002-01,,42,temperature,158.42857142857142,F,field
+IV002-01,,43,temperature,158.28571428571428,F,field
+IV002-01,,44,temperature,157.85714285714286,F,field
+IV002-01,,45,temperature,159.0,F,field
+IV002-01,,46,temperature,158.42857142857142,F,field
+IV002-01,,47,temperature,159.28571428571428,F,field
+IV002-01,,48,temperature,160.85714285714286,F,field
+IV002-01,,49,temperature,159.28571428571428,F,field
+IV002-01,,50,temperature,159.71428571428572,F,field
+IV002-01,,51,temperature,,F,field
+IV002-01,,52,temperature,,F,field
+IV002-01,,53,temperature,,F,field
+IV002-01,,54,temperature,,F,field
+IV002-01,,55,temperature,,F,field
+IV002-01,,56,temperature,,F,field
+IV002-01,,57,temperature,,F,field
+IV002-01,,58,temperature,,F,field
+IV002-01,,59,temperature,,F,field
+IV002-01,,60,temperature,,F,field
+IV002-01,,61,temperature,,F,field
+IV002-01,,62,temperature,,F,field
+IV002-01,,63,temperature,,F,field
+IV002-01,,64,temperature,,F,field
+IV002-01,,65,temperature,,F,field
+IV002-01,,66,temperature,,F,field
+IV002-01,,67,temperature,,F,field
+IV002-01,,68,temperature,,F,field
+IV002-01,,69,temperature,,F,field
+IV002-01,,70,temperature,,F,field
+IV002-01,,71,temperature,,F,field
+IV002-01,,72,temperature,,F,field
+IV002-01,,73,temperature,,F,field
+IV002-01,,74,temperature,,F,field
+IV002-01,,75,temperature,,F,field
+IV002-01,,76,temperature,,F,field
+IV002-01,,77,temperature,,F,field
+IV002-01,,78,temperature,,F,field
+IV002-01,,79,temperature,,F,field
+IV002-01,,80,temperature,,F,field
+IV002-01,,81,temperature,,F,field
+IV002-01,,82,temperature,,F,field
+IV002-01,,83,temperature,,F,field
+IV002-01,,84,temperature,,F,field
+IV002-01,,85,temperature,,F,field
+IV002-01,,86,temperature,,F,field
+IV002-01,,87,temperature,,F,field
+IV002-01,,88,temperature,,F,field
+IV002-01,,89,temperature,,F,field
+IV002-01,,90,temperature,,F,field
+IV002-01,,91,temperature,,F,field
+IV002-01,,92,temperature,,F,field
+IV002-01,,93,temperature,,F,field
+IV002-01,,94,temperature,,F,field
+IV002-01,,95,temperature,,F,field
+IV002-01,,96,temperature,,F,field
+IV002-01,,97,temperature,,F,field
+EASP002-01,,1,temperature,89.16666666666667,F,field
+EASP002-01,,2,temperature,114.66666666666667,F,field
+EASP002-01,,3,temperature,129.66666666666666,F,field
+EASP002-01,,4,temperature,,F,field
+EASP002-01,,5,temperature,,F,field
+EASP002-01,,6,temperature,143.66666666666666,F,field
+EASP002-01,,7,temperature,148.66666666666666,F,field
+EASP002-01,,8,temperature,149.66666666666666,F,field
+EASP002-01,,9,temperature,158.66666666666666,F,field
+EASP002-01,,10,temperature,162.0,F,field
+EASP002-01,,11,temperature,,F,field
+EASP002-01,,12,temperature,,F,field
+EASP002-01,,13,temperature,160.0,F,field
+EASP002-01,,14,temperature,161.66666666666666,F,field
+EASP002-01,,15,temperature,162.66666666666666,F,field
+EASP002-01,,16,temperature,161.66666666666666,F,field
+EASP002-01,,17,temperature,161.66666666666666,F,field
+EASP002-01,,18,temperature,,F,field
+EASP002-01,,19,temperature,,F,field
+EASP002-01,,20,temperature,160.83333333333334,F,field
+EASP002-01,,21,temperature,159.0,F,field
+EASP002-01,,22,temperature,157.33333333333334,F,field
+EASP002-01,,23,temperature,135.0,F,field
+EASP002-01,,24,temperature,140.33333333333334,F,field
+EASP002-01,,25,temperature,,F,field
+EASP002-01,,26,temperature,,F,field
+EASP002-01,,27,temperature,157.33333333333334,F,field
+EASP002-01,,28,temperature,158.66666666666666,F,field
+EASP002-01,,29,temperature,158.33333333333334,F,field
+EASP002-01,,30,temperature,156.66666666666666,F,field
+EASP002-01,,31,temperature,157.66666666666666,F,field
+EASP002-01,,32,temperature,,F,field
+EASP002-01,,33,temperature,,F,field
+EASP002-01,,34,temperature,157.0,F,field
+EASP002-01,,35,temperature,158.0,F,field
+EASP002-01,,36,temperature,157.0,F,field
+EASP002-01,,37,temperature,160.33333333333334,F,field
+EASP002-01,,38,temperature,158.33333333333334,F,field
+EASP002-01,,39,temperature,,F,field
+EASP002-01,,40,temperature,,F,field
+EASP002-01,,41,temperature,157.33333333333334,F,field
+EASP002-01,,42,temperature,159.0,F,field
+EASP002-01,,43,temperature,153.66666666666666,F,field
+EASP002-01,,44,temperature,150.33333333333334,F,field
+EASP002-01,,45,temperature,153.0,F,field
+EASP002-01,,46,temperature,,F,field
+EASP002-01,,47,temperature,,F,field
+EASP002-01,,48,temperature,148.66666666666666,F,field
+EASP002-01,,49,temperature,154.33333333333334,F,field
+EASP002-01,,50,temperature,118.33333333333333,F,field
+EASP002-01,,51,temperature,128.66666666666666,F,field
+EASP002-01,,52,temperature,131.0,F,field
+EASP002-01,,53,temperature,,F,field
+EASP002-01,,54,temperature,,F,field
+EASP002-01,,55,temperature,150.66666666666666,F,field
+EASP002-01,,56,temperature,154.0,F,field
+EASP002-01,,57,temperature,156.0,F,field
+EASP002-01,,58,temperature,158.33333333333334,F,field
+EASP002-01,,59,temperature,160.33333333333334,F,field
+EASP002-01,,60,temperature,,F,field
+EASP002-01,,61,temperature,,F,field
+EASP002-01,,62,temperature,161.0,F,field
+EASP002-01,,63,temperature,160.33333333333334,F,field
+EASP002-01,,64,temperature,156.33333333333334,F,field
+EASP002-01,,65,temperature,157.0,F,field
+EASP002-01,,66,temperature,156.33333333333334,F,field
+EASP002-01,,67,temperature,,F,field
+EASP002-01,,68,temperature,,F,field
+EASP002-01,,69,temperature,156.66666666666666,F,field
+EASP002-01,,70,temperature,130.33333333333334,F,field
+EASP002-01,,71,temperature,133.0,F,field
+EASP002-01,,72,temperature,137.0,F,field
+EASP002-01,,73,temperature,142.0,F,field
+EASP002-01,,74,temperature,,F,field
+EASP002-01,,75,temperature,,F,field
+EASP002-01,,76,temperature,,F,field
+EASP002-01,,77,temperature,,F,field
+EASP002-01,,78,temperature,140.83333333333334,F,field
+EASP002-01,,79,temperature,141.33333333333334,F,field
+EASP002-01,,80,temperature,141.33333333333334,F,field
+EASP002-01,,81,temperature,,F,field
+EASP002-01,,82,temperature,,F,field
+EASP002-01,,83,temperature,140.33333333333334,F,field
+EASP002-01,,84,temperature,140.0,F,field
+EASP002-01,,85,temperature,139.66666666666666,F,field
+EASP002-01,,86,temperature,140.33333333333334,F,field
+EASP002-01,,87,temperature,139.66666666666666,F,field
+EASP002-01,,88,temperature,,F,field
+EASP002-01,,89,temperature,,F,field
+EASP002-01,,90,temperature,140.0,F,field
+EASP002-01,,91,temperature,,F,field
+EASP002-01,,92,temperature,,F,field
+EASP002-01,,93,temperature,,F,field
+EASP002-01,,94,temperature,,F,field
+EASP002-01,,95,temperature,,F,field
+EASP002-01,,96,temperature,,F,field
+EASP002-01,,97,temperature,,F,field
+CASP006-01,,1,temperature,103.0,F,field
+CASP006-01,,2,temperature,,F,field
+CASP006-01,,3,temperature,109.0,F,field
+CASP006-01,,4,temperature,,F,field
+CASP006-01,,5,temperature,,F,field
+CASP006-01,,6,temperature,137.33333333333334,F,field
+CASP006-01,,7,temperature,138.0,F,field
+CASP006-01,,8,temperature,141.33333333333334,F,field
+CASP006-01,,9,temperature,146.66666666666666,F,field
+CASP006-01,,10,temperature,151.33333333333334,F,field
+CASP006-01,,11,temperature,,F,field
+CASP006-01,,12,temperature,,F,field
+CASP006-01,,13,temperature,,F,field
+CASP006-01,,14,temperature,133.0,F,field
+CASP006-01,,15,temperature,132.33333333333334,F,field
+CASP006-01,,16,temperature,136.66666666666666,F,field
+CASP006-01,,17,temperature,,F,field
+CASP006-01,,18,temperature,,F,field
+CASP006-01,,19,temperature,,F,field
+CASP006-01,,20,temperature,133.33333333333334,F,field
+CASP006-01,,21,temperature,137.5,F,field
+CASP006-01,,22,temperature,129.4,F,field
+CASP006-01,,23,temperature,131.8,F,field
+CASP006-01,,24,temperature,,F,field
+CASP006-01,,25,temperature,,F,field
+CASP006-01,,26,temperature,,F,field
+CASP006-01,,27,temperature,156.33333333333334,F,field
+CASP006-01,,28,temperature,154.0,F,field
+CASP006-01,,29,temperature,154.66666666666666,F,field
+CASP006-01,,30,temperature,153.33333333333334,F,field
+CASP006-01,,31,temperature,157.0,F,field
+CASP006-01,,32,temperature,,F,field
+CASP006-01,,33,temperature,,F,field
+CASP006-01,,34,temperature,,F,field
+CASP006-01,,35,temperature,153.0,F,field
+CASP006-01,,36,temperature,145.5,F,field
+CASP006-01,,37,temperature,151.66666666666666,F,field
+CASP006-01,,38,temperature,,F,field
+CASP006-01,,39,temperature,,F,field
+CASP006-01,,40,temperature,,F,field
+CASP006-01,,41,temperature,148.66666666666666,F,field
+CASP006-01,,42,temperature,144.0,F,field
+CASP006-01,,43,temperature,152.0,F,field
+CASP006-01,,44,temperature,150.66666666666666,F,field
+CASP006-01,,45,temperature,,F,field
+CASP006-01,,46,temperature,,F,field
+CASP006-01,,47,temperature,166.0,F,field
+CASP006-01,,48,temperature,164.0,F,field
+CASP006-01,,49,temperature,160.66666666666666,F,field
+CASP006-01,,50,temperature,,F,field
+CASP006-01,,51,temperature,,F,field
+CASP006-01,,52,temperature,,F,field
+CASP006-01,,53,temperature,,F,field
+CASP006-01,,54,temperature,,F,field
+CASP006-01,,55,temperature,160.33333333333334,F,field
+CASP006-01,,56,temperature,151.66666666666666,F,field
+CASP006-01,,57,temperature,157.0,F,field
+CASP006-01,,58,temperature,157.33333333333334,F,field
+CASP006-01,,59,temperature,,F,field
+CASP006-01,,60,temperature,,F,field
+CASP006-01,,61,temperature,157.33333333333334,F,field
+CASP006-01,,62,temperature,158.0,F,field
+CASP006-01,,63,temperature,163.0,F,field
+CASP006-01,,64,temperature,,F,field
+CASP006-01,,65,temperature,,F,field
+CASP006-01,,66,temperature,,F,field
+CASP006-01,,67,temperature,,F,field
+CASP006-01,,68,temperature,154.66666666666666,F,field
+CASP006-01,,69,temperature,154.0,F,field
+CASP006-01,,70,temperature,153.0,F,field
+CASP006-01,,71,temperature,153.0,F,field
+CASP006-01,,72,temperature,,F,field
+CASP006-01,,73,temperature,,F,field
+CASP006-01,,74,temperature,,F,field
+CASP006-01,,75,temperature,150.0,F,field
+CASP006-01,,76,temperature,149.33333333333334,F,field
+CASP006-01,,77,temperature,150.5,F,field
+CASP006-01,,78,temperature,149.52666666666667,F,field
+CASP006-01,,79,temperature,151.21,F,field
+CASP006-01,,80,temperature,149.6,F,field
+CASP006-01,,81,temperature,150.24,F,field
+CASP006-01,,82,temperature,148.51333333333332,F,field
+CASP006-01,,83,temperature,147.95000000000002,F,field
+CASP006-01,,84,temperature,149.41333333333333,F,field
+CASP006-01,,85,temperature,147.42333333333332,F,field
+CASP006-01,,86,temperature,147.53666666666666,F,field
+CASP006-01,,87,temperature,,F,field
+CASP006-01,,88,temperature,,F,field
+CASP006-01,,89,temperature,,F,field
+CASP006-01,,90,temperature,,F,field
+CASP006-01,,91,temperature,,F,field
+CASP006-01,,92,temperature,,F,field
+CASP006-01,,93,temperature,,F,field
+CASP006-01,,94,temperature,,F,field
+CASP006-01,,95,temperature,,F,field
+CASP006-01,,96,temperature,,F,field
+CASP006-01,,97,temperature,,F,field
+CASP004-02,,1,temperature,172.352,F,field
+CASP004-02,,2,temperature,169.172,F,field
+CASP004-02,,3,temperature,164.956,F,field
+CASP004-02,,4,temperature,161.138,F,field
+CASP004-02,,5,temperature,144.674,F,field
+CASP004-02,,6,temperature,137.366,F,field
+CASP004-02,,7,temperature,132.35000000000002,F,field
+CASP004-02,,8,temperature,157.474,F,field
+CASP004-02,,9,temperature,155.116,F,field
+CASP004-02,,10,temperature,156.818,F,field
+CASP004-02,,11,temperature,128.574,F,field
+CASP004-02,,12,temperature,115.68199999999999,F,field
+CASP004-02,,13,temperature,122.04,F,field
+CASP004-02,,14,temperature,127.976,F,field
+CASP004-02,,15,temperature,118.00199999999998,F,field
+CASP004-02,,16,temperature,127.91400000000002,F,field
+CASP004-02,,17,temperature,117.50600000000001,F,field
+CASP004-02,,18,temperature,126.46400000000001,F,field
+CASP004-02,,19,temperature,117.556,F,field
+CASP004-02,,20,temperature,122.648,F,field
+CASP004-02,,21,temperature,131.92999999999998,F,field
+CASP004-02,,22,temperature,117.75,F,field
+CASP004-02,,23,temperature,122.6,F,field
+CASP004-02,,24,temperature,136.218,F,field
+CASP004-02,,25,temperature,117.458,F,field
+CASP004-02,,26,temperature,119.94200000000001,F,field
+CASP004-02,,27,temperature,124.796,F,field
+CASP004-02,,28,temperature,134.12199999999999,F,field
+CASP004-02,,29,temperature,123.418,F,field
+CASP004-02,,30,temperature,116.53600000000002,F,field
+CASP004-02,,31,temperature,117.93800000000002,F,field
+CASP004-02,,32,temperature,119.39000000000001,F,field
+CASP004-02,,33,temperature,121.502,F,field
+CASP004-02,,34,temperature,124.15599999999999,F,field
+CASP004-02,,35,temperature,127.25399999999999,F,field
+CASP004-02,,36,temperature,141.254,F,field
+CASP004-02,,37,temperature,127.704,F,field
+CASP004-02,,38,temperature,117.78000000000002,F,field
+CASP004-02,,39,temperature,117.09400000000001,F,field
+CASP004-02,,40,temperature,116.36800000000001,F,field
+CASP004-02,,41,temperature,116.23799999999999,F,field
+CASP004-02,,42,temperature,116.96,F,field
+CASP004-02,,43,temperature,110.06199999999998,F,field
+CASP004-02,,44,temperature,110.828,F,field
+CASP004-02,,45,temperature,113.33599999999998,F,field
+CASP004-02,,46,temperature,117.98400000000001,F,field
+CASP004-02,,47,temperature,119.974,F,field
+CASP004-02,,48,temperature,121.99600000000001,F,field
+CASP004-02,,49,temperature,130.964,F,field
+CASP004-02,,50,temperature,148.8,F,field
+CASP004-02,,51,temperature,140.8,F,field
+CASP004-02,,52,temperature,149.0,F,field
+CASP004-02,,53,temperature,145.6,F,field
+CASP004-02,,54,temperature,148.0,F,field
+CASP004-02,,55,temperature,149.2,F,field
+CASP004-02,,56,temperature,144.0,F,field
+CASP004-02,,57,temperature,155.8,F,field
+CASP004-02,,58,temperature,156.8,F,field
+CASP004-02,,59,temperature,160.2,F,field
+CASP004-02,,60,temperature,159.8,F,field
+CASP004-02,,61,temperature,159.8,F,field
+CASP004-02,,62,temperature,161.0,F,field
+CASP004-02,,63,temperature,152.8,F,field
+CASP004-02,,64,temperature,148.4,F,field
+CASP004-02,,65,temperature,148.0,F,field
+CASP004-02,,66,temperature,152.8,F,field
+CASP004-02,,67,temperature,145.6,F,field
+CASP004-02,,68,temperature,,F,field
+CASP004-02,,69,temperature,,F,field
+CASP004-02,,70,temperature,,F,field
+CASP004-02,,71,temperature,,F,field
+CASP004-02,,72,temperature,,F,field
+CASP004-02,,73,temperature,,F,field
+CASP004-02,,74,temperature,,F,field
+CASP004-02,,75,temperature,,F,field
+CASP004-02,,76,temperature,,F,field
+CASP004-02,,77,temperature,,F,field
+CASP004-02,,78,temperature,,F,field
+CASP004-02,,79,temperature,,F,field
+CASP004-02,,80,temperature,,F,field
+CASP004-02,,81,temperature,,F,field
+CASP004-02,,82,temperature,,F,field
+CASP004-02,,83,temperature,,F,field
+CASP004-02,,84,temperature,,F,field
+CASP004-02,,85,temperature,,F,field
+CASP004-02,,86,temperature,,F,field
+CASP004-02,,87,temperature,,F,field
+CASP004-02,,88,temperature,,F,field
+CASP004-02,,89,temperature,,F,field
+CASP004-02,,90,temperature,,F,field
+CASP004-02,,91,temperature,,F,field
+CASP004-02,,92,temperature,,F,field
+CASP004-02,,93,temperature,,F,field
+CASP004-02,,94,temperature,,F,field
+CASP004-02,,95,temperature,,F,field
+CASP004-02,,96,temperature,,F,field
+CASP004-02,,97,temperature,,F,field
+ASP001-01,,1,temperature,127.8,F,field
+ASP001-01,,2,temperature,133.8,F,field
+ASP001-01,,3,temperature,136.4,F,field
+ASP001-01,,4,temperature,,F,field
+ASP001-01,,5,temperature,,F,field
+ASP001-01,,6,temperature,142.0,F,field
+ASP001-01,,7,temperature,144.4,F,field
+ASP001-01,,8,temperature,146.4,F,field
+ASP001-01,,9,temperature,148.0,F,field
+ASP001-01,,10,temperature,148.2,F,field
+ASP001-01,,11,temperature,,F,field
+ASP001-01,,12,temperature,,F,field
+ASP001-01,,13,temperature,140.2,F,field
+ASP001-01,,14,temperature,141.0,F,field
+ASP001-01,,15,temperature,142.6,F,field
+ASP001-01,,16,temperature,,F,field
+ASP001-01,,17,temperature,142.2,F,field
+ASP001-01,,18,temperature,,F,field
+ASP001-01,,19,temperature,,F,field
+ASP001-01,,20,temperature,142.6,F,field
+ASP001-01,,21,temperature,155.2,F,field
+ASP001-01,,22,temperature,155.4,F,field
+ASP001-01,,23,temperature,156.8,F,field
+ASP001-01,,24,temperature,155.8,F,field
+ASP001-01,,25,temperature,,F,field
+ASP001-01,,26,temperature,,F,field
+ASP001-01,,27,temperature,156.2,F,field
+ASP001-01,,28,temperature,157.0,F,field
+ASP001-01,,29,temperature,,F,field
+ASP001-01,,30,temperature,162.0,F,field
+ASP001-01,,31,temperature,,F,field
+ASP001-01,,32,temperature,,F,field
+ASP001-01,,33,temperature,,F,field
+ASP001-01,,34,temperature,154.8,F,field
+ASP001-01,,35,temperature,151.6,F,field
+ASP001-01,,36,temperature,151.6,F,field
+ASP001-01,,37,temperature,151.6,F,field
+ASP001-01,,38,temperature,,F,field
+ASP001-01,,39,temperature,,F,field
+ASP001-01,,40,temperature,,F,field
+ASP001-01,,41,temperature,149.0,F,field
+ASP001-01,,42,temperature,145.2,F,field
+ASP001-01,,43,temperature,,F,field
+ASP001-01,,44,temperature,147.2,F,field
+ASP001-01,,45,temperature,151.0,F,field
+ASP001-01,,46,temperature,,F,field
+ASP001-01,,47,temperature,,F,field
+ASP001-01,,48,temperature,,F,field
+ASP001-01,,49,temperature,,F,field
+ASP001-01,,50,temperature,,F,field
+ASP001-01,,51,temperature,,F,field
+ASP001-01,,52,temperature,,F,field
+ASP001-01,,53,temperature,,F,field
+ASP001-01,,54,temperature,,F,field
+ASP001-01,,55,temperature,,F,field
+ASP001-01,,56,temperature,,F,field
+ASP001-01,,57,temperature,,F,field
+ASP001-01,,58,temperature,,F,field
+ASP001-01,,59,temperature,,F,field
+ASP001-01,,60,temperature,,F,field
+ASP001-01,,61,temperature,,F,field
+ASP001-01,,62,temperature,,F,field
+ASP001-01,,63,temperature,,F,field
+ASP001-01,,64,temperature,,F,field
+ASP001-01,,65,temperature,,F,field
+ASP001-01,,66,temperature,,F,field
+ASP001-01,,67,temperature,,F,field
+ASP001-01,,68,temperature,,F,field
+ASP001-01,,69,temperature,,F,field
+ASP001-01,,70,temperature,,F,field
+ASP001-01,,71,temperature,,F,field
+ASP001-01,,72,temperature,,F,field
+ASP001-01,,73,temperature,,F,field
+ASP001-01,,74,temperature,,F,field
+ASP001-01,,75,temperature,,F,field
+ASP001-01,,76,temperature,,F,field
+ASP001-01,,77,temperature,,F,field
+ASP001-01,,78,temperature,,F,field
+ASP001-01,,79,temperature,,F,field
+ASP001-01,,80,temperature,,F,field
+ASP001-01,,81,temperature,,F,field
+ASP001-01,,82,temperature,,F,field
+ASP001-01,,83,temperature,,F,field
+ASP001-01,,84,temperature,,F,field
+ASP001-01,,85,temperature,,F,field
+ASP001-01,,86,temperature,,F,field
+ASP001-01,,87,temperature,,F,field
+ASP001-01,,88,temperature,,F,field
+ASP001-01,,89,temperature,,F,field
+ASP001-01,,90,temperature,,F,field
+ASP001-01,,91,temperature,,F,field
+ASP001-01,,92,temperature,,F,field
+ASP001-01,,93,temperature,,F,field
+ASP001-01,,94,temperature,,F,field
+ASP001-01,,95,temperature,,F,field
+ASP001-01,,96,temperature,,F,field
+ASP001-01,,97,temperature,,F,field
+EASP003-01,,1,temperature,120.4,F,field
+EASP003-01,,2,temperature,116.2,F,field
+EASP003-01,,3,temperature,124.2,F,field
+EASP003-01,,4,temperature,,F,field
+EASP003-01,,5,temperature,,F,field
+EASP003-01,,6,temperature,165.4,F,field
+EASP003-01,,7,temperature,162.0,F,field
+EASP003-01,,8,temperature,167.2,F,field
+EASP003-01,,9,temperature,170.0,F,field
+EASP003-01,,10,temperature,170.4,F,field
+EASP003-01,,11,temperature,,F,field
+EASP003-01,,12,temperature,,F,field
+EASP003-01,,13,temperature,165.4,F,field
+EASP003-01,,14,temperature,164.8,F,field
+EASP003-01,,15,temperature,166.6,F,field
+EASP003-01,,16,temperature,165.2,F,field
+EASP003-01,,17,temperature,160.2,F,field
+EASP003-01,,18,temperature,,F,field
+EASP003-01,,19,temperature,,F,field
+EASP003-01,,20,temperature,153.8,F,field
+EASP003-01,,21,temperature,,F,field
+EASP003-01,,22,temperature,152.8,F,field
+EASP003-01,,23,temperature,,F,field
+EASP003-01,,24,temperature,148.2,F,field
+EASP003-01,,25,temperature,,F,field
+EASP003-01,,26,temperature,,F,field
+EASP003-01,,27,temperature,159.2,F,field
+EASP003-01,,28,temperature,156.6,F,field
+EASP003-01,,29,temperature,156.0,F,field
+EASP003-01,,30,temperature,,F,field
+EASP003-01,,31,temperature,155.8,F,field
+EASP003-01,,32,temperature,,F,field
+EASP003-01,,33,temperature,,F,field
+EASP003-01,,34,temperature,,F,field
+EASP003-01,,35,temperature,,F,field
+EASP003-01,,36,temperature,149.2,F,field
+EASP003-01,,37,temperature,,F,field
+EASP003-01,,38,temperature,,F,field
+EASP003-01,,39,temperature,,F,field
+EASP003-01,,40,temperature,,F,field
+EASP003-01,,41,temperature,141.2,F,field
+EASP003-01,,42,temperature,,F,field
+EASP003-01,,43,temperature,135.8,F,field
+EASP003-01,,44,temperature,167.4,F,field
+EASP003-01,,45,temperature,166.6,F,field
+EASP003-01,,46,temperature,,F,field
+EASP003-01,,47,temperature,,F,field
+EASP003-01,,48,temperature,167.6,F,field
+EASP003-01,,49,temperature,167.6,F,field
+EASP003-01,,50,temperature,171.8,F,field
+EASP003-01,,51,temperature,167.6,F,field
+EASP003-01,,52,temperature,168.0,F,field
+EASP003-01,,53,temperature,,F,field
+EASP003-01,,54,temperature,,F,field
+EASP003-01,,55,temperature,168.0,F,field
+EASP003-01,,56,temperature,,F,field
+EASP003-01,,57,temperature,168.2,F,field
+EASP003-01,,58,temperature,169.0,F,field
+EASP003-01,,59,temperature,168.2,F,field
+EASP003-01,,60,temperature,,F,field
+EASP003-01,,61,temperature,,F,field
+EASP003-01,,62,temperature,165.6,F,field
+EASP003-01,,63,temperature,,F,field
+EASP003-01,,64,temperature,167.8,F,field
+EASP003-01,,65,temperature,168.4,F,field
+EASP003-01,,66,temperature,166.4,F,field
+EASP003-01,,67,temperature,,F,field
+EASP003-01,,68,temperature,,F,field
+EASP003-01,,69,temperature,166.6,F,field
+EASP003-01,,70,temperature,,F,field
+EASP003-01,,71,temperature,,F,field
+EASP003-01,,72,temperature,,F,field
+EASP003-01,,73,temperature,,F,field
+EASP003-01,,74,temperature,,F,field
+EASP003-01,,75,temperature,,F,field
+EASP003-01,,76,temperature,,F,field
+EASP003-01,,77,temperature,,F,field
+EASP003-01,,78,temperature,,F,field
+EASP003-01,,79,temperature,,F,field
+EASP003-01,,80,temperature,,F,field
+EASP003-01,,81,temperature,,F,field
+EASP003-01,,82,temperature,,F,field
+EASP003-01,,83,temperature,,F,field
+EASP003-01,,84,temperature,,F,field
+EASP003-01,,85,temperature,,F,field
+EASP003-01,,86,temperature,,F,field
+EASP003-01,,87,temperature,,F,field
+EASP003-01,,88,temperature,,F,field
+EASP003-01,,89,temperature,,F,field
+EASP003-01,,90,temperature,,F,field
+EASP003-01,,91,temperature,,F,field
+EASP003-01,,92,temperature,,F,field
+EASP003-01,,93,temperature,,F,field
+EASP003-01,,94,temperature,,F,field
+EASP003-01,,95,temperature,,F,field
+EASP003-01,,96,temperature,,F,field
+EASP003-01,,97,temperature,,F,field
+WR005-01,,1,temperature,146.5,F,field
+WR005-01,,2,temperature,136.0,F,field
+WR005-01,,3,temperature,141.0,F,field
+WR005-01,,4,temperature,142.0,F,field
+WR005-01,,5,temperature,142.33333333333334,F,field
+WR005-01,,6,temperature,,F,field
+WR005-01,,7,temperature,,F,field
+WR005-01,,8,temperature,108.0,F,field
+WR005-01,,9,temperature,107.33333333333333,F,field
+WR005-01,,10,temperature,109.33333333333333,F,field
+WR005-01,,11,temperature,110.33333333333333,F,field
+WR005-01,,12,temperature,108.0,F,field
+WR005-01,,13,temperature,109.0,F,field
+WR005-01,,14,temperature,,F,field
+WR005-01,,15,temperature,126.0,F,field
+WR005-01,,16,temperature,129.0,F,field
+WR005-01,,17,temperature,144.83333333333334,F,field
+WR005-01,,18,temperature,133.66666666666666,F,field
+WR005-01,,19,temperature,148.16666666666666,F,field
+WR005-01,,20,temperature,,F,field
+WR005-01,,21,temperature,,F,field
+WR005-01,,22,temperature,,F,field
+WR005-01,,23,temperature,,F,field
+WR005-01,,24,temperature,140.33333333333334,F,field
+WR005-01,,25,temperature,,F,field
+WR005-01,,26,temperature,,F,field
+WR005-01,,27,temperature,,F,field
+WR005-01,,28,temperature,,F,field
+WR005-01,,29,temperature,140.0,F,field
+WR005-01,,30,temperature,147.0,F,field
+WR005-01,,31,temperature,153.16666666666666,F,field
+WR005-01,,32,temperature,,F,field
+WR005-01,,33,temperature,148.83333333333334,F,field
+WR005-01,,34,temperature,,F,field
+WR005-01,,35,temperature,,F,field
+WR005-01,,36,temperature,,F,field
+WR005-01,,37,temperature,,F,field
+WR005-01,,38,temperature,151.83333333333334,F,field
+WR005-01,,39,temperature,,F,field
+WR005-01,,40,temperature,,F,field
+WR005-01,,41,temperature,,F,field
+WR005-01,,42,temperature,,F,field
+WR005-01,,43,temperature,142.66666666666666,F,field
+WR005-01,,44,temperature,,F,field
+WR005-01,,45,temperature,148.16666666666666,F,field
+WR005-01,,46,temperature,153.33333333333334,F,field
+WR005-01,,47,temperature,,F,field
+WR005-01,,48,temperature,,F,field
+WR005-01,,49,temperature,,F,field
+WR005-01,,50,temperature,,F,field
+WR005-01,,51,temperature,143.16666666666666,F,field
+WR005-01,,52,temperature,,F,field
+WR005-01,,53,temperature,,F,field
+WR005-01,,54,temperature,,F,field
+WR005-01,,55,temperature,,F,field
+WR005-01,,56,temperature,,F,field
+WR005-01,,57,temperature,151.33333333333334,F,field
+WR005-01,,58,temperature,148.66666666666666,F,field
+WR005-01,,59,temperature,146.83333333333334,F,field
+WR005-01,,60,temperature,146.5,F,field
+WR005-01,,61,temperature,144.83333333333334,F,field
+WR005-01,,62,temperature,,F,field
+WR005-01,,63,temperature,,F,field
+WR005-01,,64,temperature,146.66666666666666,F,field
+WR005-01,,65,temperature,,F,field
+WR005-01,,66,temperature,154.0,F,field
+WR005-01,,67,temperature,153.33333333333334,F,field
+WR005-01,,68,temperature,,F,field
+WR005-01,,69,temperature,,F,field
+WR005-01,,70,temperature,,F,field
+WR005-01,,71,temperature,148.33333333333334,F,field
+WR005-01,,72,temperature,,F,field
+WR005-01,,73,temperature,151.16666666666666,F,field
+WR005-01,,74,temperature,,F,field
+WR005-01,,75,temperature,144.66666666666666,F,field
+WR005-01,,76,temperature,,F,field
+WR005-01,,77,temperature,,F,field
+WR005-01,,78,temperature,,F,field
+WR005-01,,79,temperature,,F,field
+WR005-01,,80,temperature,150.66666666666666,F,field
+WR005-01,,81,temperature,,F,field
+WR005-01,,82,temperature,,F,field
+WR005-01,,83,temperature,,F,field
+WR005-01,,84,temperature,,F,field
+WR005-01,,85,temperature,143.33333333333334,F,field
+WR005-01,,86,temperature,,F,field
+WR005-01,,87,temperature,140.66666666666666,F,field
+WR005-01,,88,temperature,,F,field
+WR005-01,,89,temperature,141.66666666666666,F,field
+WR005-01,,90,temperature,,F,field
+WR005-01,,91,temperature,,F,field
+WR005-01,,92,temperature,,F,field
+WR005-01,,93,temperature,143.66666666666666,F,field
+WR005-01,,94,temperature,150.33333333333334,F,field
+WR005-01,,95,temperature,150.0,F,field
+WR005-01,,96,temperature,,F,field
+WR005-01,,97,temperature,,F,field
+WR004-01,,1,moisture,0.5,%,field
+WR004-01,,8,moisture,0.5,%,field
+WR004-01,,15,moisture,0.5,%,field
+WR004-01,,22,moisture,0.5,%,field
+WR004-01,,29,moisture,0.5,%,field
+WR004-01,,36,moisture,0.5,%,field
+WR004-01,,43,moisture,0.5,%,field
+WR004-01,,50,moisture,0.5,%,field
+WR004-01,,57,moisture,0.45,%,field
+WR004-01,,64,moisture,0.45,%,field
+WR004-01,,71,moisture,,%,field
+WR004-01,,78,moisture,,%,field
+WR004-01,,85,moisture,,%,field
+WR004-01,,92,moisture,,%,field
+CASP005-01,,1,moisture,0.5,%,field
+CASP005-01,,8,moisture,0.4,%,field
+CASP005-01,,15,moisture,0.4,%,field
+CASP005-01,,22,moisture,0.4,%,field
+CASP005-01,,29,moisture,0.4,%,field
+CASP005-01,,36,moisture,0.4,%,field
+CASP005-01,,43,moisture,0.4,%,field
+CASP005-01,,50,moisture,0.5,%,field
+CASP005-01,,57,moisture,,%,field
+CASP005-01,,64,moisture,,%,field
+CASP005-01,,71,moisture,,%,field
+CASP005-01,,78,moisture,,%,field
+CASP005-01,,85,moisture,,%,field
+CASP005-01,,92,moisture,,%,field
+EASP001-01,,1,moisture,0.6,%,field
+EASP001-01,,8,moisture,0.6,%,field
+EASP001-01,,15,moisture,0.5,%,field
+EASP001-01,,22,moisture,0.48,%,field
+EASP001-01,,29,moisture,0.42,%,field
+EASP001-01,,36,moisture,0.41,%,field
+EASP001-01,,43,moisture,0.36,%,field
+EASP001-01,,50,moisture,0.36,%,field
+EASP001-01,,57,moisture,0.43,%,field
+EASP001-01,,64,moisture,0.4,%,field
+EASP001-01,,71,moisture,0.36,%,field
+EASP001-01,,78,moisture,0.35,%,field
+EASP001-01,,85,moisture,,%,field
+EASP001-01,,92,moisture,,%,field
+IV002-01,,1,moisture,0.55,%,field
+IV002-01,,8,moisture,0.5,%,field
+IV002-01,,15,moisture,0.5,%,field
+IV002-01,,22,moisture,0.4,%,field
+IV002-01,,29,moisture,0.4,%,field
+IV002-01,,36,moisture,0.4,%,field
+IV002-01,,43,moisture,,%,field
+IV002-01,,50,moisture,,%,field
+IV002-01,,57,moisture,,%,field
+IV002-01,,64,moisture,,%,field
+IV002-01,,71,moisture,,%,field
+IV002-01,,78,moisture,,%,field
+IV002-01,,85,moisture,,%,field
+IV002-01,,92,moisture,,%,field
+EASP002-01,,1,moisture,0.6,%,field
+EASP002-01,,8,moisture,0.6,%,field
+EASP002-01,,15,moisture,0.5,%,field
+EASP002-01,,22,moisture,0.5,%,field
+EASP002-01,,29,moisture,0.45,%,field
+EASP002-01,,36,moisture,0.45,%,field
+EASP002-01,,43,moisture,0.4,%,field
+EASP002-01,,50,moisture,0.4,%,field
+EASP002-01,,57,moisture,0.4,%,field
+EASP002-01,,64,moisture,0.38,%,field
+EASP002-01,,71,moisture,0.6,%,field
+EASP002-01,,78,moisture,0.6,%,field
+EASP002-01,,85,moisture,0.6,%,field
+EASP002-01,,92,moisture,0.5,%,field
+CASP006-01,,1,moisture,,%,field
+CASP006-01,,8,moisture,0.6690518113666666,%,field
+CASP006-01,,15,moisture,,%,field
+CASP006-01,,22,moisture,0.5440518113666666,%,field
+CASP006-01,,29,moisture,0.6190518113666668,%,field
+CASP006-01,,36,moisture,0.5190518113666667,%,field
+CASP006-01,,43,moisture,0.5690518113666669,%,field
+CASP006-01,,50,moisture,,%,field
+CASP006-01,,57,moisture,0.5690518113666669,%,field
+CASP006-01,,64,moisture,,%,field
+CASP006-01,,71,moisture,0.5190518113666667,%,field
+CASP006-01,,78,moisture,,%,field
+CASP006-01,,85,moisture,0.3690518113666666,%,field
+CASP006-01,,92,moisture,,%,field
+CASP004-02,,1,moisture,0.57,%,field
+CASP004-02,,8,moisture,0.57,%,field
+CASP004-02,,15,moisture,0.57,%,field
+CASP004-02,,22,moisture,0.57,%,field
+CASP004-02,,29,moisture,0.57,%,field
+CASP004-02,,36,moisture,0.57,%,field
+CASP004-02,,43,moisture,0.57,%,field
+CASP004-02,,50,moisture,0.57,%,field
+CASP004-02,,57,moisture,0.57,%,field
+CASP004-02,,64,moisture,0.57,%,field
+CASP004-02,,71,moisture,,%,field
+CASP004-02,,78,moisture,,%,field
+CASP004-02,,85,moisture,,%,field
+CASP004-02,,92,moisture,,%,field
+ASP001-01,,1,moisture,,%,field
+ASP001-01,,8,moisture,0.5068,%,field
+ASP001-01,,15,moisture,0.5001,%,field
+ASP001-01,,22,moisture,0.6226,%,field
+ASP001-01,,29,moisture,0.5664,%,field
+ASP001-01,,36,moisture,0.4647,%,field
+ASP001-01,,43,moisture,0.5388,%,field
+ASP001-01,,50,moisture,0.48,%,field
+ASP001-01,,57,moisture,,%,field
+ASP001-01,,64,moisture,0.46,%,field
+ASP001-01,,71,moisture,0.51,%,field
+ASP001-01,,78,moisture,0.47,%,field
+ASP001-01,,85,moisture,0.45,%,field
+ASP001-01,,92,moisture,0.49,%,field
+EASP003-01,,1,moisture,,%,field
+EASP003-01,,8,moisture,0.45,%,field
+EASP003-01,,15,moisture,0.5,%,field
+EASP003-01,,22,moisture,0.5,%,field
+EASP003-01,,29,moisture,0.5,%,field
+EASP003-01,,36,moisture,0.5,%,field
+EASP003-01,,43,moisture,,%,field
+EASP003-01,,50,moisture,0.45,%,field
+EASP003-01,,57,moisture,0.4,%,field
+EASP003-01,,64,moisture,0.4,%,field
+EASP003-01,,71,moisture,0.4,%,field
+EASP003-01,,78,moisture,,%,field
+EASP003-01,,85,moisture,,%,field
+EASP003-01,,92,moisture,,%,field
+WR005-01,,1,moisture,0.6,%,field
+WR005-01,,8,moisture,,%,field
+WR005-01,,15,moisture,0.55,%,field
+WR005-01,,22,moisture,0.55,%,field
+WR005-01,,29,moisture,0.55,%,field
+WR005-01,,36,moisture,0.55,%,field
+WR005-01,,43,moisture,0.55,%,field
+WR005-01,,50,moisture,0.5,%,field
+WR005-01,,57,moisture,0.5,%,field
+WR005-01,,64,moisture,0.55,%,field
+WR005-01,,71,moisture,0.55,%,field
+WR005-01,,78,moisture,0.55,%,field
+WR005-01,,85,moisture,0.55,%,field
+WR005-01,,92,moisture,,%,field
+WR004-01,,1,o2,0.075,%,field
+WR004-01,,8,o2,0.06,%,field
+WR004-01,,15,o2,0.07,%,field
+WR004-01,,22,o2,0.06,%,field
+WR004-01,,29,o2,0.07,%,field
+WR004-01,,36,o2,0.06,%,field
+WR004-01,,43,o2,0.06,%,field
+WR004-01,,50,o2,0.06,%,field
+WR004-01,,57,o2,0.08,%,field
+WR004-01,,64,o2,0.08,%,field
+WR004-01,,71,o2,,%,field
+WR004-01,,78,o2,,%,field
+WR004-01,,85,o2,,%,field
+WR004-01,,92,o2,,%,field
+CASP005-01,,1,o2,0.11,%,field
+CASP005-01,,8,o2,0.11,%,field
+CASP005-01,,15,o2,0.1,%,field
+CASP005-01,,22,o2,0.1,%,field
+CASP005-01,,29,o2,0.1,%,field
+CASP005-01,,36,o2,0.1,%,field
+CASP005-01,,43,o2,0.1,%,field
+CASP005-01,,50,o2,0.1,%,field
+CASP005-01,,57,o2,,%,field
+CASP005-01,,64,o2,,%,field
+CASP005-01,,71,o2,,%,field
+CASP005-01,,78,o2,,%,field
+CASP005-01,,85,o2,,%,field
+CASP005-01,,92,o2,,%,field
+EASP001-01,,1,o2,0.18,%,field
+EASP001-01,,8,o2,0.1775,%,field
+EASP001-01,,15,o2,0.1725,%,field
+EASP001-01,,22,o2,0.195,%,field
+EASP001-01,,29,o2,0.178,%,field
+EASP001-01,,36,o2,0.178,%,field
+EASP001-01,,43,o2,0.176,%,field
+EASP001-01,,50,o2,0.18,%,field
+EASP001-01,,57,o2,0.173,%,field
+EASP001-01,,64,o2,0.16,%,field
+EASP001-01,,71,o2,0.13,%,field
+EASP001-01,,78,o2,0.12,%,field
+EASP001-01,,85,o2,,%,field
+EASP001-01,,92,o2,,%,field
+IV002-01,,1,o2,,%,field
+IV002-01,,8,o2,0.19,%,field
+IV002-01,,15,o2,,%,field
+IV002-01,,22,o2,0.08,%,field
+IV002-01,,29,o2,,%,field
+IV002-01,,36,o2,0.03,%,field
+IV002-01,,43,o2,,%,field
+IV002-01,,50,o2,,%,field
+IV002-01,,57,o2,,%,field
+IV002-01,,64,o2,,%,field
+IV002-01,,71,o2,,%,field
+IV002-01,,78,o2,,%,field
+IV002-01,,85,o2,,%,field
+IV002-01,,92,o2,,%,field
+EASP002-01,,1,o2,0.1,%,field
+EASP002-01,,8,o2,0.1,%,field
+EASP002-01,,15,o2,0.1,%,field
+EASP002-01,,22,o2,0.12,%,field
+EASP002-01,,29,o2,0.03,%,field
+EASP002-01,,36,o2,0.04,%,field
+EASP002-01,,43,o2,0.06,%,field
+EASP002-01,,50,o2,0.07,%,field
+EASP002-01,,57,o2,0.04,%,field
+EASP002-01,,64,o2,0.02,%,field
+EASP002-01,,71,o2,0.0,%,field
+EASP002-01,,78,o2,0.1,%,field
+EASP002-01,,85,o2,0.01,%,field
+EASP002-01,,92,o2,,%,field
+CASP006-01,,1,o2,,%,field
+CASP006-01,,8,o2,,%,field
+CASP006-01,,15,o2,,%,field
+CASP006-01,,22,o2,0.1198,%,field
+CASP006-01,,29,o2,,%,field
+CASP006-01,,36,o2,,%,field
+CASP006-01,,43,o2,,%,field
+CASP006-01,,50,o2,,%,field
+CASP006-01,,57,o2,,%,field
+CASP006-01,,64,o2,,%,field
+CASP006-01,,71,o2,,%,field
+CASP006-01,,78,o2,,%,field
+CASP006-01,,85,o2,,%,field
+CASP006-01,,92,o2,,%,field
+CASP004-02,,1,o2,0.208,%,field
+CASP004-02,,8,o2,,%,field
+CASP004-02,,15,o2,0.212,%,field
+CASP004-02,,22,o2,,%,field
+CASP004-02,,29,o2,0.212,%,field
+CASP004-02,,36,o2,,%,field
+CASP004-02,,43,o2,0.225,%,field
+CASP004-02,,50,o2,,%,field
+CASP004-02,,57,o2,0.22,%,field
+CASP004-02,,64,o2,,%,field
+CASP004-02,,71,o2,,%,field
+CASP004-02,,78,o2,,%,field
+CASP004-02,,85,o2,,%,field
+CASP004-02,,92,o2,,%,field
+ASP001-01,,1,o2,0.16,%,field
+ASP001-01,,8,o2,,%,field
+ASP001-01,,15,o2,0.1517,%,field
+ASP001-01,,22,o2,,%,field
+ASP001-01,,29,o2,0.1117,%,field
+ASP001-01,,36,o2,0.155,%,field
+ASP001-01,,43,o2,,%,field
+ASP001-01,,50,o2,0.148,%,field
+ASP001-01,,57,o2,,%,field
+ASP001-01,,64,o2,0.12,%,field
+ASP001-01,,71,o2,,%,field
+ASP001-01,,78,o2,0.09,%,field
+ASP001-01,,85,o2,,%,field
+ASP001-01,,92,o2,,%,field
+EASP003-01,,1,o2,,%,field
+EASP003-01,,8,o2,0.12,%,field
+EASP003-01,,15,o2,,%,field
+EASP003-01,,22,o2,0.15,%,field
+EASP003-01,,29,o2,,%,field
+EASP003-01,,36,o2,0.14,%,field
+EASP003-01,,43,o2,,%,field
+EASP003-01,,50,o2,0.11,%,field
+EASP003-01,,57,o2,0.1,%,field
+EASP003-01,,64,o2,,%,field
+EASP003-01,,71,o2,0.02,%,field
+EASP003-01,,78,o2,,%,field
+EASP003-01,,85,o2,,%,field
+EASP003-01,,92,o2,,%,field
+WR005-01,,1,o2,0.0275,%,field
+WR005-01,,8,o2,0.014848484848484849,%,field
+WR005-01,,15,o2,0.020588235294117643,%,field
+WR005-01,,22,o2,0.0183,%,field
+WR005-01,,29,o2,0.016666666666666666,%,field
+WR005-01,,36,o2,0.028333333333333335,%,field
+WR005-01,,43,o2,0.015,%,field
+WR005-01,,50,o2,0.02,%,field
+WR005-01,,57,o2,0.0175,%,field
+WR005-01,,64,o2,,%,field
+WR005-01,,71,o2,0.013333333333333332,%,field
+WR005-01,,78,o2,,%,field
+WR005-01,,85,o2,0.05428571428571429,%,field
+WR005-01,,92,o2,,%,field
+WR004-01,Loading,,bulk_density,826.8,lbs/cu. yard,field
+WR004-01,First Removal,,bulk_density,1350.0,lbs/cu. yard,field
+WR004-01,Second Removal,,bulk_density,1410.0,lbs/cu. yard,field
+CASP005-01,Loading,,bulk_density,810.0,lbs/cu. yard,field
+CASP005-01,First Removal,,bulk_density,852.0,lbs/cu. yard,field
+CASP005-01,Second Removal,,bulk_density,952.0,lbs/cu. yard,field
+EASP002-01,Loading,,bulk_density,1056.0,lbs/cu. yard,field
+EASP002-01,First Removal,,bulk_density,960.0,lbs/cu. yard,field
+EASP002-01,Second Removal,,bulk_density,1220.0,lbs/cu. yard,field
+CASP006-01,Loading,,bulk_density,1266.68,lbs/cu. yard,field
+CASP006-01,First Removal,,bulk_density,820.0,lbs/cu. yard,field
+CASP006-01,Second Removal,,bulk_density,848.0,lbs/cu. yard,field
+CASP004-02,Loading,,bulk_density,1026.0,lbs/cu. yard,field
+CASP004-02,First Removal,,bulk_density,870.0,lbs/cu. yard,field
+CASP004-02,Second Removal,,bulk_density,850.0,lbs/cu. yard,field
+ASP001-01,Loading,,bulk_density,,lbs/cu. yard,field
+ASP001-01,First Removal,,bulk_density,,lbs/cu. yard,field
+ASP001-01,Second Removal,,bulk_density,,lbs/cu. yard,field
+EASP003-01,Loading,,bulk_density,820.0,lbs/cu. yard,field
+EASP003-01,First Removal,,bulk_density,,lbs/cu. yard,field
+EASP003-01,Second Removal,,bulk_density,,lbs/cu. yard,field
+WR005-01,Loading,,bulk_density,1280.0,lbs/cu. yard,field
+WR005-01,First Removal,,bulk_density,1224.0,lbs/cu. yard,field
+WR005-01,Second Removal,,bulk_density,1296.0,lbs/cu. yard,field
+EASP001-01,Loading,,bulk_density,1248.0,lbs/cu. yard,field
+EASP001-01,First Removal,,bulk_density,884.0,lbs/cu. yard,field
+EASP001-01,Second Removal,,bulk_density,896.0,lbs/cu. yard,field
+IV002-01,Loading,,bulk_density,808.0,lbs/cu. yard,field
+IV002-01,First Removal,,bulk_density,1224.0,lbs/cu. yard,field
+IV002-01,Second Removal,,bulk_density,688.0,lbs/cu. yard,field
+WR004-01,First Removal,,total_n_as_rcvd,0.0045,%,lab
+CASP005-01,First Removal,,total_n_as_rcvd,0.0096,%,lab
+EASP001-01,First Removal,,total_n_as_rcvd,,%,lab
+IV002-01,First Removal,,total_n_as_rcvd,0.0072,%,lab
+EASP002-01,First Removal,,total_n_as_rcvd,0.0074,%,lab
+CASP006-01,First Removal,,total_n_as_rcvd,0.0066,%,lab
+CASP004-02,First Removal,,total_n_as_rcvd,0.0068,%,lab
+ASP001-01,First Removal,,total_n_as_rcvd,0.0072,%,lab
+EASP003-01,First Removal,,total_n_as_rcvd,0.0075,%,lab
+WR005-01,First Removal,,total_n_as_rcvd,0.0042,%,lab
+WR004-01,Loading,,total_n_as_rcvd,0.0052,%,lab
+CASP005-01,Loading,,total_n_as_rcvd,0.0037,%,lab
+EASP001-01,Loading,,total_n_as_rcvd,0.0052,%,lab
+IV002-01,Loading,,total_n_as_rcvd,0.0066,%,lab
+EASP002-01,Loading,,total_n_as_rcvd,0.0067,%,lab
+CASP006-01,Loading,,total_n_as_rcvd,0.0061,%,lab
+CASP004-02,Loading,,total_n_as_rcvd,0.0075,%,lab
+ASP001-01,Loading,,total_n_as_rcvd,0.007,%,lab
+EASP003-01,Loading,,total_n_as_rcvd,0.0073,%,lab
+WR005-01,Loading,,total_n_as_rcvd,0.0042,%,lab
+WR004-01,Second Removal,,total_n_as_rcvd,0.01116630265,%,lab
+CASP005-01,Second Removal,,total_n_as_rcvd,0.00830619796,%,lab
+EASP001-01,Second Removal,,total_n_as_rcvd,0.00900503947,%,lab
+IV002-01,Second Removal,,total_n_as_rcvd,0.0045,%,lab
+EASP002-01,Second Removal,,total_n_as_rcvd,0.01125647482,%,lab
+CASP006-01,Second Removal,,total_n_as_rcvd,0.00984605968,%,lab
+CASP004-02,Second Removal,,total_n_as_rcvd,0.00899863714,%,lab
+ASP001-01,Second Removal,,total_n_as_rcvd,0.00432701613,%,lab
+EASP003-01,Second Removal,,total_n_as_rcvd,0.0132382134,%,lab
+WR005-01,Second Removal,,total_n_as_rcvd,0.00679097222,%,lab
+WR004-01,First Removal,,total_n_dry_wt,0.0068,%,lab
+CASP005-01,First Removal,,total_n_dry_wt,0.0146,%,lab
+EASP001-01,First Removal,,total_n_dry_wt,,%,lab
+IV002-01,First Removal,,total_n_dry_wt,0.0135,%,lab
+EASP002-01,First Removal,,total_n_dry_wt,0.0169,%,lab
+CASP006-01,First Removal,,total_n_dry_wt,0.0142,%,lab
+CASP004-02,First Removal,,total_n_dry_wt,0.0147,%,lab
+ASP001-01,First Removal,,total_n_dry_wt,0.0154,%,lab
+EASP003-01,First Removal,,total_n_dry_wt,0.0183,%,lab
+WR005-01,First Removal,,total_n_dry_wt,0.008,%,lab
+WR004-01,Loading,,total_n_dry_wt,0.0076,%,lab
+CASP005-01,Loading,,total_n_dry_wt,0.0061,%,lab
+EASP001-01,Loading,,total_n_dry_wt,0.0131,%,lab
+IV002-01,Loading,,total_n_dry_wt,0.0136,%,lab
+EASP002-01,Loading,,total_n_dry_wt,0.0126,%,lab
+CASP006-01,Loading,,total_n_dry_wt,0.0184,%,lab
+CASP004-02,Loading,,total_n_dry_wt,0.0154,%,lab
+ASP001-01,Loading,,total_n_dry_wt,0.0159,%,lab
+EASP003-01,Loading,,total_n_dry_wt,0.0139,%,lab
+WR005-01,Loading,,total_n_dry_wt,0.0076,%,lab
+WR004-01,Second Removal,,total_n_dry_wt,0.0184,%,lab
+CASP005-01,Second Removal,,total_n_dry_wt,0.0123,%,lab
+EASP001-01,Second Removal,,total_n_dry_wt,0.0139,%,lab
+IV002-01,Second Removal,,total_n_dry_wt,0.0096,%,lab
+EASP002-01,Second Removal,,total_n_dry_wt,0.0183,%,lab
+CASP006-01,Second Removal,,total_n_dry_wt,0.0168,%,lab
+CASP004-02,Second Removal,,total_n_dry_wt,0.0196,%,lab
+ASP001-01,Second Removal,,total_n_dry_wt,0.0073,%,lab
+EASP003-01,Second Removal,,total_n_dry_wt,0.022,%,lab
+WR005-01,Second Removal,,total_n_dry_wt,0.0127,%,lab
+WR004-01,First Removal,,organic_c_as_rcvd,0.108,%,lab
+CASP005-01,First Removal,,organic_c_as_rcvd,0.251,%,lab
+EASP001-01,First Removal,,organic_c_as_rcvd,,%,lab
+IV002-01,First Removal,,organic_c_as_rcvd,0.224,%,lab
+EASP002-01,First Removal,,organic_c_as_rcvd,0.141,%,lab
+CASP006-01,First Removal,,organic_c_as_rcvd,0.106,%,lab
+CASP004-02,First Removal,,organic_c_as_rcvd,0.14,%,lab
+ASP001-01,First Removal,,organic_c_as_rcvd,0.187,%,lab
+EASP003-01,First Removal,,organic_c_as_rcvd,0.178,%,lab
+WR005-01,First Removal,,organic_c_as_rcvd,0.098,%,lab
+WR004-01,Loading,,organic_c_as_rcvd,0.168,%,lab
+CASP005-01,Loading,,organic_c_as_rcvd,0.172,%,lab
+EASP001-01,Loading,,organic_c_as_rcvd,0.152,%,lab
+IV002-01,Loading,,organic_c_as_rcvd,0.213,%,lab
+EASP002-01,Loading,,organic_c_as_rcvd,0.136,%,lab
+CASP006-01,Loading,,organic_c_as_rcvd,0.108,%,lab
+CASP004-02,Loading,,organic_c_as_rcvd,0.185,%,lab
+ASP001-01,Loading,,organic_c_as_rcvd,0.17,%,lab
+EASP003-01,Loading,,organic_c_as_rcvd,0.228,%,lab
+WR005-01,Loading,,organic_c_as_rcvd,0.088,%,lab
+WR004-01,Second Removal,,organic_c_as_rcvd,0.2051201248,%,lab
+CASP005-01,Second Removal,,organic_c_as_rcvd,0.1830064755,%,lab
+EASP001-01,Second Removal,,organic_c_as_rcvd,0.1230904675,%,lab
+IV002-01,Second Removal,,organic_c_as_rcvd,0.094,%,lab
+EASP002-01,Second Removal,,organic_c_as_rcvd,0.156852518,%,lab
+CASP006-01,Second Removal,,organic_c_as_rcvd,0.184027544,%,lab
+CASP004-02,Second Removal,,organic_c_as_rcvd,0.1418662692,%,lab
+ASP001-01,Second Removal,,organic_c_as_rcvd,0.06875806452,%,lab
+EASP003-01,Second Removal,,organic_c_as_rcvd,0.2695781638,%,lab
+WR005-01,Second Removal,,organic_c_as_rcvd,0.1427708333,%,lab
+WR004-01,First Removal,,organic_c_dry_wt,0.163,%,lab
+CASP005-01,First Removal,,organic_c_dry_wt,0.382,%,lab
+EASP001-01,First Removal,,organic_c_dry_wt,,%,lab
+IV002-01,First Removal,,organic_c_dry_wt,0.421,%,lab
+EASP002-01,First Removal,,organic_c_dry_wt,0.325,%,lab
+CASP006-01,First Removal,,organic_c_dry_wt,0.229,%,lab
+CASP004-02,First Removal,,organic_c_dry_wt,0.305,%,lab
+ASP001-01,First Removal,,organic_c_dry_wt,0.399,%,lab
+EASP003-01,First Removal,,organic_c_dry_wt,0.433,%,lab
+WR005-01,First Removal,,organic_c_dry_wt,0.187,%,lab
+WR004-01,Loading,,organic_c_dry_wt,0.247,%,lab
+CASP005-01,Loading,,organic_c_dry_wt,0.287,%,lab
+EASP001-01,Loading,,organic_c_dry_wt,0.381,%,lab
+IV002-01,Loading,,organic_c_dry_wt,0.437,%,lab
+EASP002-01,Loading,,organic_c_dry_wt,0.257,%,lab
+CASP006-01,Loading,,organic_c_dry_wt,0.327,%,lab
+CASP004-02,Loading,,organic_c_dry_wt,0.38,%,lab
+ASP001-01,Loading,,organic_c_dry_wt,0.385,%,lab
+EASP003-01,Loading,,organic_c_dry_wt,0.432,%,lab
+WR005-01,Loading,,organic_c_dry_wt,0.16,%,lab
+WR004-01,Second Removal,,organic_c_dry_wt,0.338,%,lab
+CASP005-01,Second Removal,,organic_c_dry_wt,0.271,%,lab
+EASP001-01,Second Removal,,organic_c_dry_wt,0.19,%,lab
+IV002-01,Second Removal,,organic_c_dry_wt,0.199,%,lab
+EASP002-01,Second Removal,,organic_c_dry_wt,0.255,%,lab
+CASP006-01,Second Removal,,organic_c_dry_wt,0.314,%,lab
+CASP004-02,Second Removal,,organic_c_dry_wt,0.309,%,lab
+ASP001-01,Second Removal,,organic_c_dry_wt,0.116,%,lab
+EASP003-01,Second Removal,,organic_c_dry_wt,0.448,%,lab
+WR005-01,Second Removal,,organic_c_dry_wt,0.267,%,lab
+WR004-01,First Removal,,c_to_n_dry_wt,24.0,,lab
+CASP005-01,First Removal,,c_to_n_dry_wt,26.0,,lab
+EASP001-01,First Removal,,c_to_n_dry_wt,,,lab
+IV002-01,First Removal,,c_to_n_dry_wt,31.0,,lab
+EASP002-01,First Removal,,c_to_n_dry_wt,19.0,,lab
+CASP006-01,First Removal,,c_to_n_dry_wt,16.0,,lab
+CASP004-02,First Removal,,c_to_n_dry_wt,21.0,,lab
+ASP001-01,First Removal,,c_to_n_dry_wt,26.0,,lab
+EASP003-01,First Removal,,c_to_n_dry_wt,24.0,,lab
+WR005-01,First Removal,,c_to_n_dry_wt,23.0,,lab
+WR004-01,Loading,,c_to_n_dry_wt,33.0,,lab
+CASP005-01,Loading,,c_to_n_dry_wt,47.0,,lab
+EASP001-01,Loading,,c_to_n_dry_wt,29.0,,lab
+IV002-01,Loading,,c_to_n_dry_wt,32.0,,lab
+EASP002-01,Loading,,c_to_n_dry_wt,20.0,,lab
+CASP006-01,Loading,,c_to_n_dry_wt,18.0,,lab
+CASP004-02,Loading,,c_to_n_dry_wt,25.0,,lab
+ASP001-01,Loading,,c_to_n_dry_wt,24.0,,lab
+EASP003-01,Loading,,c_to_n_dry_wt,31.0,,lab
+WR005-01,Loading,,c_to_n_dry_wt,21.0,,lab
+WR004-01,Second Removal,,c_to_n_dry_wt,15.89041096,,lab
+CASP005-01,Second Removal,,c_to_n_dry_wt,22.03252033,,lab
+EASP001-01,Second Removal,,c_to_n_dry_wt,18.36956522,,lab
+IV002-01,Second Removal,,c_to_n_dry_wt,20.36363636,,lab
+EASP002-01,Second Removal,,c_to_n_dry_wt,21.0,,lab
+CASP006-01,Second Removal,,c_to_n_dry_wt,13.66906475,,lab
+CASP004-02,Second Removal,,c_to_n_dry_wt,15.76530612,,lab
+ASP001-01,Second Removal,,c_to_n_dry_wt,13.93442623,,lab
+EASP003-01,Second Removal,,c_to_n_dry_wt,18.69047619,,lab
+WR005-01,Second Removal,,c_to_n_dry_wt,21.02362205,,lab
+WR004-01,First Removal,,bulk_density,1382.0,lbs/cu.yard,lab
+CASP005-01,First Removal,,bulk_density,652.0,lbs/cu.yard,lab
+EASP001-01,First Removal,,bulk_density,,lbs/cu.yard,lab
+IV002-01,First Removal,,bulk_density,832.0,lbs/cu.yard,lab
+EASP002-01,First Removal,,bulk_density,963.0,lbs/cu.yard,lab
+CASP006-01,First Removal,,bulk_density,1353.0,lbs/cu.yard,lab
+CASP004-02,First Removal,,bulk_density,1006.0,lbs/cu.yard,lab
+ASP001-01,First Removal,,bulk_density,993.0,lbs/cu.yard,lab
+EASP003-01,First Removal,,bulk_density,1086.0,lbs/cu.yard,lab
+WR005-01,First Removal,,bulk_density,1381.0,lbs/cu.yard,lab
+WR004-01,Loading,,bulk_density,883.0,lbs/cu.yard,lab
+CASP005-01,Loading,,bulk_density,1176.0,lbs/cu.yard,lab
+EASP001-01,Loading,,bulk_density,1107.0,lbs/cu.yard,lab
+IV002-01,Loading,,bulk_density,769.0,lbs/cu.yard,lab
+EASP002-01,Loading,,bulk_density,1128.0,lbs/cu.yard,lab
+CASP006-01,Loading,,bulk_density,1151.0,lbs/cu.yard,lab
+CASP004-02,Loading,,bulk_density,711.0,lbs/cu.yard,lab
+ASP001-01,Loading,,bulk_density,1097.0,lbs/cu.yard,lab
+EASP003-01,Loading,,bulk_density,672.0,lbs/cu.yard,lab
+WR005-01,Loading,,bulk_density,1174.0,lbs/cu.yard,lab
+WR004-01,Second Removal,,bulk_density,1474.178166,lbs/cu.yard,lab
+CASP005-01,Second Removal,,bulk_density,1203.257135,lbs/cu.yard,lab
+EASP001-01,Second Removal,,bulk_density,842.778,lbs/cu.yard,lab
+IV002-01,Second Removal,,bulk_density,656.6006782,lbs/cu.yard,lab
+EASP002-01,Second Removal,,bulk_density,827.0,lbs/cu.yard,lab
+CASP006-01,Second Removal,,bulk_density,1219.522544,lbs/cu.yard,lab
+CASP004-02,Second Removal,,bulk_density,976.0901564,lbs/cu.yard,lab
+ASP001-01,Second Removal,,bulk_density,1071.26448,lbs/cu.yard,lab
+EASP003-01,Second Removal,,bulk_density,672.4481305,lbs/cu.yard,lab
+WR005-01,Second Removal,,bulk_density,1153.989193,lbs/cu.yard,lab
+WR004-01,First Removal,,solids_as_rcvd,0.665,%,lab
+CASP005-01,First Removal,,solids_as_rcvd,0.657,%,lab
+EASP001-01,First Removal,,solids_as_rcvd,,%,lab
+IV002-01,First Removal,,solids_as_rcvd,0.532,%,lab
+EASP002-01,First Removal,,solids_as_rcvd,0.435,%,lab
+CASP006-01,First Removal,,solids_as_rcvd,0.463,%,lab
+CASP004-02,First Removal,,solids_as_rcvd,0.46,%,lab
+ASP001-01,First Removal,,solids_as_rcvd,0.47,%,lab
+EASP003-01,First Removal,,solids_as_rcvd,0.412,%,lab
+WR005-01,First Removal,,solids_as_rcvd,0.526,%,lab
+WR004-01,Loading,,solids_as_rcvd,0.682,%,lab
+CASP005-01,Loading,,solids_as_rcvd,0.598,%,lab
+EASP001-01,Loading,,solids_as_rcvd,0.398,%,lab
+IV002-01,Loading,,solids_as_rcvd,0.488,%,lab
+EASP002-01,Loading,,solids_as_rcvd,0.529,%,lab
+CASP006-01,Loading,,solids_as_rcvd,0.332,%,lab
+CASP004-02,Loading,,solids_as_rcvd,0.488,%,lab
+ASP001-01,Loading,,solids_as_rcvd,0.442,%,lab
+EASP003-01,Loading,,solids_as_rcvd,0.528,%,lab
+WR005-01,Loading,,solids_as_rcvd,0.553,%,lab
+WR004-01,Second Removal,,solids_as_rcvd,0.5927419355,%,lab
+CASP005-01,Second Removal,,solids_as_rcvd,0.6753006475,%,lab
+EASP001-01,Second Removal,,solids_as_rcvd,0.6068642746,%,lab
+IV002-01,Second Removal,,solids_as_rcvd,0.6017369727,%,lab
+EASP002-01,Second Removal,,solids_as_rcvd,0.471,%,lab
+CASP006-01,Second Removal,,solids_as_rcvd,0.6478445659,%,lab
+CASP004-02,Second Removal,,solids_as_rcvd,0.4591141397,%,lab
+ASP001-01,Second Removal,,solids_as_rcvd,0.6151079137,%,lab
+EASP003-01,Second Removal,,solids_as_rcvd,0.5860749809,%,lab
+WR005-01,Second Removal,,solids_as_rcvd,0.5347222222,%,lab
+WR004-01,First Removal,,moisture_as_rcvd,0.335,%,lab
+CASP005-01,First Removal,,moisture_as_rcvd,0.343,%,lab
+EASP001-01,First Removal,,moisture_as_rcvd,,%,lab
+IV002-01,First Removal,,moisture_as_rcvd,0.468,%,lab
+EASP002-01,First Removal,,moisture_as_rcvd,0.565,%,lab
+CASP006-01,First Removal,,moisture_as_rcvd,0.537,%,lab
+CASP004-02,First Removal,,moisture_as_rcvd,0.54,%,lab
+ASP001-01,First Removal,,moisture_as_rcvd,0.53,%,lab
+EASP003-01,First Removal,,moisture_as_rcvd,0.588,%,lab
+WR005-01,First Removal,,moisture_as_rcvd,0.474,%,lab
+WR004-01,Loading,,moisture_as_rcvd,0.318,%,lab
+CASP005-01,Loading,,moisture_as_rcvd,0.402,%,lab
+EASP001-01,Loading,,moisture_as_rcvd,0.602,%,lab
+IV002-01,Loading,,moisture_as_rcvd,0.512,%,lab
+EASP002-01,Loading,,moisture_as_rcvd,0.471,%,lab
+CASP006-01,Loading,,moisture_as_rcvd,0.668,%,lab
+CASP004-02,Loading,,moisture_as_rcvd,0.512,%,lab
+ASP001-01,Loading,,moisture_as_rcvd,0.558,%,lab
+EASP003-01,Loading,,moisture_as_rcvd,0.472,%,lab
+WR005-01,Loading,,moisture_as_rcvd,0.447,%,lab
+WR004-01,Second Removal,,moisture_as_rcvd,0.4072580645,%,lab
+CASP005-01,Second Removal,,moisture_as_rcvd,0.3246993525,%,lab
+EASP001-01,Second Removal,,moisture_as_rcvd,0.3931357254,%,lab
+IV002-01,Second Removal,,moisture_as_rcvd,0.3982630273,%,lab
+EASP002-01,Second Removal,,moisture_as_rcvd,0.529,%,lab
+CASP006-01,Second Removal,,moisture_as_rcvd,0.3521554341,%,lab
+CASP004-02,Second Removal,,moisture_as_rcvd,0.5408858603,%,lab
+ASP001-01,Second Removal,,moisture_as_rcvd,0.3848920863,%,lab
+EASP003-01,Second Removal,,moisture_as_rcvd,0.4139250191,%,lab
+WR005-01,Second Removal,,moisture_as_rcvd,0.4652777778,%,lab
+WR004-01,First Removal,,ph_as_rcvd,7.6,,lab
+CASP005-01,First Removal,,ph_as_rcvd,7.9,,lab
+EASP001-01,First Removal,,ph_as_rcvd,,,lab
+IV002-01,First Removal,,ph_as_rcvd,5.0,,lab
+EASP002-01,First Removal,,ph_as_rcvd,6.0,,lab
+CASP006-01,First Removal,,ph_as_rcvd,8.1,,lab
+CASP004-02,First Removal,,ph_as_rcvd,7.7,,lab
+ASP001-01,First Removal,,ph_as_rcvd,4.4,,lab
+EASP003-01,First Removal,,ph_as_rcvd,4.5,,lab
+WR005-01,First Removal,,ph_as_rcvd,7.4,,lab
+WR004-01,Loading,,ph_as_rcvd,6.3,,lab
+CASP005-01,Loading,,ph_as_rcvd,7.6,,lab
+EASP001-01,Loading,,ph_as_rcvd,6.4,,lab
+IV002-01,Loading,,ph_as_rcvd,4.7,,lab
+EASP002-01,Loading,,ph_as_rcvd,4.4,,lab
+CASP006-01,Loading,,ph_as_rcvd,6.7,,lab
+CASP004-02,Loading,,ph_as_rcvd,4.6,,lab
+ASP001-01,Loading,,ph_as_rcvd,4.5,,lab
+EASP003-01,Loading,,ph_as_rcvd,7.1,,lab
+WR005-01,Loading,,ph_as_rcvd,8.3,,lab
+WR004-01,Second Removal,,ph_as_rcvd,7.4,,lab
+CASP005-01,Second Removal,,ph_as_rcvd,7.1,,lab
+EASP001-01,Second Removal,,ph_as_rcvd,7.3,,lab
+IV002-01,Second Removal,,ph_as_rcvd,6.5,,lab
+EASP002-01,Second Removal,,ph_as_rcvd,8.4,,lab
+CASP006-01,Second Removal,,ph_as_rcvd,8.5,,lab
+CASP004-02,Second Removal,,ph_as_rcvd,7.9,,lab
+ASP001-01,Second Removal,,ph_as_rcvd,7.2,,lab
+EASP003-01,Second Removal,,ph_as_rcvd,7.0,,lab
+WR005-01,Second Removal,,ph_as_rcvd,7.8,,lab
+WR004-01,First Removal,,ph_dry_wt,,,lab
+CASP005-01,First Removal,,ph_dry_wt,,,lab
+EASP001-01,First Removal,,ph_dry_wt,,,lab
+IV002-01,First Removal,,ph_dry_wt,,,lab
+EASP002-01,First Removal,,ph_dry_wt,,,lab
+CASP006-01,First Removal,,ph_dry_wt,,,lab
+CASP004-02,First Removal,,ph_dry_wt,,,lab
+ASP001-01,First Removal,,ph_dry_wt,,,lab
+EASP003-01,First Removal,,ph_dry_wt,,,lab
+WR005-01,First Removal,,ph_dry_wt,,,lab
+WR004-01,Loading,,ph_dry_wt,,,lab
+CASP005-01,Loading,,ph_dry_wt,,,lab
+EASP001-01,Loading,,ph_dry_wt,,,lab
+IV002-01,Loading,,ph_dry_wt,,,lab
+EASP002-01,Loading,,ph_dry_wt,,,lab
+CASP006-01,Loading,,ph_dry_wt,,,lab
+CASP004-02,Loading,,ph_dry_wt,,,lab
+ASP001-01,Loading,,ph_dry_wt,,,lab
+EASP003-01,Loading,,ph_dry_wt,,,lab
+WR005-01,Loading,,ph_dry_wt,,,lab
+WR004-01,Second Removal,,ph_dry_wt,,,lab
+CASP005-01,Second Removal,,ph_dry_wt,,,lab
+EASP001-01,Second Removal,,ph_dry_wt,,,lab
+IV002-01,Second Removal,,ph_dry_wt,,,lab
+EASP002-01,Second Removal,,ph_dry_wt,,,lab
+CASP006-01,Second Removal,,ph_dry_wt,,,lab
+CASP004-02,Second Removal,,ph_dry_wt,,,lab
+ASP001-01,Second Removal,,ph_dry_wt,,,lab
+EASP003-01,Second Removal,,ph_dry_wt,,,lab
+WR005-01,Second Removal,,ph_dry_wt,,,lab
+WR004-01,First Removal,,stability,Very Stable,,lab
+CASP005-01,First Removal,,stability,Stable,,lab
+EASP001-01,First Removal,,stability,,,lab
+IV002-01,First Removal,,stability,Stable,,lab
+EASP002-01,First Removal,,stability,Stable,,lab
+CASP006-01,First Removal,,stability,Stable,,lab
+CASP004-02,First Removal,,stability,Stable,,lab
+ASP001-01,First Removal,,stability,Stable,,lab
+EASP003-01,First Removal,,stability,Stable,,lab
+WR005-01,First Removal,,stability,Very Stable,,lab
+WR004-01,Loading,,stability,,,lab
+CASP005-01,Loading,,stability,,,lab
+EASP001-01,Loading,,stability,,,lab
+IV002-01,Loading,,stability,,,lab
+EASP002-01,Loading,,stability,,,lab
+CASP006-01,Loading,,stability,,,lab
+CASP004-02,Loading,,stability,,,lab
+ASP001-01,Loading,,stability,,,lab
+EASP003-01,Loading,,stability,,,lab
+WR005-01,Loading,,stability,,,lab
+WR004-01,Second Removal,,stability,Very Stable,,lab
+CASP005-01,Second Removal,,stability,Stable,,lab
+EASP001-01,Second Removal,,stability,Stable,,lab
+IV002-01,Second Removal,,stability,Stable,,lab
+EASP002-01,Second Removal,,stability,VERY STABLE,,lab
+CASP006-01,Second Removal,,stability,VERY STABLE,,lab
+CASP004-02,Second Removal,,stability,VERY STABLE,,lab
+ASP001-01,Second Removal,,stability,Stable,,lab
+EASP003-01,Second Removal,,stability,STABLE,,lab
+WR005-01,Second Removal,,stability,Stable,,lab
+WR004-01,First Removal,,co2_evolution_1mg_co2_to_c,0.4,g OM/day,lab
+CASP005-01,First Removal,,co2_evolution_1mg_co2_to_c,1.8,g OM/day,lab
+EASP001-01,First Removal,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+IV002-01,First Removal,,co2_evolution_1mg_co2_to_c,3.8,g OM/day,lab
+EASP002-01,First Removal,,co2_evolution_1mg_co2_to_c,3.9,g OM/day,lab
+CASP006-01,First Removal,,co2_evolution_1mg_co2_to_c,2.7,g OM/day,lab
+CASP004-02,First Removal,,co2_evolution_1mg_co2_to_c,1.6,g OM/day,lab
+ASP001-01,First Removal,,co2_evolution_1mg_co2_to_c,4.7,g OM/day,lab
+EASP003-01,First Removal,,co2_evolution_1mg_co2_to_c,2.5,g OM/day,lab
+WR005-01,First Removal,,co2_evolution_1mg_co2_to_c,0.8,g OM/day,lab
+WR004-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+CASP005-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+EASP001-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+IV002-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+EASP002-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+CASP006-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+CASP004-02,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+ASP001-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+EASP003-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+WR005-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+WR004-01,Second Removal,,co2_evolution_1mg_co2_to_c,0.11728196,g OM/day,lab
+CASP005-01,Second Removal,,co2_evolution_1mg_co2_to_c,2.256661656,g OM/day,lab
+EASP001-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.885598286,g OM/day,lab
+IV002-01,Second Removal,,co2_evolution_1mg_co2_to_c,3.139573928,g OM/day,lab
+EASP002-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.607837683,g OM/day,lab
+CASP006-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.808609836,g OM/day,lab
+CASP004-02,Second Removal,,co2_evolution_1mg_co2_to_c,1.274834696,g OM/day,lab
+ASP001-01,Second Removal,,co2_evolution_1mg_co2_to_c,3.051727117,g OM/day,lab
+EASP003-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.631518808,g OM/day,lab
+WR005-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.51730531,g OM/day,lab
+WR004-01,First Removal,,co2_eolution_2mg_co2_to_c,0.2,g TS/day,lab
+CASP005-01,First Removal,,co2_eolution_2mg_co2_to_c,2.8,g TS/day,lab
+EASP001-01,First Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+IV002-01,First Removal,,co2_eolution_2mg_co2_to_c,10.9,g TS/day,lab
+EASP002-01,First Removal,,co2_eolution_2mg_co2_to_c,8.2,g TS/day,lab
+CASP006-01,First Removal,,co2_eolution_2mg_co2_to_c,2.2,g TS/day,lab
+CASP004-02,First Removal,,co2_eolution_2mg_co2_to_c,3.5,g TS/day,lab
+ASP001-01,First Removal,,co2_eolution_2mg_co2_to_c,9.2,g TS/day,lab
+EASP003-01,First Removal,,co2_eolution_2mg_co2_to_c,6.4,g TS/day,lab
+WR005-01,First Removal,,co2_eolution_2mg_co2_to_c,0.9,g TS/day,lab
+WR004-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+CASP005-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+EASP001-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+IV002-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+EASP002-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+CASP006-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+CASP004-02,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+ASP001-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+EASP003-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+WR005-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+WR004-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+CASP005-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+EASP001-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+IV002-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+EASP002-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+CASP006-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+CASP004-02,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+ASP001-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+EASP003-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+WR005-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+WR004-01,First Removal,,overall_notes,,,lab
+CASP005-01,First Removal,,overall_notes,,,lab
+EASP001-01,First Removal,,overall_notes,45 day sample was lost by mail carrier,,lab
+IV002-01,First Removal,,overall_notes,*18 day removal,,lab
+EASP002-01,First Removal,,overall_notes,,,lab
+CASP006-01,First Removal,,overall_notes,Email resent to us on 8/14/23 that contains respiration and stability test results,,lab
+CASP004-02,First Removal,,overall_notes,,,lab
+ASP001-01,First Removal,,overall_notes,,,lab
+EASP003-01,First Removal,,overall_notes,,,lab
+WR005-01,First Removal,,overall_notes,,,lab
+WR004-01,Loading,,overall_notes,,,lab
+CASP005-01,Loading,,overall_notes,,,lab
+EASP001-01,Loading,,overall_notes,,,lab
+IV002-01,Loading,,overall_notes,,,lab
+EASP002-01,Loading,,overall_notes,,,lab
+CASP006-01,Loading,,overall_notes,,,lab
+CASP004-02,Loading,,overall_notes,,,lab
+ASP001-01,Loading,,overall_notes,,,lab
+EASP003-01,Loading,,overall_notes,,,lab
+WR005-01,Loading,,overall_notes,,,lab
+WR004-01,Second Removal,,overall_notes,,,lab
+CASP005-01,Second Removal,,overall_notes,,,lab
+EASP001-01,Second Removal,,overall_notes,,,lab
+IV002-01,Second Removal,,overall_notes,,,lab
+EASP002-01,Second Removal,,overall_notes,,,lab
+CASP006-01,Second Removal,,overall_notes,,,lab
+CASP004-02,Second Removal,,overall_notes,,,lab
+ASP001-01,Second Removal,,overall_notes,,,lab
+EASP003-01,Second Removal,,overall_notes,,,lab
+WR005-01,Second Removal,,overall_notes,,,lab
+CASP004-01,Loading,,bulk_density,754,lbs/CY (manual),field
+CASP004-01,Loading,,bulk_density,0.29,g/cc,lab
+CASP004-01,First Removal,,bulk_density,754,lbs/CY (manual),field
+CASP004-01,First Removal,,bulk_density,0.29,g/cc,lab
+CASP004-01,Second Removal,,bulk_density,754,lbs/CY (manual),field
+CASP004-01,Second Removal,,bulk_density,0.29,g/cc,lab
+CASP004-01,Loading,,temperature,65-80,F,field
+CASP004-01,First Removal,,temperature,65-80,F,field
+CASP004-01,Second Removal,,temperature,65-80,F,field
+CASP004-01,Loading,,weather,Windy,,field
+CASP004-01,First Removal,,weather,Windy,,field
+CASP004-01,Second Removal,,weather,Windy,,field
+CASP004-01,Loading,,moisture,51.0,,
+CASP004-01,First Removal,,moisture,51.0,,
+CASP004-01,Second Removal,,moisture,51.0,,
+CASP004-01,Loading,,c_to_n,34.0,,lab
+CASP004-01,First Removal,,c_to_n,34.0,,lab
+CASP004-01,Second Removal,,c_to_n,34.0,,lab
+CASP004-01,Loading,,maturity,0.0,,lab
+CASP004-01,First Removal,,maturity,0.0,,lab
+CASP004-01,Second Removal,,maturity,0.0,,lab
