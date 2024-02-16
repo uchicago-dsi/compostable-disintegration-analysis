@@ -10,3 +10,8 @@ trial_id,trial_name,facility_id,midpoint_analysis,endpoint_analysis_trial_length
 9,EASP003-01,9,45,90,120,0.75
 10,WR005-01,10,46,95,180,0.5277777777777778
 11,CASP004-01,7,,,,
+12,AD001-01,11,,,,
+13,WR001-01,12,,,,
+14,CASP001-01,13,,,,
+15,CASP003-01,14,,,,
+16,WR003-01,15,,,,
