@@ -21,11 +21,13 @@ with st.sidebar:
     st.title('Disintegration Dashboard')
 
     trial_list = ['All trials'] + list(df_merged.trial_ID.unique())
-    selected_trial = st.selectbox('Select a trial', trial_list)
-    if selected_trial == 'All trials':
+    selected_trials = st.multiselect('Select trial(s)', ['All trials'] + trial_list, default='All trials')
+
+    if 'All trials' in selected_trials:
         df_selected_trial = df_merged
     else:
-        df_selected_trial = df_merged[df_merged.trial_ID == selected_trial]
+        df_selected_trial = df_merged[df_merged.trial_ID.isin(selected_trials)]
+
     residual_type = st.selectbox('Choose Residual Type', ['Residual by mass', 'Residual by surface area'])
     residual = 'mass_resid_%' if residual_type == 'Residual by mass' else 'sa_resid_%'
     material_type = st.selectbox('Choose Material Class', ['Class I', 'Class II', 'Class III'])
@@ -35,9 +37,13 @@ with st.sidebar:
         material = 'material_class_ii'
     else:  
         material = 'material_class_iii'
-    cap_anomalies = st.checkbox('Cap Anomalies')
+    cap_anomalies = st.checkbox('Without Anomalies')
 
 def bar_whisker_plot(df, x, y, cap_anomalies):
+
+    if cap_anomalies:
+        df = df[df[y] <= 100]
+
     iqr = df.groupby(x)[y].apply(lambda g: g.quantile(0.75) - g.quantile(0.25))
     nonzero_iqr_order = df[df[x].isin(iqr[iqr > 0].index)].groupby(x)[y].median().sort_values(ascending=False).index
     zero_iqr_order = iqr[iqr == 0].index
@@ -48,9 +54,6 @@ def bar_whisker_plot(df, x, y, cap_anomalies):
     sns.boxplot(data=df, x=x, y=y, order=order, palette=palette)
     plt.title(f'{y} for Each {x}')
     plt.xticks(rotation=45, ha='right')
-    
-    if cap_anomalies:
-        plt.ylim(0, 100)
     
     plt.tight_layout()
     plt.show()
