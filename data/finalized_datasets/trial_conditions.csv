@@ -1249,474 +1249,454 @@ trial_condition_id,trial_id,trial_name,trial_stage,day,condition,value,unit,meth
 1248,10,WR005-01,,78,o2,,%,field
 1249,10,WR005-01,,85,o2,0.05428571428571429,%,field
 1250,10,WR005-01,,92,o2,,%,field
-1251,1,WR004-01,Loading,,bulk_density,826.8,lbs/cu. yard,field
-1252,1,WR004-01,First Removal,,bulk_density,1350.0,lbs/cu. yard,field
-1253,1,WR004-01,Second Removal,,bulk_density,1410.0,lbs/cu. yard,field
-1254,2,CASP005-01,Loading,,bulk_density,810.0,lbs/cu. yard,field
-1255,2,CASP005-01,First Removal,,bulk_density,852.0,lbs/cu. yard,field
-1256,2,CASP005-01,Second Removal,,bulk_density,952.0,lbs/cu. yard,field
-1257,5,EASP002-01,Loading,,bulk_density,1056.0,lbs/cu. yard,field
-1258,5,EASP002-01,First Removal,,bulk_density,960.0,lbs/cu. yard,field
-1259,5,EASP002-01,Second Removal,,bulk_density,1220.0,lbs/cu. yard,field
-1260,6,CASP006-01,Loading,,bulk_density,1266.68,lbs/cu. yard,field
-1261,6,CASP006-01,First Removal,,bulk_density,820.0,lbs/cu. yard,field
-1262,6,CASP006-01,Second Removal,,bulk_density,848.0,lbs/cu. yard,field
-1263,7,CASP004-02,Loading,,bulk_density,1026.0,lbs/cu. yard,field
-1264,7,CASP004-02,First Removal,,bulk_density,870.0,lbs/cu. yard,field
-1265,7,CASP004-02,Second Removal,,bulk_density,850.0,lbs/cu. yard,field
-1266,8,ASP001-01,Loading,,bulk_density,,lbs/cu. yard,field
-1267,8,ASP001-01,First Removal,,bulk_density,,lbs/cu. yard,field
-1268,8,ASP001-01,Second Removal,,bulk_density,,lbs/cu. yard,field
-1269,9,EASP003-01,Loading,,bulk_density,820.0,lbs/cu. yard,field
-1270,9,EASP003-01,First Removal,,bulk_density,,lbs/cu. yard,field
-1271,9,EASP003-01,Second Removal,,bulk_density,,lbs/cu. yard,field
-1272,10,WR005-01,Loading,,bulk_density,1280.0,lbs/cu. yard,field
-1273,10,WR005-01,First Removal,,bulk_density,1224.0,lbs/cu. yard,field
-1274,10,WR005-01,Second Removal,,bulk_density,1296.0,lbs/cu. yard,field
-1275,3,EASP001-01,Loading,,bulk_density,1248.0,lbs/cu. yard,field
-1276,3,EASP001-01,First Removal,,bulk_density,884.0,lbs/cu. yard,field
-1277,3,EASP001-01,Second Removal,,bulk_density,896.0,lbs/cu. yard,field
-1278,4,IV002-01,Loading,,bulk_density,808.0,lbs/cu. yard,field
-1279,4,IV002-01,First Removal,,bulk_density,1224.0,lbs/cu. yard,field
-1280,4,IV002-01,Second Removal,,bulk_density,688.0,lbs/cu. yard,field
-1281,1,WR004-01,First Removal,,total_n_as_rcvd,0.0045,%,lab
-1282,2,CASP005-01,First Removal,,total_n_as_rcvd,0.0096,%,lab
-1283,3,EASP001-01,First Removal,,total_n_as_rcvd,,%,lab
-1284,4,IV002-01,First Removal,,total_n_as_rcvd,0.0072,%,lab
-1285,5,EASP002-01,First Removal,,total_n_as_rcvd,0.0074,%,lab
-1286,6,CASP006-01,First Removal,,total_n_as_rcvd,0.0066,%,lab
-1287,7,CASP004-02,First Removal,,total_n_as_rcvd,0.0068,%,lab
-1288,8,ASP001-01,First Removal,,total_n_as_rcvd,0.0072,%,lab
-1289,9,EASP003-01,First Removal,,total_n_as_rcvd,0.0075,%,lab
-1290,10,WR005-01,First Removal,,total_n_as_rcvd,0.0042,%,lab
-1291,1,WR004-01,Loading,,total_n_as_rcvd,0.0052,%,lab
-1292,2,CASP005-01,Loading,,total_n_as_rcvd,0.0037,%,lab
-1293,3,EASP001-01,Loading,,total_n_as_rcvd,0.0052,%,lab
-1294,4,IV002-01,Loading,,total_n_as_rcvd,0.0066,%,lab
-1295,5,EASP002-01,Loading,,total_n_as_rcvd,0.0067,%,lab
-1296,6,CASP006-01,Loading,,total_n_as_rcvd,0.0061,%,lab
-1297,7,CASP004-02,Loading,,total_n_as_rcvd,0.0075,%,lab
-1298,8,ASP001-01,Loading,,total_n_as_rcvd,0.007,%,lab
-1299,9,EASP003-01,Loading,,total_n_as_rcvd,0.0073,%,lab
-1300,10,WR005-01,Loading,,total_n_as_rcvd,0.0042,%,lab
-1301,1,WR004-01,Second Removal,,total_n_as_rcvd,0.01116630265,%,lab
-1302,2,CASP005-01,Second Removal,,total_n_as_rcvd,0.00830619796,%,lab
-1303,3,EASP001-01,Second Removal,,total_n_as_rcvd,0.00900503947,%,lab
-1304,4,IV002-01,Second Removal,,total_n_as_rcvd,0.0045,%,lab
-1305,5,EASP002-01,Second Removal,,total_n_as_rcvd,0.01125647482,%,lab
-1306,6,CASP006-01,Second Removal,,total_n_as_rcvd,0.00984605968,%,lab
-1307,7,CASP004-02,Second Removal,,total_n_as_rcvd,0.00899863714,%,lab
-1308,8,ASP001-01,Second Removal,,total_n_as_rcvd,0.00432701613,%,lab
-1309,9,EASP003-01,Second Removal,,total_n_as_rcvd,0.0132382134,%,lab
-1310,10,WR005-01,Second Removal,,total_n_as_rcvd,0.00679097222,%,lab
-1311,1,WR004-01,First Removal,,total_n_dry_wt,0.0068,%,lab
-1312,2,CASP005-01,First Removal,,total_n_dry_wt,0.0146,%,lab
-1313,3,EASP001-01,First Removal,,total_n_dry_wt,,%,lab
-1314,4,IV002-01,First Removal,,total_n_dry_wt,0.0135,%,lab
-1315,5,EASP002-01,First Removal,,total_n_dry_wt,0.0169,%,lab
-1316,6,CASP006-01,First Removal,,total_n_dry_wt,0.0142,%,lab
-1317,7,CASP004-02,First Removal,,total_n_dry_wt,0.0147,%,lab
-1318,8,ASP001-01,First Removal,,total_n_dry_wt,0.0154,%,lab
-1319,9,EASP003-01,First Removal,,total_n_dry_wt,0.0183,%,lab
-1320,10,WR005-01,First Removal,,total_n_dry_wt,0.008,%,lab
-1321,1,WR004-01,Loading,,total_n_dry_wt,0.0076,%,lab
-1322,2,CASP005-01,Loading,,total_n_dry_wt,0.0061,%,lab
-1323,3,EASP001-01,Loading,,total_n_dry_wt,0.0131,%,lab
-1324,4,IV002-01,Loading,,total_n_dry_wt,0.0136,%,lab
-1325,5,EASP002-01,Loading,,total_n_dry_wt,0.0126,%,lab
-1326,6,CASP006-01,Loading,,total_n_dry_wt,0.0184,%,lab
-1327,7,CASP004-02,Loading,,total_n_dry_wt,0.0154,%,lab
-1328,8,ASP001-01,Loading,,total_n_dry_wt,0.0159,%,lab
-1329,9,EASP003-01,Loading,,total_n_dry_wt,0.0139,%,lab
-1330,10,WR005-01,Loading,,total_n_dry_wt,0.0076,%,lab
-1331,1,WR004-01,Second Removal,,total_n_dry_wt,0.0184,%,lab
-1332,2,CASP005-01,Second Removal,,total_n_dry_wt,0.0123,%,lab
-1333,3,EASP001-01,Second Removal,,total_n_dry_wt,0.0139,%,lab
-1334,4,IV002-01,Second Removal,,total_n_dry_wt,0.0096,%,lab
-1335,5,EASP002-01,Second Removal,,total_n_dry_wt,0.0183,%,lab
-1336,6,CASP006-01,Second Removal,,total_n_dry_wt,0.0168,%,lab
-1337,7,CASP004-02,Second Removal,,total_n_dry_wt,0.0196,%,lab
-1338,8,ASP001-01,Second Removal,,total_n_dry_wt,0.0073,%,lab
-1339,9,EASP003-01,Second Removal,,total_n_dry_wt,0.022,%,lab
-1340,10,WR005-01,Second Removal,,total_n_dry_wt,0.0127,%,lab
-1341,1,WR004-01,First Removal,,organic_c_as_rcvd,0.108,%,lab
-1342,2,CASP005-01,First Removal,,organic_c_as_rcvd,0.251,%,lab
-1343,3,EASP001-01,First Removal,,organic_c_as_rcvd,,%,lab
-1344,4,IV002-01,First Removal,,organic_c_as_rcvd,0.224,%,lab
-1345,5,EASP002-01,First Removal,,organic_c_as_rcvd,0.141,%,lab
-1346,6,CASP006-01,First Removal,,organic_c_as_rcvd,0.106,%,lab
-1347,7,CASP004-02,First Removal,,organic_c_as_rcvd,0.14,%,lab
-1348,8,ASP001-01,First Removal,,organic_c_as_rcvd,0.187,%,lab
-1349,9,EASP003-01,First Removal,,organic_c_as_rcvd,0.178,%,lab
-1350,10,WR005-01,First Removal,,organic_c_as_rcvd,0.098,%,lab
-1351,1,WR004-01,Loading,,organic_c_as_rcvd,0.168,%,lab
-1352,2,CASP005-01,Loading,,organic_c_as_rcvd,0.172,%,lab
-1353,3,EASP001-01,Loading,,organic_c_as_rcvd,0.152,%,lab
-1354,4,IV002-01,Loading,,organic_c_as_rcvd,0.213,%,lab
-1355,5,EASP002-01,Loading,,organic_c_as_rcvd,0.136,%,lab
-1356,6,CASP006-01,Loading,,organic_c_as_rcvd,0.108,%,lab
-1357,7,CASP004-02,Loading,,organic_c_as_rcvd,0.185,%,lab
-1358,8,ASP001-01,Loading,,organic_c_as_rcvd,0.17,%,lab
-1359,9,EASP003-01,Loading,,organic_c_as_rcvd,0.228,%,lab
-1360,10,WR005-01,Loading,,organic_c_as_rcvd,0.088,%,lab
-1361,1,WR004-01,Second Removal,,organic_c_as_rcvd,0.2051201248,%,lab
-1362,2,CASP005-01,Second Removal,,organic_c_as_rcvd,0.1830064755,%,lab
-1363,3,EASP001-01,Second Removal,,organic_c_as_rcvd,0.1230904675,%,lab
-1364,4,IV002-01,Second Removal,,organic_c_as_rcvd,0.094,%,lab
-1365,5,EASP002-01,Second Removal,,organic_c_as_rcvd,0.156852518,%,lab
-1366,6,CASP006-01,Second Removal,,organic_c_as_rcvd,0.184027544,%,lab
-1367,7,CASP004-02,Second Removal,,organic_c_as_rcvd,0.1418662692,%,lab
-1368,8,ASP001-01,Second Removal,,organic_c_as_rcvd,0.06875806452,%,lab
-1369,9,EASP003-01,Second Removal,,organic_c_as_rcvd,0.2695781638,%,lab
-1370,10,WR005-01,Second Removal,,organic_c_as_rcvd,0.1427708333,%,lab
-1371,1,WR004-01,First Removal,,organic_c_dry_wt,0.163,%,lab
-1372,2,CASP005-01,First Removal,,organic_c_dry_wt,0.382,%,lab
-1373,3,EASP001-01,First Removal,,organic_c_dry_wt,,%,lab
-1374,4,IV002-01,First Removal,,organic_c_dry_wt,0.421,%,lab
-1375,5,EASP002-01,First Removal,,organic_c_dry_wt,0.325,%,lab
-1376,6,CASP006-01,First Removal,,organic_c_dry_wt,0.229,%,lab
-1377,7,CASP004-02,First Removal,,organic_c_dry_wt,0.305,%,lab
-1378,8,ASP001-01,First Removal,,organic_c_dry_wt,0.399,%,lab
-1379,9,EASP003-01,First Removal,,organic_c_dry_wt,0.433,%,lab
-1380,10,WR005-01,First Removal,,organic_c_dry_wt,0.187,%,lab
-1381,1,WR004-01,Loading,,organic_c_dry_wt,0.247,%,lab
-1382,2,CASP005-01,Loading,,organic_c_dry_wt,0.287,%,lab
-1383,3,EASP001-01,Loading,,organic_c_dry_wt,0.381,%,lab
-1384,4,IV002-01,Loading,,organic_c_dry_wt,0.437,%,lab
-1385,5,EASP002-01,Loading,,organic_c_dry_wt,0.257,%,lab
-1386,6,CASP006-01,Loading,,organic_c_dry_wt,0.327,%,lab
-1387,7,CASP004-02,Loading,,organic_c_dry_wt,0.38,%,lab
-1388,8,ASP001-01,Loading,,organic_c_dry_wt,0.385,%,lab
-1389,9,EASP003-01,Loading,,organic_c_dry_wt,0.432,%,lab
-1390,10,WR005-01,Loading,,organic_c_dry_wt,0.16,%,lab
-1391,1,WR004-01,Second Removal,,organic_c_dry_wt,0.338,%,lab
-1392,2,CASP005-01,Second Removal,,organic_c_dry_wt,0.271,%,lab
-1393,3,EASP001-01,Second Removal,,organic_c_dry_wt,0.19,%,lab
-1394,4,IV002-01,Second Removal,,organic_c_dry_wt,0.199,%,lab
-1395,5,EASP002-01,Second Removal,,organic_c_dry_wt,0.255,%,lab
-1396,6,CASP006-01,Second Removal,,organic_c_dry_wt,0.314,%,lab
-1397,7,CASP004-02,Second Removal,,organic_c_dry_wt,0.309,%,lab
-1398,8,ASP001-01,Second Removal,,organic_c_dry_wt,0.116,%,lab
-1399,9,EASP003-01,Second Removal,,organic_c_dry_wt,0.448,%,lab
-1400,10,WR005-01,Second Removal,,organic_c_dry_wt,0.267,%,lab
-1401,1,WR004-01,First Removal,,c_to_n_dry_wt,24.0,,lab
-1402,2,CASP005-01,First Removal,,c_to_n_dry_wt,26.0,,lab
-1403,3,EASP001-01,First Removal,,c_to_n_dry_wt,,,lab
-1404,4,IV002-01,First Removal,,c_to_n_dry_wt,31.0,,lab
-1405,5,EASP002-01,First Removal,,c_to_n_dry_wt,19.0,,lab
-1406,6,CASP006-01,First Removal,,c_to_n_dry_wt,16.0,,lab
-1407,7,CASP004-02,First Removal,,c_to_n_dry_wt,21.0,,lab
-1408,8,ASP001-01,First Removal,,c_to_n_dry_wt,26.0,,lab
-1409,9,EASP003-01,First Removal,,c_to_n_dry_wt,24.0,,lab
-1410,10,WR005-01,First Removal,,c_to_n_dry_wt,23.0,,lab
-1411,1,WR004-01,Loading,,c_to_n_dry_wt,33.0,,lab
-1412,2,CASP005-01,Loading,,c_to_n_dry_wt,47.0,,lab
-1413,3,EASP001-01,Loading,,c_to_n_dry_wt,29.0,,lab
-1414,4,IV002-01,Loading,,c_to_n_dry_wt,32.0,,lab
-1415,5,EASP002-01,Loading,,c_to_n_dry_wt,20.0,,lab
-1416,6,CASP006-01,Loading,,c_to_n_dry_wt,18.0,,lab
-1417,7,CASP004-02,Loading,,c_to_n_dry_wt,25.0,,lab
-1418,8,ASP001-01,Loading,,c_to_n_dry_wt,24.0,,lab
-1419,9,EASP003-01,Loading,,c_to_n_dry_wt,31.0,,lab
-1420,10,WR005-01,Loading,,c_to_n_dry_wt,21.0,,lab
-1421,1,WR004-01,Second Removal,,c_to_n_dry_wt,15.89041096,,lab
-1422,2,CASP005-01,Second Removal,,c_to_n_dry_wt,22.03252033,,lab
-1423,3,EASP001-01,Second Removal,,c_to_n_dry_wt,18.36956522,,lab
-1424,4,IV002-01,Second Removal,,c_to_n_dry_wt,20.36363636,,lab
-1425,5,EASP002-01,Second Removal,,c_to_n_dry_wt,21.0,,lab
-1426,6,CASP006-01,Second Removal,,c_to_n_dry_wt,13.66906475,,lab
-1427,7,CASP004-02,Second Removal,,c_to_n_dry_wt,15.76530612,,lab
-1428,8,ASP001-01,Second Removal,,c_to_n_dry_wt,13.93442623,,lab
-1429,9,EASP003-01,Second Removal,,c_to_n_dry_wt,18.69047619,,lab
-1430,10,WR005-01,Second Removal,,c_to_n_dry_wt,21.02362205,,lab
-1431,1,WR004-01,First Removal,,bulk_density,1382.0,lbs/cu.yard,lab
-1432,2,CASP005-01,First Removal,,bulk_density,652.0,lbs/cu.yard,lab
-1433,3,EASP001-01,First Removal,,bulk_density,,lbs/cu.yard,lab
-1434,4,IV002-01,First Removal,,bulk_density,832.0,lbs/cu.yard,lab
-1435,5,EASP002-01,First Removal,,bulk_density,963.0,lbs/cu.yard,lab
-1436,6,CASP006-01,First Removal,,bulk_density,1353.0,lbs/cu.yard,lab
-1437,7,CASP004-02,First Removal,,bulk_density,1006.0,lbs/cu.yard,lab
-1438,8,ASP001-01,First Removal,,bulk_density,993.0,lbs/cu.yard,lab
-1439,9,EASP003-01,First Removal,,bulk_density,1086.0,lbs/cu.yard,lab
-1440,10,WR005-01,First Removal,,bulk_density,1381.0,lbs/cu.yard,lab
-1441,1,WR004-01,Loading,,bulk_density,883.0,lbs/cu.yard,lab
-1442,2,CASP005-01,Loading,,bulk_density,1176.0,lbs/cu.yard,lab
-1443,3,EASP001-01,Loading,,bulk_density,1107.0,lbs/cu.yard,lab
-1444,4,IV002-01,Loading,,bulk_density,769.0,lbs/cu.yard,lab
-1445,5,EASP002-01,Loading,,bulk_density,1128.0,lbs/cu.yard,lab
-1446,6,CASP006-01,Loading,,bulk_density,1151.0,lbs/cu.yard,lab
-1447,7,CASP004-02,Loading,,bulk_density,711.0,lbs/cu.yard,lab
-1448,8,ASP001-01,Loading,,bulk_density,1097.0,lbs/cu.yard,lab
-1449,9,EASP003-01,Loading,,bulk_density,672.0,lbs/cu.yard,lab
-1450,10,WR005-01,Loading,,bulk_density,1174.0,lbs/cu.yard,lab
-1451,1,WR004-01,Second Removal,,bulk_density,1474.178166,lbs/cu.yard,lab
-1452,2,CASP005-01,Second Removal,,bulk_density,1203.257135,lbs/cu.yard,lab
-1453,3,EASP001-01,Second Removal,,bulk_density,842.778,lbs/cu.yard,lab
-1454,4,IV002-01,Second Removal,,bulk_density,656.6006782,lbs/cu.yard,lab
-1455,5,EASP002-01,Second Removal,,bulk_density,827.0,lbs/cu.yard,lab
-1456,6,CASP006-01,Second Removal,,bulk_density,1219.522544,lbs/cu.yard,lab
-1457,7,CASP004-02,Second Removal,,bulk_density,976.0901564,lbs/cu.yard,lab
-1458,8,ASP001-01,Second Removal,,bulk_density,1071.26448,lbs/cu.yard,lab
-1459,9,EASP003-01,Second Removal,,bulk_density,672.4481305,lbs/cu.yard,lab
-1460,10,WR005-01,Second Removal,,bulk_density,1153.989193,lbs/cu.yard,lab
-1461,1,WR004-01,First Removal,,solids_as_rcvd,0.665,%,lab
-1462,2,CASP005-01,First Removal,,solids_as_rcvd,0.657,%,lab
-1463,3,EASP001-01,First Removal,,solids_as_rcvd,,%,lab
-1464,4,IV002-01,First Removal,,solids_as_rcvd,0.532,%,lab
-1465,5,EASP002-01,First Removal,,solids_as_rcvd,0.435,%,lab
-1466,6,CASP006-01,First Removal,,solids_as_rcvd,0.463,%,lab
-1467,7,CASP004-02,First Removal,,solids_as_rcvd,0.46,%,lab
-1468,8,ASP001-01,First Removal,,solids_as_rcvd,0.47,%,lab
-1469,9,EASP003-01,First Removal,,solids_as_rcvd,0.412,%,lab
-1470,10,WR005-01,First Removal,,solids_as_rcvd,0.526,%,lab
-1471,1,WR004-01,Loading,,solids_as_rcvd,0.682,%,lab
-1472,2,CASP005-01,Loading,,solids_as_rcvd,0.598,%,lab
-1473,3,EASP001-01,Loading,,solids_as_rcvd,0.398,%,lab
-1474,4,IV002-01,Loading,,solids_as_rcvd,0.488,%,lab
-1475,5,EASP002-01,Loading,,solids_as_rcvd,0.529,%,lab
-1476,6,CASP006-01,Loading,,solids_as_rcvd,0.332,%,lab
-1477,7,CASP004-02,Loading,,solids_as_rcvd,0.488,%,lab
-1478,8,ASP001-01,Loading,,solids_as_rcvd,0.442,%,lab
-1479,9,EASP003-01,Loading,,solids_as_rcvd,0.528,%,lab
-1480,10,WR005-01,Loading,,solids_as_rcvd,0.553,%,lab
-1481,1,WR004-01,Second Removal,,solids_as_rcvd,0.5927419355,%,lab
-1482,2,CASP005-01,Second Removal,,solids_as_rcvd,0.6753006475,%,lab
-1483,3,EASP001-01,Second Removal,,solids_as_rcvd,0.6068642746,%,lab
-1484,4,IV002-01,Second Removal,,solids_as_rcvd,0.6017369727,%,lab
-1485,5,EASP002-01,Second Removal,,solids_as_rcvd,0.471,%,lab
-1486,6,CASP006-01,Second Removal,,solids_as_rcvd,0.6478445659,%,lab
-1487,7,CASP004-02,Second Removal,,solids_as_rcvd,0.4591141397,%,lab
-1488,8,ASP001-01,Second Removal,,solids_as_rcvd,0.6151079137,%,lab
-1489,9,EASP003-01,Second Removal,,solids_as_rcvd,0.5860749809,%,lab
-1490,10,WR005-01,Second Removal,,solids_as_rcvd,0.5347222222,%,lab
-1491,1,WR004-01,First Removal,,moisture_as_rcvd,0.335,%,lab
-1492,2,CASP005-01,First Removal,,moisture_as_rcvd,0.343,%,lab
-1493,3,EASP001-01,First Removal,,moisture_as_rcvd,,%,lab
-1494,4,IV002-01,First Removal,,moisture_as_rcvd,0.468,%,lab
-1495,5,EASP002-01,First Removal,,moisture_as_rcvd,0.565,%,lab
-1496,6,CASP006-01,First Removal,,moisture_as_rcvd,0.537,%,lab
-1497,7,CASP004-02,First Removal,,moisture_as_rcvd,0.54,%,lab
-1498,8,ASP001-01,First Removal,,moisture_as_rcvd,0.53,%,lab
-1499,9,EASP003-01,First Removal,,moisture_as_rcvd,0.588,%,lab
-1500,10,WR005-01,First Removal,,moisture_as_rcvd,0.474,%,lab
-1501,1,WR004-01,Loading,,moisture_as_rcvd,0.318,%,lab
-1502,2,CASP005-01,Loading,,moisture_as_rcvd,0.402,%,lab
-1503,3,EASP001-01,Loading,,moisture_as_rcvd,0.602,%,lab
-1504,4,IV002-01,Loading,,moisture_as_rcvd,0.512,%,lab
-1505,5,EASP002-01,Loading,,moisture_as_rcvd,0.471,%,lab
-1506,6,CASP006-01,Loading,,moisture_as_rcvd,0.668,%,lab
-1507,7,CASP004-02,Loading,,moisture_as_rcvd,0.512,%,lab
-1508,8,ASP001-01,Loading,,moisture_as_rcvd,0.558,%,lab
-1509,9,EASP003-01,Loading,,moisture_as_rcvd,0.472,%,lab
-1510,10,WR005-01,Loading,,moisture_as_rcvd,0.447,%,lab
-1511,1,WR004-01,Second Removal,,moisture_as_rcvd,0.4072580645,%,lab
-1512,2,CASP005-01,Second Removal,,moisture_as_rcvd,0.3246993525,%,lab
-1513,3,EASP001-01,Second Removal,,moisture_as_rcvd,0.3931357254,%,lab
-1514,4,IV002-01,Second Removal,,moisture_as_rcvd,0.3982630273,%,lab
-1515,5,EASP002-01,Second Removal,,moisture_as_rcvd,0.529,%,lab
-1516,6,CASP006-01,Second Removal,,moisture_as_rcvd,0.3521554341,%,lab
-1517,7,CASP004-02,Second Removal,,moisture_as_rcvd,0.5408858603,%,lab
-1518,8,ASP001-01,Second Removal,,moisture_as_rcvd,0.3848920863,%,lab
-1519,9,EASP003-01,Second Removal,,moisture_as_rcvd,0.4139250191,%,lab
-1520,10,WR005-01,Second Removal,,moisture_as_rcvd,0.4652777778,%,lab
-1521,1,WR004-01,First Removal,,ph_as_rcvd,7.6,,lab
-1522,2,CASP005-01,First Removal,,ph_as_rcvd,7.9,,lab
-1523,3,EASP001-01,First Removal,,ph_as_rcvd,,,lab
-1524,4,IV002-01,First Removal,,ph_as_rcvd,5.0,,lab
-1525,5,EASP002-01,First Removal,,ph_as_rcvd,6.0,,lab
-1526,6,CASP006-01,First Removal,,ph_as_rcvd,8.1,,lab
-1527,7,CASP004-02,First Removal,,ph_as_rcvd,7.7,,lab
-1528,8,ASP001-01,First Removal,,ph_as_rcvd,4.4,,lab
-1529,9,EASP003-01,First Removal,,ph_as_rcvd,4.5,,lab
-1530,10,WR005-01,First Removal,,ph_as_rcvd,7.4,,lab
-1531,1,WR004-01,Loading,,ph_as_rcvd,6.3,,lab
-1532,2,CASP005-01,Loading,,ph_as_rcvd,7.6,,lab
-1533,3,EASP001-01,Loading,,ph_as_rcvd,6.4,,lab
-1534,4,IV002-01,Loading,,ph_as_rcvd,4.7,,lab
-1535,5,EASP002-01,Loading,,ph_as_rcvd,4.4,,lab
-1536,6,CASP006-01,Loading,,ph_as_rcvd,6.7,,lab
-1537,7,CASP004-02,Loading,,ph_as_rcvd,4.6,,lab
-1538,8,ASP001-01,Loading,,ph_as_rcvd,4.5,,lab
-1539,9,EASP003-01,Loading,,ph_as_rcvd,7.1,,lab
-1540,10,WR005-01,Loading,,ph_as_rcvd,8.3,,lab
-1541,1,WR004-01,Second Removal,,ph_as_rcvd,7.4,,lab
-1542,2,CASP005-01,Second Removal,,ph_as_rcvd,7.1,,lab
-1543,3,EASP001-01,Second Removal,,ph_as_rcvd,7.3,,lab
-1544,4,IV002-01,Second Removal,,ph_as_rcvd,6.5,,lab
-1545,5,EASP002-01,Second Removal,,ph_as_rcvd,8.4,,lab
-1546,6,CASP006-01,Second Removal,,ph_as_rcvd,8.5,,lab
-1547,7,CASP004-02,Second Removal,,ph_as_rcvd,7.9,,lab
-1548,8,ASP001-01,Second Removal,,ph_as_rcvd,7.2,,lab
-1549,9,EASP003-01,Second Removal,,ph_as_rcvd,7.0,,lab
-1550,10,WR005-01,Second Removal,,ph_as_rcvd,7.8,,lab
-1551,1,WR004-01,First Removal,,ph_dry_wt,,,lab
-1552,2,CASP005-01,First Removal,,ph_dry_wt,,,lab
-1553,3,EASP001-01,First Removal,,ph_dry_wt,,,lab
-1554,4,IV002-01,First Removal,,ph_dry_wt,,,lab
-1555,5,EASP002-01,First Removal,,ph_dry_wt,,,lab
-1556,6,CASP006-01,First Removal,,ph_dry_wt,,,lab
-1557,7,CASP004-02,First Removal,,ph_dry_wt,,,lab
-1558,8,ASP001-01,First Removal,,ph_dry_wt,,,lab
-1559,9,EASP003-01,First Removal,,ph_dry_wt,,,lab
-1560,10,WR005-01,First Removal,,ph_dry_wt,,,lab
-1561,1,WR004-01,Loading,,ph_dry_wt,,,lab
-1562,2,CASP005-01,Loading,,ph_dry_wt,,,lab
-1563,3,EASP001-01,Loading,,ph_dry_wt,,,lab
-1564,4,IV002-01,Loading,,ph_dry_wt,,,lab
-1565,5,EASP002-01,Loading,,ph_dry_wt,,,lab
-1566,6,CASP006-01,Loading,,ph_dry_wt,,,lab
-1567,7,CASP004-02,Loading,,ph_dry_wt,,,lab
-1568,8,ASP001-01,Loading,,ph_dry_wt,,,lab
-1569,9,EASP003-01,Loading,,ph_dry_wt,,,lab
-1570,10,WR005-01,Loading,,ph_dry_wt,,,lab
-1571,1,WR004-01,Second Removal,,ph_dry_wt,,,lab
-1572,2,CASP005-01,Second Removal,,ph_dry_wt,,,lab
-1573,3,EASP001-01,Second Removal,,ph_dry_wt,,,lab
-1574,4,IV002-01,Second Removal,,ph_dry_wt,,,lab
-1575,5,EASP002-01,Second Removal,,ph_dry_wt,,,lab
-1576,6,CASP006-01,Second Removal,,ph_dry_wt,,,lab
-1577,7,CASP004-02,Second Removal,,ph_dry_wt,,,lab
-1578,8,ASP001-01,Second Removal,,ph_dry_wt,,,lab
-1579,9,EASP003-01,Second Removal,,ph_dry_wt,,,lab
-1580,10,WR005-01,Second Removal,,ph_dry_wt,,,lab
-1581,1,WR004-01,First Removal,,stability,Very Stable,,lab
-1582,2,CASP005-01,First Removal,,stability,Stable,,lab
-1583,3,EASP001-01,First Removal,,stability,,,lab
-1584,4,IV002-01,First Removal,,stability,Stable,,lab
-1585,5,EASP002-01,First Removal,,stability,Stable,,lab
-1586,6,CASP006-01,First Removal,,stability,Stable,,lab
-1587,7,CASP004-02,First Removal,,stability,Stable,,lab
-1588,8,ASP001-01,First Removal,,stability,Stable,,lab
-1589,9,EASP003-01,First Removal,,stability,Stable,,lab
-1590,10,WR005-01,First Removal,,stability,Very Stable,,lab
-1591,1,WR004-01,Loading,,stability,,,lab
-1592,2,CASP005-01,Loading,,stability,,,lab
-1593,3,EASP001-01,Loading,,stability,,,lab
-1594,4,IV002-01,Loading,,stability,,,lab
-1595,5,EASP002-01,Loading,,stability,,,lab
-1596,6,CASP006-01,Loading,,stability,,,lab
-1597,7,CASP004-02,Loading,,stability,,,lab
-1598,8,ASP001-01,Loading,,stability,,,lab
-1599,9,EASP003-01,Loading,,stability,,,lab
-1600,10,WR005-01,Loading,,stability,,,lab
-1601,1,WR004-01,Second Removal,,stability,Very Stable,,lab
-1602,2,CASP005-01,Second Removal,,stability,Stable,,lab
-1603,3,EASP001-01,Second Removal,,stability,Stable,,lab
-1604,4,IV002-01,Second Removal,,stability,Stable,,lab
-1605,5,EASP002-01,Second Removal,,stability,VERY STABLE,,lab
-1606,6,CASP006-01,Second Removal,,stability,VERY STABLE,,lab
-1607,7,CASP004-02,Second Removal,,stability,VERY STABLE,,lab
-1608,8,ASP001-01,Second Removal,,stability,Stable,,lab
-1609,9,EASP003-01,Second Removal,,stability,STABLE,,lab
-1610,10,WR005-01,Second Removal,,stability,Stable,,lab
-1611,1,WR004-01,First Removal,,co2_evolution_1mg_co2_to_c,0.4,g OM/day,lab
-1612,2,CASP005-01,First Removal,,co2_evolution_1mg_co2_to_c,1.8,g OM/day,lab
-1613,3,EASP001-01,First Removal,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1614,4,IV002-01,First Removal,,co2_evolution_1mg_co2_to_c,3.8,g OM/day,lab
-1615,5,EASP002-01,First Removal,,co2_evolution_1mg_co2_to_c,3.9,g OM/day,lab
-1616,6,CASP006-01,First Removal,,co2_evolution_1mg_co2_to_c,2.7,g OM/day,lab
-1617,7,CASP004-02,First Removal,,co2_evolution_1mg_co2_to_c,1.6,g OM/day,lab
-1618,8,ASP001-01,First Removal,,co2_evolution_1mg_co2_to_c,4.7,g OM/day,lab
-1619,9,EASP003-01,First Removal,,co2_evolution_1mg_co2_to_c,2.5,g OM/day,lab
-1620,10,WR005-01,First Removal,,co2_evolution_1mg_co2_to_c,0.8,g OM/day,lab
-1621,1,WR004-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1622,2,CASP005-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1623,3,EASP001-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1624,4,IV002-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1625,5,EASP002-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1626,6,CASP006-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1627,7,CASP004-02,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1628,8,ASP001-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1629,9,EASP003-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1630,10,WR005-01,Loading,,co2_evolution_1mg_co2_to_c,,g OM/day,lab
-1631,1,WR004-01,Second Removal,,co2_evolution_1mg_co2_to_c,0.11728196,g OM/day,lab
-1632,2,CASP005-01,Second Removal,,co2_evolution_1mg_co2_to_c,2.256661656,g OM/day,lab
-1633,3,EASP001-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.885598286,g OM/day,lab
-1634,4,IV002-01,Second Removal,,co2_evolution_1mg_co2_to_c,3.139573928,g OM/day,lab
-1635,5,EASP002-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.607837683,g OM/day,lab
-1636,6,CASP006-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.808609836,g OM/day,lab
-1637,7,CASP004-02,Second Removal,,co2_evolution_1mg_co2_to_c,1.274834696,g OM/day,lab
-1638,8,ASP001-01,Second Removal,,co2_evolution_1mg_co2_to_c,3.051727117,g OM/day,lab
-1639,9,EASP003-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.631518808,g OM/day,lab
-1640,10,WR005-01,Second Removal,,co2_evolution_1mg_co2_to_c,1.51730531,g OM/day,lab
-1641,1,WR004-01,First Removal,,co2_eolution_2mg_co2_to_c,0.2,g TS/day,lab
-1642,2,CASP005-01,First Removal,,co2_eolution_2mg_co2_to_c,2.8,g TS/day,lab
-1643,3,EASP001-01,First Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1644,4,IV002-01,First Removal,,co2_eolution_2mg_co2_to_c,10.9,g TS/day,lab
-1645,5,EASP002-01,First Removal,,co2_eolution_2mg_co2_to_c,8.2,g TS/day,lab
-1646,6,CASP006-01,First Removal,,co2_eolution_2mg_co2_to_c,2.2,g TS/day,lab
-1647,7,CASP004-02,First Removal,,co2_eolution_2mg_co2_to_c,3.5,g TS/day,lab
-1648,8,ASP001-01,First Removal,,co2_eolution_2mg_co2_to_c,9.2,g TS/day,lab
-1649,9,EASP003-01,First Removal,,co2_eolution_2mg_co2_to_c,6.4,g TS/day,lab
-1650,10,WR005-01,First Removal,,co2_eolution_2mg_co2_to_c,0.9,g TS/day,lab
-1651,1,WR004-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1652,2,CASP005-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1653,3,EASP001-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1654,4,IV002-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1655,5,EASP002-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1656,6,CASP006-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1657,7,CASP004-02,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1658,8,ASP001-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1659,9,EASP003-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1660,10,WR005-01,Loading,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1661,1,WR004-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1662,2,CASP005-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1663,3,EASP001-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1664,4,IV002-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1665,5,EASP002-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1666,6,CASP006-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1667,7,CASP004-02,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1668,8,ASP001-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1669,9,EASP003-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1670,10,WR005-01,Second Removal,,co2_eolution_2mg_co2_to_c,,g TS/day,lab
-1671,1,WR004-01,First Removal,,overall_notes,,,lab
-1672,2,CASP005-01,First Removal,,overall_notes,,,lab
-1673,3,EASP001-01,First Removal,,overall_notes,45 day sample was lost by mail carrier,,lab
-1674,4,IV002-01,First Removal,,overall_notes,*18 day removal,,lab
-1675,5,EASP002-01,First Removal,,overall_notes,,,lab
-1676,6,CASP006-01,First Removal,,overall_notes,Email resent to us on 8/14/23 that contains respiration and stability test results,,lab
-1677,7,CASP004-02,First Removal,,overall_notes,,,lab
-1678,8,ASP001-01,First Removal,,overall_notes,,,lab
-1679,9,EASP003-01,First Removal,,overall_notes,,,lab
-1680,10,WR005-01,First Removal,,overall_notes,,,lab
-1681,1,WR004-01,Loading,,overall_notes,,,lab
-1682,2,CASP005-01,Loading,,overall_notes,,,lab
-1683,3,EASP001-01,Loading,,overall_notes,,,lab
-1684,4,IV002-01,Loading,,overall_notes,,,lab
-1685,5,EASP002-01,Loading,,overall_notes,,,lab
-1686,6,CASP006-01,Loading,,overall_notes,,,lab
-1687,7,CASP004-02,Loading,,overall_notes,,,lab
-1688,8,ASP001-01,Loading,,overall_notes,,,lab
-1689,9,EASP003-01,Loading,,overall_notes,,,lab
-1690,10,WR005-01,Loading,,overall_notes,,,lab
-1691,1,WR004-01,Second Removal,,overall_notes,,,lab
-1692,2,CASP005-01,Second Removal,,overall_notes,,,lab
-1693,3,EASP001-01,Second Removal,,overall_notes,,,lab
-1694,4,IV002-01,Second Removal,,overall_notes,,,lab
-1695,5,EASP002-01,Second Removal,,overall_notes,,,lab
-1696,6,CASP006-01,Second Removal,,overall_notes,,,lab
-1697,7,CASP004-02,Second Removal,,overall_notes,,,lab
-1698,8,ASP001-01,Second Removal,,overall_notes,,,lab
-1699,9,EASP003-01,Second Removal,,overall_notes,,,lab
-1700,10,WR005-01,Second Removal,,overall_notes,,,lab
-1701,11,CASP004-01,Loading,,bulk_density,754,lbs/CY (manual),field
-1702,11,CASP004-01,Loading,,bulk_density,0.29,g/cc,lab
-1703,11,CASP004-01,First Removal,,bulk_density,754,lbs/CY (manual),field
-1704,11,CASP004-01,First Removal,,bulk_density,0.29,g/cc,lab
-1705,11,CASP004-01,Second Removal,,bulk_density,754,lbs/CY (manual),field
-1706,11,CASP004-01,Second Removal,,bulk_density,0.29,g/cc,lab
-1707,11,CASP004-01,Loading,,temperature,65-80,F,field
-1708,11,CASP004-01,First Removal,,temperature,65-80,F,field
-1709,11,CASP004-01,Second Removal,,temperature,65-80,F,field
-1710,11,CASP004-01,Loading,,weather,Windy,,field
-1711,11,CASP004-01,First Removal,,weather,Windy,,field
-1712,11,CASP004-01,Second Removal,,weather,Windy,,field
-1713,11,CASP004-01,Loading,,moisture,51.0,,
-1714,11,CASP004-01,First Removal,,moisture,51.0,,
-1715,11,CASP004-01,Second Removal,,moisture,51.0,,
-1716,11,CASP004-01,Loading,,c_to_n,34.0,,lab
-1717,11,CASP004-01,First Removal,,c_to_n,34.0,,lab
-1718,11,CASP004-01,Second Removal,,c_to_n,34.0,,lab
-1719,11,CASP004-01,Loading,,maturity,0.0,,lab
-1720,11,CASP004-01,First Removal,,maturity,0.0,,lab
-1721,11,CASP004-01,Second Removal,,maturity,0.0,,lab
+1251,1,WR004-01,Loading,0,bulk_density,826.8,lbs/cu. yard,field
+1252,1,WR004-01,First Removal,43,bulk_density,1350.0,lbs/cu. yard,field
+1253,1,WR004-01,Second Removal,67,bulk_density,1410.0,lbs/cu. yard,field
+1254,2,CASP005-01,Loading,0,bulk_density,810.0,lbs/cu. yard,field
+1255,2,CASP005-01,First Removal,45,bulk_density,852.0,lbs/cu. yard,field
+1256,2,CASP005-01,Second Removal,71,bulk_density,952.0,lbs/cu. yard,field
+1257,5,EASP002-01,Loading,0,bulk_density,1056.0,lbs/cu. yard,field
+1258,5,EASP002-01,First Removal,48,bulk_density,960.0,lbs/cu. yard,field
+1259,5,EASP002-01,Second Removal,93,bulk_density,1220.0,lbs/cu. yard,field
+1260,6,CASP006-01,Loading,0,bulk_density,1266.68,lbs/cu. yard,field
+1261,6,CASP006-01,First Removal,44,bulk_density,820.0,lbs/cu. yard,field
+1262,6,CASP006-01,Second Removal,90,bulk_density,848.0,lbs/cu. yard,field
+1263,7,CASP004-02,Loading,0,bulk_density,1026.0,lbs/cu. yard,field
+1264,7,CASP004-02,First Removal,44,bulk_density,870.0,lbs/cu. yard,field
+1265,7,CASP004-02,Second Removal,68,bulk_density,850.0,lbs/cu. yard,field
+1266,8,ASP001-01,Loading,0,bulk_density,,lbs/cu. yard,field
+1267,8,ASP001-01,First Removal,45,bulk_density,,lbs/cu. yard,field
+1268,8,ASP001-01,Second Removal,90,bulk_density,,lbs/cu. yard,field
+1269,9,EASP003-01,Loading,0,bulk_density,820.0,lbs/cu. yard,field
+1270,9,EASP003-01,First Removal,45,bulk_density,,lbs/cu. yard,field
+1271,9,EASP003-01,Second Removal,90,bulk_density,,lbs/cu. yard,field
+1272,10,WR005-01,Loading,0,bulk_density,1280.0,lbs/cu. yard,field
+1273,10,WR005-01,First Removal,46,bulk_density,1224.0,lbs/cu. yard,field
+1274,10,WR005-01,Second Removal,95,bulk_density,1296.0,lbs/cu. yard,field
+1275,3,EASP001-01,Loading,0,bulk_density,1248.0,lbs/cu. yard,field
+1276,3,EASP001-01,First Removal,45,bulk_density,884.0,lbs/cu. yard,field
+1277,3,EASP001-01,Second Removal,72,bulk_density,896.0,lbs/cu. yard,field
+1278,4,IV002-01,Loading,0,bulk_density,808.0,lbs/cu. yard,field
+1279,4,IV002-01,First Removal,19,bulk_density,1224.0,lbs/cu. yard,field
+1280,4,IV002-01,Second Removal,49,bulk_density,688.0,lbs/cu. yard,field
+1281,1,WR004-01,First Removal,43,total_n_as_rcvd,0.0045,%,lab
+1282,2,CASP005-01,First Removal,45,total_n_as_rcvd,0.0096,%,lab
+1283,3,EASP001-01,First Removal,45,total_n_as_rcvd,,%,lab
+1284,4,IV002-01,First Removal,19,total_n_as_rcvd,0.0072,%,lab
+1285,5,EASP002-01,First Removal,48,total_n_as_rcvd,0.0074,%,lab
+1286,6,CASP006-01,First Removal,44,total_n_as_rcvd,0.0066,%,lab
+1287,7,CASP004-02,First Removal,44,total_n_as_rcvd,0.0068,%,lab
+1288,8,ASP001-01,First Removal,45,total_n_as_rcvd,0.0072,%,lab
+1289,9,EASP003-01,First Removal,45,total_n_as_rcvd,0.0075,%,lab
+1290,10,WR005-01,First Removal,46,total_n_as_rcvd,0.0042,%,lab
+1291,1,WR004-01,Loading,0,total_n_as_rcvd,0.0052,%,lab
+1292,2,CASP005-01,Loading,0,total_n_as_rcvd,0.0037,%,lab
+1293,3,EASP001-01,Loading,0,total_n_as_rcvd,0.0052,%,lab
+1294,4,IV002-01,Loading,0,total_n_as_rcvd,0.0066,%,lab
+1295,5,EASP002-01,Loading,0,total_n_as_rcvd,0.0067,%,lab
+1296,6,CASP006-01,Loading,0,total_n_as_rcvd,0.0061,%,lab
+1297,7,CASP004-02,Loading,0,total_n_as_rcvd,0.0075,%,lab
+1298,8,ASP001-01,Loading,0,total_n_as_rcvd,0.007,%,lab
+1299,9,EASP003-01,Loading,0,total_n_as_rcvd,0.0073,%,lab
+1300,10,WR005-01,Loading,0,total_n_as_rcvd,0.0042,%,lab
+1301,1,WR004-01,Second Removal,67,total_n_as_rcvd,0.01116630265,%,lab
+1302,2,CASP005-01,Second Removal,71,total_n_as_rcvd,0.00830619796,%,lab
+1303,3,EASP001-01,Second Removal,72,total_n_as_rcvd,0.00900503947,%,lab
+1304,4,IV002-01,Second Removal,49,total_n_as_rcvd,0.0045,%,lab
+1305,5,EASP002-01,Second Removal,93,total_n_as_rcvd,0.01125647482,%,lab
+1306,6,CASP006-01,Second Removal,90,total_n_as_rcvd,0.00984605968,%,lab
+1307,7,CASP004-02,Second Removal,68,total_n_as_rcvd,0.00899863714,%,lab
+1308,8,ASP001-01,Second Removal,90,total_n_as_rcvd,0.00432701613,%,lab
+1309,9,EASP003-01,Second Removal,90,total_n_as_rcvd,0.0132382134,%,lab
+1310,10,WR005-01,Second Removal,95,total_n_as_rcvd,0.00679097222,%,lab
+1311,1,WR004-01,First Removal,43,total_n_dry_wt,0.0068,%,lab
+1312,2,CASP005-01,First Removal,45,total_n_dry_wt,0.0146,%,lab
+1313,3,EASP001-01,First Removal,45,total_n_dry_wt,,%,lab
+1314,4,IV002-01,First Removal,19,total_n_dry_wt,0.0135,%,lab
+1315,5,EASP002-01,First Removal,48,total_n_dry_wt,0.0169,%,lab
+1316,6,CASP006-01,First Removal,44,total_n_dry_wt,0.0142,%,lab
+1317,7,CASP004-02,First Removal,44,total_n_dry_wt,0.0147,%,lab
+1318,8,ASP001-01,First Removal,45,total_n_dry_wt,0.0154,%,lab
+1319,9,EASP003-01,First Removal,45,total_n_dry_wt,0.0183,%,lab
+1320,10,WR005-01,First Removal,46,total_n_dry_wt,0.008,%,lab
+1321,1,WR004-01,Loading,0,total_n_dry_wt,0.0076,%,lab
+1322,2,CASP005-01,Loading,0,total_n_dry_wt,0.0061,%,lab
+1323,3,EASP001-01,Loading,0,total_n_dry_wt,0.0131,%,lab
+1324,4,IV002-01,Loading,0,total_n_dry_wt,0.0136,%,lab
+1325,5,EASP002-01,Loading,0,total_n_dry_wt,0.0126,%,lab
+1326,6,CASP006-01,Loading,0,total_n_dry_wt,0.0184,%,lab
+1327,7,CASP004-02,Loading,0,total_n_dry_wt,0.0154,%,lab
+1328,8,ASP001-01,Loading,0,total_n_dry_wt,0.0159,%,lab
+1329,9,EASP003-01,Loading,0,total_n_dry_wt,0.0139,%,lab
+1330,10,WR005-01,Loading,0,total_n_dry_wt,0.0076,%,lab
+1331,1,WR004-01,Second Removal,67,total_n_dry_wt,0.0184,%,lab
+1332,2,CASP005-01,Second Removal,71,total_n_dry_wt,0.0123,%,lab
+1333,3,EASP001-01,Second Removal,72,total_n_dry_wt,0.0139,%,lab
+1334,4,IV002-01,Second Removal,49,total_n_dry_wt,0.0096,%,lab
+1335,5,EASP002-01,Second Removal,93,total_n_dry_wt,0.0183,%,lab
+1336,6,CASP006-01,Second Removal,90,total_n_dry_wt,0.0168,%,lab
+1337,7,CASP004-02,Second Removal,68,total_n_dry_wt,0.0196,%,lab
+1338,8,ASP001-01,Second Removal,90,total_n_dry_wt,0.0073,%,lab
+1339,9,EASP003-01,Second Removal,90,total_n_dry_wt,0.022,%,lab
+1340,10,WR005-01,Second Removal,95,total_n_dry_wt,0.0127,%,lab
+1341,1,WR004-01,First Removal,43,organic_c_as_rcvd,0.108,%,lab
+1342,2,CASP005-01,First Removal,45,organic_c_as_rcvd,0.251,%,lab
+1343,3,EASP001-01,First Removal,45,organic_c_as_rcvd,,%,lab
+1344,4,IV002-01,First Removal,19,organic_c_as_rcvd,0.224,%,lab
+1345,5,EASP002-01,First Removal,48,organic_c_as_rcvd,0.141,%,lab
+1346,6,CASP006-01,First Removal,44,organic_c_as_rcvd,0.106,%,lab
+1347,7,CASP004-02,First Removal,44,organic_c_as_rcvd,0.14,%,lab
+1348,8,ASP001-01,First Removal,45,organic_c_as_rcvd,0.187,%,lab
+1349,9,EASP003-01,First Removal,45,organic_c_as_rcvd,0.178,%,lab
+1350,10,WR005-01,First Removal,46,organic_c_as_rcvd,0.098,%,lab
+1351,1,WR004-01,Loading,0,organic_c_as_rcvd,0.168,%,lab
+1352,2,CASP005-01,Loading,0,organic_c_as_rcvd,0.172,%,lab
+1353,3,EASP001-01,Loading,0,organic_c_as_rcvd,0.152,%,lab
+1354,4,IV002-01,Loading,0,organic_c_as_rcvd,0.213,%,lab
+1355,5,EASP002-01,Loading,0,organic_c_as_rcvd,0.136,%,lab
+1356,6,CASP006-01,Loading,0,organic_c_as_rcvd,0.108,%,lab
+1357,7,CASP004-02,Loading,0,organic_c_as_rcvd,0.185,%,lab
+1358,8,ASP001-01,Loading,0,organic_c_as_rcvd,0.17,%,lab
+1359,9,EASP003-01,Loading,0,organic_c_as_rcvd,0.228,%,lab
+1360,10,WR005-01,Loading,0,organic_c_as_rcvd,0.088,%,lab
+1361,1,WR004-01,Second Removal,67,organic_c_as_rcvd,0.2051201248,%,lab
+1362,2,CASP005-01,Second Removal,71,organic_c_as_rcvd,0.1830064755,%,lab
+1363,3,EASP001-01,Second Removal,72,organic_c_as_rcvd,0.1230904675,%,lab
+1364,4,IV002-01,Second Removal,49,organic_c_as_rcvd,0.094,%,lab
+1365,5,EASP002-01,Second Removal,93,organic_c_as_rcvd,0.156852518,%,lab
+1366,6,CASP006-01,Second Removal,90,organic_c_as_rcvd,0.184027544,%,lab
+1367,7,CASP004-02,Second Removal,68,organic_c_as_rcvd,0.1418662692,%,lab
+1368,8,ASP001-01,Second Removal,90,organic_c_as_rcvd,0.06875806452,%,lab
+1369,9,EASP003-01,Second Removal,90,organic_c_as_rcvd,0.2695781638,%,lab
+1370,10,WR005-01,Second Removal,95,organic_c_as_rcvd,0.1427708333,%,lab
+1371,1,WR004-01,First Removal,43,organic_c_dry_wt,0.163,%,lab
+1372,2,CASP005-01,First Removal,45,organic_c_dry_wt,0.382,%,lab
+1373,3,EASP001-01,First Removal,45,organic_c_dry_wt,,%,lab
+1374,4,IV002-01,First Removal,19,organic_c_dry_wt,0.421,%,lab
+1375,5,EASP002-01,First Removal,48,organic_c_dry_wt,0.325,%,lab
+1376,6,CASP006-01,First Removal,44,organic_c_dry_wt,0.229,%,lab
+1377,7,CASP004-02,First Removal,44,organic_c_dry_wt,0.305,%,lab
+1378,8,ASP001-01,First Removal,45,organic_c_dry_wt,0.399,%,lab
+1379,9,EASP003-01,First Removal,45,organic_c_dry_wt,0.433,%,lab
+1380,10,WR005-01,First Removal,46,organic_c_dry_wt,0.187,%,lab
+1381,1,WR004-01,Loading,0,organic_c_dry_wt,0.247,%,lab
+1382,2,CASP005-01,Loading,0,organic_c_dry_wt,0.287,%,lab
+1383,3,EASP001-01,Loading,0,organic_c_dry_wt,0.381,%,lab
+1384,4,IV002-01,Loading,0,organic_c_dry_wt,0.437,%,lab
+1385,5,EASP002-01,Loading,0,organic_c_dry_wt,0.257,%,lab
+1386,6,CASP006-01,Loading,0,organic_c_dry_wt,0.327,%,lab
+1387,7,CASP004-02,Loading,0,organic_c_dry_wt,0.38,%,lab
+1388,8,ASP001-01,Loading,0,organic_c_dry_wt,0.385,%,lab
+1389,9,EASP003-01,Loading,0,organic_c_dry_wt,0.432,%,lab
+1390,10,WR005-01,Loading,0,organic_c_dry_wt,0.16,%,lab
+1391,1,WR004-01,Second Removal,67,organic_c_dry_wt,0.338,%,lab
+1392,2,CASP005-01,Second Removal,71,organic_c_dry_wt,0.271,%,lab
+1393,3,EASP001-01,Second Removal,72,organic_c_dry_wt,0.19,%,lab
+1394,4,IV002-01,Second Removal,49,organic_c_dry_wt,0.199,%,lab
+1395,5,EASP002-01,Second Removal,93,organic_c_dry_wt,0.255,%,lab
+1396,6,CASP006-01,Second Removal,90,organic_c_dry_wt,0.314,%,lab
+1397,7,CASP004-02,Second Removal,68,organic_c_dry_wt,0.309,%,lab
+1398,8,ASP001-01,Second Removal,90,organic_c_dry_wt,0.116,%,lab
+1399,9,EASP003-01,Second Removal,90,organic_c_dry_wt,0.448,%,lab
+1400,10,WR005-01,Second Removal,95,organic_c_dry_wt,0.267,%,lab
+1401,1,WR004-01,First Removal,43,c_to_n_dry_wt,24.0,,lab
+1402,2,CASP005-01,First Removal,45,c_to_n_dry_wt,26.0,,lab
+1403,3,EASP001-01,First Removal,45,c_to_n_dry_wt,,,lab
+1404,4,IV002-01,First Removal,19,c_to_n_dry_wt,31.0,,lab
+1405,5,EASP002-01,First Removal,48,c_to_n_dry_wt,19.0,,lab
+1406,6,CASP006-01,First Removal,44,c_to_n_dry_wt,16.0,,lab
+1407,7,CASP004-02,First Removal,44,c_to_n_dry_wt,21.0,,lab
+1408,8,ASP001-01,First Removal,45,c_to_n_dry_wt,26.0,,lab
+1409,9,EASP003-01,First Removal,45,c_to_n_dry_wt,24.0,,lab
+1410,10,WR005-01,First Removal,46,c_to_n_dry_wt,23.0,,lab
+1411,1,WR004-01,Loading,0,c_to_n_dry_wt,33.0,,lab
+1412,2,CASP005-01,Loading,0,c_to_n_dry_wt,47.0,,lab
+1413,3,EASP001-01,Loading,0,c_to_n_dry_wt,29.0,,lab
+1414,4,IV002-01,Loading,0,c_to_n_dry_wt,32.0,,lab
+1415,5,EASP002-01,Loading,0,c_to_n_dry_wt,20.0,,lab
+1416,6,CASP006-01,Loading,0,c_to_n_dry_wt,18.0,,lab
+1417,7,CASP004-02,Loading,0,c_to_n_dry_wt,25.0,,lab
+1418,8,ASP001-01,Loading,0,c_to_n_dry_wt,24.0,,lab
+1419,9,EASP003-01,Loading,0,c_to_n_dry_wt,31.0,,lab
+1420,10,WR005-01,Loading,0,c_to_n_dry_wt,21.0,,lab
+1421,1,WR004-01,Second Removal,67,c_to_n_dry_wt,15.89041096,,lab
+1422,2,CASP005-01,Second Removal,71,c_to_n_dry_wt,22.03252033,,lab
+1423,3,EASP001-01,Second Removal,72,c_to_n_dry_wt,18.36956522,,lab
+1424,4,IV002-01,Second Removal,49,c_to_n_dry_wt,20.36363636,,lab
+1425,5,EASP002-01,Second Removal,93,c_to_n_dry_wt,21.0,,lab
+1426,6,CASP006-01,Second Removal,90,c_to_n_dry_wt,13.66906475,,lab
+1427,7,CASP004-02,Second Removal,68,c_to_n_dry_wt,15.76530612,,lab
+1428,8,ASP001-01,Second Removal,90,c_to_n_dry_wt,13.93442623,,lab
+1429,9,EASP003-01,Second Removal,90,c_to_n_dry_wt,18.69047619,,lab
+1430,10,WR005-01,Second Removal,95,c_to_n_dry_wt,21.02362205,,lab
+1431,1,WR004-01,First Removal,43,bulk_density,1382.0,lbs/cu.yard,lab
+1432,2,CASP005-01,First Removal,45,bulk_density,652.0,lbs/cu.yard,lab
+1433,3,EASP001-01,First Removal,45,bulk_density,,lbs/cu.yard,lab
+1434,4,IV002-01,First Removal,19,bulk_density,832.0,lbs/cu.yard,lab
+1435,5,EASP002-01,First Removal,48,bulk_density,963.0,lbs/cu.yard,lab
+1436,6,CASP006-01,First Removal,44,bulk_density,1353.0,lbs/cu.yard,lab
+1437,7,CASP004-02,First Removal,44,bulk_density,1006.0,lbs/cu.yard,lab
+1438,8,ASP001-01,First Removal,45,bulk_density,993.0,lbs/cu.yard,lab
+1439,9,EASP003-01,First Removal,45,bulk_density,1086.0,lbs/cu.yard,lab
+1440,10,WR005-01,First Removal,46,bulk_density,1381.0,lbs/cu.yard,lab
+1441,1,WR004-01,Loading,0,bulk_density,883.0,lbs/cu.yard,lab
+1442,2,CASP005-01,Loading,0,bulk_density,1176.0,lbs/cu.yard,lab
+1443,3,EASP001-01,Loading,0,bulk_density,1107.0,lbs/cu.yard,lab
+1444,4,IV002-01,Loading,0,bulk_density,769.0,lbs/cu.yard,lab
+1445,5,EASP002-01,Loading,0,bulk_density,1128.0,lbs/cu.yard,lab
+1446,6,CASP006-01,Loading,0,bulk_density,1151.0,lbs/cu.yard,lab
+1447,7,CASP004-02,Loading,0,bulk_density,711.0,lbs/cu.yard,lab
+1448,8,ASP001-01,Loading,0,bulk_density,1097.0,lbs/cu.yard,lab
+1449,9,EASP003-01,Loading,0,bulk_density,672.0,lbs/cu.yard,lab
+1450,10,WR005-01,Loading,0,bulk_density,1174.0,lbs/cu.yard,lab
+1451,1,WR004-01,Second Removal,67,bulk_density,1474.178166,lbs/cu.yard,lab
+1452,2,CASP005-01,Second Removal,71,bulk_density,1203.257135,lbs/cu.yard,lab
+1453,3,EASP001-01,Second Removal,72,bulk_density,842.778,lbs/cu.yard,lab
+1454,4,IV002-01,Second Removal,49,bulk_density,656.6006782,lbs/cu.yard,lab
+1455,5,EASP002-01,Second Removal,93,bulk_density,827.0,lbs/cu.yard,lab
+1456,6,CASP006-01,Second Removal,90,bulk_density,1219.522544,lbs/cu.yard,lab
+1457,7,CASP004-02,Second Removal,68,bulk_density,976.0901564,lbs/cu.yard,lab
+1458,8,ASP001-01,Second Removal,90,bulk_density,1071.26448,lbs/cu.yard,lab
+1459,9,EASP003-01,Second Removal,90,bulk_density,672.4481305,lbs/cu.yard,lab
+1460,10,WR005-01,Second Removal,95,bulk_density,1153.989193,lbs/cu.yard,lab
+1461,1,WR004-01,First Removal,43,solids_as_rcvd,0.665,%,lab
+1462,2,CASP005-01,First Removal,45,solids_as_rcvd,0.657,%,lab
+1463,3,EASP001-01,First Removal,45,solids_as_rcvd,,%,lab
+1464,4,IV002-01,First Removal,19,solids_as_rcvd,0.532,%,lab
+1465,5,EASP002-01,First Removal,48,solids_as_rcvd,0.435,%,lab
+1466,6,CASP006-01,First Removal,44,solids_as_rcvd,0.463,%,lab
+1467,7,CASP004-02,First Removal,44,solids_as_rcvd,0.46,%,lab
+1468,8,ASP001-01,First Removal,45,solids_as_rcvd,0.47,%,lab
+1469,9,EASP003-01,First Removal,45,solids_as_rcvd,0.412,%,lab
+1470,10,WR005-01,First Removal,46,solids_as_rcvd,0.526,%,lab
+1471,1,WR004-01,Loading,0,solids_as_rcvd,0.682,%,lab
+1472,2,CASP005-01,Loading,0,solids_as_rcvd,0.598,%,lab
+1473,3,EASP001-01,Loading,0,solids_as_rcvd,0.398,%,lab
+1474,4,IV002-01,Loading,0,solids_as_rcvd,0.488,%,lab
+1475,5,EASP002-01,Loading,0,solids_as_rcvd,0.529,%,lab
+1476,6,CASP006-01,Loading,0,solids_as_rcvd,0.332,%,lab
+1477,7,CASP004-02,Loading,0,solids_as_rcvd,0.488,%,lab
+1478,8,ASP001-01,Loading,0,solids_as_rcvd,0.442,%,lab
+1479,9,EASP003-01,Loading,0,solids_as_rcvd,0.528,%,lab
+1480,10,WR005-01,Loading,0,solids_as_rcvd,0.553,%,lab
+1481,1,WR004-01,Second Removal,67,solids_as_rcvd,0.5927419355,%,lab
+1482,2,CASP005-01,Second Removal,71,solids_as_rcvd,0.6753006475,%,lab
+1483,3,EASP001-01,Second Removal,72,solids_as_rcvd,0.6068642746,%,lab
+1484,4,IV002-01,Second Removal,49,solids_as_rcvd,0.6017369727,%,lab
+1485,5,EASP002-01,Second Removal,93,solids_as_rcvd,0.471,%,lab
+1486,6,CASP006-01,Second Removal,90,solids_as_rcvd,0.6478445659,%,lab
+1487,7,CASP004-02,Second Removal,68,solids_as_rcvd,0.4591141397,%,lab
+1488,8,ASP001-01,Second Removal,90,solids_as_rcvd,0.6151079137,%,lab
+1489,9,EASP003-01,Second Removal,90,solids_as_rcvd,0.5860749809,%,lab
+1490,10,WR005-01,Second Removal,95,solids_as_rcvd,0.5347222222,%,lab
+1491,1,WR004-01,First Removal,43,moisture_as_rcvd,0.335,%,lab
+1492,2,CASP005-01,First Removal,45,moisture_as_rcvd,0.343,%,lab
+1493,3,EASP001-01,First Removal,45,moisture_as_rcvd,,%,lab
+1494,4,IV002-01,First Removal,19,moisture_as_rcvd,0.468,%,lab
+1495,5,EASP002-01,First Removal,48,moisture_as_rcvd,0.565,%,lab
+1496,6,CASP006-01,First Removal,44,moisture_as_rcvd,0.537,%,lab
+1497,7,CASP004-02,First Removal,44,moisture_as_rcvd,0.54,%,lab
+1498,8,ASP001-01,First Removal,45,moisture_as_rcvd,0.53,%,lab
+1499,9,EASP003-01,First Removal,45,moisture_as_rcvd,0.588,%,lab
+1500,10,WR005-01,First Removal,46,moisture_as_rcvd,0.474,%,lab
+1501,1,WR004-01,Loading,0,moisture_as_rcvd,0.318,%,lab
+1502,2,CASP005-01,Loading,0,moisture_as_rcvd,0.402,%,lab
+1503,3,EASP001-01,Loading,0,moisture_as_rcvd,0.602,%,lab
+1504,4,IV002-01,Loading,0,moisture_as_rcvd,0.512,%,lab
+1505,5,EASP002-01,Loading,0,moisture_as_rcvd,0.471,%,lab
+1506,6,CASP006-01,Loading,0,moisture_as_rcvd,0.668,%,lab
+1507,7,CASP004-02,Loading,0,moisture_as_rcvd,0.512,%,lab
+1508,8,ASP001-01,Loading,0,moisture_as_rcvd,0.558,%,lab
+1509,9,EASP003-01,Loading,0,moisture_as_rcvd,0.472,%,lab
+1510,10,WR005-01,Loading,0,moisture_as_rcvd,0.447,%,lab
+1511,1,WR004-01,Second Removal,67,moisture_as_rcvd,0.4072580645,%,lab
+1512,2,CASP005-01,Second Removal,71,moisture_as_rcvd,0.3246993525,%,lab
+1513,3,EASP001-01,Second Removal,72,moisture_as_rcvd,0.3931357254,%,lab
+1514,4,IV002-01,Second Removal,49,moisture_as_rcvd,0.3982630273,%,lab
+1515,5,EASP002-01,Second Removal,93,moisture_as_rcvd,0.529,%,lab
+1516,6,CASP006-01,Second Removal,90,moisture_as_rcvd,0.3521554341,%,lab
+1517,7,CASP004-02,Second Removal,68,moisture_as_rcvd,0.5408858603,%,lab
+1518,8,ASP001-01,Second Removal,90,moisture_as_rcvd,0.3848920863,%,lab
+1519,9,EASP003-01,Second Removal,90,moisture_as_rcvd,0.4139250191,%,lab
+1520,10,WR005-01,Second Removal,95,moisture_as_rcvd,0.4652777778,%,lab
+1521,1,WR004-01,First Removal,43,ph_as_rcvd,7.6,,lab
+1522,2,CASP005-01,First Removal,45,ph_as_rcvd,7.9,,lab
+1523,3,EASP001-01,First Removal,45,ph_as_rcvd,,,lab
+1524,4,IV002-01,First Removal,19,ph_as_rcvd,5.0,,lab
+1525,5,EASP002-01,First Removal,48,ph_as_rcvd,6.0,,lab
+1526,6,CASP006-01,First Removal,44,ph_as_rcvd,8.1,,lab
+1527,7,CASP004-02,First Removal,44,ph_as_rcvd,7.7,,lab
+1528,8,ASP001-01,First Removal,45,ph_as_rcvd,4.4,,lab
+1529,9,EASP003-01,First Removal,45,ph_as_rcvd,4.5,,lab
+1530,10,WR005-01,First Removal,46,ph_as_rcvd,7.4,,lab
+1531,1,WR004-01,Loading,0,ph_as_rcvd,6.3,,lab
+1532,2,CASP005-01,Loading,0,ph_as_rcvd,7.6,,lab
+1533,3,EASP001-01,Loading,0,ph_as_rcvd,6.4,,lab
+1534,4,IV002-01,Loading,0,ph_as_rcvd,4.7,,lab
+1535,5,EASP002-01,Loading,0,ph_as_rcvd,4.4,,lab
+1536,6,CASP006-01,Loading,0,ph_as_rcvd,6.7,,lab
+1537,7,CASP004-02,Loading,0,ph_as_rcvd,4.6,,lab
+1538,8,ASP001-01,Loading,0,ph_as_rcvd,4.5,,lab
+1539,9,EASP003-01,Loading,0,ph_as_rcvd,7.1,,lab
+1540,10,WR005-01,Loading,0,ph_as_rcvd,8.3,,lab
+1541,1,WR004-01,Second Removal,67,ph_as_rcvd,7.4,,lab
+1542,2,CASP005-01,Second Removal,71,ph_as_rcvd,7.1,,lab
+1543,3,EASP001-01,Second Removal,72,ph_as_rcvd,7.3,,lab
+1544,4,IV002-01,Second Removal,49,ph_as_rcvd,6.5,,lab
+1545,5,EASP002-01,Second Removal,93,ph_as_rcvd,8.4,,lab
+1546,6,CASP006-01,Second Removal,90,ph_as_rcvd,8.5,,lab
+1547,7,CASP004-02,Second Removal,68,ph_as_rcvd,7.9,,lab
+1548,8,ASP001-01,Second Removal,90,ph_as_rcvd,7.2,,lab
+1549,9,EASP003-01,Second Removal,90,ph_as_rcvd,7.0,,lab
+1550,10,WR005-01,Second Removal,95,ph_as_rcvd,7.8,,lab
+1551,1,WR004-01,First Removal,43,ph_dry_wt,,,lab
+1552,2,CASP005-01,First Removal,45,ph_dry_wt,,,lab
+1553,3,EASP001-01,First Removal,45,ph_dry_wt,,,lab
+1554,4,IV002-01,First Removal,19,ph_dry_wt,,,lab
+1555,5,EASP002-01,First Removal,48,ph_dry_wt,,,lab
+1556,6,CASP006-01,First Removal,44,ph_dry_wt,,,lab
+1557,7,CASP004-02,First Removal,44,ph_dry_wt,,,lab
+1558,8,ASP001-01,First Removal,45,ph_dry_wt,,,lab
+1559,9,EASP003-01,First Removal,45,ph_dry_wt,,,lab
+1560,10,WR005-01,First Removal,46,ph_dry_wt,,,lab
+1561,1,WR004-01,Loading,0,ph_dry_wt,,,lab
+1562,2,CASP005-01,Loading,0,ph_dry_wt,,,lab
+1563,3,EASP001-01,Loading,0,ph_dry_wt,,,lab
+1564,4,IV002-01,Loading,0,ph_dry_wt,,,lab
+1565,5,EASP002-01,Loading,0,ph_dry_wt,,,lab
+1566,6,CASP006-01,Loading,0,ph_dry_wt,,,lab
+1567,7,CASP004-02,Loading,0,ph_dry_wt,,,lab
+1568,8,ASP001-01,Loading,0,ph_dry_wt,,,lab
+1569,9,EASP003-01,Loading,0,ph_dry_wt,,,lab
+1570,10,WR005-01,Loading,0,ph_dry_wt,,,lab
+1571,1,WR004-01,Second Removal,67,ph_dry_wt,,,lab
+1572,2,CASP005-01,Second Removal,71,ph_dry_wt,,,lab
+1573,3,EASP001-01,Second Removal,72,ph_dry_wt,,,lab
+1574,4,IV002-01,Second Removal,49,ph_dry_wt,,,lab
+1575,5,EASP002-01,Second Removal,93,ph_dry_wt,,,lab
+1576,6,CASP006-01,Second Removal,90,ph_dry_wt,,,lab
+1577,7,CASP004-02,Second Removal,68,ph_dry_wt,,,lab
+1578,8,ASP001-01,Second Removal,90,ph_dry_wt,,,lab
+1579,9,EASP003-01,Second Removal,90,ph_dry_wt,,,lab
+1580,10,WR005-01,Second Removal,95,ph_dry_wt,,,lab
+1581,1,WR004-01,First Removal,43,stability,Very Stable,,lab
+1582,2,CASP005-01,First Removal,45,stability,Stable,,lab
+1583,3,EASP001-01,First Removal,45,stability,,,lab
+1584,4,IV002-01,First Removal,19,stability,Stable,,lab
+1585,5,EASP002-01,First Removal,48,stability,Stable,,lab
+1586,6,CASP006-01,First Removal,44,stability,Stable,,lab
+1587,7,CASP004-02,First Removal,44,stability,Stable,,lab
+1588,8,ASP001-01,First Removal,45,stability,Stable,,lab
+1589,9,EASP003-01,First Removal,45,stability,Stable,,lab
+1590,10,WR005-01,First Removal,46,stability,Very Stable,,lab
+1591,1,WR004-01,Loading,0,stability,,,lab
+1592,2,CASP005-01,Loading,0,stability,,,lab
+1593,3,EASP001-01,Loading,0,stability,,,lab
+1594,4,IV002-01,Loading,0,stability,,,lab
+1595,5,EASP002-01,Loading,0,stability,,,lab
+1596,6,CASP006-01,Loading,0,stability,,,lab
+1597,7,CASP004-02,Loading,0,stability,,,lab
+1598,8,ASP001-01,Loading,0,stability,,,lab
+1599,9,EASP003-01,Loading,0,stability,,,lab
+1600,10,WR005-01,Loading,0,stability,,,lab
+1601,1,WR004-01,Second Removal,67,stability,Very Stable,,lab
+1602,2,CASP005-01,Second Removal,71,stability,Stable,,lab
+1603,3,EASP001-01,Second Removal,72,stability,Stable,,lab
+1604,4,IV002-01,Second Removal,49,stability,Stable,,lab
+1605,5,EASP002-01,Second Removal,93,stability,VERY STABLE,,lab
+1606,6,CASP006-01,Second Removal,90,stability,VERY STABLE,,lab
+1607,7,CASP004-02,Second Removal,68,stability,VERY STABLE,,lab
+1608,8,ASP001-01,Second Removal,90,stability,Stable,,lab
+1609,9,EASP003-01,Second Removal,90,stability,STABLE,,lab
+1610,10,WR005-01,Second Removal,95,stability,Stable,,lab
+1611,1,WR004-01,First Removal,43,co2_evolution_1mg_co2_to_c,0.4,g OM/day,lab
+1612,2,CASP005-01,First Removal,45,co2_evolution_1mg_co2_to_c,1.8,g OM/day,lab
+1613,3,EASP001-01,First Removal,45,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1614,4,IV002-01,First Removal,19,co2_evolution_1mg_co2_to_c,3.8,g OM/day,lab
+1615,5,EASP002-01,First Removal,48,co2_evolution_1mg_co2_to_c,3.9,g OM/day,lab
+1616,6,CASP006-01,First Removal,44,co2_evolution_1mg_co2_to_c,2.7,g OM/day,lab
+1617,7,CASP004-02,First Removal,44,co2_evolution_1mg_co2_to_c,1.6,g OM/day,lab
+1618,8,ASP001-01,First Removal,45,co2_evolution_1mg_co2_to_c,4.7,g OM/day,lab
+1619,9,EASP003-01,First Removal,45,co2_evolution_1mg_co2_to_c,2.5,g OM/day,lab
+1620,10,WR005-01,First Removal,46,co2_evolution_1mg_co2_to_c,0.8,g OM/day,lab
+1621,1,WR004-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1622,2,CASP005-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1623,3,EASP001-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1624,4,IV002-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1625,5,EASP002-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1626,6,CASP006-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1627,7,CASP004-02,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1628,8,ASP001-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1629,9,EASP003-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1630,10,WR005-01,Loading,0,co2_evolution_1mg_co2_to_c,,g OM/day,lab
+1631,1,WR004-01,Second Removal,67,co2_evolution_1mg_co2_to_c,0.11728196,g OM/day,lab
+1632,2,CASP005-01,Second Removal,71,co2_evolution_1mg_co2_to_c,2.256661656,g OM/day,lab
+1633,3,EASP001-01,Second Removal,72,co2_evolution_1mg_co2_to_c,1.885598286,g OM/day,lab
+1634,4,IV002-01,Second Removal,49,co2_evolution_1mg_co2_to_c,3.139573928,g OM/day,lab
+1635,5,EASP002-01,Second Removal,93,co2_evolution_1mg_co2_to_c,1.607837683,g OM/day,lab
+1636,6,CASP006-01,Second Removal,90,co2_evolution_1mg_co2_to_c,1.808609836,g OM/day,lab
+1637,7,CASP004-02,Second Removal,68,co2_evolution_1mg_co2_to_c,1.274834696,g OM/day,lab
+1638,8,ASP001-01,Second Removal,90,co2_evolution_1mg_co2_to_c,3.051727117,g OM/day,lab
+1639,9,EASP003-01,Second Removal,90,co2_evolution_1mg_co2_to_c,1.631518808,g OM/day,lab
+1640,10,WR005-01,Second Removal,95,co2_evolution_1mg_co2_to_c,1.51730531,g OM/day,lab
+1641,1,WR004-01,First Removal,43,co2_eolution_2mg_co2_to_c,0.2,g TS/day,lab
+1642,2,CASP005-01,First Removal,45,co2_eolution_2mg_co2_to_c,2.8,g TS/day,lab
+1643,3,EASP001-01,First Removal,45,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1644,4,IV002-01,First Removal,19,co2_eolution_2mg_co2_to_c,10.9,g TS/day,lab
+1645,5,EASP002-01,First Removal,48,co2_eolution_2mg_co2_to_c,8.2,g TS/day,lab
+1646,6,CASP006-01,First Removal,44,co2_eolution_2mg_co2_to_c,2.2,g TS/day,lab
+1647,7,CASP004-02,First Removal,44,co2_eolution_2mg_co2_to_c,3.5,g TS/day,lab
+1648,8,ASP001-01,First Removal,45,co2_eolution_2mg_co2_to_c,9.2,g TS/day,lab
+1649,9,EASP003-01,First Removal,45,co2_eolution_2mg_co2_to_c,6.4,g TS/day,lab
+1650,10,WR005-01,First Removal,46,co2_eolution_2mg_co2_to_c,0.9,g TS/day,lab
+1651,1,WR004-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1652,2,CASP005-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1653,3,EASP001-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1654,4,IV002-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1655,5,EASP002-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1656,6,CASP006-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1657,7,CASP004-02,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1658,8,ASP001-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1659,9,EASP003-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1660,10,WR005-01,Loading,0,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1661,1,WR004-01,Second Removal,67,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1662,2,CASP005-01,Second Removal,71,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1663,3,EASP001-01,Second Removal,72,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1664,4,IV002-01,Second Removal,49,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1665,5,EASP002-01,Second Removal,93,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1666,6,CASP006-01,Second Removal,90,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1667,7,CASP004-02,Second Removal,68,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1668,8,ASP001-01,Second Removal,90,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1669,9,EASP003-01,Second Removal,90,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1670,10,WR005-01,Second Removal,95,co2_eolution_2mg_co2_to_c,,g TS/day,lab
+1671,1,WR004-01,Second Removal,67,maturity,1,,lab
+1672,2,CASP005-01,Second Removal,71,maturity,1,,lab
+1673,3,EASP001-01,Second Removal,72,maturity,1,,lab
+1674,4,IV002-01,Second Removal,49,maturity,1,,lab
+1675,5,EASP002-01,Second Removal,93,maturity,1,,lab
+1676,6,CASP006-01,Second Removal,90,maturity,1,,lab
+1677,7,CASP004-02,Second Removal,68,maturity,1,,lab
+1678,8,ASP001-01,Second Removal,90,maturity,1,,lab
+1679,9,EASP003-01,Second Removal,90,maturity,1,,lab
+1680,10,WR005-01,Second Removal,95,maturity,1,,lab
+1681,11,CASP004-01,Loading,0,bulk_density,754,lbs/CY (manual),field
+1682,11,CASP004-01,Loading,0,bulk_density,0.29,g/cc,lab
+1683,11,CASP004-01,First Removal,,bulk_density,754,lbs/CY (manual),field
+1684,11,CASP004-01,First Removal,,bulk_density,0.29,g/cc,lab
+1685,11,CASP004-01,Second Removal,,bulk_density,754,lbs/CY (manual),field
+1686,11,CASP004-01,Second Removal,,bulk_density,0.29,g/cc,lab
+1687,11,CASP004-01,Loading,0,temperature,65-80,F,field
+1688,11,CASP004-01,First Removal,,temperature,65-80,F,field
+1689,11,CASP004-01,Second Removal,,temperature,65-80,F,field
+1690,11,CASP004-01,Loading,0,weather,Windy,,field
+1691,11,CASP004-01,First Removal,,weather,Windy,,field
+1692,11,CASP004-01,Second Removal,,weather,Windy,,field
+1693,11,CASP004-01,Loading,0,moisture,51.0,,
+1694,11,CASP004-01,First Removal,,moisture,51.0,,
+1695,11,CASP004-01,Second Removal,,moisture,51.0,,
+1696,11,CASP004-01,Loading,0,c_to_n,34.0,,lab
+1697,11,CASP004-01,First Removal,,c_to_n,34.0,,lab
+1698,11,CASP004-01,Second Removal,,c_to_n,34.0,,lab
+1699,11,CASP004-01,Loading,0,maturity,0.0,,lab
+1700,11,CASP004-01,First Removal,,maturity,0.0,,lab
+1701,11,CASP004-01,Second Removal,,maturity,0.0,,lab
