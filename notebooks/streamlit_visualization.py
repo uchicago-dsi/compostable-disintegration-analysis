@@ -13,12 +13,6 @@ st.set_page_config(
 
 st.write("Current Working Directory:", os.getcwd())
 
-st.set_page_config(
-    page_title="Disintegration Dashboard",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 # Assuming the CSV files are in the correct directories and accessible
 observations = pd.read_csv('../data/finalized_datasets/observations_compiled.csv')
 observations['item_ID'] = observations['item_ID'].astype(str)
