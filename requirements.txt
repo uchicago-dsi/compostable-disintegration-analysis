@@ -13,3 +13,4 @@ streamlit
 numpy
 matplotlib
 seaborn
+os
