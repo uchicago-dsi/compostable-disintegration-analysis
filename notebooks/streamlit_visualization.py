@@ -21,7 +21,7 @@ df_merged = pd.merge(observations, items, left_on='item_ID', right_on='item_id',
 with st.sidebar:
     st.title('Residual Dashboard')
 
-    trial_list = ['All trials'] + list(df_merged.trial_ID.unique())
+    trial_list = list(df_merged.trial_ID.unique())
     selected_trials = st.multiselect('Select trial(s)', ['All trials'] + trial_list, default='All trials')
 
     if 'All trials' in selected_trials:
