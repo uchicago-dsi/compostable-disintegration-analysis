@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
+st.set_page_config(
+    page_title="Disintegration Dashboard",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 st.write("Current Working Directory:", os.getcwd())
 
 st.set_page_config(
