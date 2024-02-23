@@ -9,4 +9,7 @@ ipykernel~=6.16
 
 # project packages
 pandas~=2.1
-
+streamlit
+numpy
+matplotlib
+seaborn
