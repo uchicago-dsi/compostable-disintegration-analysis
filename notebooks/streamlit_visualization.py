@@ -41,7 +41,7 @@ with st.sidebar:
         material = 'item_name'
     else:  
         material = 'material_class_iii'
-    cap_anomalies = st.checkbox('Without Anomalies')
+    cap_anomalies = st.checkbox('Cap Anomalies')
 
 def bar_whisker_plot(df, x, y, cap_anomalies):
 
