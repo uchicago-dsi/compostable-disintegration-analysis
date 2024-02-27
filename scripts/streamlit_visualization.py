@@ -10,11 +10,16 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+conn = st.connection("postgresql", type="sql")
+
+# Perform query.
+observations = conn.query('SELECT * FROM observations;', ttl="10m")
+items = conn.query('SELECT * FROM items;', ttl="10m")
 
 # Assuming the CSV files are in the correct directories and accessible
-observations = pd.read_csv('data/finalized_datasets/observations_compiled.csv')
+#observations = pd.read_csv('data/finalized_datasets/observations_compiled.csv')
 observations['item_ID'] = observations['item_ID'].astype(str)
-items = pd.read_csv('data/finalized_datasets/items.csv')
+#items = pd.read_csv('data/finalized_datasets/items.csv')
 items['item_id'] = items['item_id'].astype(str)
 df_merged = pd.merge(observations, items, left_on='item_ID', right_on='item_id', how='inner')
 
