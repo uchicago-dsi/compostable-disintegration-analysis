@@ -80,8 +80,10 @@ def bar_whisker_plot(df, x, y, cap_anomalies):
     plt.figure(figsize=(12, 8))
     unique = df[x].nunique()
     palette = sns.color_palette("husl", unique)
-    sns.boxplot(data=df, x=material_type, y=residual_type, order=order, palette=palette)
+    sns.boxplot(data=df, x=x, y=y, order=order, palette=palette)
     plt.title(f"{residual_type} for Each {material_type}")
+    plt.xlabel(material_type)
+    plt.ylabel(residual_type)
     plt.xticks(rotation=45, ha="right")
 
     plt.tight_layout()
