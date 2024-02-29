@@ -49,7 +49,9 @@ with st.sidebar:
         df_selected_trial = df_merged[df_merged.trial_ID.isin(selected_trials)]
 
     # Facility technology filter
-    if "All Technologies" not in selected_facility_technologies:
+    if "All Technologies" in selected_facility_technologies:
+        df_selected_trial = df_selected_trial
+    else:
         df_selected_trial = df_selected_trial[df_selected_trial.primary_technology.isin(selected_facility_technologies)]
 
     # Residual type filter
