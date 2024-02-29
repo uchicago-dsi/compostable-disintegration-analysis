@@ -13,11 +13,11 @@ st.set_page_config(
 )
 
 # Assuming the CSV files are in the correct directories and accessible
-observations = pd.read_csv("data/finalized_datasets/observations_compiled.csv")
+observations = pd.read_csv("/Users/cecilia/2024-winter-compostable/data/finalized_datasets/observations_compiled.csv")
 observations = observations.astype({"item_ID": str, "facility_ID": str})
-items = pd.read_csv("data/finalized_datasets/items.csv")
+items = pd.read_csv("/Users/cecilia/2024-winter-compostable/data/finalized_datasets/items.csv")
 items["item_id"] = items["item_id"].astype(str)
-facilities = pd.read_csv("data/finalized_datasets/facilities.csv")
+facilities = pd.read_csv("/Users/cecilia/2024-winter-compostable/data/finalized_datasets/facilities.csv")
 facilities["facility_id"] = facilities["facility_id"].astype(str)
 
 df_merged = pd.merge(
@@ -43,16 +43,16 @@ with st.sidebar:
     )
 
     # Trial filter
-    if "All trials" in selected_trials:
+    if "All Trials" in selected_trials:
         df_selected_trial = df_merged
     else:
         df_selected_trial = df_merged[df_merged.trial_ID.isin(selected_trials)]
 
     # Facility technology filter
     if "All Technologies" in selected_facility_technologies:
-        df_selected_trial = df_selected_trial
+        df_selected_tech = df_selected_trial
     else:
-        df_selected_trial = df_selected_trial[df_selected_trial.primary_technology.isin(selected_facility_technologies)]
+        df_selected_tech = df_selected_trial[df_selected_trial.primary_technology.isin(selected_facility_technologies)]
 
     # Residual type filter
     residual_type = st.selectbox(
@@ -82,13 +82,26 @@ with st.sidebar:
         material = "material_class_iii"
 
     # Anomaly filter
-    cap_anomalies = st.checkbox(
-        "Limit Residuals to 100%. For most trials, there are some results with over 100% residuals. Select this box to limit these values to 100%."
+    cap_anomalies = st.checkbox("Limit Residuals to 100%")
+    st.markdown(
+    "_Note: for most trials, there are some results with over 100% residuals. "
+    "Select this box to limit these values to 100%._",
+    unsafe_allow_html=True,
     )
 
 
 def bar_whisker_plot(df, x, y, cap_anomalies):
+    # Check if the DataFrame is empty
+    if df.empty:
+        plt.text(0.5, 0.5, 'No data available.\nPlease adjust the filter and try again.', 
+                 horizontalalignment='center', verticalalignment='center', 
+                 transform=plt.gca().transAxes, fontsize=12)
+        plt.gca().axes.get_xaxis().set_visible(False)
+        plt.gca().axes.get_yaxis().set_visible(False)
+        plt.show()
+        return  # Exit the function if no data is available
 
+    # Cap anomalies if specified
     if cap_anomalies:
         df[y] = df[y].clip(lower=0, upper=100)
 
@@ -126,5 +139,5 @@ st.write(
 
     """
 )
-item_residual = bar_whisker_plot(df_selected_trial, material, residual, cap_anomalies)
+item_residual = bar_whisker_plot(df_selected_tech, material, residual, cap_anomalies)
 st.pyplot(plt)
