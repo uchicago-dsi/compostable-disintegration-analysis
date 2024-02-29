@@ -14,11 +14,17 @@ st.set_page_config(
 
 # Assuming the CSV files are in the correct directories and accessible
 observations = pd.read_csv("data/finalized_datasets/observations_compiled.csv")
-observations["item_ID"] = observations["item_ID"].astype(str)
+observations = observations.astype({"item_ID": str, "facility_ID": str})
 items = pd.read_csv("data/finalized_datasets/items.csv")
 items["item_id"] = items["item_id"].astype(str)
+facilities = pd.read_csv("data/finalized_datasets/facilities.csv")
+facilities["facility_id"] = facilities["facility_id"].astype(str)
+
 df_merged = pd.merge(
     observations, items, left_on="item_ID", right_on="item_id", how="inner"
+)
+df_merged = pd.merge(
+    df_merged, facilities, left_on="facility_ID", right_on="facility_id", how="inner"
 )
 
 with st.sidebar:
@@ -26,19 +32,34 @@ with st.sidebar:
 
     trial_list = list(df_merged.trial_ID.unique())
     selected_trials = st.multiselect(
-        "Select trial(s)", ["All trials"] + trial_list, default="All trials"
+        "Select Trial(s)", ["All Trials"] + trial_list, default="All Trials"
     )
 
+    facility_technology_list = list(df_merged.facility_technology.unique())
+    selected_facility_technologies = st.multiselect(
+        "Select Facility Technology(s)", 
+        ["All Technologies"] + facility_technology_list, 
+        default="All Technologies"
+    )
+
+    # Trial filter
     if "All trials" in selected_trials:
         df_selected_trial = df_merged
     else:
         df_selected_trial = df_merged[df_merged.trial_ID.isin(selected_trials)]
 
+    # Facility technology filter
+    if "All Technologies" not in selected_facility_technologies:
+        df_selected_trial = df_selected_trial[df_selected_trial.facility_technology.isin(selected_facility_technologies)]
+
+    # Residual type filter
     residual_type = st.selectbox(
         "Show Residuals by Mass or Surface Area",
-        ["Residual by mass", "Residual by surface area"],
+        ["Residual by Mass", "Residual by Surface Area"],
     )
     residual = "mass_resid_%" if residual_type == "Residual by mass" else "sa_resid_%"
+
+    # Material type filter
     material_type = st.selectbox(
         "Choose X-Axis Display",
         [
@@ -57,6 +78,8 @@ with st.sidebar:
         material = "item_name"
     else:
         material = "material_class_iii"
+
+    # Anomaly filter
     cap_anomalies = st.checkbox(
         "Limit Residuals to 100%. For most trials, there are some results with over 100% residuals. Select this box to limit these values to 100%."
     )
