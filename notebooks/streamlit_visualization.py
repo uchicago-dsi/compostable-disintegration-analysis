@@ -35,7 +35,7 @@ with st.sidebar:
         "Select Trial(s)", ["All Trials"] + trial_list, default="All Trials"
     )
 
-    facility_technology_list = list(df_merged.facility_technology.unique())
+    facility_technology_list = list(df_merged.primary_technology.unique())
     selected_facility_technologies = st.multiselect(
         "Select Facility Technology(s)", 
         ["All Technologies"] + facility_technology_list, 
@@ -50,7 +50,7 @@ with st.sidebar:
 
     # Facility technology filter
     if "All Technologies" not in selected_facility_technologies:
-        df_selected_trial = df_selected_trial[df_selected_trial.facility_technology.isin(selected_facility_technologies)]
+        df_selected_trial = df_selected_trial[df_selected_trial.primary_technology.isin(selected_facility_technologies)]
 
     # Residual type filter
     residual_type = st.selectbox(
