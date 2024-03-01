@@ -1,82 +1,82 @@
 item_id,original_item_id,item_id_10_trials,item_name,item_description,item_sku,brand,manufacturer,material_class_i,material_class_ii,material_class_iii,certification,kit,item_weight,weight_unit,item_dimensions,dimensions_unit,item_capacity,capacity_unit
-1,A1,,PLA-lined Paper Bowl 12oz,BESICS Bowl,WM-W270,BÉSICS®,WeiMon,Fiber,Lined Fiber,PLA lined Paper,BPI,Baseline,8.113333333,grams,"3’’ diameter, 2.5’’ H",inches,,milliliters
-2,A2,,CPLA Hot Cup Lid,Hot cup lid,,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,Baseline,3.573333333,grams,"3.5’’ diameter, 0.5’’ H",inches,,milliliters
-3,A3,,CPLA Hot Cup Lid,Hot cup lid,WTHL-101,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,Baseline,3.573333333,grams,"3.5’’ diameter, 0.5’’ H",inches,,milliliters
-4,A4,,PLA-lined Bagasse Bowl 300mL,"PLA-lined fibre bowl, white ",,BÉSICS®,GQPP,Fiber,Lined Fiber,PLA lined Bagasse,Component Materials Certified by BPI,Baseline,10.88,grams,5.5’’ x 5.5’’ x 2’’,inches,300.0,milliliters
-5,K,,CPLA Hot Cup Lid,CPLA Lid,,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,Baseline,2.5,grams,"3.5’’ diameter, 0.5’’ H",inches,80.0,milliliters
-6,A6,,BÉSICS® Baseline Containers,Besics Containers (Lined box with lid and uncoated fry try),,BÉSICS®,Seaside Paper,Fiber,Lined Fiber,Lined Tree Fiber and Unlined Fiber,BPI,Baseline,5.603333333,grams,,inches,,milliliters
-7,A7,,Paper Tray with Lid,Lined paper food tray with lid,,BÉSICS®,Seaside Paper,Fiber,Lined Fiber,PLA-lined fibre,,Baseline,29.76333333,grams,4.75’’ x 6’’ x 3.25’’,inches,,milliliters
-8,A8,,"CPLA Spoon 6""",Cutlery,,BÉSICS®,CFY,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Baseline,4.75,grams,6.5’’ x 1.53’’ (max) x 3/8’’,inches,,milliliters
-9,A9,,"CPLA Spoon 6""",BESICS Spoon,,BÉSICS®,CFY,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Baseline,4.75,grams,6.5’’ x 1.53’’ (max) x 3/8’’,inches,,milliliters
-10,Q,,"Unlined Paper Tray, small",Uncoated paper food tray ,,BÉSICS®,Seaside Paper,Fiber,Unlined Fiber,Paper,,Baseline,11.87333333,grams,2 3/16’’ x 3 1/8’’ 5.75’’,inches,,milliliters
-11,A11,,PLA Cold Cup 16oz,16 oz PLA cold cup,,Greenware®,FabriKal,Biopolymer,Rigid biopolymer,PLA,BPI,Baseline,14.58,grams,"2.5’’ diameter at base, 4’’ diameter at mouth, 5.75’’ H",inches,,milliliters
-12,A12,,Kraft Paper Control 1-ply,,,No name,Canadian Tire,Positive Control,Positive Control - Fiber,Kraft paper,,Baseline,2.853333333,grams,10’’ x 5 1/8’’ x N/A,inches,,milliliters
-13,O,K3,Bagasse Clamshell 9x9,Fiber Clamshell,,Not disclosed,Not disclosed,Fiber,Unlined Fiber,Unlined Sugarcane Fibre (bagasse) PFAS Free,Certified BPI and/or TUV,CLP,45.19,grams,,inches,,milliliters
-14,A14,N,PLa-lined Paper Hot Cup 12oz,Lined Hot Cup D,,BÉSICS®,WeiMon,Fiber,Lined Fiber,PLA lined Paper,BPI,CLP,10.9,grams,,inches,,milliliters
-15,A15,V,"CPLA Spoon 6""",Spoon C,,BÉSICS®,CFY,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,CLP,4.78,grams,,inches,,milliliters
-16,A16,O,CPLA Hot Cup Lid,Hot Cup Lid A,,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,CLP,2.75,grams,"3.5’’ diameter, 0.5’’ H",inches,80.0,milliliters
-17,A17,P,Bin Liner Bag 2.5 gal,Bag B,,Not disclosed,Not disclosed,Biopolymer,Biopolymer Film/Bag,PBAT & Other Multilaminate Film,Certified BPI or TUV; CMA passed,CLP,6.21,grams,,inches,,milliliters
-18,A18,K3,Cellulose Bag Control,Cellulose bag,,Not disclosed,Not disclosed,Positive Control,Positive Control - Film,Positive Control - Cellulose Film,Certified BPI and/or TUV,CLP,4.0,grams,,inches,,milliliters
-19,A19,B,Coffee Pod 1,Coffee Pod,,Not disclosed,Not disclosed,Mixed Materials,Mixed Materials,PLA Film & CPLA & Fiber,Certified BPI and/or TUV,CLP,13.24,grams,,inches,,milliliters
-20,A20,K1,Kraft Butcher Paper Pink,Butcher Paper,,Not disclosed,Not disclosed,Positive Control,Positive Control - Fiber,Positive Control - Unlined Paper,,CLP,4.0,grams,,inches,,milliliters
-21,A21,Q,Fiber Bowl 16oz,Molded Fiber Bowl B,,Not disclosed,Not disclosed,Fiber,Unlined Fiber,Unlined Molded Fiber (mixed fibers),Certified BPI and/or TUV,CLP,17.05333333,grams,,inches,,milliliters
-22,A22,K2,Navel Orange Peel Control,Navel orange peel,,Multiple,Not disclosed,Positive Control,Positive Control - Food Scraps,Positive Control - Food Scraps,,CLP,73.12333333,grams,,inches,,milliliters
-23,A23,J,PLA Cold Cup 12oz,Cold Cup B,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,Excluded,CLP,10.39,grams,,inches,,milliliters
-24,V,S,PLA Cold Cup Lid 8oz,Cold Cup Lid B,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,Certified BPI and/or TUV,CLP,2.22,grams,,inches,,milliliters
-25,A25,D,"Spoon PLA 6""",Spoon A,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,In process for certification,CLP,4.54,grams,,inches,,milliliters
-26,A26,H,"Straw PHA 8""",Straw A,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (< 0.75mm),PHA,In process for certification,CLP,1.0,grams,,inches,,milliliters
-27,P,,PLA-lined Bamboo Hot Cup 16oz,16oz NoTree Paper Hot Cup SKU CU-SU-16,,World Centric™,World Centric™,Fiber,Lined Fiber,PLA-lined Bamboo Paper,BPI,Custom,13.52333333,grams,5.5x2.5x3.5,inches,,milliliters
-28,K3,,PBAT Bin Liner 3 gallon ,3Gallon Food Scrap Bag BG-CS-3,,World Centric™,World Centric™,Biopolymer,Biopolymer Film/Bag,PBAT and corn starch,BPI,Custom,7.156666667,grams,8.75x15x0.1,inches,,milliliters
-29,B,,"Kraft straw 8""",,,World Centric™,World Centric™,Fiber,Unlined Fiber,Paper,BPI,Custom,1.073333333,grams,8x0.250.25,inches,,milliliters
-30,A30,,Multi-laminate stand-up pounch with zipper,Alter Eco Quinoa Bag,,Alter Eco,Alter Eco,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,9.0,grams,,inches,,milliliters
-31,A31,,PLA-lined Bagasse Plate,,,BÉSICS®,BÉSICS®,Fiber,Lined Fiber,PLA lined Bagasse,BPI,Custom,13.275,grams,,inches,,milliliters
-32,A32,,Multi-laminate stand-up pounch with zipper,Elk Packaging Bag,,Elk Packaging,Elk Packaging,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,3.5,grams,,inches,,milliliters
-33,A33,,Fiber Clamshell 9x9in,"Fiber Clamshell, Lined 9x9x3 SKU TO-SC-U9L-LF",,World Centric™,World Centric™,Fiber,Lined Fiber,PLA-lined Mixed Fiber,BPI,Custom,47.78,grams,18x9x3,inches,,milliliters
-34,C,,"Fiber Spoon 6""","Fiber Cutlery, Spoon SP-FB-6-LF",,World Centric™,World Centric™,Fiber,Unlined Fiber,Mixed Fiber,BPI,Custom,3.986666667,grams,6x1.251.25,inches,,milliliters
-35,A35,,Multi-laminate stand-up pounch with zipper,Large natural clear colour bag,,Elk Packaging,Sun & Swell / Elk,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,8.4,grams,8’’ x 6’’ x N/A,inches,,milliliters
-36,A36,,PLA Cold Cup 14oz,WC 14oz PLA Cold Cup SKU CP-CS-14,CP-CS-14,World Centric™,World Centric™,Biopolymer,Rigid biopolymer,PLA,BPI,Custom,10.16666667,grams,4.52.5x4,inches,,milliliters
-37,A37,,Multi-laminate stand-up pounch with zipper,Printed small bag with brown background and logo,,TIPA,Sun & Swell / TIPA,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,4.566666667,grams,4 7/8’’ x 4 1/8’’ x N/A,inches,,milliliters
-38,A38,,Multi-laminate stand-up pounch with zipper,Small zippered clear colour bag,,Elevate Packaging,Sun & Swell / Elevate,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,4.826666667,grams,5 7/8’’ x 4 5/8’’ x N/A,inches,,milliliters
-39,A39,,Multi-laminate stand-up pounch with zipper,Large brown bag,,Elevate Packaging,Sun & Swell/ Elevate,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,12.72,grams,10’’ x 6.75’’ x N/A,inches,,milliliters
-40,K1,,"TPLA Spoon 6""",TPLA Spoon SP-PS-6,,World Centric™,World Centric™,Biopolymer,Rigid biopolymer,TPLA,BPI,Custom,4.97,grams,6x1.250.375,inches,,milliliters
-41,A41,,Paper Straw,Blue Paper Straw (weight of 2 straws),,Vegware,Vegware,Fiber,Unlined Fiber,Paper,BPI,Custom,1.0,grams,,inches,,milliliters
-42,A42,,CPLA Fork,Forks (weight of 2 forks),,Vegware,Vegware,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Custom,4.333333333,grams,,inches,,milliliters
-43,A43,,PLA Straw,Plastic Straw (weight of 2 straws),,Vegware,Vegware,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,BPI,Custom,1.0,grams,,inches,,milliliters
-44,I,,CPLA Spoon,Spoons (weight of 2 spoons) ,,Vegware,Vegware,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Custom,5.333333333,grams,,inches,,milliliters
-45,A45,2.F2,Agave Spoon,"Utensil spoon, agave",,Company C,Company C,Fiber,Unlined Fiber,Agave,BPI,Custom,3.61,grams,1x0.2x6,inches,,milliliters
-46,K2,1H,Agave Straw,Straw A,,Company C,Company C,Fiber,Unlined Fiber,Agave,BPI,Custom,0.6466666667,grams,0.3x0.3x8.2,inches,,milliliters
-47,J,1C,Bagasse Clamshell,Clamshell,,Company B,Company B,Fiber,Unlined Fiber,Bagasse,BPI,Custom,48.22,grams,8.5x8.5x3,inches,,milliliters
-48,A48,1F,Coffee Bag 1,Coffee Bag 1,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,20.45,grams,7x0.1x10.3,inches,,milliliters
-49,S,1G,Coffee Bag 2,Coffee Bag 2,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,12.5,grams,6x0.1x8.75,inches,,milliliters
-50,A50,2.D2,Coffee Bag 3,Coffee Bag 3,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,14.59,grams,6.75x0.1x6.75,inches,,milliliters
-51,A51,200,Coffee Bag 4,Coffee Bag 4,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,16.37,grams,7.5x0.1x10,inches,,milliliters
-52,A52,1D,CPLA Spoon,CPLA utensil,,Company B,Company B,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Custom,4.896666667,grams,6x1.5x5,inches,,milliliters
-53,A53,1E,Hot Cup,"PLA lined cup, green/white",,Company B,Company B,Fiber,Lined Fiber,PLA-lined Tree Fiber,BPI,Custom,9.986666667,grams,3x3.5x4.25,inches,,milliliters
-54,D,2.A2,Hot Cup,"PLA lined hot cup, natural color",,Company A,Company A,Fiber,Lined Fiber,Mixed Fibers,BPI,Custom,12.36333333,grams,2.5x3.5x5.5,inches,,milliliters
-55,A55,2.H2,Paper Spoon,"Paper spoon, natural color",,Company A,Company A,Fiber,Unlined Fiber,Tree Fiber,BPI,Custom,3.553333333,grams,1x2x5.75,inches,,milliliters
-56,H,1B,PLA portion cup 16oz,"Portion cup (PLA, clear) 16 oz",,Company B,Company B,Fiber,Unlined Fiber,PLA,BPI,Custom,10.74333333,grams,3.5x4x5,inches,,milliliters
-57,A57,1A,Soup bowl ,Container (unlined),,Company A,Company A,Fiber,Unlined Fiber,Mixed Fibers,BPI,Custom,30.46,grams,9x7x1.5,inches,,milliliters
-58,A58,2.C2,Soup Bowl 32oz,"32oz PLA-lined paper food bowl, 185-Series",,Company E,Company E,Fiber,Unlined Fiber,Bagasse,BPI,Custom,20.44666667,grams,4x6x3,inches,,milliliters
-59,A59,2.G2,Stand up Biopolymer Pouch,"Bar bag, with LABEL",,Company D,Company D,Biopolymer,Biopolymer Film/Bag,Not disclosed,BPI,Custom,1.713333333,grams,3x0.05x5.5,inches,,milliliters
-60,A60,2.B2,Unlined Bella Bowl,Bella pot,,Company E,Company E,Fiber,Unlined Fiber,Bagasse,BPI,Custom,7.513333333,grams,3x3x2.5,inches,,milliliters
-61,A61,,PBAT/PLA film wrapper ,Wrapper for TPLA Spoon SP-PS-I,SP-PS-I Wrapper,World Centric™,World Centric™,Biopolymer,Biopolymer Film/Bag,Mixed biopolymer,BPI,Custom,,grams,8.25x2x0.1,inches,,milliliters
-62,A62,,PLA-lined Paper Bowl 8oz,,,BÉSICS®,WeiMon,Fiber,Lined Fiber,PLA lined Paper,BPI,Pilot,7.766666667,grams,,inches,300.0,milliliters
-63,A63,,Cellulose bag 5x7in,Cellulose bag 5x7,NKR 5x7,BÉSICS®,Pak-Sel,Biopolymer,Biopolymer Film/Bag,Cellulose,BPI,Pilot,2.333333333,grams,,inches,0.36,milliliters
-64,A64,,Unlined Bagasse Bowl,BESICS fireware bowl,,BÉSICS®,GQPP,Fiber,Unlined Fiber,Bagasse,BPI,Pilot,14.73333333,grams,,inches,,milliliters
-65,A65,,Unlined Bagasse Clamshell 850mL,Fibreware clamshell,GQ-C-850-1CR,BÉSICS®,GQPP,Fiber,Unlined Fiber,Bagasse,BPI,Pilot,16.3,grams,,inches,750.0,milliliters
-66,A66,,Unlined Bagasse Clamshell 9x9,Fibreware clamshell,,BÉSICS®,GQPP,Fiber,Unlined Fiber,Bagasse,BPI,Pilot,42.33333333,grams,,inches,1800.0,milliliters
-67,A67,,Paper hot cup sleeve,BESICS Sleeve,B-Sleeve,BÉSICS®,Seaside Paper,Fiber,Unlined Fiber,Paper,,Pilot,5.933333333,grams,,inches,350.0,milliliters
-68,A68,,PLA-lined Paper,BESICS wrap,"H-18""90'",BÉSICS®,Dyne-A-Pak,Fiber,Lined Fiber,PLA lined Paper,Not,Pilot,10.0,grams,,inches,9.0,milliliters
-69,A69,,CPLA Fork,CPLA Fork,CPLA-002,Jaya®,Stalk Market,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Pilot,5.133333333,grams,,inches,60.0,milliliters
-70,A70,,CPLA Knife,CPLA Knife,CPLA-001,Jaya®,Stalk Market,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Pilot,4.433333333,grams,,inches,60.0,milliliters
-71,A71,,PLA Box 320z,D&W 32oz square box,W-N32N,D&W,D&W,Biopolymer,Rigid Biopolymer (> 0.75mm),PLA amorphous,Not,Pilot,18.66666667,grams,,inches,1000.0,milliliters
-72,A72,,PLA Lid 32oz ,D&W PLA lid,W-H59N LID,D&W,D&W,Biopolymer,Rigid biopolymer,PLA amorphous,Not,Pilot,7.0,grams,,inches,100.0,milliliters
-73,A73,,PLA-lined Paper Bowl 12oz,Ecotainer bowl,IP-DFRE-08,Ecotainer®,International Paper,Fiber,Lined Fiber,PLA lined Paper,BPI,Pilot,8.333333333,grams,,inches,350.0,milliliters
-74,A74,,PLA Cold Cup 20oz,Fabrikal 20oz cup,FK-GC-20,Greenware®,FabriKal,Biopolymer,Rigid biopolymer,PLA amorphous,BPI,Pilot,16.0,grams,,inches,600.0,milliliters
-75,A75,,Positive control - kraft paper 2 ply,Kraft control,,No name,Canadian Tire,Fiber,Unlined Fiber,Tree fibre,,Pilot,10.33333333,grams,,inches,9.0,milliliters
-76,A76,,MPLA Spoon,MPLA Spoon,NATUR-SP,NaturTec,NaturTec,Biopolymer,Rigid biopolymer,MPLA,BPI,Pilot,3.933333333,grams,,inches,60.0,milliliters
-77,A77,,CPLA Foam Tray ,Biofoam tray,DAP-2,Dyne-A-Pak,Dyne-A-Pak,Biopolymer,Foam biopolymer,PLA foam,Not,Pilot,6.866666667,grams,,inches,330.0,milliliters
-78,A78,,"Unlined Paper Tray, large",SPP tray (hot dog tray) ,SPP-D1222,Seaside Paper,Seaside Paper,Fiber,Unlined Fiber,Paper,BPI,Pilot,28.66666667,grams,,inches,1800.0,milliliters
-79,A79,,Multi-laminate stand-up pounch with zipper,Be the leader bag,,Associated Labels,Associated Labels,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not,Pilot,119.3,grams,,inches,,milliliters
-80,A80,,Multi-laminate metallized stand-up pouch with zipper,Silver bag,,Associated Labels,Associated Labels,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not,Pilot,152.5,grams,,inches,,milliliters
-81,A81,,PLA Lid 32oz,,,World Centric™,World Centric™,Biopolymer,Rigid Biopolymer (> 0.75mm),PLA,BPI,Custom,15.13666667,grams,10x6.5x1.25,inches,,milliliters
+1,A1,,PLA-lined Bamboo Hot Cup 16oz,16oz NoTree Paper Hot Cup SKU CU-SU-16,,World Centric™,World Centric™,Fiber,Lined Fiber,PLA-lined Bamboo Paper,BPI,Custom,13.52333333,grams,5.5x2.5x3.5,inches,,milliliters
+2,A2,,PBAT Bin Liner 3 gallon ,3Gallon Food Scrap Bag BG-CS-3,,World Centric™,World Centric™,Biopolymer,Biopolymer Film/Bag,PBAT and corn starch,BPI,Custom,7.156666667,grams,8.75x15x0.1,inches,,milliliters
+3,A3,,"Kraft straw 8""",,,World Centric™,World Centric™,Fiber,Unlined Fiber,Paper,BPI,Custom,1.073333333,grams,8x0.250.25,inches,,milliliters
+4,A4,,Multi-laminate stand-up pounch with zipper,Alter Eco Quinoa Bag,,Alter Eco,Alter Eco,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,9.0,grams,,inches,,milliliters
+5,K,K3,Bagasse Clamshell 9x9,Fiber Clamshell,,Not disclosed,Not disclosed,Fiber,Unlined Fiber,Unlined Sugarcane Fibre (bagasse) PFAS Free,Certified BPI and/or TUV,CLP,45.19,grams,,inches,,milliliters
+6,A6,,PLA-lined Paper Bowl 12oz,BESICS Bowl,WM-W270,BÉSICS®,WeiMon,Fiber,Lined Fiber,PLA lined Paper,BPI,Baseline,8.113333333,grams,"3’’ diameter, 2.5’’ H",inches,,milliliters
+7,A7,,CPLA Hot Cup Lid,Hot cup lid,,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,Baseline,3.573333333,grams,"3.5’’ diameter, 0.5’’ H",inches,,milliliters
+8,A8,,CPLA Hot Cup Lid,Hot cup lid,WTHL-101,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,Baseline,3.573333333,grams,"3.5’’ diameter, 0.5’’ H",inches,,milliliters
+9,A9,N,PLa-lined Paper Hot Cup 12oz,Lined Hot Cup D,,BÉSICS®,WeiMon,Fiber,Lined Fiber,PLA lined Paper,BPI,CLP,10.9,grams,,inches,,milliliters
+10,Q,,PLA-lined Bagasse Bowl 300mL,"PLA-lined fibre bowl, white ",,BÉSICS®,GQPP,Fiber,Lined Fiber,PLA lined Bagasse,Component Materials Certified by BPI,Baseline,10.88,grams,5.5’’ x 5.5’’ x 2’’,inches,300.0,milliliters
+11,A11,V,"CPLA Spoon 6""",Spoon C,,BÉSICS®,CFY,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,CLP,4.78,grams,,inches,,milliliters
+12,A12,,PLA-lined Paper Bowl 8oz,,,BÉSICS®,WeiMon,Fiber,Lined Fiber,PLA lined Paper,BPI,Pilot,7.766666667,grams,,inches,300.0,milliliters
+13,O,,CPLA Hot Cup Lid,CPLA Lid,,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,Baseline,2.5,grams,"3.5’’ diameter, 0.5’’ H",inches,80.0,milliliters
+14,A14,O,CPLA Hot Cup Lid,Hot Cup Lid A,,BÉSICS®,Multiple,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,BPI,CLP,2.75,grams,"3.5’’ diameter, 0.5’’ H",inches,80.0,milliliters
+15,A15,,BÉSICS® Baseline Containers,Besics Containers (Lined box with lid and uncoated fry try),,BÉSICS®,Seaside Paper,Fiber,Lined Fiber,Lined Tree Fiber and Unlined Fiber,BPI,Baseline,41.63666667,grams,,inches,,milliliters
+16,A16,,Cellulose bag 5x7in,Cellulose bag 5x7,NKR 5x7,BÉSICS®,Pak-Sel,Biopolymer,Biopolymer Film/Bag,Cellulose,BPI,Pilot,2.333333333,grams,,inches,0.36,milliliters
+17,A17,,Unlined Bagasse Bowl,BESICS fireware bowl,,BÉSICS®,GQPP,Fiber,Unlined Fiber,Bagasse,BPI,Pilot,14.73333333,grams,,inches,,milliliters
+18,A18,,Unlined Bagasse Clamshell 850mL,Fibreware clamshell,GQ-C-850-1CR,BÉSICS®,GQPP,Fiber,Unlined Fiber,Bagasse,BPI,Pilot,16.3,grams,,inches,750.0,milliliters
+19,A19,,Unlined Bagasse Clamshell 9x9,Fibreware clamshell,,BÉSICS®,GQPP,Fiber,Unlined Fiber,Bagasse,BPI,Pilot,42.33333333,grams,,inches,1800.0,milliliters
+20,A20,,PLA-lined Bagasse Plate,,,BÉSICS®,BÉSICS®,Fiber,Lined Fiber,PLA lined Bagasse,BPI,Custom,13.275,grams,,inches,,milliliters
+21,A21,,Paper Tray with Lid,Lined paper food tray with lid,,BÉSICS®,Seaside Paper,Fiber,Lined Fiber,PLA-lined fibre,,Baseline,29.76333333,grams,4.75’’ x 6’’ x 3.25’’,inches,,milliliters
+22,A22,,Paper hot cup sleeve,BESICS Sleeve,B-Sleeve,BÉSICS®,Seaside Paper,Fiber,Unlined Fiber,Paper,,Pilot,5.933333333,grams,,inches,350.0,milliliters
+23,A23,,"CPLA Spoon 6""",Cutlery,,BÉSICS®,CFY,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Baseline,4.75,grams,6.5’’ x 1.53’’ (max) x 3/8’’,inches,,milliliters
+24,V,,"CPLA Spoon 6""",BESICS Spoon,,BÉSICS®,CFY,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Baseline,4.75,grams,6.5’’ x 1.53’’ (max) x 3/8’’,inches,,milliliters
+25,A25,,"Unlined Paper Tray, small",Uncoated paper food tray ,,BÉSICS®,Seaside Paper,Fiber,Unlined Fiber,Paper,,Baseline,11.87333333,grams,2 3/16’’ x 3 1/8’’ 5.75’’,inches,,milliliters
+26,A26,,PLA-lined Paper,BESICS wrap,"H-18""90'",BÉSICS®,Dyne-A-Pak,Fiber,Lined Fiber,PLA lined Paper,Not,Pilot,10.0,grams,,inches,9.0,milliliters
+27,P,P,Bin Liner Bag 2.5 gal,Bag B,,Not disclosed,Not disclosed,Biopolymer,Biopolymer Film/Bag,PBAT & Other Multilaminate Film,Certified BPI or TUV; CMA passed,CLP,6.21,grams,,inches,,milliliters
+28,K3,K3,Cellulose Bag Control,Cellulose bag,,Not disclosed,Not disclosed,Positive Control,Positive Control - Film,Positive Control - Cellulose Film,Certified BPI and/or TUV,CLP,4.0,grams,,inches,,milliliters
+29,B,B,Coffee Pod 1,Coffee Pod,,Not disclosed,Not disclosed,Mixed Materials,Mixed Materials,PLA Film & CPLA & Fiber,Certified BPI and/or TUV,CLP,13.24,grams,,inches,,milliliters
+30,A30,,CPLA Fork,CPLA Fork,CPLA-002,Jaya®,Stalk Market,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Pilot,5.133333333,grams,,inches,60.0,milliliters
+31,A31,,CPLA Knife,CPLA Knife,CPLA-001,Jaya®,Stalk Market,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Pilot,4.433333333,grams,,inches,60.0,milliliters
+32,A32,,PLA Box 320z,D&W 32oz square box,W-N32N,D&W,D&W,Biopolymer,Rigid Biopolymer (> 0.75mm),PLA amorphous,Not,Pilot,18.66666667,grams,,inches,1000.0,milliliters
+33,A33,,PLA Lid 32oz ,D&W PLA lid,W-H59N LID,D&W,D&W,Biopolymer,Rigid biopolymer,PLA amorphous,Not,Pilot,7.0,grams,,inches,100.0,milliliters
+34,C,,PLA-lined Paper Bowl 12oz,Ecotainer bowl,IP-DFRE-08,Ecotainer®,International Paper,Fiber,Lined Fiber,PLA lined Paper,BPI,Pilot,8.333333333,grams,,inches,350.0,milliliters
+35,A35,,Multi-laminate stand-up pounch with zipper,Elk Packaging Bag,,Elk Packaging,Elk Packaging,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,3.5,grams,,inches,,milliliters
+36,A36,,PLA Cold Cup 16oz,16 oz PLA cold cup,,Greenware®,FabriKal,Biopolymer,Rigid biopolymer,PLA,BPI,Baseline,14.58,grams,"2.5’’ diameter at base, 4’’ diameter at mouth, 5.75’’ H",inches,,milliliters
+37,A37,,PLA Cold Cup 20oz,Fabrikal 20oz cup,FK-GC-20,Greenware®,FabriKal,Biopolymer,Rigid biopolymer,PLA amorphous,BPI,Pilot,16.0,grams,,inches,600.0,milliliters
+38,A38,,Fiber Clamshell 9x9in,"Fiber Clamshell, Lined 9x9x3 SKU TO-SC-U9L-LF",,World Centric™,World Centric™,Fiber,Lined Fiber,PLA-lined Mixed Fiber,BPI,Custom,47.78,grams,18x9x3,inches,,milliliters
+39,A39,,"Fiber Spoon 6""","Fiber Cutlery, Spoon SP-FB-6-LF",,World Centric™,World Centric™,Fiber,Unlined Fiber,Mixed Fiber,BPI,Custom,3.986666667,grams,6x1.251.25,inches,,milliliters
+40,K1,K1,Kraft Butcher Paper Pink,Butcher Paper,,Not disclosed,Not disclosed,Positive Control,Positive Control - Fiber,Positive Control - Unlined Paper,,CLP,4.0,grams,,inches,,milliliters
+41,A41,,Kraft Paper Control 1-ply,,,No name,Canadian Tire,Positive Control,Positive Control - Fiber,Kraft paper,,Baseline,2.853333333,grams,10’’ x 5 1/8’’ x N/A,inches,,milliliters
+42,A42,,Positive control - kraft paper 2 ply,Kraft control,,No name,Canadian Tire,Fiber,Unlined Fiber,Tree fibre,,Pilot,10.33333333,grams,,inches,9.0,milliliters
+43,A43,,Multi-laminate stand-up pounch with zipper,Large natural clear colour bag,,Elk Packaging,Sun & Swell / Elk,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,8.4,grams,8’’ x 6’’ x N/A,inches,,milliliters
+44,I,Q,Fiber Bowl 16oz,Molded Fiber Bowl B,,Not disclosed,Not disclosed,Fiber,Unlined Fiber,Unlined Molded Fiber (mixed fibers),Certified BPI and/or TUV,CLP,17.05333333,grams,,inches,,milliliters
+45,A45,,MPLA Spoon,MPLA Spoon,NATUR-SP,NaturTec,NaturTec,Biopolymer,Rigid biopolymer,MPLA,BPI,Pilot,3.933333333,grams,,inches,60.0,milliliters
+46,K2,K2,Navel Orange Peel Control,Navel orange peel,,Multiple,Not disclosed,Positive Control,Positive Control - Food Scraps,Positive Control - Food Scraps,,CLP,73.12333333,grams,,inches,,milliliters
+47,J,J,PLA Cold Cup 12oz,Cold Cup B,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,Excluded,CLP,10.39,grams,,inches,,milliliters
+48,A48,,PLA Cold Cup 14oz,WC 14oz PLA Cold Cup SKU CP-CS-14,CP-CS-14,World Centric™,World Centric™,Biopolymer,Rigid biopolymer,PLA,BPI,Custom,10.16666667,grams,4.52.5x4,inches,,milliliters
+49,S,S,PLA Cold Cup Lid 8oz,Cold Cup Lid B,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,Certified BPI and/or TUV,CLP,2.22,grams,,inches,,milliliters
+50,A50,,CPLA Foam Tray ,Biofoam tray,DAP-2,Dyne-A-Pak,Dyne-A-Pak,Biopolymer,Foam biopolymer,PLA foam,Not,Pilot,6.866666667,grams,,inches,330.0,milliliters
+51,A51,,PLA Lid 32oz,,,World Centric™,World Centric™,Biopolymer,Rigid Biopolymer (> 0.75mm),PLA,BPI,,15.13666667,grams,10x6.5x1.25,inches,,milliliters
+52,A52,,Multi-laminate stand-up pounch with zipper,Printed small bag with brown background and logo,,TIPA,Sun & Swell / TIPA,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,4.566666667,grams,4 7/8’’ x 4 1/8’’ x N/A,inches,,milliliters
+53,A53,,Multi-laminate stand-up pounch with zipper,Small zippered clear colour bag,,Elevate Packaging,Sun & Swell / Elevate,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,4.826666667,grams,5 7/8’’ x 4 5/8’’ x N/A,inches,,milliliters
+54,D,D,"Spoon PLA 6""",Spoon A,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,In process for certification,CLP,4.54,grams,,inches,,milliliters
+55,A55,,"Unlined Paper Tray, large",SPP tray (hot dog tray) ,SPP-D1222,Seaside Paper,Seaside Paper,Fiber,Unlined Fiber,Paper,BPI,Pilot,28.66666667,grams,,inches,1800.0,milliliters
+56,H,H,"Straw PHA 8""",Straw A,,Not disclosed,Not disclosed,Biopolymer,Rigid Biopolymer (< 0.75mm),PHA,In process for certification,CLP,1.0,grams,,inches,,milliliters
+57,A57,,Multi-laminate stand-up pounch with zipper,Large brown bag,,Elevate Packaging,Sun & Swell/ Elevate,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not disclosed,Custom,12.72,grams,10’’ x 6.75’’ x N/A,inches,,milliliters
+58,A58,,Multi-laminate stand-up pounch with zipper,Be the leader bag,,Associated Labels,Associated Labels,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not,Pilot,119.3,grams,,inches,,milliliters
+59,A59,,Multi-laminate metallized stand-up pouch with zipper,Silver bag,,Associated Labels,Associated Labels,Biopolymer,Biopolymer Film/Bag,Not disclosed,Not,Pilot,152.5,grams,,inches,,milliliters
+60,A60,,"TPLA Spoon 6""",TPLA Spoon SP-PS-6,,World Centric™,World Centric™,Biopolymer,Rigid biopolymer,TPLA,BPI,Custom,4.97,grams,6x1.250.375,inches,,milliliters
+61,A61,,Paper Straw,Blue Paper Straw (weight of 2 straws),,Vegware,Vegware,Fiber,Unlined Fiber,Paper,BPI,Custom,1.0,grams,,inches,,milliliters
+62,A62,,CPLA Fork,Forks (weight of 2 forks),,Vegware,Vegware,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Custom,4.333333333,grams,,inches,,milliliters
+63,A63,,PLA Straw,Plastic Straw (weight of 2 straws),,Vegware,Vegware,Biopolymer,Rigid Biopolymer (< 0.75mm),PLA,BPI,Custom,1.0,grams,,inches,,milliliters
+64,A64,,CPLA Spoon,Spoons (weight of 2 spoons) ,,Vegware,Vegware,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Custom,5.333333333,grams,,inches,,milliliters
+65,A65,2.F2,Agave Spoon,"Utensil spoon, agave",,Company C,Company C,Fiber,Unlined Fiber,Agave,BPI,Custom,3.61,grams,1x0.2x6,inches,,milliliters
+66,A66,1H,Agave Straw,Straw A,,Company C,Company C,Fiber,Unlined Fiber,Agave,BPI,Custom,0.6466666667,grams,0.3x0.3x8.2,inches,,milliliters
+67,A67,1C,Bagasse Clamshell,Clamshell,,Company B,Company B,Fiber,Unlined Fiber,Bagasse,BPI,Custom,48.22,grams,8.5x8.5x3,inches,,milliliters
+68,A68,1F,Coffee Bag 1,Coffee Bag 1,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,20.45,grams,7x0.1x10.3,inches,,milliliters
+69,A69,1G,Coffee Bag 2,Coffee Bag 2,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,12.5,grams,6x0.1x8.75,inches,,milliliters
+70,A70,2.D2,Coffee Bag 3,Coffee Bag 3,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,14.59,grams,6.75x0.1x6.75,inches,,milliliters
+71,A71,200,Coffee Bag 4,Coffee Bag 4,,Company F,Company F,Biopolymer,Biopolymer Film/Bag,Not disclosed,,Custom,16.37,grams,7.5x0.1x10,inches,,milliliters
+72,A72,1D,CPLA Spoon,CPLA utensil,,Company B,Company B,Biopolymer,Rigid Biopolymer (> 0.75mm),CPLA,BPI,Custom,4.896666667,grams,6x1.5x5,inches,,milliliters
+73,A73,1E,Hot Cup,"PLA lined cup, green/white",,Company B,Company B,Fiber,Lined Fiber,PLA-lined Tree Fiber,BPI,Custom,9.986666667,grams,3x3.5x4.25,inches,,milliliters
+74,A74,2.A2,Hot Cup,"PLA lined hot cup, natural color",,Company A,Company A,Fiber,Lined Fiber,Mixed Fibers,BPI,Custom,12.36333333,grams,2.5x3.5x5.5,inches,,milliliters
+75,A75,2.H2,Paper Spoon,"Paper spoon, natural color",,Company A,Company A,Fiber,Unlined Fiber,Tree Fiber,BPI,Custom,3.553333333,grams,1x2x5.75,inches,,milliliters
+76,A76,1B,PLA portion cup 16oz,"Portion cup (PLA, clear) 16 oz",,Company B,Company B,Fiber,Unlined Fiber,PLA,BPI,Custom,10.74333333,grams,3.5x4x5,inches,,milliliters
+77,A77,1A,Soup bowl ,Container (unlined),,Company A,Company A,Fiber,Unlined Fiber,Mixed Fibers,BPI,Custom,30.46,grams,9x7x1.5,inches,,milliliters
+78,A78,2.C2,Soup Bowl 32oz,"32oz PLA-lined paper food bowl, 185-Series",,Company E,Company E,Fiber,Unlined Fiber,Bagasse,BPI,Custom,20.44666667,grams,4x6x3,inches,,milliliters
+79,A79,2.G2,Stand up Biopolymer Pouch,"Bar bag, with LABEL",,Company D,Company D,Biopolymer,Biopolymer Film/Bag,Not disclosed,BPI,Custom,1.713333333,grams,3x0.05x5.5,inches,,milliliters
+80,A80,2.B2,Unlined Bella Bowl,Bella pot,,Company E,Company E,Fiber,Unlined Fiber,Bagasse,BPI,Custom,7.513333333,grams,3x3x2.5,inches,,milliliters
+81,A81,,PBAT/PLA film wrapper ,Wrapper for TPLA Spoon SP-PS-I,SP-PS-I Wrapper,World Centric™,World Centric™,Biopolymer,Biopolymer Film/Bag,Mixed biopolymer,BPI,Custom,,grams,8.25x2x0.1,inches,,milliliters

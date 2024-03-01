@@ -1,4 +1,4 @@
-item_id__trial,item_description_from_trial,item_description_refined,material_i,material_ii,material_class_iii,item_format,item_size,item_capacity,item_capacity_units,item_length,item_length_units,certification_status_at_time_of_testing,product_name,product_brand
+item_id__trial,item_description_from_trial,item_description_refined,material_i,material_ii,material_iii,item_format,item_size,item_capacity,item_capacity_units,item_length,item_length_units,certification_status_at_time_of_testing,product_name,product_brand
 N,Lined Hot Cup D,BESICS 12oz Hot Cup,Fiber,Lined Fiber,PLA-lined Tree Fiber,Hot Cup,12oz,12.0,oz,,,Certified BPI,PLa-lined Paper Hot Cup 12oz,BÉSICS®
 Q,Molded Fiber Bowl C,BESICS 250mL Leaf Bowl,Fiber,Lined Fiber,PLA-lined Sugarcane Fibre (bagasse),Bowl,250mL,250.0,mL,,,Component Materials Certified by BPI,PLA-lined Bagasse Bowl 300mL,BÉSICS®
 O,Hot Cup Lid A,BESICS 8oz Hot cup lid,Biopolymer,Rigid Biopolymer (< 0.75mm),CPLA,Hot Cup Lid,8oz,8.0,oz,,,Certified BPI,CPLA Hot Cup Lid,CBÉSICS®
