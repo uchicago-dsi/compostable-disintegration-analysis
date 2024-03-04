@@ -1,0 +1,16 @@
+facility_id,facility_name,primary_technology
+1,WR004,Windrow
+2,CASP005,Covered Aerated Static Pile
+3,EASP001,Extended Aerated Static Pile
+4,IV002,In-Vessel
+5,EASP002,Extended Aerated Static Pile
+6,CASP006,Covered Aerated Static Pile
+7,CASP004,Covered Aerated Static Pile
+8,ASP001,Aerated Static Pile
+9,EASP003,Extended Aerated Static Pile
+10,WR005,Windrow
+11,AD001,Anaerobic Digestion
+12,WR001,Windrow
+13,CASP001,Covered Aerated Static Pile
+14,CASP003,Covered Aerated Static Pile
+15,WR003,Windrow

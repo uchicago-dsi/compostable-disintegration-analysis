@@ -1,0 +1,17 @@
+trial_id,trial_name,facility_id,midpoint_analysis,endpoint_analysis_trial_length,typical_process_from_start_to_sale,%_trial_length_to_typical_process,primary_technology
+1,WR004-01,1,43,67,85,0.788235294117647,Windrow
+2,CASP005-01,2,45,71,75,0.9466666666666667,Covered Aerated Static Pile
+3,EASP001-01,3,45,72,72.5,0.993103448275862,Extended Aerated Static Pile
+4,IV002-01,4,19,49,50,0.98,In-Vessel
+5,EASP002-01,5,48,93,140,0.6642857142857143,Extended Aerated Static Pile
+6,CASP006-01,6,44,90,100,0.9,Covered Aerated Static Pile
+7,CASP004-02,7,44,68,62,1.096774193548387,Covered Aerated Static Pile
+8,ASP001-01,8,45,90,180,0.5,Aerated Static Pile
+9,EASP003-01,9,45,90,120,0.75,Extended Aerated Static Pile
+10,WR005-01,10,46,95,180,0.5277777777777778,Windrow
+11,CASP004-01,7,,,,,
+12,AD001-01,11,,,,,
+13,WR001-01,12,,,,,
+14,CASP001-01,13,,,,,
+15,CASP003-01,14,,,,,
+16,WR003-01,15,,,,,

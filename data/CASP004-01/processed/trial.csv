@@ -1,0 +1,7 @@
+trial_id,facility_id,trial_stage,temp_f,weather,moisture_%,bulk_density,ph,c_to_n_ratio,maturity,trial_notes
+44547-01-21,44547.0,Start,65-80,Windy,51.0,"754 lbs/CY (manual) 
+0.29 g/cc (lab)",4.85,34.0,0.0,Moisture assessed via oven drying. Lab feedstock analysis sent in Friday 8/6/21
+44547-01-21,44547.0,Interval,65-80,Windy,51.0,"754 lbs/CY (manual) 
+0.29 g/cc (lab)",4.85,34.0,0.0,Moisture assessed via oven drying. Lab feedstock analysis sent in Friday 8/6/21
+44547-01-21,44547.0,End,65-80,Windy,51.0,"754 lbs/CY (manual) 
+0.29 g/cc (lab)",4.85,34.0,0.0,Moisture assessed via oven drying. Lab feedstock analysis sent in Friday 8/6/21
