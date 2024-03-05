@@ -12,12 +12,12 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Assuming the CSV files are in the correct directories and accessible
-observations = pd.read_csv("data/observations_compiled.csv")
+# streamlit is in the root of the repo
+observations = pd.read_csv("dashboard/data/observations_compiled.csv")
 observations = observations.astype({"item_ID": str, "facility_ID": str})
-items = pd.read_csv("data/items.csv")
+items = pd.read_csv("dashboard/data/items.csv")
 items["item_id"] = items["item_id"].astype(str)
-facilities = pd.read_csv("data/facilities.csv")
+facilities = pd.read_csv("dashboard/data/facilities.csv")
 facilities["facility_id"] = facilities["facility_id"].astype(str)
 
 df_merged = pd.merge(
@@ -59,7 +59,7 @@ with st.sidebar:
         "Show Residuals by Mass or Surface Area",
         ["Residual by Mass", "Residual by Surface Area"],
     )
-    residual = "mass_resid_%" if residual_type == "Residual by mass" else "sa_resid_%"
+    residual = "mass_resid_%" if residual_type == "Residual by Mass" else "sa_resid_%"
 
     # Material type filter
     material_type = st.selectbox(
@@ -88,6 +88,7 @@ with st.sidebar:
     "Select this box to limit these values to 100%._",
     unsafe_allow_html=True,
     )
+
 
 
 def bar_whisker_plot(df, x, y, cap_anomalies):
