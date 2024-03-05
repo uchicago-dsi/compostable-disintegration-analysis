@@ -4,23 +4,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+from sqlalchemy import create_engine
+
+DATABASE_URL = st.secrets["DATABASE_URL"]
+
+engine = create_engine(DATABASE_URL)
+connection = engine.connect()
+
+def load_data(table):
+    query = f"SELECT * FROM {table};"
+    data = pd.read_sql(query, connection)
+    return data
+
+observations = load_data('observations')
+items = load_data('items')
 
 st.set_page_config(
     page_title="Disintegration Dashboard",
     layout="wide",
     initial_sidebar_state="expanded"
 )
-conn = st.connection("postgresql", type="sql")
+#conn = st.connection("postgresql", type="sql")
 
 # Perform query.
-observations = conn.query('SELECT * FROM observations;', ttl="10m")
-items = conn.query('SELECT * FROM items;', ttl="10m")
+#observations = conn.query('SELECT * FROM observations;', ttl="10m")
+#items = conn.query('SELECT * FROM items;', ttl="10m")
 
 # Assuming the CSV files are in the correct directories and accessible
 #observations = pd.read_csv('data/finalized_datasets/observations_compiled.csv')
 observations['item_ID'] = observations['item_ID'].astype(str)
 #items = pd.read_csv('data/finalized_datasets/items.csv')
-items['item_id'] = items['item_id'].astype(str)
+items['item_id'] = items['item_id'].astype(int).astype(str)
 df_merged = pd.merge(observations, items, left_on='item_ID', right_on='item_id', how='inner')
 
 with st.sidebar:

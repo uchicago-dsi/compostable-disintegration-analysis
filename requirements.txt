@@ -13,3 +13,5 @@ streamlit
 numpy
 matplotlib
 seaborn
+sqlalchemy
+psycopg2
