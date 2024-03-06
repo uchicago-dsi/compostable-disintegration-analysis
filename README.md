@@ -58,9 +58,13 @@ This directory contains processed and raw data used for compiling intermediate c
   - `observation_mass.csv`: Contains intermediate data sourced from the same 10 experimental trials wrangled to summarize the mass residuals mass_resid_% for each item.
   - `products.csv`: Intermediate table that summarizes all relevant information about items/products, including ID, brand, certifications, and initial weight, among others. 
 
+
 - **Raw**:
+  - `Compiled Field Results  for DSI - 2023 Bulk 10 Trial Data.xlsx`: It holds raw trial result data for 10 trials and details about the products used and facilities involved.
   - `Compiled Field Results - CFTP Gathered Data.xlsx`: A comprehensive untidy spreadsheet that includes raw data collected from additional 5 trials along with details about the items/products tested. 
-  - Includes additional raw files which are .csv sheets extracted from the above-mentioned `Compiled Field Results - CFTP Gathered Data.xlsx' data for easier access. This is functionally redundant.
+  - `CFTP Test Item Inventory with Dimensions - All Trials.xlsx`: It includes item information across all trials (16 trials in the current dataset), and is used for creating the item table.
+  - `Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx`: It holds trial condition (i.e. temperature, moisture) observations for 10 trials, and is used for creating the trial condition table.
+  - Includes additional raw files which are .csv extracted from `Compiled Field Results - CFTP Gathered Data.xlsx` data for easier access. This is functionally redundant.
 
 **1.1.2 Finalized Datasets**
 
