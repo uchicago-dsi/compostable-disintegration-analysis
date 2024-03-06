@@ -14,7 +14,7 @@ The Compost Research & Education Foundation (CREF) researches the disintegration
 The DSI will be extending a data pipeline to format data from new experiments into a consistent format and creating visualizations showing disintegration rates for different materials and composting methodology. We will also create a process for importing new trial data that CREF's partner facilities will use in future trials, and start building the infrastructure for a public-facing dashboard of data from composting trials.
 
 ## Usage
-Our main deliverable is a Streamlit Dashboard that has been deployed to the cloud, please let us know if access to the deployed version of the app is necessary. It can also be accessed locally using the following steps:
+Our main deliverable is a Streamlit Dashboard that has been deployed to the cloud, please let us know if access to the deployed version of the app is necessary (if necessary, the team can invite you via email as the current app is a private one). It can also be accessed locally using the following steps:
 
 1. Build the Docker container using the following command:
 
@@ -190,23 +190,3 @@ To deploy the app, we used:
 - main file path: `dashboard/streamlit_visualization.py`
 
 **Note**: the app is deployed at the root level, so the data file path in the `streamlit_visualization.py`are all relative to the the root.
-
-### Docker
-
-### Docker & Make
-
-We use `docker` and `make` to run our code. There are three built-in `make` commands:
-
-* `make build-only`: This will build the image only. It is useful for testing and making changes to the Dockerfile.
-* `make run-notebooks`: This will run a jupyter server which also mounts the current directory into `\program`.
-* `make run-interactive`: This will create a container (with the current directory mounted as `\program`) and loads an interactive session. 
-
-The file `Makefile` contains information about about the specific commands that are run using when calling each `make` statement.
-
-### Developing inside a container with VS Code
-
-If you prefer to develop inside a container with VS Code then do the following steps. Note that this works with both regular scripts as well as jupyter notebooks.
-
-1. Open the repository in VS Code
-2. At the bottom right a window may appear that says `Folder contains a Dev Container configuration file...`. If it does, select, `Reopen in Container` and you are done. Otherwise proceed to next step. 
-3. Click the blue or green rectangle in the bottom left of VS code (should say something like `><` or `>< WSL`). Options should appear in the top center of your screen. Select `Reopen in Container`.
