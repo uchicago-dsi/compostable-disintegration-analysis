@@ -51,16 +51,15 @@ Our data is structured into three main directories within the `data` folder:
 
 **1.1.1 Compiled Results**
 
-This directory contains processed and raw data used for compiling results:
+This directory contains processed and raw data used for compiling intermediate csv files used for subsequent analysis:
 
 - **Processed**:
-  - `observation_area.csv`: Contains intermediate data sourced from the 10 trials wrangled to emphasize the sa_resid_% for each item
-  - `observation_mass.csv`: Contains intermediate data sourced from the 10 trials wrangled to emphasize the mass_resid_% for each item
+  - `observation_area.csv`: Contains intermediate data sourced from 10 experimental trials collected by the CFTP that is wrangled to summarize the surface area residuals sa_resid_% for each item.
+  - `observation_mass.csv`: Contains intermediate data sourced from the same 10 experimental trials wrangled to summarize the mass residuals mass_resid_% for each item.
   - `products.csv`: Intermediate table that summarizes all relevant information about items/products, including ID, brand, certifications, and initial weight, among others. 
 
 - **Raw**:
-  - `Compiled Field Results - CFTP Gathered Data.xlsx`: A comprehensive spreadsheet that includes raw data collected from the 5 trials along with details about the items/products tested.
-  - `observations.csv`: Contains intermediate data sourced from the 10 trials wrangled to show sa_resid_% and mass_resid_% for each item tested. 
+  - `Compiled Field Results - CFTP Gathered Data.xlsx`: A comprehensive untidy spreadsheet that includes raw data collected from additional 5 trials along with details about the items/products tested. 
 
 **1.1.2 Finalized Datasets**
 
@@ -72,6 +71,24 @@ This directory contains the final datasets that were used in the analyses:
 - `observations_compiled.csv`: Aggregated observations from all three data sources (10 trials, 5 trials, CASP004 trial) wrangled to show the mass_resid_%, sa_resid_%, and treated_mass_resid_% (for instances when the rretrieved residuals were dried to counteract the additional weight of moisture post-decomposition)
 - `trial_conditions.csv`: Aggregated table of trial conditions, includes temperature, moisture, C:N ratio, etc. 
 - `trials.csv`: Aggregated table showing all trials, along with their unique IDs, facilities in which they were conducted, and other details. 
+
+**1.1.3 CASP004-01**
+
+This directory structure is organized into two main subdirectories: `processed`, and `raw`. 
+
+- **processed**: This directory contains data that has likely been cleaned, transformed, or otherwise processed for analysis. The files include:
+   - `bag.csv`: Contains detail information specific to the bags (technical replicates) used in this trial.
+   - `facility.csv`: Contains information about the facility where the project was conducted.
+   - `item.csv`: Contains information about the items included in the trials, and their physical characteristics.
+   - `observation.csv`: This file holds recorded observations (mass residuals) from the trial.
+   - `trial.csv`: Contains data related to specific environmental variables included tested during the trial.
+
+- **raw**: This directory houses raw data files, which are unprocessed and in their original format. The files include:
+   - `Bag&Product Setup.csv`: Unprocessed bag product setup file.
+   - `CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx`: This is an Excel file containing data extracted from PDF tables, pre-processed for analysis but not yet fully cleaned.
+   - `materials.csv`: Lists three different levels of material classification of the items used in this trial. 
+   - `Test summary per bag & stage.csv`: Summarizes test results, segmented by bag and removal stage.
+   - `masterfile.csv`: Contains all pre-processed data files merged together. 
 
 #### 1.2 Accessing Data
 
