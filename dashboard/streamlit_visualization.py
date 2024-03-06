@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Assuming the CSV files are in the correct directories and accessible
-observations = pd.read_csv("/Users/ally/Documents/GitHub/2024-winter-compostable/data/finalized_datasets/observations_compiled.csv")
+observations = pd.read_csv("dashboard/data/observations_compiled.csv")
 observations = observations.astype({"item_ID": str, "facility_ID": str})
 items = pd.read_csv("dashboard/data/items.csv")
 items["item_id"] = items["item_id"].astype(str)
