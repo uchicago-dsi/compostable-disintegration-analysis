@@ -47,7 +47,7 @@ We mainly used three folders:
 
 Our data is structured into three main directories within the `data` folder:
 
-##### 1. Compiled Results
+**1. Compiled Results**
 
 This directory contains processed and raw data used for compiling results:
 
@@ -60,7 +60,7 @@ This directory contains processed and raw data used for compiling results:
   - `Compiled Field Results - CFTP Gathered Data.xlsx`: A comprehensive spreadsheet that includes raw data collected from the 5 trials along with details about the items/products tested.
   - `observations.csv`: Contains intermediate data sourced from the 10 trials wrangled to show sa_resid_% and mass_resid_% for each item tested. 
 
-##### 2. Finalized Datasets
+**2. Finalized Datasets**
 
 This directory contains the final datasets that were used in the analyses:
 
