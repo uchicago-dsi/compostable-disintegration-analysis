@@ -15,6 +15,3 @@ numpy
 matplotlib
 seaborn
 adjustText
-sqlalchemy
-psycopg2
-
