@@ -85,12 +85,16 @@ Currently the pipelines we used to clean the data as well as notebooks used to s
 
 #### 2.1 Basic setup for running the notebooks
 
-    To run the notebooks in Docker:
-    1. Open terminal and type in the following, make sure that it runs without getting an error:
-        docker build -t compostable . 
-    2. Then, after it finishes building, type in the following:
-        docker run -p 8888:8888 compostable
-    3. You will see 3 URLs generated, please copy the last one into your default browser, and Jupyter Notebook will be launched in Docker
+To run the notebooks in Docker:
+1. Open terminal and type in the following, make sure that it runs without getting an error:
+```bash
+docker build -t compostable . 
+```
+2. Then, after it finishes building, type in the following:
+```bash
+docker run -p 8888:8888 compostable
+```
+3. You will see 3 URLs generated, please copy the last one into your default browser, and Jupyter Notebook will be launched in Docker
 
 #### 2.2 Notebook Organization
 
