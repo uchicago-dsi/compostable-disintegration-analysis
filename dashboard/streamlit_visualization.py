@@ -12,8 +12,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# streamlit is in the root of the repo
-observations = pd.read_csv("dashboard/data/observations_compiled.csv")
+# Assuming the CSV files are in the correct directories and accessible
+observations = pd.read_csv("/Users/ally/Documents/GitHub/2024-winter-compostable/data/finalized_datasets/observations_compiled.csv")
 observations = observations.astype({"item_ID": str, "facility_ID": str})
 items = pd.read_csv("dashboard/data/items.csv")
 items["item_id"] = items["item_id"].astype(str)
@@ -92,6 +92,14 @@ with st.sidebar:
 
 
 def bar_whisker_plot(df, x, y, cap_anomalies):
+    '''
+    This function generates a bar and whisker plot.
+    Input: 
+    df: a dataframe that contains trial information
+    x: the x-axis chosen by the user of the interface (material types or product types)
+    y: the percent residual measure by mass or surface area
+    cap_anomalies: takes in a boolean value that indicates whether the y-axis should be clipped to 100%
+    '''
     # Check if the DataFrame is empty
     if df.empty:
         plt.text(0.5, 0.5, 'No data available.\nPlease adjust the filter and try again.', 

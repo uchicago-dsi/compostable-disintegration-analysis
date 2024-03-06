@@ -1,5 +1,10 @@
 # Compostable Disintegration Analysis
 
+### contributors
+Kristof Turan: kristofturan@uchicago.edu |
+Cecilia Zhang: xyzhang0329@uchicago.edu |
+Ally Yun: allym0806@uchicago.edu |
+
 ## Project Background
 
 The Compost Research & Education Foundation (CREF) researches the disintegration of compostable foodware and packaging to find correlations between different composting methodologies and the rate of disintegration. Through the Compostable Field Testing Program, facilities submit their composting results and CREF analyzes the data to find best composting practices. Facilities submit data in varying formats, so the DSI will help CREF create a database well-suited to the kinds of statistical analysis performed on composting data. CREF will then standardize their data collection process so participating facilities adhere to best practices in both running experiments and in data collection. In the future, CREF will make the data and analysis from their partner facilities available on a public dashboard.
@@ -9,29 +14,26 @@ The Compost Research & Education Foundation (CREF) researches the disintegration
 The DSI will be extending a data pipeline to format data from new experiments into a consistent format and creating visualizations showing disintegration rates for different materials and composting methodology. We will also create a process for importing new trial data that CREF's partner facilities will use in future trials, and start building the infrastructure for a public-facing dashboard of data from composting trials.
 
 ## Usage
+Our main deliverable is a Streamlit Dashboard that has been deployed to the cloud, please let us know if access to the deployed version of the app is necessary. It can also be accessed locally using the following steps:
 
-### Docker
+1. Build the Docker container using the following command:
 
-### Docker & Make
+```bash
+docker build -t streamlit_dashboard -f Dockerfile.dashboard .
+```
+Please run in the terminal under the root directory of the project.
 
-We use `docker` and `make` to run our code. There are three built-in `make` commands:
+2. Once the Docker image is built, run the dashboard locally by executing:
 
-* `make build-only`: This will build the image only. It is useful for testing and making changes to the Dockerfile.
-* `make run-notebooks`: This will run a jupyter server which also mounts the current directory into `\program`.
-* `make run-interactive`: This will create a container (with the current directory mounted as `\program`) and loads an interactive session. 
+```bash
+docker run -p 8501:8501 streamlit_dashboard
+```
 
-The file `Makefile` contains information about about the specific commands that are run using when calling each `make` statement.
+3. After starting the Docker container, the Streamlit dashboard is accessible via the following URL: 
 
-### Developing inside a container with VS Code
+- http://0.0.0.0:8501
 
-If you prefer to develop inside a container with VS Code then do the following steps. Note that this works with both regular scripts as well as jupyter notebooks.
-
-1. Open the repository in VS Code
-2. At the bottom right a window may appear that says `Folder contains a Dev Container configuration file...`. If it does, select, `Reopen in Container` and you are done. Otherwise proceed to next step. 
-3. Click the blue or green rectangle in the bottom left of VS code (should say something like `><` or `>< WSL`). Options should appear in the top center of your screen. Select `Reopen in Container`.
-
-
-
+We have also stored the pipelines used to clean datasets used in the Streamlit App in the Notebooks folder. They do not have to be run since the finalized datasets have already been generated. If necessary, details on the pipelines notebook and how they should be run in Docker can be found in section 2 of the Repository Structure below.
 
 ## Repository Structure
 
@@ -94,13 +96,19 @@ docker build -t compostable .
 ```bash
 docker run -p 8888:8888 compostable
 ```
-3. You will see 3 URLs generated, please copy the last one into your default browser, and Jupyter Notebook will be launched in Docker
+3. You will see 3 URLs generated, please copy the last one into your default browser, and Jupyter Notebook will be launched in Docker, it should start with:
+
+```bash
+http://127.0.0.1:8888/
+```
 
 #### 2.2 Notebook Organization
 
 **2.2.1 Pipelines**:
 
 The pipelines transform raw data into cleaned and organized data tables, making them more accessible for analysis and visualization. Currently, these pipelines are implemented in notebooks, allowing for a detailed examination and resolution of specific issues within each of the 16 trial datasets.
+
+Please note that the pipelines do not have to be run to generate the Streamlit App.
 
 - `add_bag_compiled.ipynb`: Contains pipeline that extracts all bag information from the 16 trials, and assigns unique IDs for each bag used
   - Uses: `Compiled Field Results - CFTP Gathered Data.xlsx`, `observation_mass.csv`, `masterfile.csv`
@@ -183,7 +191,22 @@ To deploy the app, we used:
 
 **Note**: the app is deployed at the root level, so the data file path in the `streamlit_visualization.py`are all relative to the the root.
 
-### contributors
-Kristof Turan: kristofturan@uchicago.edu
-Cecilia Zhang: xyzhang0329@uchicago.edu
-Ally Yun: allym0806@uchicago.edu
+### Docker
+
+### Docker & Make
+
+We use `docker` and `make` to run our code. There are three built-in `make` commands:
+
+* `make build-only`: This will build the image only. It is useful for testing and making changes to the Dockerfile.
+* `make run-notebooks`: This will run a jupyter server which also mounts the current directory into `\program`.
+* `make run-interactive`: This will create a container (with the current directory mounted as `\program`) and loads an interactive session. 
+
+The file `Makefile` contains information about about the specific commands that are run using when calling each `make` statement.
+
+### Developing inside a container with VS Code
+
+If you prefer to develop inside a container with VS Code then do the following steps. Note that this works with both regular scripts as well as jupyter notebooks.
+
+1. Open the repository in VS Code
+2. At the bottom right a window may appear that says `Folder contains a Dev Container configuration file...`. If it does, select, `Reopen in Container` and you are done. Otherwise proceed to next step. 
+3. Click the blue or green rectangle in the bottom left of VS code (should say something like `><` or `>< WSL`). Options should appear in the top center of your screen. Select `Reopen in Container`.
