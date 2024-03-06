@@ -60,6 +60,7 @@ This directory contains processed and raw data used for compiling intermediate c
 
 - **Raw**:
   - `Compiled Field Results - CFTP Gathered Data.xlsx`: A comprehensive untidy spreadsheet that includes raw data collected from additional 5 trials along with details about the items/products tested. 
+  - Includes additional raw files which are .csv sheets extracted from the above-mentioned `Compiled Field Results - CFTP Gathered Data.xlsx' data for easier access. This is functionally redundant.
 
 **1.1.2 Finalized Datasets**
 
