@@ -8,11 +8,21 @@ DATA_FOLDER = "../data/"
 # DATA_FOLDER = "data/"
 
 ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
-items = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
 
-items["Start Weight"] = items["Average Initial Weight, g"]
+# TODO: I think we don't need this
+# ITEMS_COLS = [
+#     "Item ID",
+#     "Item Name",
+#     "Item Description Refined",
+#     "Material Class I",
+#     "Material Class II",
+#     "Material Class III",
+#     "Start Weight",
+# ]
 
-items_cols = [
+# TODO: Maybe put this in the class?
+TRIAL_COLS = [
+    "Trial",
     "Item ID",
     "Item Name",
     "Item Description Refined",
@@ -20,15 +30,17 @@ items_cols = [
     "Material Class II",
     "Material Class III",
     "Start Weight",
+    "% Residuals (Weight)",
+    "% Residuals (Area)",
 ]
 
-items_clean = items[items_cols]
-item2id = {
-    key.strip(): value
-    for key, value in items_clean.set_index("Item Description Refined")["Item ID"]
-    .to_dict()
-    .items()
-}
+# TODO: Put this in the class if we need it
+# item2id = {
+#     key.strip(): value
+#     for key, value in items.set_index("Item Description Refined")["Item ID"]
+#     .to_dict()
+#     .items()
+# }
 
 
 class AbstractDataPipeline(ABC):
@@ -36,8 +48,13 @@ class AbstractDataPipeline(ABC):
         self.data_filepath = data_filepath
         filename, _ = self.data_filepath.rsplit(".", 1)
         self.output_filepath = f"{filename}_clean.csv"
+
         self.data = self.load_data(data_filepath)
         self.items = self.load_items(items_filepath)
+
+    @abstractmethod
+    def load_data(self, data_filepath):
+        pass
 
     def load_items(self, items_filepath):
         """Loads the items DataFrame."""
@@ -46,38 +63,19 @@ class AbstractDataPipeline(ABC):
         return items
 
     @abstractmethod
-    def load_data(self, data_filepath):
-        pass
-
-    @abstractmethod
     def preprocess_data(self, data):
         pass
 
     def process_data(self, df):
         """Processes the weight and area DataFrames"""
-
         joined = pd.merge(self.items, df, on="Item ID")
-
-        # TODO: Move this into constants or something and initialize it in the constructor
-        keep_cols = [
-            "Trial",
-            "Item ID",
-            "Item Name",
-            "Item Description Refined",
-            "Material Class I",
-            "Material Class II",
-            "Material Class III",
-            "Start Weight",
-            "% Residuals (Weight)",
-            "% Residuals (Area)",
-        ]
-        return joined[keep_cols]
+        return joined[TRIAL_COLS]
 
     def run(self):
         preprocessed_data = self.preprocess_data()
         processed_data = self.process_data(preprocessed_data)
         processed_data.to_csv(self.output_filepath, index=False)
-        return self.processed_data
+        return processed_data
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
@@ -130,34 +128,32 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         )
 
     def preprocess_data(self):
-        df_weight = df_weight[df_weight["Trial Stage"] == "Second Removal"]
+        df_pp = self.data[self.data["Trial Stage"] == "Second Removal"]
+        df_pp = df_pp.rename(columns={"Facility Name": "Trial"})
 
-        # TODO: change this so we are doing this all in preprocessing
-        joined = joined.rename(columns={"Facility Name": "Trial"})
+        # # TODO: Do we care about bags, etc? If so, keep them here
+        # joined = joined[
+        #     ["Trial", "Item ID", "% Residuals (Weight)", "% Residuals (Area)"]
+        # ]
 
-        # TODO: Do we care about bags, etc? If so, keep them here
-        joined = joined[
-            ["Trial", "Item ID", "% Residuals (Weight)", "% Residuals (Area)"]
-        ]
-
-        return joined
+        return df_pp
 
 
 TEN_TRIALS_PATH = (
     DATA_FOLDER + "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
 )
-closed_loop_pipeline = ClosedLoopPipeline()
+closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH)
 
 
-closed_loop_processed = closed_loop_pipeline.run(TEN_TRIALS_PATH)
+closed_loop_processed = closed_loop_pipeline.run()
 
 
 class CASP004Pipeline(AbstractDataPipeline):
     # TODO: Load the filepath from constructor
-    def load_items(self, items=items_clean):
-        """Loads the items DataFrame."""
-        items_casp004 = pd.read_excel(FILEPATH_PDF, sheet_name=2)
-        return items
+    # def load_items(self, items=items_clean):
+    #     """Loads the items DataFrame."""
+    #     items_casp004 = pd.read_excel(FILEPATH_PDF, sheet_name=2)
+    #     return items
 
     def preprocess_data(self, data_filepath):
         df_weight = self.load_data(data_filepath, sheet_name=3, skiprows=2)
@@ -189,7 +185,7 @@ class CASP004Pipeline(AbstractDataPipeline):
 CASP004_PATH = (
     DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
-casp004_pipeline = ClosedLoopPipeline()
+# casp004_pipeline = ClosedLoopPipeline(CASP004_PATH)
 
 
 # casp004_processed = casp004_pipeline.run(CASP004_PATH)
