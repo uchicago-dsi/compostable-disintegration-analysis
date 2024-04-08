@@ -33,12 +33,15 @@ item2id = {
 
 class AbstractDataPipeline(ABC):
     def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
+        self.data_filepath = data_filepath
+        filename, _ = self.data_filepath.rsplit(".", 1)
+        self.output_filepath = f"{filename}_clean.csv"
         self.data = self.load_data(data_filepath)
         self.items = self.load_items(items_filepath)
 
     def load_items(self, items_filepath):
         """Loads the items DataFrame."""
-        items = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
+        items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
         items["Start Weight"] = items["Average Initial Weight, g"]
         return items
 
@@ -70,47 +73,41 @@ class AbstractDataPipeline(ABC):
         ]
         return joined[keep_cols]
 
-    def save_data(self, df, output_filepath):
-        """Saves the DataFrame to a CSV file."""
-        df.to_csv(output_filepath, index=False)
-
-    # TODO: Redo this to use self.data and self.items
-    def run(self, data_filepath):
-        preprocessed_data = self.preprocess_data(data_filepath)
+    def run(self):
+        preprocessed_data = self.preprocess_data()
         processed_data = self.process_data(preprocessed_data)
-        filename, _ = data_filepath.rsplit(".", 1)
-        output_filepath = f"{filename}_clean.csv"
-        self.save_data(processed_data, output_filepath)
-        return processed_data
+        processed_data.to_csv(self.output_filepath, index=False)
+        return self.processed_data
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
     def melt_trial(self, df, value_name):
         """Helper method to melt DataFrames."""
+        item_ids = [
+            "N",
+            "O",
+            "Q",
+            "V",
+            "B",
+            "D",
+            "H",
+            "I",
+            "J",
+            "K",
+            "K1",
+            "K2",
+            "K3",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "S",
+            "V",
+        ]
         return (
             df.melt(
                 id_vars=["Facility Name", "Trial Stage", "Bag Set", "Bag Number"],
-                value_vars=[
-                    "N",
-                    "O",
-                    "Q",
-                    "V",
-                    "B",
-                    "D",
-                    "H",
-                    "I",
-                    "J",
-                    "K",
-                    "K1",
-                    "K2",
-                    "K3",
-                    "N",
-                    "O",
-                    "P",
-                    "Q",
-                    "S",
-                    "V",
-                ],
+                value_vars=item_ids,
                 var_name="Item ID",
                 value_name=value_name,
             )
@@ -118,23 +115,24 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             .reset_index(drop=True)
         )
 
-    def preprocess_data(self, data_filepath):
-        df_weight = self.load_data(data_filepath, sheet_name=3, skiprows=2)
-        df_weight = df_weight[df_weight["Trial Stage"] == "Second Removal"]
-
-        df_area = self.load_data(data_filepath, sheet_name=4, skiprows=2)
-        df_area = df_area[df_area["Trial Stage"] == "Second Removal"]
-
+    def load_data(self, data_filepath):
+        df_weight = pd.read_excel(data_filepath, sheet_name=3, skiprows=2)
         weight_melted = self.melt_trial(df_weight, "% Residuals (Weight)")
+
+        df_area = pd.read_excel(data_filepath, sheet_name=4, skiprows=2)
         area_melted = self.melt_trial(df_area, "% Residuals (Area)")
 
-        joined = pd.merge(
+        return pd.merge(
             weight_melted,
             area_melted,
             on=["Facility Name", "Trial Stage", "Bag Set", "Bag Number", "Item ID"],
             how="outer",
         )
 
+    def preprocess_data(self):
+        df_weight = df_weight[df_weight["Trial Stage"] == "Second Removal"]
+
+        # TODO: change this so we are doing this all in preprocessing
         joined = joined.rename(columns={"Facility Name": "Trial"})
 
         # TODO: Do we care about bags, etc? If so, keep them here
