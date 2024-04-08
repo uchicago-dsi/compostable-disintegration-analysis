@@ -2,23 +2,12 @@ from abc import ABC, abstractmethod
 
 import pandas as pd
 
-# TODO: figure out how to handle this for debugger
+# TODO: figure out how to handle data folder for debugger
 
 DATA_FOLDER = "../data/"
 # DATA_FOLDER = "data/"
 
 ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
-
-# TODO: I think we don't need this
-# ITEMS_COLS = [
-#     "Item ID",
-#     "Item Name",
-#     "Item Description Refined",
-#     "Material Class I",
-#     "Material Class II",
-#     "Material Class III",
-#     "Start Weight",
-# ]
 
 # TODO: Maybe put this in the class?
 # Can also keep bags, etc if we want them
@@ -44,7 +33,7 @@ class AbstractDataPipeline(ABC):
 
         self.data = self.load_data(data_filepath)
         self.items = self.load_items(items_filepath)
-        self.items2id = self.load_items_map()
+        self.item2id = self.load_items_map()
 
     @abstractmethod
     def load_data(self, data_filepath):
@@ -67,20 +56,27 @@ class AbstractDataPipeline(ABC):
             .items()
         }
 
-    @abstractmethod
-    def preprocess_data(self, data):
-        pass
+    def preprocess_data(self, df):
+        return df
+
+    def join_with_items(self, df):
+        """Processes the weight and area DataFrames"""
+        return pd.merge(self.items, df, on="Item ID")
 
     def process_data(self, df):
-        """Processes the weight and area DataFrames"""
-        joined = pd.merge(self.items, df, on="Item ID")
-        return joined[TRIAL_COLS]
+        return df
+
+    def save_data(self, df):
+        df = df[TRIAL_COLS]
+        df.to_csv(self.output_filepath, index=False)
+        return df
 
     def run(self):
-        preprocessed_data = self.preprocess_data()
-        processed_data = self.process_data(preprocessed_data)
-        processed_data.to_csv(self.output_filepath, index=False)
-        return processed_data
+        preprocessed_data = self.preprocess_data(self.data)
+        joined_data = self.join_with_items(preprocessed_data)
+        processed_data = self.process_data(joined_data)
+        output_data = self.save_data(processed_data)
+        return output_data
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
@@ -132,8 +128,8 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             how="outer",
         )
 
-    def preprocess_data(self):
-        df_pp = self.data[self.data["Trial Stage"] == "Second Removal"]
+    def preprocess_data(self, df):
+        df_pp = df[df["Trial Stage"] == "Second Removal"]
         df_pp = df_pp.rename(columns={"Facility Name": "Trial"})
         return df_pp
 
@@ -192,7 +188,49 @@ class CASP004Pipeline(AbstractDataPipeline):
 CASP004_PATH = (
     DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
-casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH)
+# casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH)
 
 
-casp004_processed = casp004_pipeline.run()
+# casp004_processed = casp004_pipeline.run()
+
+
+class AD001Pipeline(AbstractDataPipeline):
+    """
+    def run(self):
+        preprocessed_data = self.preprocess_data()
+        joined_data = self.join_with_items(preprocessed_data)
+        processed_data = self.process_data(joined_data)
+        processed_data.to_csv(self.output_filepath, index=False)
+        return processed_data
+    """
+
+    def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
+        super().__init__(data_filepath, items_filepath)
+        filename, _ = self.data_filepath.rsplit(".", 1)
+        self.output_filepath = f"{filename}_ad001_clean.csv"
+
+    def load_data(self, data_filepath):
+        return pd.read_excel(data_filepath, sheet_name=0, skiprows=1)
+
+    def join_with_items(self, df):
+        # TODO: Do we want to merge on ID or should we just merge on description if we have it?
+        df["Item ID"] = df["Item Description Refined"].map(self.item2id)
+        # Prevent duplicate columns when merging with items
+        drop_cols = ["Item Description From Trial", "Item Description Refined"]
+        df = df.drop(drop_cols, axis=1)
+        assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
+        return pd.merge(self.items, df, on="Item ID")
+
+    def process_data(self, df):
+        df["% Residuals (Weight)"] = df["Residual Weight - Oven-dry"] / (
+            df["Start Weight"] * df["Number of Items per bag"]
+        )
+        df["% Residuals (Area)"] = None
+        df["Trial"] = df["Trial ID"]
+        return df
+
+
+PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
+ad001_pipeline = AD001Pipeline(PDF_TRIALS)
+
+ad001_processed = ad001_pipeline.run()
