@@ -21,6 +21,7 @@ ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trial
 # ]
 
 # TODO: Maybe put this in the class?
+# Can also keep bags, etc if we want them
 TRIAL_COLS = [
     "Trial",
     "Item ID",
@@ -130,12 +131,6 @@ class ClosedLoopPipeline(AbstractDataPipeline):
     def preprocess_data(self):
         df_pp = self.data[self.data["Trial Stage"] == "Second Removal"]
         df_pp = df_pp.rename(columns={"Facility Name": "Trial"})
-
-        # # TODO: Do we care about bags, etc? If so, keep them here
-        # joined = joined[
-        #     ["Trial", "Item ID", "% Residuals (Weight)", "% Residuals (Area)"]
-        # ]
-
         return df_pp
 
 
@@ -149,37 +144,37 @@ closed_loop_processed = closed_loop_pipeline.run()
 
 
 class CASP004Pipeline(AbstractDataPipeline):
-    # TODO: Load the filepath from constructor
-    # def load_items(self, items=items_clean):
-    #     """Loads the items DataFrame."""
-    #     items_casp004 = pd.read_excel(FILEPATH_PDF, sheet_name=2)
-    #     return items
-
-    def preprocess_data(self, data_filepath):
-        df_weight = self.load_data(data_filepath, sheet_name=3, skiprows=2)
-        df_weight = df_weight[df_weight["Trial Stage"] == "Second Removal"]
-
-        df_area = self.load_data(data_filepath, sheet_name=4, skiprows=2)
-        df_area = df_area[df_area["Trial Stage"] == "Second Removal"]
-
-        weight_melted = self.melt_trial(df_weight, "% Residuals (Weight)")
-        area_melted = self.melt_trial(df_area, "% Residuals (Area)")
-
-        joined = pd.merge(
-            weight_melted,
-            area_melted,
-            on=["Facility Name", "Trial Stage", "Bag Set", "Bag Number", "Item ID"],
-            how="outer",
+    def load_items(self, items_filepath):
+        """Loads the items DataFrame."""
+        return pd.read_excel(items_filepath, sheet_name=2).drop_duplicates(
+            subset=["Item Name"]
         )
 
-        joined = joined.rename(columns={"Facility Name": "Trial"})
+    # TODO: Wait what is this » need to figure out how to do items mapping here
+    # items_casp004.set_index('Item Name')['Weight (average)'].to_dict()
+    # observations_casp004['Start Weight'] = observations_casp004['Product Name'].map(casp004_weights)
 
-        # TODO: Do we care about bags, etc? If so, keep them here
-        joined = joined[
-            ["Trial", "Item ID", "% Residuals (Weight)", "% Residuals (Area)"]
-        ]
+    def load_data(self, data_filepath):
+        return pd.read_excel(data_filepath, sheet_name=1)
 
-        return joined
+    def preprocess_data(self):
+        # Only use observations at the end
+        df_pp = self.data[self.data["Stage"] == "End"]
+        # Bags A-5 and A-6 were not found
+        df_pp = self.data[~self.data["Bag Id"].isin(["A-5", "A-6"])]
+
+        # Take the average of the three weight observations
+        df_pp["End Weight"] = df_pp[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
+
+        # Null values mean the item fully disintegrated
+        df_pp["End Weight"] = df_pp["End Weight"].fillna(0)
+
+        breakpoint()
+
+        # TODO: Need to set up some sort of item joining method
+        # observations_casp004['Item ID'] = observations_casp004['Product Name'].map(item2id)
+
+        return df_pp
 
 
 CASP004_PATH = (
