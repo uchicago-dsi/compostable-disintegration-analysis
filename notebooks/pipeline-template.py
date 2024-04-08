@@ -35,14 +35,6 @@ TRIAL_COLS = [
     "% Residuals (Area)",
 ]
 
-# TODO: Put this in the class if we need it
-# item2id = {
-#     key.strip(): value
-#     for key, value in items.set_index("Item Description Refined")["Item ID"]
-#     .to_dict()
-#     .items()
-# }
-
 
 class AbstractDataPipeline(ABC):
     def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
@@ -52,6 +44,7 @@ class AbstractDataPipeline(ABC):
 
         self.data = self.load_data(data_filepath)
         self.items = self.load_items(items_filepath)
+        self.items2id = self.load_items_map()
 
     @abstractmethod
     def load_data(self, data_filepath):
@@ -62,6 +55,17 @@ class AbstractDataPipeline(ABC):
         items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
         items["Start Weight"] = items["Average Initial Weight, g"]
         return items
+
+    # TODO: maybe this is an abstract method?
+    def load_items_map(self):
+        return {
+            key.strip(): value
+            for key, value in self.items.set_index("Item Description Refined")[
+                "Item ID"
+            ]
+            .to_dict()
+            .items()
+        }
 
     @abstractmethod
     def preprocess_data(self, data):
@@ -150,9 +154,19 @@ class CASP004Pipeline(AbstractDataPipeline):
             subset=["Item Name"]
         )
 
-    # TODO: Wait what is this » need to figure out how to do items mapping here
-    # items_casp004.set_index('Item Name')['Weight (average)'].to_dict()
-    # observations_casp004['Start Weight'] = observations_casp004['Product Name'].map(casp004_weights)
+    def load_items_map(self):
+        # TODO: Ok...not sure how to set this up for this trial actually
+        # items_casp004.set_index('Item Name')['Weight (average)'].to_dict()
+        # observations_casp004['Start Weight'] = observations_casp004['Product Name'].map(casp004_weights)
+
+        return {
+            key.strip(): value
+            for key, value in self.items.set_index("Item Description Refined")[
+                "Item ID"
+            ]
+            .to_dict()
+            .items()
+        }
 
     def load_data(self, data_filepath):
         return pd.read_excel(data_filepath, sheet_name=1)
@@ -169,8 +183,6 @@ class CASP004Pipeline(AbstractDataPipeline):
         # Null values mean the item fully disintegrated
         df_pp["End Weight"] = df_pp["End Weight"].fillna(0)
 
-        breakpoint()
-
         # TODO: Need to set up some sort of item joining method
         # observations_casp004['Item ID'] = observations_casp004['Product Name'].map(item2id)
 
@@ -180,7 +192,7 @@ class CASP004Pipeline(AbstractDataPipeline):
 CASP004_PATH = (
     DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
-# casp004_pipeline = ClosedLoopPipeline(CASP004_PATH)
+casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH)
 
 
-# casp004_processed = casp004_pipeline.run(CASP004_PATH)
+casp004_processed = casp004_pipeline.run()
