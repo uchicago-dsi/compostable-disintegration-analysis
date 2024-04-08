@@ -71,6 +71,7 @@ class AbstractDataPipeline(ABC):
         df.to_csv(self.output_filepath, index=False)
         return df
 
+    # TODO: Make saving the csv an argument
     def run(self):
         preprocessed_data = self.preprocess_data(self.data)
         joined_data = self.join_with_items(preprocessed_data)
