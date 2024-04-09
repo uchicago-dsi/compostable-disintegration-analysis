@@ -26,18 +26,19 @@ TRIAL_COLS = [
 
 
 class AbstractDataPipeline(ABC):
-    def __init__(self, data_filepath, items_filepath=ITEMS_PATH, trial=None):
+    def __init__(self, data_filepath, items_filepath=ITEMS_PATH, trial=None, sheet_name=0, skiprows=0):
         self.data_filepath = data_filepath
         filename, _ = self.data_filepath.rsplit(".", 1)
         file_suffix = f"_{trial}_clean.csv" if trial else "_clean.csv"
         self.output_filepath = filename + file_suffix
 
-        self.data = self.load_data(data_filepath)
+        # TODO: This is kind of messy and could probably be better
+        self.data = self.load_data(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
         self.items = self.load_items(items_filepath)
         self.item2id = self.load_items_map()
 
     @abstractmethod
-    def load_data(self, data_filepath):
+    def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
         pass
 
     def load_items(self, items_filepath):
@@ -118,7 +119,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             .reset_index(drop=True)
         )
 
-    def load_data(self, data_filepath):
+    def load_data(self, data_filepath, sheet_name, skiprows):
         df_weight = pd.read_excel(data_filepath, sheet_name=3, skiprows=2)
         weight_melted = self.melt_trial(df_weight, "% Residuals (Weight)")
 
@@ -198,6 +199,9 @@ CASP004_PATH = (
 # casp004_processed = casp004_pipeline.run()
 
 class PDFPipeline(AbstractDataPipeline):
+    def load_data(self, data_filepath, sheet_name=0, skiprows=0):
+        return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
+
     # TODO: Maybe need to add setup for extra items here
     def join_with_items(self, df):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
@@ -217,21 +221,10 @@ class PDFPipeline(AbstractDataPipeline):
         return df
 
 
-class AD001Pipeline(PDFPipeline):
-    def load_data(self, data_filepath):
-        return pd.read_excel(data_filepath, sheet_name=0, skiprows=1)
-
-
 PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
-ad001_pipeline = AD001Pipeline(PDF_TRIALS, trial="ad001")
 
-ad001_processed = ad001_pipeline.run()
+ad001_pipeline = PDFPipeline(PDF_TRIALS, trial="ad001", sheet_name=0, skiprows=1)
+ad001_processed = ad001_pipeline.run(save=True)
 
-class WR001Pipeline(PDFPipeline):
-    def load_data(self, data_filepath):
-        return pd.read_excel(data_filepath, sheet_name=1)
-
-
-wr001_pipeline = WR001Pipeline(PDF_TRIALS, trial="wr001")
-
+wr001_pipeline = PDFPipeline(PDF_TRIALS, trial="wr001", sheet_name=1)
 wr001_processed = wr001_pipeline.run(save=True)
