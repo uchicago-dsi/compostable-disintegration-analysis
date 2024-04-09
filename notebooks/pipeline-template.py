@@ -35,7 +35,8 @@ class AbstractDataPipeline(ABC):
         # TODO: This is kind of messy and could probably be better
         self.data = self.load_data(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
         self.items = self.load_items(items_filepath)
-        self.item2id = self.load_items_map()
+        # TODO: Just doing this to try CASP004
+        # self.item2id = self.load_items_map()
 
     @abstractmethod
     def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
@@ -82,6 +83,56 @@ class AbstractDataPipeline(ABC):
         if save:
             df.to_csv(self.output_filepath, index=False)
         return df
+    
+
+class CASP004Pipeline(AbstractDataPipeline):
+    def load_items(self, items_filepath):
+        """Loads the items DataFrame."""
+        return pd.read_excel(items_filepath, sheet_name=2).drop_duplicates(
+            subset=["Item Name"]
+        )
+
+    # def load_items_map(self):
+    #     return {
+    #         key.strip(): value
+    #         for key, value in self.items.set_index("Item Description")[
+    #             "Item ID"
+    #         ]
+    #         .to_dict()
+    #         .items()
+    #     }
+
+    def load_data(self, data_filepath, sheet_name=0, skiprows=0):
+        return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
+    
+    # TODO: Ok...not sure how to set this up for this trial actually
+    # items_casp004.set_index('Item Name')['Weight (average)'].to_dict()
+    # observations_casp004['Start Weight'] = observations_casp004['Product Name'].map(casp004_weights)
+
+    def join_with_items(self, df):
+        """Processes the weight and area DataFrames"""
+        return pd.merge(self.items, df, left_on="Item Name", right_on="Product Name")
+
+    def preprocess_data(self, data):
+        # Only use observations at the end
+        df = data[data["Stage"] == "End"]
+        # Bags A-5 and A-6 were not found
+        df = df[~df["Bag Id"].isin(["A-5", "A-6"])]
+
+        # Take the average of the three weight observations
+        df["End Weight"] = df[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
+
+        # Null values mean the item fully disintegrated
+        df["End Weight"] = df["End Weight"].fillna(0)
+
+        return df
+
+
+CASP004_PATH = (
+    DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
+)
+casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH, sheet_name=1)
+casp004_processed = casp004_pipeline.run(save=True)
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
@@ -143,60 +194,7 @@ TEN_TRIALS_PATH = (
     DATA_FOLDER + "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
 )
 closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH)
-
-
-closed_loop_processed = closed_loop_pipeline.run()
-
-
-class CASP004Pipeline(AbstractDataPipeline):
-    def load_items(self, items_filepath):
-        """Loads the items DataFrame."""
-        return pd.read_excel(items_filepath, sheet_name=2).drop_duplicates(
-            subset=["Item Name"]
-        )
-
-    def load_items_map(self):
-        # TODO: Ok...not sure how to set this up for this trial actually
-        # items_casp004.set_index('Item Name')['Weight (average)'].to_dict()
-        # observations_casp004['Start Weight'] = observations_casp004['Product Name'].map(casp004_weights)
-
-        return {
-            key.strip(): value
-            for key, value in self.items.set_index("Item Description Refined")[
-                "Item ID"
-            ]
-            .to_dict()
-            .items()
-        }
-
-    def load_data(self, data_filepath):
-        return pd.read_excel(data_filepath, sheet_name=1)
-
-    def preprocess_data(self):
-        # Only use observations at the end
-        df_pp = self.data[self.data["Stage"] == "End"]
-        # Bags A-5 and A-6 were not found
-        df_pp = self.data[~self.data["Bag Id"].isin(["A-5", "A-6"])]
-
-        # Take the average of the three weight observations
-        df_pp["End Weight"] = df_pp[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
-
-        # Null values mean the item fully disintegrated
-        df_pp["End Weight"] = df_pp["End Weight"].fillna(0)
-
-        # TODO: Need to set up some sort of item joining method
-        # observations_casp004['Item ID'] = observations_casp004['Product Name'].map(item2id)
-
-        return df_pp
-
-
-CASP004_PATH = (
-    DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
-)
-# casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH)
-
-
-# casp004_processed = casp004_pipeline.run()
+closed_loop_processed = closed_loop_pipeline.run(save=True)
 
 class PDFPipeline(AbstractDataPipeline):
     def load_data(self, data_filepath, sheet_name=0, skiprows=0):
@@ -231,5 +229,13 @@ ad001_processed = ad001_pipeline.run(save=True)
 wr001_pipeline = PDFPipeline(PDF_TRIALS, trial="wr001", sheet_name=1)
 wr001_processed = wr001_pipeline.run(save=True)
 
-casp001_pipeline =  PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
+casp001_pipeline = PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
 casp001_processed = casp001_pipeline.run(save=True)
+
+# TODO: Null items after mapping
+wr003_pipeline = PDFPipeline(PDF_TRIALS, trial="wr003", sheet_name=4)
+# wr003_processed = wr003_pipeline.run(save=True)
+
+# TODO: This has null items — figure out the extra items setup
+casp003_pipeline = PDFPipeline(PDF_TRIALS, trial="casp003", sheet_name=3)
+# casp003_processed = casp003_pipeline.run(save=True)
