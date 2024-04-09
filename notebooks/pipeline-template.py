@@ -8,6 +8,7 @@ DATA_FOLDER = "../data/"
 # DATA_FOLDER = "data/"
 
 ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
+EXTRA_ITEMS_PATH = DATA_FOLDER + "Item IDS for CASP004 CASP003.xlsx"
 
 # TODO: Maybe put this in the class?
 # Can also keep bags, etc if we want them
@@ -35,13 +36,16 @@ class AbstractDataPipeline(ABC):
         # TODO: This is kind of messy and could probably be better
         self.data = self.load_data(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
         self.items = self.load_items(items_filepath)
-        # TODO: Just doing this to try CASP004
-        # self.item2id = self.load_items_map()
+        # TODO: Comment the below lines to try CASP004
+        self.item2id = self.load_items_map()
+        self.item2id = self.load_extra_items_map() | self.item2id
+
 
     @abstractmethod
     def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
         pass
 
+    # TODO: maybe this is also an abstract method? Or is it just different for the CASP004 trial?
     def load_items(self, items_filepath):
         """Loads the items DataFrame."""
         items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
@@ -58,6 +62,10 @@ class AbstractDataPipeline(ABC):
             .to_dict()
             .items()
         }
+    
+    def load_extra_items_map(self):
+        extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
+        return extra_items.set_index("OG Description")['Item ID'].to_dict()
 
     def preprocess_data(self, df):
         return df
@@ -75,7 +83,8 @@ class AbstractDataPipeline(ABC):
         return df
 
     def run(self, save=False):
-        df = self.preprocess_data(self.data)
+        df = self.data.copy()
+        df = self.preprocess_data(df)
         df = self.join_with_items(df)
         df = self.process_data(df)
         df = self.save_data(df)
@@ -131,8 +140,9 @@ class CASP004Pipeline(AbstractDataPipeline):
 CASP004_PATH = (
     DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
-casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH, sheet_name=1)
-casp004_processed = casp004_pipeline.run(save=True)
+# casp004_pipeline = CASP004Pipeline(CASP004_PATH, items_filepath=CASP004_PATH, sheet_name=1)
+# TODO: This breaks
+# casp004_processed = casp004_pipeline.run(save=True)
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
@@ -197,13 +207,17 @@ closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH)
 closed_loop_processed = closed_loop_pipeline.run(save=True)
 
 class PDFPipeline(AbstractDataPipeline):
+    def __init__(self, *args, weight_col="Residual Weight - Oven-dry", **kwargs):
+        super().__init__(*args, **kwargs)
+        self.weight_col = weight_col
+
     def load_data(self, data_filepath, sheet_name=0, skiprows=0):
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
     # TODO: Maybe need to add setup for extra items here
     def join_with_items(self, df):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
-        df["Item ID"] = df["Item Description Refined"].map(self.item2id)
+        df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
         drop_cols = ["Item Description From Trial", "Item Description Refined"]
         df = df.drop(drop_cols, axis=1)
@@ -211,7 +225,7 @@ class PDFPipeline(AbstractDataPipeline):
         return pd.merge(self.items, df, on="Item ID")
 
     def process_data(self, df):
-        df["% Residuals (Weight)"] = df["Residual Weight - Oven-dry"] / (
+        df["% Residuals (Weight)"] = df[self.weight_col] / (
             df["Start Weight"] * df["Number of Items per bag"]
         )
         df["% Residuals (Area)"] = None
@@ -232,10 +246,15 @@ wr001_processed = wr001_pipeline.run(save=True)
 casp001_pipeline = PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
 casp001_processed = casp001_pipeline.run(save=True)
 
-# TODO: Null items after mapping
-wr003_pipeline = PDFPipeline(PDF_TRIALS, trial="wr003", sheet_name=4)
-# wr003_processed = wr003_pipeline.run(save=True)
-
 # TODO: This has null items — figure out the extra items setup
-casp003_pipeline = PDFPipeline(PDF_TRIALS, trial="casp003", sheet_name=3)
-# casp003_processed = casp003_pipeline.run(save=True)
+
+class CASP003Pipeline(PDFPipeline):
+    def preprocess_data(self, data):
+        # everything in blug bags was combined and impossible to separate
+        return data[data['Trial Bag Colour'] != "Blue"]
+
+casp003_pipeline = CASP003Pipeline(PDF_TRIALS, trial="casp003", sheet_name=3, weight_col="Final Residual Weight - wet - aggregate")
+casp003_processed = casp003_pipeline.run(save=True)
+
+wr003_pipeline = PDFPipeline(PDF_TRIALS, trial="wr003", sheet_name=4, weight_col="Final Residual Weight - wet")
+wr003_processed = wr003_pipeline.run(save=True)
