@@ -26,10 +26,11 @@ TRIAL_COLS = [
 
 
 class AbstractDataPipeline(ABC):
-    def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
+    def __init__(self, data_filepath, items_filepath=ITEMS_PATH, trial=None):
         self.data_filepath = data_filepath
         filename, _ = self.data_filepath.rsplit(".", 1)
-        self.output_filepath = f"{filename}_clean.csv"
+        file_suffix = f"_{trial}_clean.csv" if trial else "_clean.csv"
+        self.output_filepath = filename + file_suffix
 
         self.data = self.load_data(data_filepath)
         self.items = self.load_items(items_filepath)
@@ -71,7 +72,6 @@ class AbstractDataPipeline(ABC):
         df.to_csv(self.output_filepath, index=False)
         return df
 
-    # TODO: Make saving the csv an argument
     def run(self, save=False):
         df = self.preprocess_data(self.data)
         df = self.join_with_items(df)
@@ -197,25 +197,8 @@ CASP004_PATH = (
 
 # casp004_processed = casp004_pipeline.run()
 
-
-class AD001Pipeline(AbstractDataPipeline):
-    """
-    def run(self):
-        preprocessed_data = self.preprocess_data()
-        joined_data = self.join_with_items(preprocessed_data)
-        processed_data = self.process_data(joined_data)
-        processed_data.to_csv(self.output_filepath, index=False)
-        return processed_data
-    """
-
-    def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
-        super().__init__(data_filepath, items_filepath)
-        filename, _ = self.data_filepath.rsplit(".", 1)
-        self.output_filepath = f"{filename}_ad001_clean.csv"
-
-    def load_data(self, data_filepath):
-        return pd.read_excel(data_filepath, sheet_name=0, skiprows=1)
-
+class PDFPipeline(AbstractDataPipeline):
+    # TODO: Maybe need to add setup for extra items here
     def join_with_items(self, df):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         df["Item ID"] = df["Item Description Refined"].map(self.item2id)
@@ -234,38 +217,21 @@ class AD001Pipeline(AbstractDataPipeline):
         return df
 
 
+class AD001Pipeline(PDFPipeline):
+    def load_data(self, data_filepath):
+        return pd.read_excel(data_filepath, sheet_name=0, skiprows=1)
+
+
 PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
-ad001_pipeline = AD001Pipeline(PDF_TRIALS)
+ad001_pipeline = AD001Pipeline(PDF_TRIALS, trial="ad001")
 
 ad001_processed = ad001_pipeline.run()
 
-class WR001Pipeline(AbstractDataPipeline):
-    def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
-        super().__init__(data_filepath, items_filepath)
-        filename, _ = self.data_filepath.rsplit(".", 1)
-        self.output_filepath = f"{filename}_wr001_clean.csv"
-
+class WR001Pipeline(PDFPipeline):
     def load_data(self, data_filepath):
         return pd.read_excel(data_filepath, sheet_name=1)
 
-    def join_with_items(self, df):
-        df["Item ID"] = df["Item Description Refined"].map(self.item2id)
-        # Prevent duplicate columns when merging with items
-        drop_cols = ["Item Description From Trial", "Item Description Refined"]
-        df = df.drop(drop_cols, axis=1)
-        assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
-        return pd.merge(self.items, df, on="Item ID")
 
-    def process_data(self, df):
-        df["% Residuals (Weight)"] = df["Residual Weight - Oven-dry"] / (
-            df["Start Weight"] * df["Number of Items per bag"]
-        )
-        df["% Residuals (Area)"] = None
-        df["Trial"] = df["Trial ID"]
-        return df
+wr001_pipeline = WR001Pipeline(PDF_TRIALS, trial="wr001")
 
-
-PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
-ad001_pipeline = AD001Pipeline(PDF_TRIALS)
-
-ad001_processed = ad001_pipeline.run()
+wr001_processed = wr001_pipeline.run(save=True)
