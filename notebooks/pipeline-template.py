@@ -223,8 +223,13 @@ class PDFPipeline(AbstractDataPipeline):
 
 PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
 
+# TODO: Can I add an assertion to make sure the total number of observations is correct?
+
 ad001_pipeline = PDFPipeline(PDF_TRIALS, trial="ad001", sheet_name=0, skiprows=1)
 ad001_processed = ad001_pipeline.run(save=True)
 
 wr001_pipeline = PDFPipeline(PDF_TRIALS, trial="wr001", sheet_name=1)
 wr001_processed = wr001_pipeline.run(save=True)
+
+casp001_pipeline =  PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
+casp001_processed = casp001_pipeline.run(save=True)
