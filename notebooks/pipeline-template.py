@@ -72,12 +72,15 @@ class AbstractDataPipeline(ABC):
         return df
 
     # TODO: Make saving the csv an argument
-    def run(self):
-        preprocessed_data = self.preprocess_data(self.data)
-        joined_data = self.join_with_items(preprocessed_data)
-        processed_data = self.process_data(joined_data)
-        output_data = self.save_data(processed_data)
-        return output_data
+    def run(self, save=False):
+        df = self.preprocess_data(self.data)
+        df = self.join_with_items(df)
+        df = self.process_data(df)
+        df = self.save_data(df)
+        df = df[TRIAL_COLS]
+        if save:
+            df.to_csv(self.output_filepath, index=False)
+        return df
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
@@ -215,6 +218,37 @@ class AD001Pipeline(AbstractDataPipeline):
 
     def join_with_items(self, df):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
+        df["Item ID"] = df["Item Description Refined"].map(self.item2id)
+        # Prevent duplicate columns when merging with items
+        drop_cols = ["Item Description From Trial", "Item Description Refined"]
+        df = df.drop(drop_cols, axis=1)
+        assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
+        return pd.merge(self.items, df, on="Item ID")
+
+    def process_data(self, df):
+        df["% Residuals (Weight)"] = df["Residual Weight - Oven-dry"] / (
+            df["Start Weight"] * df["Number of Items per bag"]
+        )
+        df["% Residuals (Area)"] = None
+        df["Trial"] = df["Trial ID"]
+        return df
+
+
+PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
+ad001_pipeline = AD001Pipeline(PDF_TRIALS)
+
+ad001_processed = ad001_pipeline.run()
+
+class WR001Pipeline(AbstractDataPipeline):
+    def __init__(self, data_filepath, items_filepath=ITEMS_PATH):
+        super().__init__(data_filepath, items_filepath)
+        filename, _ = self.data_filepath.rsplit(".", 1)
+        self.output_filepath = f"{filename}_wr001_clean.csv"
+
+    def load_data(self, data_filepath):
+        return pd.read_excel(data_filepath, sheet_name=1)
+
+    def join_with_items(self, df):
         df["Item ID"] = df["Item Description Refined"].map(self.item2id)
         # Prevent duplicate columns when merging with items
         drop_cols = ["Item Description From Trial", "Item Description Refined"]
