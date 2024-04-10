@@ -4,6 +4,7 @@ import pandas as pd
 
 # TODO: figure out how to handle data folder for debugger
 # TODO: Can I add an assertion to make sure the total number of observations is correct?
+# TODO: figure out the right abstraction for the load items » items should be loaded separately and passed to the class
 
 DATA_FOLDER = "../data/"
 # DATA_FOLDER = "data/"
@@ -25,6 +26,8 @@ TRIAL_COLS = [
     "% Residuals (Weight)",
     "% Residuals (Area)",
 ]
+
+processed_data = []
 
 
 class AbstractDataPipeline(ABC):
@@ -164,7 +167,7 @@ CASP004_PATH = (
     DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
 casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1, trial="casp004")
-casp004_processed = casp004_pipeline.run(save=True)
+processed_data.append(casp004_pipeline.run())
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
@@ -226,7 +229,7 @@ TEN_TRIALS_PATH = (
     DATA_FOLDER + "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
 )
 closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH, trial="closed_loop")
-closed_loop_processed = closed_loop_pipeline.run(save=True)
+processed_data.append(closed_loop_pipeline.run())
 
 
 class PDFPipeline(AbstractDataPipeline):
@@ -259,13 +262,13 @@ class PDFPipeline(AbstractDataPipeline):
 PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
 
 ad001_pipeline = PDFPipeline(PDF_TRIALS, trial="ad001", sheet_name=0, skiprows=1)
-ad001_processed = ad001_pipeline.run(save=True)
+processed_data.append(ad001_pipeline.run())
 
 wr001_pipeline = PDFPipeline(PDF_TRIALS, trial="wr001", sheet_name=1)
-wr001_processed = wr001_pipeline.run(save=True)
+processed_data.append(wr001_pipeline.run())
 
 casp001_pipeline = PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
-casp001_processed = casp001_pipeline.run(save=True)
+processed_data.append(casp001_pipeline.run())
 
 
 class CASP003Pipeline(PDFPipeline):
@@ -280,9 +283,14 @@ casp003_pipeline = CASP003Pipeline(
     sheet_name=3,
     weight_col="Final Residual Weight - wet - aggregate",
 )
-casp003_processed = casp003_pipeline.run(save=True)
+processed_data.append(casp003_pipeline.run())
 
 wr003_pipeline = PDFPipeline(
     PDF_TRIALS, trial="wr003", sheet_name=4, weight_col="Final Residual Weight - wet"
 )
-wr003_processed = wr003_pipeline.run(save=True)
+processed_data.append(wr003_pipeline.run())
+
+output_filepath = DATA_FOLDER + "all_trials_processed.csv"
+print(f"Saving all trials to {output_filepath}")
+pd.concat(processed_data, ignore_index=True).to_csv(output_filepath, index=False)
+print("Complete!")
