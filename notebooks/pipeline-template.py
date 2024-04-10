@@ -37,7 +37,8 @@ class AbstractDataPipeline(ABC):
     ):
         self.data_filepath = data_filepath
         filename, _ = self.data_filepath.rsplit(".", 1)
-        file_suffix = f"_{trial}_clean.csv" if trial else "_clean.csv"
+        self.trial = trial
+        file_suffix = f"_{trial}_clean.csv" if self.trial else "_clean.csv"
         self.output_filepath = filename + file_suffix
 
         # TODO: This is kind of messy and could probably be better
@@ -79,6 +80,7 @@ class AbstractDataPipeline(ABC):
         return df
 
     def join_with_items(self, df):
+        """Processes the weight and area DataFrames"""
         return pd.merge(self.items, df, on="Item ID")
 
     def process_data(self, df):
@@ -90,6 +92,7 @@ class AbstractDataPipeline(ABC):
         return df
 
     def run(self, save=False):
+        print(f"Running data pipeline for {self.trial}")
         df = self.data.copy()
         df = self.preprocess_data(df)
         df = self.join_with_items(df)
@@ -98,6 +101,8 @@ class AbstractDataPipeline(ABC):
         df = df[TRIAL_COLS]
         if save:
             df.to_csv(self.output_filepath, index=False)
+            print(f"Saved to {self.output_filepath}")
+        print("Complete!")
         return df
 
 
@@ -161,7 +166,7 @@ class CASP004Pipeline(AbstractDataPipeline):
 CASP004_PATH = (
     DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
-casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1)
+casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1, trial="casp004")
 casp004_processed = casp004_pipeline.run(save=True)
 
 
@@ -215,15 +220,15 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         )
 
     def preprocess_data(self, df):
-        df = df[df["Trial Stage"] == "Second Removal"]
-        df = df.rename(columns={"Facility Name": "Trial"})
-        return df
+        df_pp = df[df["Trial Stage"] == "Second Removal"]
+        df_pp = df_pp.rename(columns={"Facility Name": "Trial"})
+        return df_pp
 
 
 TEN_TRIALS_PATH = (
     DATA_FOLDER + "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
 )
-closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH)
+closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH, trial="closed_loop")
 closed_loop_processed = closed_loop_pipeline.run(save=True)
 
 
@@ -235,15 +240,15 @@ class PDFPipeline(AbstractDataPipeline):
     def load_data(self, data_filepath, sheet_name=0, skiprows=0):
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
-    def preprocess_data(self, df):
+    # TODO: Maybe need to add setup for extra items here
+    def join_with_items(self, df):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
-        # TODO: Make this more generalizable
         # Prevent duplicate columns when merging with items
-        drop_cols = ["Item Description Refined", "Item Description From Trial"]
+        drop_cols = ["Item Description From Trial", "Item Description Refined"]
         df = df.drop(drop_cols, axis=1)
         assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
-        return df
+        return pd.merge(self.items, df, on="Item ID")
 
     def process_data(self, df):
         df["% Residuals (Weight)"] = df[self.weight_col] / (
