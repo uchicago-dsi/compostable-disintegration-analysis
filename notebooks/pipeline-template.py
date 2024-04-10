@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 # TODO: figure out how to handle data folder for debugger
+# TODO: Can I add an assertion to make sure the total number of observations is correct?
 
 DATA_FOLDER = "../data/"
 # DATA_FOLDER = "data/"
@@ -46,7 +47,6 @@ class AbstractDataPipeline(ABC):
             data_filepath, sheet_name=sheet_name, skiprows=skiprows
         )
         self.items = self.load_items(items_filepath)
-        # TODO: Comment the below lines to try CASP004
         self.item2id = self.load_items_map()
         self.item2id = self.load_extra_items_map() | self.item2id
 
@@ -54,14 +54,12 @@ class AbstractDataPipeline(ABC):
     def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
         pass
 
-    # TODO: maybe this is also an abstract method? Or is it just different for the CASP004 trial?
     def load_items(self, items_filepath):
         """Loads the items DataFrame."""
         items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
         items["Start Weight"] = items["Average Initial Weight, g"]
         return items
 
-    # TODO: maybe this is an abstract method?
     def load_items_map(self):
         return {
             key.strip(): value
@@ -144,9 +142,8 @@ class CASP004Pipeline(AbstractDataPipeline):
         # rename so this matches the other trials
         df["Item Description Refined"] = df["Product Name"]
 
-        # TODO: Do we want to merge on ID or should we just merge on description if we have it?
+        # TODO: Some of this should be in the abstract method...
         df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
-        # TODO: Make this more generalizable
         # Prevent duplicate columns when merging with items
         drop_cols = ["Item Description Refined"]
         df = df.drop(drop_cols, axis=1)
@@ -220,9 +217,9 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         )
 
     def preprocess_data(self, df):
-        df_pp = df[df["Trial Stage"] == "Second Removal"]
-        df_pp = df_pp.rename(columns={"Facility Name": "Trial"})
-        return df_pp
+        df = df[df["Trial Stage"] == "Second Removal"]
+        df = df.rename(columns={"Facility Name": "Trial"})
+        return df
 
 
 TEN_TRIALS_PATH = (
@@ -261,8 +258,6 @@ class PDFPipeline(AbstractDataPipeline):
 
 PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
 
-# TODO: Can I add an assertion to make sure the total number of observations is correct?
-
 ad001_pipeline = PDFPipeline(PDF_TRIALS, trial="ad001", sheet_name=0, skiprows=1)
 ad001_processed = ad001_pipeline.run(save=True)
 
@@ -271,8 +266,6 @@ wr001_processed = wr001_pipeline.run(save=True)
 
 casp001_pipeline = PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
 casp001_processed = casp001_pipeline.run(save=True)
-
-# TODO: This has null items — figure out the extra items setup
 
 
 class CASP003Pipeline(PDFPipeline):
