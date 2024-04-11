@@ -285,5 +285,13 @@ processed_data.append(wr003_pipeline.run())
 
 output_filepath = DATA_FOLDER + "all_trials_processed.csv"
 print(f"Saving all trials to {output_filepath}")
-pd.concat(processed_data, ignore_index=True).to_csv(output_filepath, index=False)
+all_trials = pd.concat(processed_data, ignore_index=True)
+
+# Exclude mixed materials and multi-laminate pouches
+all_trials = all_trials[~(all_trials["Material Class II"] == "Mixed Materials")]
+all_trials = all_trials[
+    ~(all_trials["Item Name"] == "Multi-laminate stand-up pounch with zipper")
+]
+
+all_trials.to_csv(output_filepath, index=False)
 print("Complete!")
