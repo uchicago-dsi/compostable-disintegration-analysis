@@ -9,9 +9,6 @@ import pandas as pd
 DATA_FOLDER = "../data/"
 # DATA_FOLDER = "data/"
 
-ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
-EXTRA_ITEMS_PATH = DATA_FOLDER + "Item IDS for CASP004 CASP003.xlsx"
-
 # TODO: Maybe put this in the class?
 # Can also keep bags, etc if we want them
 TRIAL_COLS = [
@@ -26,6 +23,24 @@ TRIAL_COLS = [
     "% Residuals (Weight)",
     "% Residuals (Area)",
 ]
+
+ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
+EXTRA_ITEMS_PATH = DATA_FOLDER + "Item IDS for CASP004 CASP003.xlsx"
+
+ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
+ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
+
+item2id = {
+    key.strip(): value
+    for key, value in ITEMS.set_index("Item Description Refined")["Item ID"]
+    .to_dict()
+    .items()
+}
+
+extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
+extra_items = extra_items.set_index("OG Description")["Item ID"].to_dict()
+
+item2id = item2id | extra_items
 
 processed_data = []
 
@@ -49,33 +64,35 @@ class AbstractDataPipeline(ABC):
         self.data = self.load_data(
             data_filepath, sheet_name=sheet_name, skiprows=skiprows
         )
-        self.items = self.load_items(items_filepath)
-        self.item2id = self.load_items_map()
-        self.item2id = self.load_extra_items_map() | self.item2id
+        # self.items = self.load_items(items_filepath)
+        # self.item2id = self.load_items_map()
+        # self.item2id = self.load_extra_items_map() | self.item2id
+        self.items = ITEMS
+        self.item2id = item2id
 
     @abstractmethod
     def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
         pass
 
-    def load_items(self, items_filepath):
-        """Loads the items DataFrame."""
-        items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
-        items["Start Weight"] = items["Average Initial Weight, g"]
-        return items
+    # def load_items(self, items_filepath):
+    #     """Loads the items DataFrame."""
+    #     items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
+    #     items["Start Weight"] = items["Average Initial Weight, g"]
+    #     return items
 
-    def load_items_map(self):
-        return {
-            key.strip(): value
-            for key, value in self.items.set_index("Item Description Refined")[
-                "Item ID"
-            ]
-            .to_dict()
-            .items()
-        }
+    # def load_items_map(self):
+    #     return {
+    #         key.strip(): value
+    #         for key, value in self.items.set_index("Item Description Refined")[
+    #             "Item ID"
+    #         ]
+    #         .to_dict()
+    #         .items()
+    #     }
 
-    def load_extra_items_map(self):
-        extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
-        return extra_items.set_index("OG Description")["Item ID"].to_dict()
+    # def load_extra_items_map(self):
+    #     extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
+    #     return extra_items.set_index("OG Description")["Item ID"].to_dict()
 
     def preprocess_data(self, df):
         return df
@@ -109,16 +126,27 @@ class AbstractDataPipeline(ABC):
 
 class CASP004Pipeline(AbstractDataPipeline):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        """Processes the weight and area DataFrames"""
+        # We are using the start weight specific to this trial so drop the Start Weight column
+        # Start weight is set in preprocess_data
+        self.items = self.items.drop("Start Weight", axis=1)
+        # """Processes the weight and area DataFrames"""
+        # # We are using the start weight specific to this trial so drop the Start Weight column
+        # # Start weight is set in preprocess_data
+        # items = items.drop("Start Weight", axis=1)
+
     def load_data(self, data_filepath, sheet_name=0, skiprows=0):
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
-    def load_items(self, items_filepath):
-        items = super().load_items(items_filepath)
+    # def load_items(self, items_filepath):
+    #     items = super().load_items(items_filepath)
 
-        # We are using the start weight specific to this trial so drop the Start Weight column
-        # Start weight is set in preprocess_data
-        items = items.drop("Start Weight", axis=1)
-        return items
+    #     # We are using the start weight specific to this trial so drop the Start Weight column
+    #     # Start weight is set in preprocess_data
+    #     items = items.drop("Start Weight", axis=1)
+    #     return items
 
     def preprocess_data(self, data):
         # Only use observations at the end
