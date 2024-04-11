@@ -49,7 +49,8 @@ class AbstractDataPipeline(ABC):
     def __init__(
         self,
         data_filepath,
-        items_filepath=ITEMS_PATH,
+        items=ITEMS,
+        item2id=item2id,
         trial=None,
         sheet_name=0,
         skiprows=0,
@@ -64,35 +65,12 @@ class AbstractDataPipeline(ABC):
         self.data = self.load_data(
             data_filepath, sheet_name=sheet_name, skiprows=skiprows
         )
-        # self.items = self.load_items(items_filepath)
-        # self.item2id = self.load_items_map()
-        # self.item2id = self.load_extra_items_map() | self.item2id
-        self.items = ITEMS
+        self.items = items
         self.item2id = item2id
 
     @abstractmethod
     def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
         pass
-
-    # def load_items(self, items_filepath):
-    #     """Loads the items DataFrame."""
-    #     items = pd.read_excel(items_filepath, sheet_name=0, skiprows=3)
-    #     items["Start Weight"] = items["Average Initial Weight, g"]
-    #     return items
-
-    # def load_items_map(self):
-    #     return {
-    #         key.strip(): value
-    #         for key, value in self.items.set_index("Item Description Refined")[
-    #             "Item ID"
-    #         ]
-    #         .to_dict()
-    #         .items()
-    #     }
-
-    # def load_extra_items_map(self):
-    #     extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
-    #     return extra_items.set_index("OG Description")["Item ID"].to_dict()
 
     def preprocess_data(self, df):
         return df
@@ -132,21 +110,9 @@ class CASP004Pipeline(AbstractDataPipeline):
         # We are using the start weight specific to this trial so drop the Start Weight column
         # Start weight is set in preprocess_data
         self.items = self.items.drop("Start Weight", axis=1)
-        # """Processes the weight and area DataFrames"""
-        # # We are using the start weight specific to this trial so drop the Start Weight column
-        # # Start weight is set in preprocess_data
-        # items = items.drop("Start Weight", axis=1)
 
     def load_data(self, data_filepath, sheet_name=0, skiprows=0):
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
-
-    # def load_items(self, items_filepath):
-    #     items = super().load_items(items_filepath)
-
-    #     # We are using the start weight specific to this trial so drop the Start Weight column
-    #     # Start weight is set in preprocess_data
-    #     items = items.drop("Start Weight", axis=1)
-    #     return items
 
     def preprocess_data(self, data):
         # Only use observations at the end
@@ -268,7 +234,6 @@ class PDFPipeline(AbstractDataPipeline):
     def load_data(self, data_filepath, sheet_name=0, skiprows=0):
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
-    # TODO: Maybe need to add setup for extra items here
     def join_with_items(self, df):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
