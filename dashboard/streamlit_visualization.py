@@ -1,9 +1,6 @@
-import os
-
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
+import plotly.graph_objects as go
 import streamlit as st
 
 st.set_page_config(
@@ -12,22 +9,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Assuming the CSV files are in the correct directories and accessible
 df = pd.read_csv("dashboard/all_trials_processed.csv")
-# df["% Residuals (Weight)"] = df["% Residuals (Weight)"] * 100
-# df["% Residuals (Area)"] = df["% Residuals (Area)"] * 100
-# observations = observations.astype({"item_ID": str, "facility_ID": str})
-# items = pd.read_csv("dashboard/data/items.csv")
-# items["item_id"] = items["item_id"].astype(str)
-# facilities = pd.read_csv("dashboard/data/facilities.csv")
-# facilities["facility_id"] = facilities["facility_id"].astype(str)
-
-# df_merged = pd.merge(
-#     observations, items, left_on="item_ID", right_on="item_id", how="inner"
-# )
-# df_merged = pd.merge(
-#     df_merged, facilities, left_on="facility_ID", right_on="facility_id", how="inner"
-# )
 
 with st.sidebar:
     st.title("Residual Dashboard")
@@ -37,26 +19,26 @@ with st.sidebar:
         "Select Trial(s)", ["All Trials"] + trial_list, default="All Trials"
     )
 
-    facility_technology_list = list(df["Material Class II"].unique())
-    selected_facility_technologies = st.multiselect(
+    # TODO: This is bad — handle "select all" better
+    # Trial filter
+    if "All Trials" in selected_trials:
+        df = df
+    else:
+        df = df[df.Trial.isin(selected_trials)]
+
+    materials = list(df["Material Class II"].unique())
+    selected_materials = st.multiselect(
         "Select Facility Technology(s)",
-        ["All Technologies"] + facility_technology_list,
+        ["All Technologies"] + materials,
         default="All Technologies",
     )
 
-    # Trial filter
-    if "All Trials" in selected_trials:
-        df_selected_trial = df
-    else:
-        df_selected_trial = df[df.trial_ID.isin(selected_trials)]
-
+    # TODO: Also bad
     # Facility technology filter
-    if "All Technologies" in selected_facility_technologies:
-        df_selected_tech = df_selected_trial
+    if "All Technologies" in selected_materials:
+        df = df
     else:
-        df_selected_tech = df_selected_trial[
-            df_selected_trial["Material Class II"].isin(selected_facility_technologies)
-        ]
+        df = df[df["Material Class II"].isin(selected_materials)]
 
     # Residual type filter
     residual_type = st.selectbox(
@@ -79,6 +61,7 @@ with st.sidebar:
             "Item Types",
         ],
     )
+    # TODO: What? Make this a dictionary or something
     # make this a dictionary
     if material_type == "High-Level Material Categories":
         material = "Material Class I"
@@ -90,69 +73,12 @@ with st.sidebar:
         material = "Material Class III"
 
     # Anomaly filter
-    cap_anomalies = st.checkbox("Limit Residuals to 100%")
+    cap = st.checkbox("Limit Residuals to 100%")
     st.markdown(
         "_Note: for most trials, there are some results with over 100% residuals. "
         "Select this box to limit these values to 100%._",
         unsafe_allow_html=True,
     )
-
-
-def bar_whisker_plot(df, x, y, cap_anomalies):
-    """
-    This function generates a bar and whisker plot.
-    Input:
-    df: a dataframe that contains trial information
-    x: the x-axis chosen by the user of the interface (material types or product types)
-    y: the percent residual measure by mass or surface area
-    cap_anomalies: takes in a boolean value that indicates whether the y-axis should be clipped to 100%
-    """
-    # Check if the DataFrame is empty
-    if df.empty:
-        plt.text(
-            0.5,
-            0.5,
-            "No data available.\nPlease adjust the filter and try again.",
-            horizontalalignment="center",
-            verticalalignment="center",
-            transform=plt.gca().transAxes,
-            fontsize=12,
-        )
-        plt.gca().axes.get_xaxis().set_visible(False)
-        plt.gca().axes.get_yaxis().set_visible(False)
-        plt.show()
-        return  # Exit the function if no data is available
-
-    # Cap anomalies if specified
-    if cap_anomalies:
-        df[y] = df[y].clip(lower=0, upper=100)
-
-    iqr = df.groupby(x)[y].apply(lambda g: g.quantile(0.75) - g.quantile(0.25))
-    nonzero_iqr_order = (
-        df[df[x].isin(iqr[iqr > 0].index)]
-        .groupby(x)[y]
-        .median()
-        .sort_values(ascending=False)
-        .index
-    )
-    zero_iqr_order = iqr[iqr == 0].index
-    order = nonzero_iqr_order.append(zero_iqr_order)
-    plt.figure(figsize=(12, 8))
-    unique = df[x].nunique()
-    palette = sns.color_palette("husl", unique)
-    sns.boxplot(data=df, x=x, y=y, order=order, palette=palette)
-    plt.title(f"{residual_type} for Each {material_type}")
-    plt.xlabel(material_type)
-    plt.ylabel(residual_type)
-    plt.xticks(rotation=45, ha="right")
-
-    plt.tight_layout()
-    plt.show()
-
-
-import matplotlib.colors as mcolors
-import numpy as np
-import plotly.graph_objects as go
 
 class2color = {
     "Positive Control": "#70AD47",
@@ -291,6 +217,6 @@ st.write(
 # st.pyplot(plt)
 
 fig = box_and_whisker(
-    df, column=residual, class_I=None, cap=cap_anomalies, height=800, width=1000
+    df, column=residual, class_I=None, cap=cap, height=800, width=1000
 )
 st.plotly_chart(fig, use_container_width=True)
