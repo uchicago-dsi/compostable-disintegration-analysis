@@ -1,3 +1,4 @@
+import json
 from abc import ABC, abstractmethod
 
 import pandas as pd
@@ -29,6 +30,9 @@ EXTRA_ITEMS_PATH = DATA_FOLDER + "Item IDS for CASP004 CASP003.xlsx"
 
 ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
 ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
+
+old_json = json.load(open("old_items.json", "r"))
+ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
 
 item2id = {
     key.strip(): value
@@ -292,6 +296,8 @@ all_trials = all_trials[~(all_trials["Material Class II"] == "Mixed Materials")]
 all_trials = all_trials[
     ~(all_trials["Item Name"] == "Multi-laminate stand-up pounch with zipper")
 ]
+# Exclude anything over 1000% as outlier
+all_trials = all_trials[all_trials["% Residuals (Weight)"] < 10]
 
 all_trials.to_csv(output_filepath, index=False)
 print("Complete!")
