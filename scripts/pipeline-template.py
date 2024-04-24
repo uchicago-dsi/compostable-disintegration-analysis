@@ -17,6 +17,7 @@ TRIAL_COLS = [
     "Item ID",
     "Item Name",
     "Item Description Refined",
+    "Item Description Refined (Trial)",
     "Material Class I",
     "Material Class II",
     "Material Class III",
@@ -80,7 +81,6 @@ class AbstractDataPipeline(ABC):
         return df
 
     def join_with_items(self, df):
-        """Processes the weight and area DataFrames"""
         return pd.merge(self.items, df, on="Item ID")
 
     def calculate_results(self, df):
@@ -146,8 +146,9 @@ class CASP004Pipeline(AbstractDataPipeline):
         # TODO: Some of this should be in the abstract method...
         df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
-        drop_cols = ["Item Description Refined"]
-        df = df.drop(drop_cols, axis=1)
+        df = df.rename(
+            columns={"Item Description Refined": "Item Description Refined (Trial)"}
+        )
         assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
 
         return df
@@ -220,6 +221,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
     def preprocess_data(self, df):
         df = df[df["Trial Stage"] == "Second Removal"]
         df = df.rename(columns={"Facility Name": "Trial"})
+        df["Item Description Refined (Trial)"] = None
         return df
 
 
@@ -242,7 +244,10 @@ class PDFPipeline(AbstractDataPipeline):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
-        drop_cols = ["Item Description From Trial", "Item Description Refined"]
+        df = df.rename(
+            columns={"Item Description Refined": "Item Description Refined (Trial)"}
+        )
+        drop_cols = ["Item Description From Trial"]
         df = df.drop(drop_cols, axis=1)
         assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
         return pd.merge(self.items, df, on="Item ID")
