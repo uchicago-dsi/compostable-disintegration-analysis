@@ -15,6 +15,7 @@ DATA_FOLDER = "../data/"
 TRIAL_COLS = [
     "Trial",
     "Item ID",
+    "Item Format",
     "Item Name",
     "Item Description Refined",
     "Item Description Refined (Trial)",
