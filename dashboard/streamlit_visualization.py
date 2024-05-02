@@ -173,6 +173,9 @@ def box_and_whisker(
     data = []
     x_labels = []
 
+    # Don't allow disintegration rates to be negative
+    df[column] = df[column].clip(lower=0)
+
     if cap:
         df[column] = df[column].clip(upper=1)
 
