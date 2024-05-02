@@ -10,6 +10,8 @@ st.set_page_config(
 )
 
 df = pd.read_csv("dashboard/all_trials_processed.csv")
+df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
+df["% Disintegrated (Area)"] = 1 - df["% Residuals (Area)"]
 
 with st.sidebar:
     st.title("Select Results to Show")
@@ -42,15 +44,24 @@ with st.sidebar:
         df = df[df["Material Class II"].isin(selected_materials)]
 
     # Residual type filter
-    residual_type = st.selectbox(
-        "Show Residuals by Mass or by Surface Area",
-        ["Residual by Mass", "Residual by Surface Area"],
+    # TODO: How do we wat to phrase this?
+    display = st.selectbox(
+        "Show by Mass or by Surface Area",
+        [
+            "Residual by Mass",
+            "Residual by Surface Area",
+            "Disintegrated by Mass",
+            "Disintegrated by Surface Area",
+        ],
     )
-    residual = (
-        "% Residuals (Weight)"
-        if residual_type == "Residual by Mass"
-        else "% Residuals (Area)"
-    )
+    display_dict = {
+        "Residual by Mass": "% Residuals (Weight)",
+        "Residual by Surface Area": "% Residuals (Area)",
+        "Disintegrated by Mass": "% Disintegrated (Weight)",
+        "Disintegrated by Surface Area": "% Disintegrated (Area)",
+    }
+
+    display_col = display_dict.get(display)
 
     # Material type filter
     material_type = st.selectbox(
@@ -63,7 +74,6 @@ with st.sidebar:
         ],
     )
     # TODO: What? Make this a dictionary or something
-    # make this a dictionary
     if material_type == "High-Level Material Categories":
         material = "Material Class I"
     elif material_type == "Generic Material Categories":
@@ -80,6 +90,7 @@ with st.sidebar:
         "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
         unsafe_allow_html=True,
     )
+    hide_empty = st.checkbox("Hide categories with no data")
 
 class2color = {
     "Positive Control": "#70AD47",
@@ -106,11 +117,14 @@ def box_and_whisker(
     column,
     groupby="Material Class II",
     cap=False,
+    hide_empty=False,
     height=800,
     width=1000,
     save=False,
 ):
     df = df_input.copy()  # prevent modifying actual dataframe
+    if hide_empty:
+        df = df.dropna(subset=[column])
 
     data = []
     x_labels = []
@@ -132,6 +146,7 @@ def box_and_whisker(
         group = df[df[groupby] == material]
         if not group.empty:
             count = group[column].count()
+            # TODO: Wait...I don't think this should be this specific for Material Class I...
             class_I_name = group["Material Class I"].iloc[0]
             color = class2color.get(class_I_name, "#000")
             trace = go.Box(
@@ -195,6 +210,12 @@ st.write(
 )
 
 fig = box_and_whisker(
-    df, column=residual, groupby=material, cap=cap, height=800, width=1000
+    df,
+    column=display_col,
+    groupby=material,
+    cap=cap,
+    hide_empty=hide_empty,
+    height=800,
+    width=1000,
 )
 st.plotly_chart(fig, use_container_width=True)
