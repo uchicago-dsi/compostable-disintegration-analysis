@@ -40,26 +40,33 @@ st.write(
     """
 )
 
+# TODO: Maybe I should keep all of this in session state, then update stuff so that you can't add additional stuff to the selection if "All Trials", etc. is selected
+if "test_methods" not in st.session_state:
+    st.session_state.test_methods = ["All Test Methods"]
+
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    trial_list = sorted(list(df["Trial ID"].unique()))
-    selected_trials = st.multiselect(
-        "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
+    test_methods = list(df["Test Method"].unique())
+    st.session_state.test_methods = st.multiselect(
+        "Select test method(s)",
+        ["All Test Methods"] + test_methods,
+        default="All Test Methods",
     )
+
+with col1:
+    if st.session_state.test_methods != ["Bulk Dose"]:
+        trial_list = sorted(list(df["Trial ID"].unique()))
+        selected_trials = st.multiselect(
+            "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
+        )
+    else:
+        st.write("Trial selection is disabled for bulk dose test method.")
     # Anomaly filter
     cap = not st.checkbox("Show results with over 100% Residuals Remaining")
     st.markdown(
         "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
         unsafe_allow_html=True,
-    )
-
-with col2:
-    test_methods = list(df["Test Method"].unique())
-    test_methods = st.multiselect(
-        "Select test method(s)",
-        ["All Test Methods"] + test_methods,
-        default="All Test Methods",
     )
 
 with col2:
@@ -112,8 +119,8 @@ display_dict = {
 
 display_col = display_dict.get(display)
 
-if "All Test Methods" not in test_methods:
-    df = df[df["Test Method"].isin(test_methods)]
+if "All Test Methods" not in st.session_state.test_methods:
+    df = df[df["Test Method"].isin(st.session_state.test_methods)]
 
 if "All Technologies" not in selected_technologies:
     df = df[df["Technology"].isin(selected_technologies)]
