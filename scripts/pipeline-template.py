@@ -13,7 +13,8 @@ DATA_FOLDER = "../data/"
 # TODO: Maybe put this in the class?
 # Can also keep bags, etc if we want them
 TRIAL_COLS = [
-    "Trial",
+    "Trial ID",
+    "Test Method",
     "Item ID",
     "Item Format",
     "Item Name",
@@ -47,6 +48,24 @@ extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
 extra_items = extra_items.set_index("OG Description")["Item ID"].to_dict()
 
 item2id = item2id | extra_items
+
+TRIALS_PATH = (
+    DATA_FOLDER + "CFTP Anonymized Data Compilation Overview - For Sharing.xlsx"
+)
+TRIALS = pd.read_excel(TRIALS_PATH, skiprows=3)
+
+trial2id = {
+    "Facility 1 (Windrow)": "WR004-01",
+    "Facility 2 (CASP)": "CASP005-01",
+    "Facility 3 (EASP)": "EASP001-01",
+    "Facility 4 (In-Vessel)": "IV002-01",
+    "Facility 5 (EASP)": "EASP002-01",
+    "Facility 6 (CASP)": "CASP006-01",
+    "Facility 7 (CASP)": "CASP004-02",
+    "Facility 8 (ASP)": "ASP001-01",
+    "Facility 9 (EASP)": "EASP003-01",
+    "Facility 10 (Windrow)": "WR005-01",
+}
 
 processed_data = []
 
@@ -87,18 +106,13 @@ class AbstractDataPipeline(ABC):
     def calculate_results(self, df):
         return df
 
-    def save_data(self, df):
-        df = df[TRIAL_COLS]
-        df.to_csv(self.output_filepath, index=False)
-        return df
-
     def run(self, save=False):
         print(f"Running data pipeline for {self.trial}")
         df = self.data.copy()
         df = self.preprocess_data(df)
         df = self.join_with_items(df)
         df = self.calculate_results(df)
-        df = self.save_data(df)
+        df = pd.merge(df, TRIALS, left_on="Trial ID", right_on="Public Trial ID")
         df = df[TRIAL_COLS]
         if save:
             df.to_csv(self.output_filepath, index=False)
@@ -150,6 +164,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         df = df.rename(
             columns={"Item Description Refined": "Item Description Refined (Trial)"}
         )
+        df["Trial ID"] = "CASP004-01"
         assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
 
         return df
@@ -196,7 +211,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         ]
         return (
             df.melt(
-                id_vars=["Facility Name", "Trial Stage", "Bag Set", "Bag Number"],
+                id_vars=["Trial ID", "Trial Stage", "Bag Set", "Bag Number"],
                 value_vars=item_ids,
                 var_name="Item ID",
                 value_name=value_name,
@@ -210,19 +225,19 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         weight_melted = self.melt_trial(df_weight, "% Residuals (Weight)")
 
         df_area = pd.read_excel(data_filepath, sheet_name=4, skiprows=2)
+        df_area["Trial ID"] = df_area["Facility Name"].map(trial2id)
         area_melted = self.melt_trial(df_area, "% Residuals (Area)")
 
         return pd.merge(
             weight_melted,
             area_melted,
-            on=["Facility Name", "Trial Stage", "Bag Set", "Bag Number", "Item ID"],
+            on=["Trial ID", "Trial Stage", "Bag Set", "Bag Number", "Item ID"],
             how="outer",
         )
 
     def preprocess_data(self, df):
-        df = df[df["Trial Stage"] == "Second Removal"]
-        df = df.rename(columns={"Facility Name": "Trial"})
         df["Item Description Refined (Trial)"] = None
+        df = df[df["Trial Stage"] == "Second Removal"]
         return df
 
 

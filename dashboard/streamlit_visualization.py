@@ -13,6 +13,24 @@ df = pd.read_csv("dashboard/all_trials_processed.csv")
 df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
 df["% Disintegrated (Area)"] = 1 - df["% Residuals (Area)"]
 
+id2technology = {
+    "WR": "Windrow",
+    "CASP": "Covered or Extended Aerated Static Pile",
+    "EASP": "Covered or Extended Aerated Static Pile",
+    "ASP": "Aerated Static Pile",
+    "IV": "In-Vessel",
+}
+
+
+def map_technology(trial_id):
+    for key in id2technology:
+        if key in trial_id:
+            return id2technology[key]
+    return "Unknown"
+
+
+df["Technology"] = df["Trial ID"].apply(map_technology)
+
 st.markdown("#### CFTP Field Test Results Dashboard")
 st.write(
     """
@@ -22,81 +40,10 @@ st.write(
     """
 )
 
-# with st.sidebar:
-#     st.title("Select Results to Show")
-
-#     trial_list = list(df.Trial.unique())
-#     selected_trials = st.multiselect(
-#         "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
-#     )
-
-#     # TODO: This is bad — handle "select all" better
-#     # Trial filter
-#     if "All Trials" in selected_trials:
-#         df = df
-#     else:
-#         df = df[df.Trial.isin(selected_trials)]
-
-#     # TODO: maybe fix this part here...what do we want to do
-#     materials = list(df["Material Class II"].unique())
-#     selected_materials = st.multiselect(
-#         "Select material type(s)",
-#         ["All Technologies"] + materials,
-#         default="All Technologies",
-#     )
-
-#     # TODO: Also bad
-#     # Facility technology filter
-#     if "All Technologies" in selected_materials:
-#         df = df
-#     else:
-#         df = df[df["Material Class II"].isin(selected_materials)]
-
-#     # Residual type filter
-#     # TODO: How do we wat to phrase this?
-#     display = st.selectbox(
-#         "Show by Mass or by Surface Area",
-#         [
-#             "Residual by Mass",
-#             "Residual by Surface Area",
-#             "Disintegrated by Mass",
-#             "Disintegrated by Surface Area",
-#         ],
-#     )
-#     display_dict = {
-#         "Residual by Mass": "% Residuals (Weight)",
-#         "Residual by Surface Area": "% Residuals (Area)",
-#         "Disintegrated by Mass": "% Disintegrated (Weight)",
-#         "Disintegrated by Surface Area": "% Disintegrated (Area)",
-#     }
-
-#     display_col = display_dict.get(display)
-
-#     # Material type filter
-#     material_type = st.selectbox(
-#         "Choose x-axis display",
-#         [
-#             "High-Level Material Categories",
-#             "Generic Material Categories",
-#             "Specific Material Categories",
-#             "Item Types",
-#         ],
-#     )
-#     # TODO: What? Make this a dictionary or something
-#     if material_type == "High-Level Material Categories":
-#         material = "Material Class I"
-#     elif material_type == "Generic Material Categories":
-#         material = "Material Class II"
-#     # TODO: Maybe enforce sort order for this
-#     elif material_type == "Item Types":
-#         material = "Item Format"
-#     else:
-#         material = "Material Class III"
-
-col1, col2, col3, col4 = st.columns(4)  # Create four columns for the controls
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    trial_list = list(df.Trial.unique())
+    trial_list = sorted(list(df["Trial ID"].unique()))
     selected_trials = st.multiselect(
         "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
     )
@@ -108,13 +55,31 @@ with col1:
     )
 
 with col2:
+    test_methods = list(df["Test Method"].unique())
+    test_methods = st.multiselect(
+        "Select test method(s)",
+        ["All Test Methods"] + test_methods,
+        default="All Test Methods",
+    )
+
+with col2:
     materials = list(df["Material Class II"].unique())
     selected_materials = st.multiselect(
         "Select material type(s)",
-        ["All Technologies"] + materials,
+        ["All Materials"] + materials,
+        default="All Materials",
+    )
+
+    hide_empty = st.checkbox("Hide categories with no data")
+
+
+with col3:
+    technology = sorted(list(df["Technology"].unique()))
+    selected_technologies = st.multiselect(
+        "Select technology",
+        ["All Technologies"] + technology,
         default="All Technologies",
     )
-    hide_empty = st.checkbox("Hide categories with no data")
 
 with col3:
     display = st.selectbox(
@@ -146,6 +111,12 @@ display_dict = {
 }
 
 display_col = display_dict.get(display)
+
+if "All Test Methods" not in test_methods:
+    df = df[df["Test Method"].isin(test_methods)]
+
+if "All Technologies" not in selected_technologies:
+    df = df[df["Technology"].isin(selected_technologies)]
 
 # TODO: What? Make this a dictionary or something
 if material_type == "High-Level Material Categories":
