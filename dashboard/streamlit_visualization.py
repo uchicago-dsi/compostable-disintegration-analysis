@@ -12,11 +12,11 @@ st.set_page_config(
 df = pd.read_csv("dashboard/all_trials_processed.csv")
 
 with st.sidebar:
-    st.title("Residual Dashboard")
+    st.title("Select Results to Show")
 
     trial_list = list(df.Trial.unique())
     selected_trials = st.multiselect(
-        "Select Trial(s)", ["All Trials"] + trial_list, default="All Trials"
+        "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
     )
 
     # TODO: This is bad — handle "select all" better
@@ -26,9 +26,10 @@ with st.sidebar:
     else:
         df = df[df.Trial.isin(selected_trials)]
 
+    # TODO: maybe fix this part here...what do we want to do
     materials = list(df["Material Class II"].unique())
     selected_materials = st.multiselect(
-        "Select Facility Technology(s)",
+        "Select material type(s)",
         ["All Technologies"] + materials,
         default="All Technologies",
     )
@@ -42,7 +43,7 @@ with st.sidebar:
 
     # Residual type filter
     residual_type = st.selectbox(
-        "Show Residuals by Mass or Surface Area",
+        "Show Residuals by Mass or by Surface Area",
         ["Residual by Mass", "Residual by Surface Area"],
     )
     residual = (
@@ -53,7 +54,7 @@ with st.sidebar:
 
     # Material type filter
     material_type = st.selectbox(
-        "Choose X-Axis Display",
+        "Choose x-axis display",
         [
             "High-Level Material Categories",
             "Generic Material Categories",
@@ -67,16 +68,16 @@ with st.sidebar:
         material = "Material Class I"
     elif material_type == "Generic Material Categories":
         material = "Material Class II"
+    # TODO: Maybe enforce sort order for this
     elif material_type == "Item Types":
-        material = "Item Name"
+        material = "Item Format"
     else:
         material = "Material Class III"
 
     # Anomaly filter
-    cap = st.checkbox("Limit Residuals to 100%")
+    cap = not st.checkbox("Show results with over 100% Residuals Remaining")
     st.markdown(
-        "_Note: for most trials, there are some results with over 100% residuals. "
-        "Select this box to limit these values to 100%._",
+        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
         unsafe_allow_html=True,
     )
 
@@ -184,15 +185,12 @@ def box_and_whisker(
     return fig
 
 
-st.markdown("#### Product Residual Analysis of Field Testing Results")
+st.markdown("#### CFTP Field Test Results Dashboard")
 st.write(
     """
-    The Compost Research & Education Foundation (CREF) investigates the breakdown 
-    of compostable foodware and packaging products. This research is conducted under the Compostable 
-    Field Testing Program, where facilities submit data that CREF uses to establish composting best practices.
-    This interactive dashboard presents analysis of composting efficiency based on item types and material types of individual items,
-    using field testing data from 16 separate trials.
+    The Compostable Field Testing Program (CFTP) is an international, open-source research platform for composters to field test the disintegration of compostable foodware and packaging in their real-world operations. Operating since 2016, the CFTP has collected data from field trials conducted at compost facilities varying in geography, scale and processing technologies. 
 
+    The University of Chicago Data Science Institute (DSI) and CFTP, with support from the 11th Hour Project, have created this interactive dashboard for public use. This interactive dashboard presents the residuals remaining at the end of a field test. 
     """
 )
 
