@@ -31,38 +31,27 @@ def map_technology(trial_id):
 
 df["Technology"] = df["Trial ID"].apply(map_technology)
 
-st.markdown("#### CFTP Field Test Results Dashboard")
-st.write(
-    """
-    The Compostable Field Testing Program (CFTP) is an international, open-source research platform for composters to field test the disintegration of compostable foodware and packaging in their real-world operations. Operating since 2016, the CFTP has collected data from field trials conducted at compost facilities varying in geography, scale and processing technologies. 
 
-    The University of Chicago Data Science Institute (DSI) and CFTP, with support from the 11th Hour Project, have created this interactive dashboard for public use. This interactive dashboard presents the residuals remaining at the end of a field test. 
-    """
-)
+# TODO: Maybe I should keep all of this in session state, then update stuff so that you can't add additional stuff to the selection if "All Trials", etc. is selected
+if "test_methods" not in st.session_state:
+    st.session_state.test_methods = ["All Test Methods"]
 
-col1, col2, col3, col4, col5 = st.columns(5)
-
-with col1:
-    trial_list = sorted(list(df["Trial ID"].unique()))
-    selected_trials = st.multiselect(
-        "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
-    )
-    # Anomaly filter
-    cap = not st.checkbox("Show results with over 100% Residuals Remaining")
-    st.markdown(
-        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
-        unsafe_allow_html=True,
-    )
-
-with col2:
+with st.sidebar:
     test_methods = list(df["Test Method"].unique())
-    test_methods = st.multiselect(
+    st.session_state.test_methods = st.multiselect(
         "Select test method(s)",
         ["All Test Methods"] + test_methods,
         default="All Test Methods",
     )
 
-with col2:
+    if st.session_state.test_methods != ["Bulk Dose"]:
+        trial_list = sorted(list(df["Trial ID"].unique()))
+        selected_trials = st.multiselect(
+            "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
+        )
+    else:
+        st.write("Trial selection is disabled for bulk dose test method.")
+
     materials = list(df["Material Class II"].unique())
     selected_materials = st.multiselect(
         "Select material type(s)",
@@ -70,10 +59,6 @@ with col2:
         default="All Materials",
     )
 
-    hide_empty = st.checkbox("Hide categories with no data")
-
-
-with col3:
     technology = sorted(list(df["Technology"].unique()))
     selected_technologies = st.multiselect(
         "Select technology",
@@ -81,7 +66,6 @@ with col3:
         default="All Technologies",
     )
 
-with col3:
     display = st.selectbox(
         "Show by Mass or by Surface Area",
         [
@@ -92,7 +76,6 @@ with col3:
         ],
     )
 
-with col4:
     material_type = st.selectbox(
         "Choose x-axis display",
         [
@@ -103,6 +86,25 @@ with col4:
         ],
     )
 
+    # Anomaly filter
+    cap = not st.checkbox("Show results with over 100% Residuals Remaining")
+    st.markdown(
+        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
+        unsafe_allow_html=True,
+    )
+
+    hide_empty = st.checkbox("Hide categories with no data")
+
+st.markdown("#### CFTP Field Test Results Dashboard")
+st.write(
+    """
+    The Compostable Field Testing Program (CFTP) is an international, open-source research platform for composters to field test the disintegration of compostable foodware and packaging in their real-world operations. Operating since 2016, the CFTP has collected data from field trials conducted at compost facilities varying in geography, scale and processing technologies. 
+
+    The University of Chicago Data Science Institute (DSI) and CFTP, with support from the 11th Hour Project, have created this interactive dashboard for public use. This interactive dashboard presents the residuals remaining at the end of a field test. 
+    """
+)
+
+
 display_dict = {
     "Residual by Mass": "% Residuals (Weight)",
     "Residual by Surface Area": "% Residuals (Area)",
@@ -112,8 +114,8 @@ display_dict = {
 
 display_col = display_dict.get(display)
 
-if "All Test Methods" not in test_methods:
-    df = df[df["Test Method"].isin(test_methods)]
+if "All Test Methods" not in st.session_state.test_methods:
+    df = df[df["Test Method"].isin(st.session_state.test_methods)]
 
 if "All Technologies" not in selected_technologies:
     df = df[df["Technology"].isin(selected_technologies)]
@@ -165,6 +167,9 @@ def box_and_whisker(
 
     data = []
     x_labels = []
+
+    # Don't allow disintegration rates to be negative
+    df[column] = df[column].clip(lower=0)
 
     if cap:
         df[column] = df[column].clip(upper=1)
