@@ -9,4 +9,9 @@ ipykernel~=6.16
 
 # project packages
 pandas~=2.1
-
+openpyxl
+streamlit
+numpy
+matplotlib
+plotly
+kaleido
