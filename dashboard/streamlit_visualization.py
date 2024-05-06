@@ -9,6 +9,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+temps = pd.read_csv("dashboard/temperatures.csv", index_col=0)
+
 df = pd.read_csv("dashboard/all_trials_processed.csv")
 df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
 df["% Disintegrated (Area)"] = 1 - df["% Residuals (Area)"]
@@ -76,6 +78,11 @@ with st.sidebar:
         ],
     )
 
+    temp_filter = st.selectbox(
+        "Select average temperature range",
+        ["All Temperatures", "≤140F", "140-150F", "150-160F", "≥160F"],
+    )
+
     material_type = st.selectbox(
         "Choose x-axis display",
         [
@@ -119,6 +126,24 @@ if "All Test Methods" not in st.session_state.test_methods:
 
 if "All Technologies" not in selected_technologies:
     df = df[df["Technology"].isin(selected_technologies)]
+
+
+def get_filtered_trial_ids(df, col, low, high):
+    return list(df[(df[col] >= low) & (df[col] <= high)].index)
+
+
+if temp_filter != "All Temperatures":
+    col = "Average Temperature (F)"
+    if temp_filter == "≤140F":
+        facility_ids = get_filtered_trial_ids(temps, col, -float("inf"), 140)
+    elif temp_filter == "140-150F":
+        facility_ids = get_filtered_trial_ids(temps, col, 140, 150)
+    elif temp_filter == "150-160F":
+        facility_ids = get_filtered_trial_ids(temps, col, 150, 160)
+    elif temp_filter == "≥160F":
+        facility_ids = get_filtered_trial_ids(temps, col, 160, float("inf"))
+    df = df[df["Trial ID"].isin(facility_ids)]
+
 
 # TODO: What? Make this a dictionary or something
 if material_type == "High-Level Material Categories":
