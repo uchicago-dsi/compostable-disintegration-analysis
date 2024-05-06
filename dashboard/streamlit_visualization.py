@@ -145,16 +145,13 @@ if temp_filter != "All Temperatures":
     df = df[df["Trial ID"].isin(facility_ids)]
 
 
-# TODO: What? Make this a dictionary or something
-if material_type == "High-Level Material Categories":
-    material = "Material Class I"
-elif material_type == "Generic Material Categories":
-    material = "Material Class II"
-# TODO: Maybe enforce sort order for this
-elif material_type == "Item Types":
-    material = "Item Format"
-else:
-    material = "Material Class III"
+selection2material = {
+    "High-Level Material Categories": "Material Class I",
+    "Generic Material Categories": "Material Class II",
+    "Specific Material Categories": "Material Class III",
+    "Item Types": "Item Format",
+}
+material_col = selection2material.get(material_type, "Material Class I")
 
 class2color = {
     "Positive Control": "#70AD47",
