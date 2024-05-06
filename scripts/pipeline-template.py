@@ -67,6 +67,16 @@ trial2id = {
     "Facility 10 (Windrow)": "WR005-01",
 }
 
+OPERATING_CONDITIONS_PATH = (
+    DATA_FOLDER + "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
+)
+TEMPS = pd.read_excel(
+    OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #"
+)
+TEMPS.columns = [trial2id[col.replace("*", "")] for col in TEMPS.columns]
+TEMPS = TEMPS.mean().to_frame("Average Temperature (F)")
+TEMPS.to_csv(DATA_FOLDER + "temperatures.csv")
+
 processed_data = []
 
 
