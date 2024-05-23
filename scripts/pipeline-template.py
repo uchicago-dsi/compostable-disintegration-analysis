@@ -36,7 +36,7 @@ EXTRA_ITEMS_PATH = DATA_DIR / "Item IDS for CASP004 CASP003.xlsx"
 ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
 ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
 
-old_json = json.load(open("old_items.json", "r"))
+old_json = json.load(open(DATA_DIR / "old_items.json", "r"))
 ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
 
 item2id = {
@@ -75,7 +75,15 @@ TEMPS = pd.read_excel(
 )
 TEMPS.columns = [trial2id[col.replace("*", "")] for col in TEMPS.columns]
 TEMPS = TEMPS.mean().to_frame("Average Temperature (F)")
-TEMPS.to_csv(DATA_DIR + "temperatures.csv")
+TEMPS.to_csv(DATA_DIR / "temperatures.csv")
+
+TRIAL_LENGTHS = pd.read_excel(
+    OPERATING_CONDITIONS_PATH,
+    sheet_name=2,
+    skiprows=3,
+)
+
+breakpoint()
 
 processed_data = []
 
