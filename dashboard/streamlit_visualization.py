@@ -10,6 +10,7 @@ st.set_page_config(
 )
 
 temps = pd.read_csv("dashboard/temperatures.csv", index_col=0)
+trial_durations = pd.read_csv("dashboard/trial_durations.csv", index_col=0)
 
 df = pd.read_csv("dashboard/all_trials_processed.csv")
 df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
@@ -68,19 +69,30 @@ with st.sidebar:
         default="All Technologies",
     )
 
-    display = st.selectbox(
-        "Show by Mass or by Surface Area",
+    mass_or_area = st.selectbox(
+        "Show Results by Mass or by Surface Area",
         [
-            "Residual by Mass",
-            "Residual by Surface Area",
-            "Disintegrated by Mass",
-            "Disintegrated by Surface Area",
+            "Mass",
+            "Surface Area",
+        ],
+    )
+
+    residuals_or_disintegration = st.selectbox(
+        "Show by Residuals Remaining or by Percent Disintegrated",
+        [
+            "Residuals Remaining",
+            "Percent Disintegrated",
         ],
     )
 
     temp_filter = st.selectbox(
-        "Select average temperature range",
+        "Select Average Temperature Range",
         ["All Temperatures", "≤140F", "140-150F", "150-160F", "≥160F"],
+    )
+
+    duration_filter = st.selectbox(
+        "Select Trial Duration Range",
+        ["All Durations", "30-45 Days", "45-75 Days", "≥75 Days"],
     )
 
     material_type = st.selectbox(
@@ -96,11 +108,11 @@ with st.sidebar:
     # Anomaly filter
     cap = not st.checkbox("Show results with over 100% Residuals Remaining")
     st.markdown(
-        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
+        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals. Disintegration results are always capped at 0% (no negative disintegration results)_",
         unsafe_allow_html=True,
     )
 
-    hide_empty = st.checkbox("Hide categories with no data")
+    # hide_empty = st.checkbox("Hide categories with no data")
 
 st.markdown("#### CFTP Field Test Results Dashboard")
 st.write(
@@ -111,15 +123,13 @@ st.write(
     """
 )
 
-
 display_dict = {
-    "Residual by Mass": "% Residuals (Weight)",
-    "Residual by Surface Area": "% Residuals (Area)",
-    "Disintegrated by Mass": "% Disintegrated (Weight)",
-    "Disintegrated by Surface Area": "% Disintegrated (Area)",
+    ("Mass", "Residuals Remaining"): "% Residuals (Weight)",
+    ("Mass", "Percent Disintegrated"): "% Disintegrated (Weight)",
+    ("Surface Area", "Residuals Remaining"): "% Residuals (Area)",
+    ("Surface Area", "Percent Disintegrated"): "% Disintegrated (Area)",
 }
-
-display_col = display_dict.get(display)
+display_col = display_dict[(mass_or_area, residuals_or_disintegration)]
 
 if "All Test Methods" not in st.session_state.test_methods:
     df = df[df["Test Method"].isin(st.session_state.test_methods)]
@@ -132,29 +142,39 @@ def get_filtered_trial_ids(df, col, low, high):
     return list(df[(df[col] >= low) & (df[col] <= high)].index)
 
 
+temp_dict = {
+    "≤140F": (-float("inf"), 140),
+    "140-150F": (140, 150),
+    "150-160F": (150, 160),
+    "≥160F": (160, float("inf")),
+}
+
 if temp_filter != "All Temperatures":
     col = "Average Temperature (F)"
-    if temp_filter == "≤140F":
-        facility_ids = get_filtered_trial_ids(temps, col, -float("inf"), 140)
-    elif temp_filter == "140-150F":
-        facility_ids = get_filtered_trial_ids(temps, col, 140, 150)
-    elif temp_filter == "150-160F":
-        facility_ids = get_filtered_trial_ids(temps, col, 150, 160)
-    elif temp_filter == "≥160F":
-        facility_ids = get_filtered_trial_ids(temps, col, 160, float("inf"))
+    low, high = temp_dict[temp_filter]
+    facility_ids = get_filtered_trial_ids(temps, col, low, high)
+    df = df[df["Trial ID"].isin(facility_ids)]
+
+duration_dict = {
+    "30-45 Days": (30, 45),
+    "45-75 Days": (45, 75),
+    "≥75 Days": (75, float("inf")),
+}
+
+if duration_filter != "All Durations":
+    col = "Trial Duration"
+    low, high = duration_dict[duration_filter]
+    facility_ids = get_filtered_trial_ids(trial_durations, col, low, high)
     df = df[df["Trial ID"].isin(facility_ids)]
 
 
-# TODO: What? Make this a dictionary or something
-if material_type == "High-Level Material Categories":
-    material = "Material Class I"
-elif material_type == "Generic Material Categories":
-    material = "Material Class II"
-# TODO: Maybe enforce sort order for this
-elif material_type == "Item Types":
-    material = "Item Format"
-else:
-    material = "Material Class III"
+selection2material = {
+    "High-Level Material Categories": "Material Class I",
+    "Generic Material Categories": "Material Class II",
+    "Specific Material Categories": "Material Class III",
+    "Item Types": "Item Format",
+}
+material_col = selection2material.get(material_type, "Material Class I")
 
 class2color = {
     "Positive Control": "#70AD47",
@@ -181,14 +201,12 @@ def box_and_whisker(
     column,
     groupby="Material Class II",
     cap=False,
-    hide_empty=False,
     height=800,
     width=1000,
     save=False,
+    min_values=5,
 ):
     df = df_input.copy()  # prevent modifying actual dataframe
-    if hide_empty:
-        df = df.dropna(subset=[column])
 
     data = []
     x_labels = []
@@ -211,7 +229,7 @@ def box_and_whisker(
 
     for material in groups:
         group = df[df[groupby] == material]
-        if not group.empty:
+        if len(group) >= min_values:
             count = group[column].count()
             # TODO: Wait...I don't think this should be this specific for Material Class I...
             class_I_name = group["Material Class I"].iloc[0]
@@ -226,6 +244,10 @@ def box_and_whisker(
             )
             data.append(trace)
             x_labels.append(f"     {material}<br>     n={count}")
+
+    if not data:
+        st.error("No data available for the selected criteria.")
+        return
 
     y_axis_title = f"{column}"
     if cap:
@@ -271,20 +293,19 @@ def box_and_whisker(
 fig = box_and_whisker(
     df,
     column=display_col,
-    groupby=material,
+    groupby=material_col,
     cap=cap,
-    hide_empty=hide_empty,
+    min_values=5,
     height=800,
     width=1000,
 )
-st.plotly_chart(fig, use_container_width=True)
+if fig:
+    st.plotly_chart(fig, use_container_width=True)
 
 st.write(
     """
     ##### Definitions
     Results are displayed in terms of the “% Residuals”, i.e. the amount of product that remained at the end of the field test, whether by weight or surface area.
-
-    TODO: Should we include information by percent disintegrated?
 
     - Max: Maximum value
     - Upper Fence (Top Whisker): Third Quartile + 1.5 * Interquartile Range
