@@ -10,6 +10,7 @@ st.set_page_config(
 )
 
 temps = pd.read_csv("dashboard/temperatures.csv", index_col=0)
+trial_durations = pd.read_csv("dashboard/trial_durations.csv", index_col=0)
 
 df = pd.read_csv("dashboard/all_trials_processed.csv")
 df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
@@ -85,8 +86,13 @@ with st.sidebar:
     )
 
     temp_filter = st.selectbox(
-        "Select average temperature range",
+        "Select Average Temperature Range",
         ["All Temperatures", "≤140F", "140-150F", "150-160F", "≥160F"],
+    )
+
+    duration_filter = st.selectbox(
+        "Select Trial Duration Range",
+        ["All Durations", "30-45 Days", "45-75 Days", "≥75 Days"],
     )
 
     material_type = st.selectbox(
@@ -136,16 +142,29 @@ def get_filtered_trial_ids(df, col, low, high):
     return list(df[(df[col] >= low) & (df[col] <= high)].index)
 
 
+temp_dict = {
+    "≤140F": (-float("inf"), 140),
+    "140-150F": (140, 150),
+    "150-160F": (150, 160),
+    "≥160F": (160, float("inf")),
+}
+
 if temp_filter != "All Temperatures":
     col = "Average Temperature (F)"
-    if temp_filter == "≤140F":
-        facility_ids = get_filtered_trial_ids(temps, col, -float("inf"), 140)
-    elif temp_filter == "140-150F":
-        facility_ids = get_filtered_trial_ids(temps, col, 140, 150)
-    elif temp_filter == "150-160F":
-        facility_ids = get_filtered_trial_ids(temps, col, 150, 160)
-    elif temp_filter == "≥160F":
-        facility_ids = get_filtered_trial_ids(temps, col, 160, float("inf"))
+    low, high = temp_dict[temp_filter]
+    facility_ids = get_filtered_trial_ids(temps, col, low, high)
+    df = df[df["Trial ID"].isin(facility_ids)]
+
+duration_dict = {
+    "30-45 Days": (30, 45),
+    "45-75 Days": (45, 75),
+    "≥75 Days": (75, float("inf")),
+}
+
+if duration_filter != "All Durations":
+    col = "Trial Duration"
+    low, high = duration_dict[duration_filter]
+    facility_ids = get_filtered_trial_ids(trial_durations, col, low, high)
     df = df[df["Trial ID"].isin(facility_ids)]
 
 
