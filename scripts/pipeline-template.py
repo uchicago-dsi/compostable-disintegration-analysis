@@ -65,6 +65,16 @@ trial2id = {
     "Facility 8 (ASP)": "ASP001-01",
     "Facility 9 (EASP)": "EASP003-01",
     "Facility 10 (Windrow)": "WR005-01",
+    "Facility 1": "WR004-01",
+    "Facility 2": "CASP005-01",
+    "Facility 3": "EASP001-01",
+    "Facility 4": "IV002-01",
+    "Facility 5": "EASP002-01",
+    "Facility 6": "CASP006-01",
+    "Facility 7": "CASP004-02",
+    "Facility 8": "ASP001-01",
+    "Facility 9": "EASP003-01",
+    "Facility 10": "WR005-01",
 }
 
 OPERATING_CONDITIONS_PATH = (
@@ -93,7 +103,6 @@ TRIAL_DURATION = TRIAL_DURATION[
         "Endpoint Analysis (trial length)": "Trial Duration",
     }
 )
-
 TRIAL_DURATION["Trial ID"] = (
     TRIAL_DURATION["Trial ID"]
     .str.replace("( ", "(")
@@ -101,6 +110,13 @@ TRIAL_DURATION["Trial ID"] = (
     .map(trial2id)
 )
 TRIAL_DURATION.set_index("Trial ID").to_csv(DATA_DIR / "trial_durations.csv")
+
+MOISTURE = pd.read_excel(
+    OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week"
+)
+MOISTURE.columns = [trial2id[col.replace("*", "")] for col in MOISTURE.columns]
+MOISTURE = MOISTURE.mean().to_frame("Average % Moisture (In Field)")
+MOISTURE.to_csv(DATA_DIR / "moisture.csv")
 
 processed_data = []
 
