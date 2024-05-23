@@ -91,7 +91,14 @@ TRIAL_LENGTHS = TRIAL_LENGTHS[
         "Endpoint Analysis (trial length)": "Trial Duration",
     }
 )
-TRIAL_LENGTHS.to_csv(DATA_DIR / "trial_lengths.csv")
+
+TRIAL_LENGTHS["Trial ID"] = (
+    TRIAL_LENGTHS["Trial ID"]
+    .str.replace("( ", "(")
+    .str.replace(" )", ")")
+    .map(trial2id)
+)
+TRIAL_LENGTHS.set_index("Trial ID").to_csv(DATA_DIR / "trial_lengths.csv")
 
 processed_data = []
 
