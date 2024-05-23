@@ -111,8 +111,10 @@ TRIAL_DURATION["Trial ID"] = (
 )
 TRIAL_DURATION.set_index("Trial ID").to_csv(DATA_DIR / "trial_durations.csv")
 
-MOISTURE = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1)
-MOISTURE.columns = [trial2id[col.replace("*", "")] for col in TEMPS.columns]
+MOISTURE = pd.read_excel(
+    OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week"
+)
+MOISTURE.columns = [trial2id[col.replace("*", "")] for col in MOISTURE.columns]
 MOISTURE = MOISTURE.mean().to_frame("Average % Moisture (In Field)")
 MOISTURE.to_csv(DATA_DIR / "moisture.csv")
 
