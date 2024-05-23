@@ -245,6 +245,10 @@ def box_and_whisker(
             data.append(trace)
             x_labels.append(f"     {material}<br>     n={count}")
 
+    if not data:
+        st.error("No data available for the selected criteria.")
+        return
+
     y_axis_title = f"{column}"
     if cap:
         y_axis_title += " Capped"
@@ -295,7 +299,8 @@ fig = box_and_whisker(
     height=800,
     width=1000,
 )
-st.plotly_chart(fig, use_container_width=True)
+if fig:
+    st.plotly_chart(fig, use_container_width=True)
 
 st.write(
     """
