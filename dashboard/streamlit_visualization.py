@@ -68,13 +68,19 @@ with st.sidebar:
         default="All Technologies",
     )
 
-    display = st.selectbox(
-        "Show by Mass or by Surface Area",
+    mass_or_area = st.selectbox(
+        "Show Results by Mass or by Surface Area",
         [
-            "Residual by Mass",
-            "Residual by Surface Area",
-            "Disintegrated by Mass",
-            "Disintegrated by Surface Area",
+            "Mass",
+            "Surface Area",
+        ],
+    )
+
+    residuals_or_disintegration = st.selectbox(
+        "Show by Residuals Remaining or by Percent Disintegrated",
+        [
+            "Residuals Remaining",
+            "Percent Disintegrated",
         ],
     )
 
@@ -96,7 +102,7 @@ with st.sidebar:
     # Anomaly filter
     cap = not st.checkbox("Show results with over 100% Residuals Remaining")
     st.markdown(
-        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals._",
+        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals. Disintegration results are always capped at 0% (no negative disintegration results)_",
         unsafe_allow_html=True,
     )
 
@@ -111,15 +117,13 @@ st.write(
     """
 )
 
-
 display_dict = {
-    "Residual by Mass": "% Residuals (Weight)",
-    "Residual by Surface Area": "% Residuals (Area)",
-    "Disintegrated by Mass": "% Disintegrated (Weight)",
-    "Disintegrated by Surface Area": "% Disintegrated (Area)",
+    ("Mass", "Residuals Remaining"): "% Residuals (Weight)",
+    ("Mass", "Percent Disintegrated"): "% Disintegrated (Weight)",
+    ("Surface Area", "Residuals Remaining"): "% Residuals (Area)",
+    ("Surface Area", "Percent Disintegrated"): "% Disintegrated (Area)",
 }
-
-display_col = display_dict.get(display)
+display_col = display_dict[(mass_or_area, residuals_or_disintegration)]
 
 if "All Test Methods" not in st.session_state.test_methods:
     df = df[df["Test Method"].isin(st.session_state.test_methods)]
@@ -178,15 +182,12 @@ def box_and_whisker(
     column,
     groupby="Material Class II",
     cap=False,
-    # hide_empty=False,
     height=800,
     width=1000,
     save=False,
     min_values=5,
 ):
     df = df_input.copy()  # prevent modifying actual dataframe
-    # if hide_empty:
-    #     df = df.dropna(subset=[column])
 
     data = []
     x_labels = []
