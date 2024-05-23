@@ -77,13 +77,15 @@ TEMPS.columns = [trial2id[col.replace("*", "")] for col in TEMPS.columns]
 TEMPS = TEMPS.mean().to_frame("Average Temperature (F)")
 TEMPS.to_csv(DATA_DIR / "temperatures.csv")
 
-TRIAL_LENGTHS = pd.read_excel(
+TRIAL_DURATION = pd.read_excel(
     OPERATING_CONDITIONS_PATH,
     sheet_name=2,
     skiprows=3,
 )
-TRIAL_LENGTHS.columns = [col.replace("\n", "").strip() for col in TRIAL_LENGTHS.columns]
-TRIAL_LENGTHS = TRIAL_LENGTHS[
+TRIAL_DURATION.columns = [
+    col.replace("\n", "").strip() for col in TRIAL_DURATION.columns
+]
+TRIAL_DURATION = TRIAL_DURATION[
     ["Facility Designation", "Endpoint Analysis (trial length)"]
 ].rename(
     columns={
@@ -92,13 +94,13 @@ TRIAL_LENGTHS = TRIAL_LENGTHS[
     }
 )
 
-TRIAL_LENGTHS["Trial ID"] = (
-    TRIAL_LENGTHS["Trial ID"]
+TRIAL_DURATION["Trial ID"] = (
+    TRIAL_DURATION["Trial ID"]
     .str.replace("( ", "(")
     .str.replace(" )", ")")
     .map(trial2id)
 )
-TRIAL_LENGTHS.set_index("Trial ID").to_csv(DATA_DIR / "trial_lengths.csv")
+TRIAL_DURATION.set_index("Trial ID").to_csv(DATA_DIR / "trial_durations.csv")
 
 processed_data = []
 
