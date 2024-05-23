@@ -100,7 +100,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
-    hide_empty = st.checkbox("Hide categories with no data")
+    # hide_empty = st.checkbox("Hide categories with no data")
 
 st.markdown("#### CFTP Field Test Results Dashboard")
 st.write(
@@ -178,14 +178,15 @@ def box_and_whisker(
     column,
     groupby="Material Class II",
     cap=False,
-    hide_empty=False,
+    # hide_empty=False,
     height=800,
     width=1000,
     save=False,
+    min_values=5,
 ):
     df = df_input.copy()  # prevent modifying actual dataframe
-    if hide_empty:
-        df = df.dropna(subset=[column])
+    # if hide_empty:
+    #     df = df.dropna(subset=[column])
 
     data = []
     x_labels = []
@@ -208,7 +209,7 @@ def box_and_whisker(
 
     for material in groups:
         group = df[df[groupby] == material]
-        if not group.empty:
+        if len(group) >= min_values:
             count = group[column].count()
             # TODO: Wait...I don't think this should be this specific for Material Class I...
             class_I_name = group["Material Class I"].iloc[0]
@@ -268,9 +269,9 @@ def box_and_whisker(
 fig = box_and_whisker(
     df,
     column=display_col,
-    groupby=material,
+    groupby=material_col,
     cap=cap,
-    hide_empty=hide_empty,
+    min_values=5,
     height=800,
     width=1000,
 )
@@ -280,8 +281,6 @@ st.write(
     """
     ##### Definitions
     Results are displayed in terms of the “% Residuals”, i.e. the amount of product that remained at the end of the field test, whether by weight or surface area.
-
-    TODO: Should we include information by percent disintegrated?
 
     - Max: Maximum value
     - Upper Fence (Top Whisker): Third Quartile + 1.5 * Interquartile Range
