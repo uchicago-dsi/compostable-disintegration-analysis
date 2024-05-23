@@ -1,5 +1,7 @@
 import json
+import os
 from abc import ABC, abstractmethod
+from pathlib import Path
 
 import pandas as pd
 
@@ -7,8 +9,8 @@ import pandas as pd
 # TODO: Can I add an assertion to make sure the total number of observations is correct?
 # TODO: figure out the right abstraction for the load items » items should be loaded separately and passed to the class
 
-DATA_FOLDER = "../data/"
-# DATA_FOLDER = "data/"
+CURRENT_DIR = Path(__file__).resolve().parent
+DATA_DIR = CURRENT_DIR / "../data/"
 
 # TODO: Maybe put this in the class?
 # Can also keep bags, etc if we want them
@@ -28,13 +30,13 @@ TRIAL_COLS = [
     "% Residuals (Area)",
 ]
 
-ITEMS_PATH = DATA_FOLDER + "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
-EXTRA_ITEMS_PATH = DATA_FOLDER + "Item IDS for CASP004 CASP003.xlsx"
+ITEMS_PATH = DATA_DIR / "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
+EXTRA_ITEMS_PATH = DATA_DIR / "Item IDS for CASP004 CASP003.xlsx"
 
 ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
 ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
 
-old_json = json.load(open("old_items.json", "r"))
+old_json = json.load(open(DATA_DIR / "old_items.json", "r"))
 ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
 
 item2id = {
@@ -49,9 +51,7 @@ extra_items = extra_items.set_index("OG Description")["Item ID"].to_dict()
 
 item2id = item2id | extra_items
 
-TRIALS_PATH = (
-    DATA_FOLDER + "CFTP Anonymized Data Compilation Overview - For Sharing.xlsx"
-)
+TRIALS_PATH = DATA_DIR / "CFTP Anonymized Data Compilation Overview - For Sharing.xlsx"
 TRIALS = pd.read_excel(TRIALS_PATH, skiprows=3)
 
 trial2id = {
@@ -68,14 +68,39 @@ trial2id = {
 }
 
 OPERATING_CONDITIONS_PATH = (
-    DATA_FOLDER + "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
+    DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
 )
 TEMPS = pd.read_excel(
     OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #"
 )
 TEMPS.columns = [trial2id[col.replace("*", "")] for col in TEMPS.columns]
 TEMPS = TEMPS.mean().to_frame("Average Temperature (F)")
-TEMPS.to_csv(DATA_FOLDER + "temperatures.csv")
+TEMPS.to_csv(DATA_DIR / "temperatures.csv")
+
+TRIAL_DURATION = pd.read_excel(
+    OPERATING_CONDITIONS_PATH,
+    sheet_name=2,
+    skiprows=3,
+)
+TRIAL_DURATION.columns = [
+    col.replace("\n", "").strip() for col in TRIAL_DURATION.columns
+]
+TRIAL_DURATION = TRIAL_DURATION[
+    ["Facility Designation", "Endpoint Analysis (trial length)"]
+].rename(
+    columns={
+        "Facility Designation": "Trial ID",
+        "Endpoint Analysis (trial length)": "Trial Duration",
+    }
+)
+
+TRIAL_DURATION["Trial ID"] = (
+    TRIAL_DURATION["Trial ID"]
+    .str.replace("( ", "(")
+    .str.replace(" )", ")")
+    .map(trial2id)
+)
+TRIAL_DURATION.set_index("Trial ID").to_csv(DATA_DIR / "trial_durations.csv")
 
 processed_data = []
 
@@ -91,10 +116,10 @@ class AbstractDataPipeline(ABC):
         skiprows=0,
     ):
         self.data_filepath = data_filepath
-        filename, _ = self.data_filepath.rsplit(".", 1)
+        filename = self.data_filepath.stem
         self.trial = trial
         file_suffix = f"_{trial}_clean.csv" if self.trial else "_clean.csv"
-        self.output_filepath = filename + file_suffix
+        self.output_filepath = self.data_filepath.with_name(filename + file_suffix)
 
         # TODO: This is kind of messy and could probably be better
         self.data = self.load_data(
@@ -189,7 +214,7 @@ class CASP004Pipeline(AbstractDataPipeline):
 
 
 CASP004_PATH = (
-    DATA_FOLDER + "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
+    DATA_DIR / "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
 casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1, trial="casp004")
 processed_data.append(casp004_pipeline.run())
@@ -251,9 +276,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         return df
 
 
-TEN_TRIALS_PATH = (
-    DATA_FOLDER + "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
-)
+TEN_TRIALS_PATH = DATA_DIR / "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
 closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH, trial="closed_loop")
 processed_data.append(closed_loop_pipeline.run())
 
@@ -287,7 +310,7 @@ class PDFPipeline(AbstractDataPipeline):
         return df
 
 
-PDF_TRIALS = DATA_FOLDER + "Compiled Field Results - CFTP Gathered Data.xlsx"
+PDF_TRIALS = DATA_DIR / "Compiled Field Results - CFTP Gathered Data.xlsx"
 
 ad001_pipeline = PDFPipeline(PDF_TRIALS, trial="ad001", sheet_name=0, skiprows=1)
 processed_data.append(ad001_pipeline.run())
@@ -318,7 +341,7 @@ wr003_pipeline = PDFPipeline(
 )
 processed_data.append(wr003_pipeline.run())
 
-output_filepath = DATA_FOLDER + "all_trials_processed.csv"
+output_filepath = DATA_DIR / "all_trials_processed.csv"
 print(f"Saving all trials to {output_filepath}")
 all_trials = pd.concat(processed_data, ignore_index=True)
 
