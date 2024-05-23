@@ -11,6 +11,7 @@ st.set_page_config(
 
 temps = pd.read_csv("dashboard/temperatures.csv", index_col=0)
 trial_durations = pd.read_csv("dashboard/trial_durations.csv", index_col=0)
+moisture = pd.read_csv("dashboard/moisture.csv", index_col=0)
 
 df = pd.read_csv("dashboard/all_trials_processed.csv")
 df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
@@ -87,12 +88,17 @@ with st.sidebar:
 
     temp_filter = st.selectbox(
         "Select Average Temperature Range",
-        ["All Temperatures", "≤140F", "140-150F", "150-160F", "≥160F"],
+        ["All Temperatures", "<140F", "140-150F", "150-160F", ">160F"],
     )
 
     duration_filter = st.selectbox(
         "Select Trial Duration Range",
-        ["All Durations", "30-45 Days", "45-75 Days", "≥75 Days"],
+        ["All Durations", "30-45 Days", "45-75 Days", ">75 Days"],
+    )
+
+    moisture_filter = st.selectbox(
+        "Select Average Moisture Content (In Field) Range",
+        ["All Moistures", "<45%", "45-60%", ">60%"],
     )
 
     material_type = st.selectbox(
@@ -138,35 +144,51 @@ if "All Technologies" not in selected_technologies:
     df = df[df["Technology"].isin(selected_technologies)]
 
 
-def get_filtered_trial_ids(df, col, low, high):
-    return list(df[(df[col] >= low) & (df[col] <= high)].index)
+def get_filtered_trial_ids(df, col, low, high, inclusive):
+    if inclusive:
+        return list(df[(df[col] >= low) & (df[col] <= high)].index)
+    else:
+        return list(df[(df[col] > low) & (df[col] < high)].index)
 
 
 temp_dict = {
-    "≤140F": (-float("inf"), 140),
-    "140-150F": (140, 150),
-    "150-160F": (150, 160),
-    "≥160F": (160, float("inf")),
+    "<140F": (-float("inf"), 140, False),
+    "140-150F": (140, 150, True),
+    "150-160F": (150, 160, True),
+    ">160F": (160, float("inf"), False),
 }
 
 if temp_filter != "All Temperatures":
     col = "Average Temperature (F)"
-    low, high = temp_dict[temp_filter]
-    facility_ids = get_filtered_trial_ids(temps, col, low, high)
+    low, high, inclusive = temp_dict[temp_filter]
+    facility_ids = get_filtered_trial_ids(temps, col, low, high, inclusive=inclusive)
     df = df[df["Trial ID"].isin(facility_ids)]
 
 duration_dict = {
-    "30-45 Days": (30, 45),
-    "45-75 Days": (45, 75),
-    "≥75 Days": (75, float("inf")),
+    "30-45 Days": (30, 45, True),
+    "45-75 Days": (45, 75, True),
+    ">75 Days": (75, float("inf"), False),
 }
 
 if duration_filter != "All Durations":
     col = "Trial Duration"
-    low, high = duration_dict[duration_filter]
-    facility_ids = get_filtered_trial_ids(trial_durations, col, low, high)
+    low, high, inclusive = duration_dict[duration_filter]
+    facility_ids = get_filtered_trial_ids(
+        trial_durations, col, low, high, inclusive=inclusive
+    )
     df = df[df["Trial ID"].isin(facility_ids)]
 
+moisture_dict = {
+    "<45%": (-float("inf"), 0.45, False),
+    "45-60%": (0.45, 0.60, True),
+    ">60%": (0.60, float("inf"), False),
+}
+
+if moisture_filter != "All Moistures":
+    col = "Average % Moisture (In Field)"
+    low, high, inclusive = moisture_dict[moisture_filter]
+    facility_ids = get_filtered_trial_ids(moisture, col, low, high, inclusive=inclusive)
+    df = df[df["Trial ID"].isin(facility_ids)]
 
 selection2material = {
     "High-Level Material Categories": "Material Class I",
