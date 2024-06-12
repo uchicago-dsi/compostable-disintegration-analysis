@@ -98,7 +98,7 @@ with st.sidebar:
 
     moisture_filter = st.selectbox(
         "Select Average Moisture Content (In Field) Range",
-        ["All Moistures", "<45%", "45-60%", ">60%"],
+        ["All Moistures", "<40%", "40-45%", "45-50%", "50-55%", "55-60%", ">60%"],
     )
 
     material_type = st.selectbox(
@@ -114,7 +114,7 @@ with st.sidebar:
     # Anomaly filter
     cap = not st.checkbox("Show results with over 100% Residuals Remaining")
     st.markdown(
-        "_Note: There are some results by both weight or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals. Disintegration results are always capped at 0% (no negative disintegration results)_",
+        "_Note: There are some results by both mass or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals. Disintegration results are always capped at 0% (no negative disintegration results)_",
         unsafe_allow_html=True,
     )
 
@@ -136,6 +136,9 @@ display_dict = {
     ("Surface Area", "Percent Disintegrated"): "% Disintegrated (Area)",
 }
 display_col = display_dict[(mass_or_area, residuals_or_disintegration)]
+
+if "All Materials" not in selected_materials:
+    df = df[df["Material Class II"].isin(selected_materials)]
 
 if "All Test Methods" not in st.session_state.test_methods:
     df = df[df["Test Method"].isin(st.session_state.test_methods)]
@@ -179,8 +182,11 @@ if duration_filter != "All Durations":
     df = df[df["Trial ID"].isin(facility_ids)]
 
 moisture_dict = {
-    "<45%": (-float("inf"), 0.45, False),
-    "45-60%": (0.45, 0.60, True),
+    "<40%": (-float("inf"), 0.4, False),
+    "40-45%": (0.4, 0.45, True),  # "40-45%": (0.40, 0.45, True),
+    "45-50%": (0.45, 0.50, True),
+    "50-55%": (0.50, 0.55, True),
+    "55-60%": (0.55, 0.60, True),
     ">60%": (0.60, float("inf"), False),
 }
 
@@ -265,7 +271,7 @@ def box_and_whisker(
                 width=0.3,
             )
             data.append(trace)
-            x_labels.append(f"     {material}<br>     n={count}")
+            x_labels.append(f"     {material} (n={count})")
 
     if not data:
         st.error("No data available for the selected criteria.")
@@ -274,6 +280,13 @@ def box_and_whisker(
     y_axis_title = f"{column}"
     if cap:
         y_axis_title += " Capped"
+
+    if len(groups) < 6:
+        tickangle = 0
+    elif len(groups) < 10:
+        tickangle = 45
+    else:
+        tickangle = 90
 
     layout = go.Layout(
         height=height,
@@ -285,7 +298,7 @@ def box_and_whisker(
             ticktext=x_labels,
             title_font=dict(size=20),
             tickfont=dict(size=14),
-            tickangle=90,
+            tickangle=tickangle,
         ),
         yaxis=dict(
             title=y_axis_title,
@@ -295,6 +308,7 @@ def box_and_whisker(
             title_font=dict(size=20),
             tickfont=dict(size=16),
             rangemode="tozero",
+            range=[0, 1],
         ),
     )
 
@@ -327,7 +341,7 @@ if fig:
 st.write(
     """
     ##### Definitions
-    Results are displayed in terms of the “% Residuals”, i.e. the amount of product that remained at the end of the field test, whether by weight or surface area.
+    Results are displayed in terms of the “% Residuals”, i.e. the amount of product that remained at the end of the field test, whether by mass or surface area.
 
     - Max: Maximum value
     - Upper Fence (Top Whisker): Third Quartile + 1.5 * Interquartile Range
