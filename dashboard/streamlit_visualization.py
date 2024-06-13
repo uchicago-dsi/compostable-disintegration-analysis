@@ -223,11 +223,21 @@ class_II_order = [
     "Positive Control - Food Scraps",
 ]
 
+# TODO: Hacky way to generate title...
+title = f"{display_col} by {material_type}"
+if "All Test Methods" not in st.session_state.test_methods:
+    test_methods_str = ", ".join(st.session_state.test_methods)
+    title += f", {test_methods_str}"
+if "All Technologies" not in selected_technologies:
+    technologies_str = ", ".join(selected_technologies)
+    title += f", {technologies_str}"
+
 
 def box_and_whisker(
     df_input,
     column,
     groupby="Material Class II",
+    title=title,
     cap=False,
     height=800,
     width=1000,
@@ -292,6 +302,7 @@ def box_and_whisker(
         height=height,
         width=width,
         showlegend=False,
+        title=dict(text=title, x=0.5, xanchor='center', yanchor='top'),
         xaxis=dict(
             tickmode="array",
             tickvals=list(range(len(x_labels))),
