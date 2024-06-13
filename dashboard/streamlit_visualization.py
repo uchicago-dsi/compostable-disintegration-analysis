@@ -14,7 +14,7 @@ trial_durations = pd.read_csv("dashboard/trial_durations.csv", index_col=0)
 moisture = pd.read_csv("dashboard/moisture.csv", index_col=0)
 
 df = pd.read_csv("dashboard/all_trials_processed.csv")
-df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
+df["% Disintegrated (Mass)"] = 1 - df["% Residuals (Mass)"]
 df["% Disintegrated (Area)"] = 1 - df["% Residuals (Area)"]
 
 id2technology = {
@@ -123,19 +123,22 @@ with st.sidebar:
 st.markdown("#### CFTP Field Test Results Dashboard")
 st.write(
     """
-    The Compostable Field Testing Program (CFTP) is an international, open-source research platform for composters to field test the disintegration of compostable foodware and packaging in their real-world operations. Operating since 2016, the CFTP has collected data from field trials conducted at compost facilities varying in geography, scale and processing technologies. 
+    The Compostable Field Testing Program (CFTP) is an international, open-source research platform for composters to field test the disintegration of compostable foodware and packaging in their real-world operations. Operating since 2016, the CFTP has collected data from field trials conducted at compost facilities varying in geography, scale and processing technologies.
 
-    The University of Chicago Data Science Institute (DSI) and CFTP, with support from the 11th Hour Project, have created this interactive dashboard for public use. This interactive dashboard presents the residuals remaining at the end of a field test. 
+    The University of Chicago Data Science Institute (DSI) and CFTP, with support from the 11th Hour Project, have created this interactive dashboard for public use. This interactive dashboard presents the residuals remaining at the end of a field test.
     """
 )
 
 display_dict = {
-    ("Mass", "Residuals Remaining"): "% Residuals (Weight)",
-    ("Mass", "Percent Disintegrated"): "% Disintegrated (Weight)",
+    ("Mass", "Residuals Remaining"): "% Residuals (Mass)",
+    ("Mass", "Percent Disintegrated"): "% Disintegrated (Mass)",
     ("Surface Area", "Residuals Remaining"): "% Residuals (Area)",
     ("Surface Area", "Percent Disintegrated"): "% Disintegrated (Area)",
 }
 display_col = display_dict[(mass_or_area, residuals_or_disintegration)]
+
+if "All Trials" not in selected_trials:
+    df = df[df["Trial ID"].isin(selected_trials)]
 
 if "All Materials" not in selected_materials:
     df = df[df["Material Class II"].isin(selected_materials)]
@@ -223,11 +226,25 @@ class_II_order = [
     "Positive Control - Food Scraps",
 ]
 
+# TODO: Hacky way to generate title...
+title = f"{display_col} by {material_type}"
+if "All Test Methods" not in st.session_state.test_methods:
+    test_methods_str = ", ".join(st.session_state.test_methods)
+    title += f", {test_methods_str}"
+if "All Technologies" not in selected_technologies:
+    technologies_str = ", ".join(selected_technologies)
+    title += f", {technologies_str}"
+
+# Count the number of trials
+num_trials = len(df["Trial ID"].unique())
+
 
 def box_and_whisker(
     df_input,
     column,
     groupby="Material Class II",
+    title=title,
+    num_trials=num_trials,
     cap=False,
     height=800,
     width=1000,
@@ -292,6 +309,7 @@ def box_and_whisker(
         height=height,
         width=width,
         showlegend=False,
+        title=dict(text=title + f" - {num_trials} Trial(s)", x=0.5, xanchor='center', yanchor='top'),
         xaxis=dict(
             tickmode="array",
             tickvals=list(range(len(x_labels))),
