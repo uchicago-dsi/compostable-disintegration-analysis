@@ -80,6 +80,8 @@ trial2id = {
 OPERATING_CONDITIONS_PATH = (
     DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
 )
+
+# TODO: Set this up so we can actually plot the full temperature data
 TEMPS = pd.read_excel(
     OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #"
 )
