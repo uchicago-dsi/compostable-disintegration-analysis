@@ -1,4 +1,4 @@
-Trial ID,Test Method,Item ID,Item Format,Item Name,Item Description Refined,Item Description Refined (Trial),Material Class I,Material Class II,Material Class III,Start Weight,% Residuals (Weight),% Residuals (Area)
+Trial ID,Test Method,Item ID,Item Format,Item Name,Item Description Refined,Item Description Refined (Trial),Material Class I,Material Class II,Material Class III,Start Weight,% Residuals (Mass),% Residuals (Area)
 CASP004-01,Mesh Bag,A6,Bowl,PLA-lined Paper Bowl 12oz,BÉSICS® 12 oz Soup bowl,12 oz Hot cup / Soup bowl,Fiber,Lined Fiber,PLA lined Paper,8.11,0.0,
 CASP004-01,Mesh Bag,A6,Bowl,PLA-lined Paper Bowl 12oz,BÉSICS® 12 oz Soup bowl,12 oz Hot cup / Soup bowl,Fiber,Lined Fiber,PLA lined Paper,8.11,0.0,
 CASP004-01,Mesh Bag,A6,Bowl,PLA-lined Paper Bowl 12oz,BÉSICS® 12 oz Soup bowl,12 oz Hot cup / Soup bowl,Fiber,Lined Fiber,PLA lined Paper,8.11,1.8713522400328815,
