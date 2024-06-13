@@ -26,7 +26,7 @@ TRIAL_COLS = [
     "Material Class II",
     "Material Class III",
     "Start Weight",
-    "% Residuals (Weight)",
+    "% Residuals (Mass)",
     "% Residuals (Area)",
 ]
 
@@ -225,7 +225,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         df["End Weight"] = df["End Weight"].fillna(0)
 
         df["% Residuals (Area)"] = None
-        df["% Residuals (Weight)"] = df["End Weight"] / df["Start Weight"]
+        df["% Residuals (Mass)"] = df["End Weight"] / df["Start Weight"]
         return df
 
 
@@ -273,7 +273,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
 
     def load_data(self, data_filepath, sheet_name, skiprows):
         df_weight = pd.read_excel(data_filepath, sheet_name=3, skiprows=2)
-        weight_melted = self.melt_trial(df_weight, "% Residuals (Weight)")
+        weight_melted = self.melt_trial(df_weight, "% Residuals (Mass)")
 
         df_area = pd.read_excel(data_filepath, sheet_name=4, skiprows=2)
         df_area["Trial ID"] = df_area["Facility Name"].map(trial2id)
@@ -318,7 +318,7 @@ class PDFPipeline(AbstractDataPipeline):
         return pd.merge(self.items, df, on="Item ID")
 
     def calculate_results(self, df):
-        df["% Residuals (Weight)"] = df[self.weight_col] / (
+        df["% Residuals (Mass)"] = df[self.weight_col] / (
             df["Start Weight"] * df["Number of Items per bag"]
         )
         df["% Residuals (Area)"] = None
@@ -367,7 +367,7 @@ all_trials = all_trials[
     ~(all_trials["Item Name"] == "Multi-laminate stand-up pounch with zipper")
 ]
 # Exclude anything over 1000% as outlier
-all_trials = all_trials[all_trials["% Residuals (Weight)"] < 10]
+all_trials = all_trials[all_trials["% Residuals (Mass)"] < 10]
 
 all_trials.to_csv(output_filepath, index=False)
 print("Complete!")
