@@ -14,7 +14,7 @@ trial_durations = pd.read_csv("dashboard/trial_durations.csv", index_col=0)
 moisture = pd.read_csv("dashboard/moisture.csv", index_col=0)
 
 df = pd.read_csv("dashboard/all_trials_processed.csv")
-df["% Disintegrated (Weight)"] = 1 - df["% Residuals (Weight)"]
+df["% Disintegrated (Mass)"] = 1 - df["% Residuals (Mass)"]
 df["% Disintegrated (Area)"] = 1 - df["% Residuals (Area)"]
 
 id2technology = {
@@ -130,8 +130,8 @@ st.write(
 )
 
 display_dict = {
-    ("Mass", "Residuals Remaining"): "% Residuals (Weight)",
-    ("Mass", "Percent Disintegrated"): "% Disintegrated (Weight)",
+    ("Mass", "Residuals Remaining"): "% Residuals (Mass)",
+    ("Mass", "Percent Disintegrated"): "% Disintegrated (Mass)",
     ("Surface Area", "Residuals Remaining"): "% Residuals (Area)",
     ("Surface Area", "Percent Disintegrated"): "% Disintegrated (Area)",
 }
