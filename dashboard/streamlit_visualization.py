@@ -54,6 +54,7 @@ with st.sidebar:
             "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
         )
     else:
+        selected_trials = ["All Trials"]
         st.write("Trial selection is disabled for bulk dose test method.")
 
     materials = list(df["Material Class II"].unique())
