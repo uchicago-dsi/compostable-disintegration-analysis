@@ -137,6 +137,9 @@ display_dict = {
 }
 display_col = display_dict[(mass_or_area, residuals_or_disintegration)]
 
+if "All Trials" not in selected_trials:
+    df = df[df["Trial ID"].isin(selected_trials)]
+
 if "All Materials" not in selected_materials:
     df = df[df["Material Class II"].isin(selected_materials)]
 
@@ -232,12 +235,16 @@ if "All Technologies" not in selected_technologies:
     technologies_str = ", ".join(selected_technologies)
     title += f", {technologies_str}"
 
+# Count the number of trials
+num_trials = len(df["Trial ID"].unique())
+
 
 def box_and_whisker(
     df_input,
     column,
     groupby="Material Class II",
     title=title,
+    num_trials=num_trials,
     cap=False,
     height=800,
     width=1000,
@@ -302,7 +309,7 @@ def box_and_whisker(
         height=height,
         width=width,
         showlegend=False,
-        title=dict(text=title, x=0.5, xanchor='center', yanchor='top'),
+        title=dict(text=title + f" - {num_trials} Trial(s)", x=0.5, xanchor='center', yanchor='top'),
         xaxis=dict(
             tickmode="array",
             tickvals=list(range(len(x_labels))),
