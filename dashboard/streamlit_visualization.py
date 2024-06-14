@@ -282,7 +282,7 @@ def box_and_whisker(
         df[column] = df[column].clip(upper=1)
 
     max_value = df[column].max()
-    max_value = max(100, max_value)
+    max_value = max(1, max_value)
 
     # Maintain Material Class I sort order for everything
     df['Material Class I'] = pd.Categorical(df['Material Class I'], categories=class_I_order, ordered=True)
@@ -343,7 +343,7 @@ def box_and_whisker(
             title_font=dict(size=20),
             tickfont=dict(size=16),
             rangemode="tozero",
-            range=[0, 1],
+            range=[0, max_value],
         ),
     )
 
