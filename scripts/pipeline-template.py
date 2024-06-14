@@ -86,7 +86,7 @@ df_temps = pd.read_excel(
     OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #"
 )
 df_temps.columns = [trial2id[col.replace("*", "")] for col in df_temps.columns]
-df_temps.to_csv
+df_temps.to_csv(DATA_DIR / "temperatures.csv")
 df_temps.mean().to_frame("Average Temperature (F)").to_csv(DATA_DIR / "avg_temps.csv")
 
 TRIAL_DURATION = pd.read_excel(
