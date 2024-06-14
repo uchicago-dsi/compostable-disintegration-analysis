@@ -227,6 +227,22 @@ class_II_order = [
     "Positive Control - Film",
     "Positive Control - Food Scraps",
 ]
+class_III_order = [
+    "PLA Lined Bagasse",
+    "Unlined Molded Fiber",
+]
+item_type_order = [
+    "Bowl",
+    "Clamshell",
+    "Cutlery",
+    "Biopolymer Bag",
+    "Cold Cup",
+    "Spoon",
+    "Straw",
+    "Positive Control - Film",
+    "Positive Control - Fiber",
+    "Positive Control - Food Scraps",
+]
 
 # TODO: Hacky way to generate title...
 title = f"{display_col} by {material_type}"
@@ -259,7 +275,7 @@ def box_and_whisker(
     data = []
     x_labels = []
 
-    # Don't allow disintegration rates to be negative
+    # Note: don't allow disintegration rates to be negative
     df[column] = df[column].clip(lower=0)
 
     if cap:
@@ -268,12 +284,10 @@ def box_and_whisker(
     max_value = df[column].max()
     max_value = max(100, max_value)
 
-    # TODO: What colors do we want for other stuff? Should probably make this the same as Material Class II
+    # Maintain Material Class I sort order for everything
+    df['Material Class I'] = pd.Categorical(df['Material Class I'], categories=class_I_order, ordered=True)
+    df = df.sort_values(by='Material Class I')
     groups = df[groupby].unique()
-    if groupby == "Material Class II":
-        groups = class_II_order
-    if groupby == "Material Class I":
-        groups = class_I_order
 
     for material in groups:
         group = df[df[groupby] == material]
