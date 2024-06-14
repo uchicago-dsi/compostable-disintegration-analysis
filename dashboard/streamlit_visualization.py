@@ -9,6 +9,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# TODO: set up a separate temps df and create the average temps from it
 temps = pd.read_csv("dashboard/temperatures.csv", index_col=0)
 trial_durations = pd.read_csv("dashboard/trial_durations.csv", index_col=0)
 moisture = pd.read_csv("dashboard/moisture.csv", index_col=0)
@@ -54,6 +55,7 @@ with st.sidebar:
             "Select trial(s)", ["All Trials"] + trial_list, default="All Trials"
         )
     else:
+        selected_trials = ["All Trials"]
         st.write("Trial selection is disabled for bulk dose test method.")
 
     materials = list(df["Material Class II"].unique())
@@ -252,6 +254,7 @@ def box_and_whisker(
     min_values=5,
 ):
     df = df_input.copy()  # prevent modifying actual dataframe
+    df = df[df[column].notnull()]
 
     data = []
     x_labels = []
