@@ -1,76 +1,38 @@
-import * as aq from 'arquero';
-import fs from 'fs';
+import { NextResponse } from 'next/server';
+import * as d3 from 'd3';
 import path from 'path';
-import { NextResponse } from "next/server";
+import fs from 'fs/promises';
 
-const ITEMS = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
-const MOISTURE = path.join(process.cwd(), 'public', 'data', 'moisture.csv');
-const TEMPERATURES = path.join(process.cwd(), 'public', 'data', 'temperatures.csv');
-const TRIAL_DURATIONS = path.join(process.cwd(), 'public', 'data', 'trial_durations.csv');
+const dataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
 
-let cachedData = null;
-
-const fetchData = (filePath) => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
+const fetchData = async () => {
+  const data = await fs.readFile(dataPath, 'utf8');
+  return d3.csvParse(data);
 };
 
-const loadData = async () => {
-  try {
-    const [rawItems, rawMoisture, rawTemperatures, rawTrialDurations] = await Promise.all([
-      fetchData(ITEMS),
-      fetchData(MOISTURE),
-      fetchData(TEMPERATURES),
-      fetchData(TRIAL_DURATIONS)
-    ]);
-
-    cachedData = {
-      itemsTable: aq.fromCSV(rawItems),
-      moistureTable: aq.fromCSV(rawMoisture),
-      temperaturesTable: aq.fromCSV(rawTemperatures),
-      trialDurationsTable: aq.fromCSV(rawTrialDurations),
-    };
-  } catch (error) {
-    console.error('Error loading data:', error);
-  }
+const calculateQuartiles = (data, key) => {
+  const sorted = data.map(d => parseFloat(d[key])).sort((a, b) => a - b);
+  return {
+    min: d3.min(sorted),
+    q1: d3.quantile(sorted, 0.25),
+    median: d3.quantile(sorted, 0.5),
+    q3: d3.quantile(sorted, 0.75),
+    max: d3.max(sorted),
+  };
 };
 
-export async function GET(req, reqParams) {
-    if (!cachedData) {
-      await loadData();
-    }
+const prepareData = async (aggCol) => {
+  const data = await fetchData();
+  const grouped = d3.groups(data, d => d[aggCol]);
+  return grouped.map(([key, values]) => ({
+    aggCol: key,
+    ...calculateQuartiles(values, '% Residuals (Mass)'),
+  }));
+};
 
-    return NextResponse.json({
-      items: cachedData.itemsTable.objects(),
-      moisture: cachedData.moistureTable.objects(),
-      temperatures: cachedData.temperaturesTable.objects(),
-      trialDurations: cachedData.trialDurationsTable.objects(),
-    }, { status: 200 });
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const aggCol = searchParams.get('aggcol') || 'Material Class I';
+  const data = await prepareData(aggCol);
+  return NextResponse.json(data);
 }
-
-// export async function GET(req, reqParams) {
-//   if (data.length == 0) {
-//       await getData()
-//   }
-
-//   if (reqParams.params.datatype == "plants") {
-//       if (cleanedData.length == 0) {
-//           getCleanData(data)
-//       }
-//       return NextResponse.json(cleanedData, { status: 200 });
-//   }
-
-//   if (reqParams.params.datatype == "sales") {
-//       if (salesData.length == 0) {
-//           getSalesData(data)
-//       }
-//       return NextResponse.json(salesData, { status: 200 });
-//   }
-// }
