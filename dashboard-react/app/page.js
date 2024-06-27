@@ -1,47 +1,51 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-
-const fetchData = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  const data = await response.json();
-  return data;
-};
+import React, { useEffect } from 'react';
+import { useSnapshot } from 'valtio';
+import Plot from 'react-plotly.js';
+import state from '@/lib/state';
 
 const Home = () => {
-  const [data, setData] = useState(null);
+  const snap = useSnapshot(state);
 
   useEffect(() => {
-    const fetchAndSetData = async () => {
-      try {
-        const result = await fetchData('/api/data');
-        setData(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    const fetchData = async () => {
+      console.log("Fetching data...");
+      const response = await fetch(`/api/data?aggcol=${snap.aggCol}`);
+      const result = await response.json();
+      console.log(result);
+      state.setData(result);
     };
+    fetchData();
+  }, [snap.aggCol]);
 
-    fetchAndSetData();
-  }, []);
+  const handleColumnChange = (event) => {
+    console.log("Changing column...");
+    console.log(event.target.value);
+    state.setSelectedColumn(event.target.value);
+  };
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  const plotData = snap.data.map(d => ({
+    type: 'box',
+    name: d[snap.aggCol],
+    y: [d.min, d.q1, d.median, d.q3, d.max]
+  }));
 
   return (
-    <div>
-      <h1>Data Loaded</h1>
-      <h2>Items</h2>
-      <pre>{JSON.stringify(data.items, null, 2)}</pre>
-      <h2>Moisture</h2>
-      <pre>{JSON.stringify(data.moisture, null, 2)}</pre>
-      <h2>Temperatures</h2>
-      <pre>{JSON.stringify(data.temperatures, null, 2)}</pre>
-      <h2>Trial Durations</h2>
-      <pre>{JSON.stringify(data.trialDurations, null, 2)}</pre>
-    </div>
+    <main>
+      <h1>Box Plot</h1>
+      <div>
+        <label htmlFor="columnSelect">Select Column:</label>
+        <select id="columnSelect" value={snap.aggCol} onChange={handleColumnChange}>
+          <option value="Material Class I">Material Class I</option>
+          <option value="Material Class II">Material Class II</option>
+          <option value="Material Class III">Material Class III</option>
+        </select>
+      </div>
+      <Plot
+        data={plotData}
+        layout={{ width: 800, height: 600, title: 'Box Plot' }}
+      />
+    </main>
   );
 };
 
