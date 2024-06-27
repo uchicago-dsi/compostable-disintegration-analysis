@@ -21,18 +21,20 @@ const calculateQuartiles = (data, key) => {
   };
 };
 
-const prepareData = async (aggCol) => {
+const prepareData = async (aggCol, displayCol) => {
   const data = await fetchData();
   const grouped = d3.groups(data, d => d[aggCol]);
   return grouped.map(([key, values]) => ({
     aggCol: key,
-    ...calculateQuartiles(values, '% Residuals (Mass)'),
+    ...calculateQuartiles(values, displayCol),
   }));
 };
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
-  const data = await prepareData(aggCol);
+  const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
+  console.log(displayCol)
+  const data = await prepareData(aggCol, displayCol);
   return NextResponse.json(data);
 }
