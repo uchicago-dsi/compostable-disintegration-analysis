@@ -80,6 +80,7 @@ trial2id = {
     "Facility 10": "WR005-01",
 }
 
+# TODO: Honestly should put the operating conditions all in one file
 OPERATING_CONDITIONS_PATH = (
     DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
 )

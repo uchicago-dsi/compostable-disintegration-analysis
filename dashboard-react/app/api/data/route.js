@@ -2,19 +2,12 @@ import { NextResponse } from 'next/server';
 import * as d3 from 'd3';
 import path from 'path';
 import fs from 'fs/promises';
+import { moistureDict } from '@/lib/constants';
 
-const dataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
+const trialDataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
+const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', 'moisture.csv');
 
-const moistureDict = {
-  "<40%": [-Infinity, 0.4, false],
-  "40-45%": [0.4, 0.45, true],
-  "45-50%": [0.45, 0.50, true],
-  "50-55%": [0.50, 0.55, true],
-  "55-60%": [0.55, 0.60, true],
-  ">60%": [0.60, Infinity, false],
-};
-
-const fetchData = async () => {
+const fetchData = async (dataPath) => {
   const data = await fs.readFile(dataPath, 'utf8');
   return d3.csvParse(data);
 };
@@ -41,7 +34,7 @@ return data.filter(d => {
 };
 
 const applyFilters = (data, filters) => {
-  console.log(filters)
+  // console.log(filters)
   return data.filter(d => {
     return Object.entries(filters).every(([col, filterValue]) => {
       // if (!filterValue || filterValue === 'All') {
@@ -56,19 +49,51 @@ const applyFilters = (data, filters) => {
 };
 
 const prepareData = async (searchParams) => {
-  const data = await fetchData();
-
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
   // TODO: Can I split this out somehow and iterate through?
   const testMethods = searchParams.get('testmethods') || '';
   const moistureFilter = searchParams.get('moisture') || 'All Moistures';
 
+  const trialData = await fetchData(trialDataPath);
+  const operatingConditions = await fetchData(operatingConditionsPath);
+
   // Filter data on params
   // TODO: make this generalizable
-  const filteredData = testMethods.length > 0
-    ? data.filter(d => testMethods.includes(d['Test Method']))
-    : data;
+  var filteredData = testMethods.length > 0
+    ? trialData.filter(d => testMethods.includes(d['Test Method']))
+    : trialData;
+
+  console.log("moistureFilter")
+  console.log(moistureFilter)
+
+  console.log("operatingConditions")
+  console.log(operatingConditions)
+
+  if (moistureFilter !== 'All Moistures') {
+    const [low, high, inclusive] = moistureDict[moistureFilter];
+
+    // Filter the operatingConditions data
+    const filteredTrials = operatingConditions.filter(trial => {
+      const moistureValue = trial['Average % Moisture (In Field)'];
+      if (inclusive) {
+        return moistureValue >= low && moistureValue <= high;
+      }
+      return moistureValue > low && moistureValue < high;
+    });
+
+    console.log("filteredTrials")
+    console.log(filteredTrials)
+
+    // Extract the Trial IDs of the filtered trials
+    const trialIDs = filteredTrials.map(trial => trial['Trial ID']);
+    console.log("trialIDs")
+    console.log(trialIDs)
+
+    // Filter the trialData based on the filtered Trial IDs
+    filteredData = filteredData.filter(data => trialIDs.includes(data['Trial ID']));
+  }
+
 
   // const brokenFilteredData = applyFilters(data, {
   //   'Test Method': selectedTestMethods,
