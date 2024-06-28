@@ -39,6 +39,8 @@ ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
 old_json = json.load(open(DATA_DIR / "old_items.json"))
 ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
 
+OUTLIER_THRESHOLD = 10
+
 item2id = {
     key.strip(): value
     for key, value in ITEMS.set_index("Item Description Refined")["Item ID"]
@@ -367,8 +369,18 @@ processed_data.append(casp004_pipeline.run())
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
-    def melt_trial(self, df, value_name):
-        """Helper method to melt DataFrames."""
+    """Pipeline for processing Closed Loop trial data."""
+
+    def melt_trial(self, df: pd.DataFrame, value_name: str) -> pd.DataFrame:
+        """Helper method to melt DataFrames.
+
+        Args:
+            df (pd.DataFrame): DataFrame to melt.
+            value_name (str): Name of the value column after melting.
+
+        Returns:
+            pd.DataFrame: Melted DataFrame.
+        """
         item_ids = [
             "N",
             "O",
@@ -401,7 +413,19 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             .reset_index(drop=True)
         )
 
-    def load_data(self, data_filepath, sheet_name, skiprows):
+    def load_data(
+        self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0
+    ) -> pd.DataFrame:
+        """Loads data from the specified Excel file.
+
+        Args:
+            data_filepath (Path): Path to the data file.
+            sheet_name (int, optional): Sheet name or index to load. Defaults to 0.
+            skiprows (int, optional): Number of rows to skip at the start of the file. Defaults to 0.
+
+        Returns:
+            pd.DataFrame: Loaded and merged data.
+        """
         df_weight = pd.read_excel(data_filepath, sheet_name=3, skiprows=2)
         weight_melted = self.melt_trial(df_weight, "% Residuals (Mass)")
 
@@ -409,14 +433,24 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         df_area["Trial ID"] = df_area["Facility Name"].map(trial2id)
         area_melted = self.melt_trial(df_area, "% Residuals (Area)")
 
-        return pd.merge(
-            weight_melted,
+        return weight_melted.merge(
             area_melted,
             on=["Trial ID", "Trial Stage", "Bag Set", "Bag Number", "Item ID"],
             how="outer",
         )
 
-    def preprocess_data(self, df):
+    def preprocess_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Preprocesses the data.
+
+        This method sets the item description to None and filters the data to
+        only include the "Second Removal" stage.
+
+        Args:
+            df (pd.DataFrame): Data to preprocess.
+
+        Returns:
+            pd.DataFrame: Preprocessed data.
+        """
         df["Item Description Refined (Trial)"] = None
         df = df[df["Trial Stage"] == "Second Removal"]
         return df
@@ -428,14 +462,48 @@ processed_data.append(closed_loop_pipeline.run())
 
 
 class PDFPipeline(AbstractDataPipeline):
-    def __init__(self, *args, weight_col="Residual Weight - Oven-dry", **kwargs):
+    """Pipeline for processing PDF trial data."""
+
+    def __init__(
+        self, *args: Any, weight_col: str = "Residual Weight - Oven-dry", **kwargs: Any
+    ) -> None:
+        """Initializes the PDFPipeline with the given parameters.
+
+        Args:
+            *args: Variable length argument list.
+            weight_col (str, optional): Column name for the residual weight. Defaults to "Residual Weight - Oven-dry".
+            **kwargs: Arbitrary keyword arguments.
+        """
         super().__init__(*args, **kwargs)
         self.weight_col = weight_col
 
-    def load_data(self, data_filepath, sheet_name=0, skiprows=0):
+    def load_data(
+        self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0
+    ) -> pd.DataFrame:
+        """Loads data from the specified Excel file.
+
+        Args:
+            data_filepath (Path): Path to the data file.
+            sheet_name (int, optional): Sheet name or index to load. Defaults to 0.
+            skiprows (int, optional): Number of rows to skip at the start of the file. Defaults to 0.
+
+        Returns:
+            pd.DataFrame: Loaded data.
+        """
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
-    def join_with_items(self, df):
+    def join_with_items(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Joins the data with item information.
+
+        This method maps item descriptions to item IDs and merges the data with
+        item information, dropping any unnecessary columns.
+
+        Args:
+            df (pd.DataFrame): Data to join.
+
+        Returns:
+            pd.DataFrame: Data joined with item information.
+        """
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
@@ -445,9 +513,20 @@ class PDFPipeline(AbstractDataPipeline):
         drop_cols = ["Item Description From Trial"]
         df = df.drop(drop_cols, axis=1)
         assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
-        return pd.merge(self.items, df, on="Item ID")
+        return self.items.merge(df, on="Item ID")
 
-    def calculate_results(self, df):
+    def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Calculates results from the data.
+
+        This method calculates the percentage of residuals by mass and sets
+        residuals by area to None.
+
+        Args:
+            df (pd.DataFrame): Data to calculate results from.
+
+        Returns:
+            pd.DataFrame: Data with calculated results.
+        """
         df["% Residuals (Mass)"] = df[self.weight_col] / (
             df["Start Weight"] * df["Number of Items per bag"]
         )
@@ -469,8 +548,20 @@ processed_data.append(casp001_pipeline.run())
 
 
 class CASP003Pipeline(PDFPipeline):
-    def preprocess_data(self, data):
-        # everything in blug bags was combined and impossible to separate
+    """Pipeline for processing CASP003 trial data."""
+
+    def preprocess_data(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Preprocesses the data.
+
+        This method filters out data where the trial bag color is blue, as
+        items in blue bags were combined and impossible to separate.
+
+        Args:
+            data (pd.DataFrame): Data to preprocess.
+
+        Returns:
+            pd.DataFrame: Preprocessed data.
+        """
         return data[data["Trial Bag Colour"] != "Blue"]
 
 
@@ -497,7 +588,7 @@ all_trials = all_trials[
     ~(all_trials["Item Name"] == "Multi-laminate stand-up pounch with zipper")
 ]
 # Exclude anything over 1000% as outlier
-all_trials = all_trials[all_trials["% Residuals (Mass)"] < 10]
+all_trials = all_trials[all_trials["% Residuals (Mass)"] < OUTLIER_THRESHOLD]
 
 all_trials.to_csv(output_filepath, index=False)
 print("Complete!")
