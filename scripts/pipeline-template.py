@@ -1,7 +1,7 @@
 import json
-import os
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 import pandas as pd
 
@@ -36,7 +36,7 @@ EXTRA_ITEMS_PATH = DATA_DIR / "Item IDS for CASP004 CASP003.xlsx"
 ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
 ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
 
-old_json = json.load(open(DATA_DIR / "old_items.json", "r"))
+old_json = json.load(open(DATA_DIR / "old_items.json"))
 ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
 
 item2id = {
@@ -89,6 +89,7 @@ df_temps.columns = [trial2id[col.replace("*", "")] for col in df_temps.columns]
 df_temps.to_csv(DATA_DIR / "temperatures.csv")
 df_temps.mean().to_frame("Average Temperature (F)").to_csv(DATA_DIR / "avg_temps.csv")
 
+
 TRIAL_DURATION = pd.read_excel(
     OPERATING_CONDITIONS_PATH,
     sheet_name=2,
@@ -124,15 +125,40 @@ processed_data = []
 
 
 class AbstractDataPipeline(ABC):
+    """An abstract base class for a data pipeline.
+
+    This class provides a template for data pipelines, including methods for
+    loading, preprocessing, and calculating results from data. It also includes
+    a method for running the entire pipeline and saving the results.
+
+    Attributes:
+        data_filepath: Path to the data file.
+        items: DataFrame containing item information.
+        item2id: Dictionary mapping items to IDs.
+        trial: Trial identifier.
+        output_filepath: Path to save the output file.
+        data: Loaded data.
+    """
+
     def __init__(
         self,
-        data_filepath,
-        items=ITEMS,
-        item2id=item2id,
-        trial=None,
-        sheet_name=0,
-        skiprows=0,
-    ):
+        data_filepath: Path,
+        items: pd.DataFrame = ITEMS,
+        item2id: Dict[str, Any] = item2id,
+        trial: Optional[str] = None,
+        sheet_name: int = 0,
+        skiprows: int = 0,
+    ) -> None:
+        """Initializes the AbstractDataPipeline with the given parameters.
+
+        Args:
+            data_filepath: Path to the data file.
+            items: DataFrame containing item information.
+            item2id: Dictionary mapping items to IDs.
+            trial: Trial identifier. Defaults to None.
+            sheet_name: Sheet name or index to load. Defaults to 0.
+            skiprows: Number of rows to skip at the start of the file. Defaults to 0.
+        """
         self.data_filepath = data_filepath
         filename = self.data_filepath.stem
         self.trial = trial
@@ -147,19 +173,76 @@ class AbstractDataPipeline(ABC):
         self.item2id = item2id
 
     @abstractmethod
-    def load_data(self, data_filepath, sheet_name=0, skip_rows=0):
+    def load_data(
+        self, data_filepath: Path, sheet_name: int = 0, skip_rows: int = 0
+    ) -> pd.DataFrame:
+        """Loads data from the specified file.
+
+        This method should be implemented by subclasses to load data from the
+        specified file path.
+
+        Args:
+            data_filepath: Path to the data file.
+            sheet_name: Sheet name or index to load. Defaults to 0.
+            skip_rows: Number of rows to skip at the start of the file. Defaults to 0.
+
+        Returns:
+            DataFrame: Loaded data.
+        """
         pass
 
-    def preprocess_data(self, df):
+    def preprocess_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Preprocesses the data.
+
+        This method can be overridden by subclasses to provide specific
+        preprocessing steps.
+
+        Args:
+            df: Data to preprocess.
+
+        Returns:
+            DataFrame: Preprocessed data.
+        """
         return df
 
-    def join_with_items(self, df):
-        return pd.merge(self.items, df, on="Item ID")
+    def join_with_items(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Joins the data with item information.
 
-    def calculate_results(self, df):
+        Args:
+            df: Data to join.
+
+        Returns:
+            DataFrame: Data joined with item information.
+        """
+        return self.items.merge(df, on="Item ID")
+
+    def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Calculates results from the data.
+
+        This method can be overridden by subclasses to provide specific
+        calculations.
+
+        Args:
+            df: Data to calculate results from.
+
+        Returns:
+            DataFrame: Data with calculated results.
+        """
         return df
 
-    def run(self, save=False):
+    def run(self, save: bool = False) -> pd.DataFrame:
+        """Runs the data pipeline.
+
+        This method runs the entire data pipeline, including loading data,
+        preprocessing, joining with item information, calculating results,
+        and optionally saving the output to a file.
+
+        Args:
+            save: Whether to save the output to a file. Defaults to False.
+
+        Returns:
+            DataFrame: Final processed data.
+        """
         print(f"Running data pipeline for {self.trial}")
         df = self.data.copy()
         df = self.preprocess_data(df)
