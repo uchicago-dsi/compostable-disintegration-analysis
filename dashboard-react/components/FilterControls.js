@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
+import { moistureDict } from '@/lib/constants';
 
-const SelectionControls = () => {
+const FilterControls = () => {
   const snap = useSnapshot(state);
 
   const handleSelectionChange = (key) => (event) => {
@@ -19,7 +20,7 @@ const SelectionControls = () => {
     }
   };
 
-    //   {/* Show by Residuals Remaining or by Percent Disintegrated */}
+    // {/* Show by Residuals Remaining or by Percent Disintegrated */}
     // {/* Cap results */}
 
       
@@ -31,9 +32,13 @@ const SelectionControls = () => {
     // {/* Select Trial Duration Range */}
     // {/* Select Average Moisture Content (In Field) Range */}
 
+    // console.log("snap.filters.selectedMoistureLevels")
+    // console.log(snap.filters.selectedMoistureLevels)
+
   return (
     <>
     <div>
+        <h2>Display Options</h2>
         <div>
             <label htmlFor="columnSelect">Select Column:</label>
             <select id="columnSelect" value={snap.filters.aggCol} onChange={handleSelectionChange('aggCol')}>
@@ -49,6 +54,7 @@ const SelectionControls = () => {
                 <option value="% Residuals (Area)">% Residuals (Area)</option>
             </select>
         </div>
+        <h2>Filters</h2>
         <div>
         <label>Select Test Methods:</label>
         {snap.options["Test Method"]?.map(value => (
@@ -64,6 +70,21 @@ const SelectionControls = () => {
             </div>
         ))}
         </div>
+        <h2>Operating Conditions Filters</h2>
+        <div>
+        <label>Select Average Moisture Content (In Field) Range:</label>
+        {Object.entries(moistureDict)?.map(([key, value]) => (
+            <div key={key}>
+            <input
+                type="checkbox"
+                id={`moisture-${key}`}
+                value={key}
+                onChange={handleCheckboxChange('selectedMoistureLevels', key)}
+            />
+            <label htmlFor={`testMethod-${key}`}>{key}</label>
+            </div>
+        ))}
+        </div>
         <div>
             <p>
                 <i>
@@ -76,4 +97,4 @@ const SelectionControls = () => {
   );
 };
 
-export default SelectionControls;
+export default FilterControls;

@@ -19,6 +19,7 @@ const state = proxy({
     displayCol: '% Residuals (Mass)',
     selectedTechnologies: [],
     selectedTestMethods: [],
+    selectedMoistureLevels: [],
   },
 
   setFilterValue: (key, value) => {
