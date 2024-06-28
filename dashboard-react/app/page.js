@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import Plot from 'react-plotly.js';
 import state from '@/lib/state';
+import SelectionControls from '@/components/FilterControls';
 
 const Home = () => {
   const snap = useSnapshot(state);
@@ -64,38 +65,50 @@ const Home = () => {
   return (
     <main>
       <h1>CFTP Field Test Results Dashboard</h1>
-      <div>
-        <label htmlFor="columnSelect">Select Column:</label>
-        <select id="columnSelect" value={snap.filters.aggCol} onChange={handleSelectionChange('aggCol')}>
-          <option value="Material Class I">Material Class I</option>
-          <option value="Material Class II">Material Class II</option>
-          <option value="Material Class III">Material Class III</option>
-        </select>
-        <label htmlFor="displayColumnSelect">Select Display Column:</label>
-        <select id="displayColumnSelect" value={snap.filters.displayCol} onChange={handleSelectionChange('displayCol')}>
-          <option value="% Residuals (Mass)">% Residuals (Mass)</option>
-          <option value="% Residuals (Area)">% Residuals (Area)</option>
-        </select>
-        <label>Select Test Methods:</label>
-          {snap.options["Test Method"]?.map(value => (
-            <div key={value}>
-              <input
-                type="checkbox"
-                id={`testMethod-${value}`}
-                value={value}
-                checked={snap.filters.selectedTestMethods.includes(value)}
-                onChange={handleCheckboxChange('selectedTestMethods', value)}
-              />
-              <label htmlFor={`testMethod-${value}`}>{value}</label>
-            </div>
-          ))}
-      </div>
+      <SelectionControls />
       <Plot
         data={plotData}
-        layout={{ width: 800, height: 600, title: 'Decomposition Data' }}
+        layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
       />
     </main>
   );
-};
+}
+
+//   return (
+//     <main>
+//       <h1>CFTP Field Test Results Dashboard</h1>
+//       <div>
+//         <label htmlFor="columnSelect">Select Column:</label>
+//         <select id="columnSelect" value={snap.filters.aggCol} onChange={handleSelectionChange('aggCol')}>
+//           <option value="Material Class I">Material Class I</option>
+//           <option value="Material Class II">Material Class II</option>
+//           <option value="Material Class III">Material Class III</option>
+//         </select>
+//         <label htmlFor="displayColumnSelect">Select Display Column:</label>
+//         <select id="displayColumnSelect" value={snap.filters.displayCol} onChange={handleSelectionChange('displayCol')}>
+//           <option value="% Residuals (Mass)">% Residuals (Mass)</option>
+//           <option value="% Residuals (Area)">% Residuals (Area)</option>
+//         </select>
+//         <label>Select Test Methods:</label>
+//           {snap.options["Test Method"]?.map(value => (
+//             <div key={value}>
+//               <input
+//                 type="checkbox"
+//                 id={`testMethod-${value}`}
+//                 value={value}
+//                 checked={snap.filters.selectedTestMethods.includes(value)}
+//                 onChange={handleCheckboxChange('selectedTestMethods', value)}
+//               />
+//               <label htmlFor={`testMethod-${value}`}>{value}</label>
+//             </div>
+//           ))}
+//       </div>
+//       <Plot
+//         data={plotData}
+//         layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
+//       />
+//     </main>
+//   );
+// };
 
 export default Home;
