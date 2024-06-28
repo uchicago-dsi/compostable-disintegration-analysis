@@ -12,8 +12,7 @@ import pandas as pd
 CURRENT_DIR = Path(__file__).resolve().parent
 DATA_DIR = CURRENT_DIR / "../data/"
 
-# TODO: Maybe put this in the class?
-# Can also keep bags, etc if we want them
+# TODO: Can also keep bags, etc if we want them
 TRIAL_COLS = [
     "Trial ID",
     "Test Method",
@@ -36,7 +35,7 @@ EXTRA_ITEMS_PATH = DATA_DIR / "Item IDS for CASP004 CASP003.xlsx"
 ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
 ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
 
-old_json = json.load(open(DATA_DIR / "old_items.json"))
+old_json = json.load(Path.open(DATA_DIR / "old_items.json"))
 ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
 
 OUTLIER_THRESHOLD = 10
@@ -147,7 +146,8 @@ class AbstractDataPipeline(ABC):
         data_filepath: Path,
         items: pd.DataFrame = ITEMS,
         item2id: Dict[str, Any] = item2id,
-        trial: Optional[str] = None,
+        trials: pd.DataFrame = TRIALS,
+        trial_name: Optional[str] = None,
         sheet_name: int = 0,
         skiprows: int = 0,
     ) -> None:
@@ -157,18 +157,20 @@ class AbstractDataPipeline(ABC):
             data_filepath: Path to the data file.
             items: DataFrame containing item information.
             item2id: Dictionary mapping items to IDs.
-            trial: Trial identifier. Defaults to None.
+            trial_name: Trial name. Defaults to None.
+            trials: DataFrame containing trial information. Defaults to TRIALS.
             sheet_name: Sheet name or index to load. Defaults to 0.
             skiprows: Number of rows to skip at the start of the file. Defaults to 0.
         """
         self.data_filepath = data_filepath
         filename = self.data_filepath.stem
-        self.trial = trial
-        file_suffix = f"_{trial}_clean.csv" if self.trial else "_clean.csv"
+        self.trial_name = trial_name
+        self.trials = trials
+        file_suffix = f"_{trial_name}_clean.csv" if self.trial_name else "_clean.csv"
         self.output_filepath = self.data_filepath.with_name(filename + file_suffix)
 
         # TODO: This is kind of messy and could probably be better
-        self.data = self.load_data(
+        self.raw_data = self.load_data(
             data_filepath, sheet_name=sheet_name, skiprows=skiprows
         )
         self.items = items
@@ -193,44 +195,44 @@ class AbstractDataPipeline(ABC):
         """
         pass
 
-    def preprocess_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    def preprocess_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """Preprocesses the data.
 
         This method can be overridden by subclasses to provide specific
         preprocessing steps.
 
         Args:
-            df: Data to preprocess.
+            data: Data to preprocess.
 
         Returns:
             DataFrame: Preprocessed data.
         """
-        return df
+        return data
 
-    def join_with_items(self, df: pd.DataFrame) -> pd.DataFrame:
+    def join_with_items(self, data: pd.DataFrame) -> pd.DataFrame:
         """Joins the data with item information.
 
         Args:
-            df: Data to join.
+            data: Data to join.
 
         Returns:
             DataFrame: Data joined with item information.
         """
-        return self.items.merge(df, on="Item ID")
+        return self.items.merge(data, on="Item ID")
 
-    def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_results(self, data: pd.DataFrame) -> pd.DataFrame:
         """Calculates results from the data.
 
         This method can be overridden by subclasses to provide specific
         calculations.
 
         Args:
-            df: Data to calculate results from.
+            data: Data to calculate results from.
 
         Returns:
             DataFrame: Data with calculated results.
         """
-        return df
+        return data
 
     def run(self, save: bool = False) -> pd.DataFrame:
         """Runs the data pipeline.
@@ -245,18 +247,18 @@ class AbstractDataPipeline(ABC):
         Returns:
             DataFrame: Final processed data.
         """
-        print(f"Running data pipeline for {self.trial}")
-        df = self.data.copy()
-        df = self.preprocess_data(df)
-        df = self.join_with_items(df)
-        df = self.calculate_results(df)
-        df = pd.merge(df, TRIALS, left_on="Trial ID", right_on="Public Trial ID")
-        df = df[TRIAL_COLS]
+        print(f"Running data pipeline for {self.trial_name}")
+        data = self.raw_data.copy()
+        data = self.preprocess_data(data)
+        data = self.join_with_items(data)
+        data = self.calculate_results(data)
+        data = data.merge(self.trials, left_on="Trial ID", right_on="Public Trial ID")
+        data = data[TRIAL_COLS]
         if save:
-            df.to_csv(self.output_filepath, index=False)
+            data.to_csv(self.output_filepath, index=False)
             print(f"Saved to {self.output_filepath}")
         print("Complete!")
-        return df
+        return data
 
 
 class CASP004Pipeline(AbstractDataPipeline):
@@ -301,23 +303,23 @@ class CASP004Pipeline(AbstractDataPipeline):
         - Ensures no null items after mapping.
 
         Args:
-            data (pd.DataFrame): Data to preprocess.
+            data: Data to preprocess.
 
         Returns:
             pd.DataFrame: Preprocessed data.
         """
         # Only use observations at the end
-        df = data[data["Stage"] == "End"]
+        data = data[data["Stage"] == "End"].copy()
         # Bags A-5 and A-6 were not found
-        df = df[~df["Bag Id"].isin(["A-5", "A-6"])]
+        data = data[~data["Bag Id"].isin(["A-5", "A-6"])]
 
-        df["Trial"] = df["Trial Id"]
+        data["Trial"] = data["Trial Id"]
 
         # Take the average of the three weight observations
-        df["End Weight"] = df[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
+        data["End Weight"] = data[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
 
         # Null values mean the item fully disintegrated
-        df["End Weight"] = df["End Weight"].fillna(0)
+        data["End Weight"] = data["End Weight"].fillna(0)
 
         # Ok...we need to do some weird items work arounds here...this might work?
         casp004_items = pd.read_excel(self.data_filepath, sheet_name=2).drop_duplicates(
@@ -326,56 +328,57 @@ class CASP004Pipeline(AbstractDataPipeline):
         casp004_weights = casp004_items.set_index("Item Name")[
             "Weight (average)"
         ].to_dict()
-        df["Start Weight"] = df["Product Name"].map(casp004_weights)
+        data["Start Weight"] = data["Product Name"].map(casp004_weights)
         # rename so this matches the other trials
-        df["Item Description Refined"] = df["Product Name"]
+        data["Item Description Refined"] = data["Product Name"]
 
         # TODO: Some of this should be in the abstract method...
-        df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
+        data["Item ID"] = data["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
-        df = df.rename(
+        data = data.rename(
             columns={"Item Description Refined": "Item Description Refined (Trial)"}
         )
-        df["Trial ID"] = "CASP004-01"
-        assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
+        data["Trial ID"] = "CASP004-01"
+        if data["Item ID"].isna().sum() > 0:
+            raise ValueError("There are null items after mapping")
 
-        return df
+        return data
 
-    def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_results(self, data: pd.DataFrame) -> pd.DataFrame:
         """Calculates results from the data.
 
         This method calculates the percentage of residuals by mass and sets
         residuals by area to None.
 
         Args:
-            df (pd.DataFrame): Data to calculate results from.
+            data: Data to calculate results from.
 
         Returns:
             pd.DataFrame: Data with calculated results.
         """
-        df["End Weight"] = df[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
-        df["End Weight"] = df["End Weight"].fillna(0)
+        data["End Weight"] = data[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
+        data["End Weight"] = data["End Weight"].fillna(0)
 
-        df["% Residuals (Area)"] = None
-        df["% Residuals (Mass)"] = df["End Weight"] / df["Start Weight"]
-        return df
+        data["% Residuals (Area)"] = None
+        data["% Residuals (Mass)"] = data["End Weight"] / data["Start Weight"]
+        return data
 
 
 CASP004_PATH = (
     DATA_DIR / "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 )
-casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1, trial="casp004")
+casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1, trial_name="casp004")
 processed_data.append(casp004_pipeline.run())
 
 
 class ClosedLoopPipeline(AbstractDataPipeline):
     """Pipeline for processing Closed Loop trial data."""
 
-    def melt_trial(self, df: pd.DataFrame, value_name: str) -> pd.DataFrame:
+    def melt_trial(self, data: pd.DataFrame, value_name: str) -> pd.DataFrame:
         """Helper method to melt DataFrames.
 
         Args:
-            df (pd.DataFrame): DataFrame to melt.
+            data (pd.DataFrame): DataFrame to melt.
             value_name (str): Name of the value column after melting.
 
         Returns:
@@ -403,7 +406,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             "V",
         ]
         return (
-            df.melt(
+            data.melt(
                 id_vars=["Trial ID", "Trial Stage", "Bag Set", "Bag Number"],
                 value_vars=item_ids,
                 var_name="Item ID",
@@ -419,9 +422,9 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         """Loads data from the specified Excel file.
 
         Args:
-            data_filepath (Path): Path to the data file.
-            sheet_name (int, optional): Sheet name or index to load. Defaults to 0.
-            skiprows (int, optional): Number of rows to skip at the start of the file. Defaults to 0.
+            data_filepath: Path to the data file.
+            sheet_name: Sheet name or index to load. Defaults to 0.
+            skiprows: Number of rows to skip at the start of the file. Defaults to 0.
 
         Returns:
             pd.DataFrame: Loaded and merged data.
@@ -439,25 +442,25 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             how="outer",
         )
 
-    def preprocess_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    def preprocess_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """Preprocesses the data.
 
         This method sets the item description to None and filters the data to
         only include the "Second Removal" stage.
 
         Args:
-            df (pd.DataFrame): Data to preprocess.
+            data: Data to preprocess.
 
         Returns:
             pd.DataFrame: Preprocessed data.
         """
-        df["Item Description Refined (Trial)"] = None
-        df = df[df["Trial Stage"] == "Second Removal"]
-        return df
+        data["Item Description Refined (Trial)"] = None
+        data = data[data["Trial Stage"] == "Second Removal"]
+        return data
 
 
 TEN_TRIALS_PATH = DATA_DIR / "Donated Data 2023 - Compiled Field Results for DSI.xlsx"
-closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH, trial="closed_loop")
+closed_loop_pipeline = ClosedLoopPipeline(TEN_TRIALS_PATH, trial_name="closed_loop")
 processed_data.append(closed_loop_pipeline.run())
 
 
@@ -470,8 +473,8 @@ class PDFPipeline(AbstractDataPipeline):
         """Initializes the PDFPipeline with the given parameters.
 
         Args:
-            *args: Variable length argument list.
-            weight_col (str, optional): Column name for the residual weight. Defaults to "Residual Weight - Oven-dry".
+            *args: Arbitrary non-keyword arguments.
+            weight_col: Column name for the residual weight. Defaults to "Residual Weight - Oven-dry".
             **kwargs: Arbitrary keyword arguments.
         """
         super().__init__(*args, **kwargs)
@@ -492,28 +495,29 @@ class PDFPipeline(AbstractDataPipeline):
         """
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
-    def join_with_items(self, df: pd.DataFrame) -> pd.DataFrame:
+    def join_with_items(self, data: pd.DataFrame) -> pd.DataFrame:
         """Joins the data with item information.
 
         This method maps item descriptions to item IDs and merges the data with
         item information, dropping any unnecessary columns.
 
         Args:
-            df (pd.DataFrame): Data to join.
+            data: Data to join.
 
         Returns:
             pd.DataFrame: Data joined with item information.
         """
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
-        df["Item ID"] = df["Item Description Refined"].str.strip().map(self.item2id)
+        data["Item ID"] = data["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
-        df = df.rename(
+        data = data.rename(
             columns={"Item Description Refined": "Item Description Refined (Trial)"}
         )
         drop_cols = ["Item Description From Trial"]
-        df = df.drop(drop_cols, axis=1)
-        assert df["Item ID"].isnull().sum() == 0, "There are null items after mapping"
-        return self.items.merge(df, on="Item ID")
+        data = data.drop(drop_cols, axis=1)
+        if data["Item ID"].isna().sum() > 0:
+            raise ValueError("There are null items after mapping")
+        return self.items.merge(data, on="Item ID")
 
     def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
         """Calculates results from the data.
@@ -537,13 +541,13 @@ class PDFPipeline(AbstractDataPipeline):
 
 PDF_TRIALS = DATA_DIR / "Compiled Field Results - CFTP Gathered Data.xlsx"
 
-ad001_pipeline = PDFPipeline(PDF_TRIALS, trial="ad001", sheet_name=0, skiprows=1)
+ad001_pipeline = PDFPipeline(PDF_TRIALS, trial_name="ad001", sheet_name=0, skiprows=1)
 processed_data.append(ad001_pipeline.run())
 
-wr001_pipeline = PDFPipeline(PDF_TRIALS, trial="wr001", sheet_name=1)
+wr001_pipeline = PDFPipeline(PDF_TRIALS, trial_name="wr001", sheet_name=1)
 processed_data.append(wr001_pipeline.run())
 
-casp001_pipeline = PDFPipeline(PDF_TRIALS, trial="casp001", sheet_name=2)
+casp001_pipeline = PDFPipeline(PDF_TRIALS, trial_name="casp001", sheet_name=2)
 processed_data.append(casp001_pipeline.run())
 
 
@@ -567,14 +571,17 @@ class CASP003Pipeline(PDFPipeline):
 
 casp003_pipeline = CASP003Pipeline(
     PDF_TRIALS,
-    trial="casp003",
+    trial_name="casp003",
     sheet_name=3,
     weight_col="Final Residual Weight - wet - aggregate",
 )
 processed_data.append(casp003_pipeline.run())
 
 wr003_pipeline = PDFPipeline(
-    PDF_TRIALS, trial="wr003", sheet_name=4, weight_col="Final Residual Weight - wet"
+    PDF_TRIALS,
+    trial_name="wr003",
+    sheet_name=4,
+    weight_col="Final Residual Weight - wet",
 )
 processed_data.append(wr003_pipeline.run())
 
