@@ -1,3 +1,5 @@
+"""Processes data from the CFTP for display on a public dashboard."""
+
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -191,7 +193,7 @@ class AbstractDataPipeline(ABC):
             skip_rows: Number of rows to skip at the start of the file. Defaults to 0.
 
         Returns:
-            DataFrame: Loaded data.
+            Loaded data.
         """
         pass
 
@@ -205,7 +207,7 @@ class AbstractDataPipeline(ABC):
             data: Data to preprocess.
 
         Returns:
-            DataFrame: Preprocessed data.
+            Preprocessed data.
         """
         return data
 
@@ -216,7 +218,7 @@ class AbstractDataPipeline(ABC):
             data: Data to join.
 
         Returns:
-            DataFrame: Data joined with item information.
+            Data joined with item information.
         """
         return self.items.merge(data, on="Item ID")
 
@@ -230,7 +232,7 @@ class AbstractDataPipeline(ABC):
             data: Data to calculate results from.
 
         Returns:
-            DataFrame: Data with calculated results.
+            Data with calculated results.
         """
         return data
 
@@ -245,7 +247,7 @@ class AbstractDataPipeline(ABC):
             save: Whether to save the output to a file. Defaults to False.
 
         Returns:
-            DataFrame: Final processed data.
+            Final processed data.
         """
         print(f"Running data pipeline for {self.trial_name}")
         data = self.raw_data.copy()
@@ -287,7 +289,7 @@ class CASP004Pipeline(AbstractDataPipeline):
             skiprows (int, optional): Number of rows to skip at the start of the file. Defaults to 0.
 
         Returns:
-            pd.DataFrame: Loaded data.
+            Loaded data.
         """
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
@@ -306,7 +308,7 @@ class CASP004Pipeline(AbstractDataPipeline):
             data: Data to preprocess.
 
         Returns:
-            pd.DataFrame: Preprocessed data.
+            Preprocessed data.
         """
         # Only use observations at the end
         data = data[data["Stage"] == "End"].copy()
@@ -354,7 +356,7 @@ class CASP004Pipeline(AbstractDataPipeline):
             data: Data to calculate results from.
 
         Returns:
-            pd.DataFrame: Data with calculated results.
+            Data with calculated results.
         """
         data["End Weight"] = data[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
         data["End Weight"] = data["End Weight"].fillna(0)
@@ -382,7 +384,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             value_name (str): Name of the value column after melting.
 
         Returns:
-            pd.DataFrame: Melted DataFrame.
+            Melted DataFrame.
         """
         item_ids = [
             "N",
@@ -427,7 +429,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             skiprows: Number of rows to skip at the start of the file. Defaults to 0.
 
         Returns:
-            pd.DataFrame: Loaded and merged data.
+            Loaded and merged data.
         """
         df_weight = pd.read_excel(data_filepath, sheet_name=3, skiprows=2)
         weight_melted = self.melt_trial(df_weight, "% Residuals (Mass)")
@@ -452,7 +454,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             data: Data to preprocess.
 
         Returns:
-            pd.DataFrame: Preprocessed data.
+            Preprocessed data.
         """
         data["Item Description Refined (Trial)"] = None
         data = data[data["Trial Stage"] == "Second Removal"]
@@ -486,12 +488,12 @@ class PDFPipeline(AbstractDataPipeline):
         """Loads data from the specified Excel file.
 
         Args:
-            data_filepath (Path): Path to the data file.
-            sheet_name (int, optional): Sheet name or index to load. Defaults to 0.
-            skiprows (int, optional): Number of rows to skip at the start of the file. Defaults to 0.
+            data_filepath: Path to the data file.
+            sheet_name: Sheet name or index to load. Defaults to 0.
+            skiprows: Number of rows to skip at the start of the file. Defaults to 0.
 
         Returns:
-            pd.DataFrame: Loaded data.
+            Loaded data.
         """
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
@@ -505,7 +507,7 @@ class PDFPipeline(AbstractDataPipeline):
             data: Data to join.
 
         Returns:
-            pd.DataFrame: Data joined with item information.
+            Data joined with item information.
         """
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         data["Item ID"] = data["Item Description Refined"].str.strip().map(self.item2id)
@@ -519,24 +521,24 @@ class PDFPipeline(AbstractDataPipeline):
             raise ValueError("There are null items after mapping")
         return self.items.merge(data, on="Item ID")
 
-    def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_results(self, data: pd.DataFrame) -> pd.DataFrame:
         """Calculates results from the data.
 
         This method calculates the percentage of residuals by mass and sets
         residuals by area to None.
 
         Args:
-            df (pd.DataFrame): Data to calculate results from.
+            data: Data to calculate results from.
 
         Returns:
-            pd.DataFrame: Data with calculated results.
+            Data with calculated results.
         """
-        df["% Residuals (Mass)"] = df[self.weight_col] / (
-            df["Start Weight"] * df["Number of Items per bag"]
+        data["% Residuals (Mass)"] = data[self.weight_col] / (
+            data["Start Weight"] * data["Number of Items per bag"]
         )
-        df["% Residuals (Area)"] = None
-        df["Trial"] = df["Trial ID"]
-        return df
+        data["% Residuals (Area)"] = None
+        data["Trial"] = data["Trial ID"]
+        return data
 
 
 PDF_TRIALS = DATA_DIR / "Compiled Field Results - CFTP Gathered Data.xlsx"
@@ -564,7 +566,7 @@ class CASP003Pipeline(PDFPipeline):
             data (pd.DataFrame): Data to preprocess.
 
         Returns:
-            pd.DataFrame: Preprocessed data.
+            Preprocessed data.
         """
         return data[data["Trial Bag Colour"] != "Blue"]
 
