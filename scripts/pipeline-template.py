@@ -258,18 +258,52 @@ class AbstractDataPipeline(ABC):
 
 
 class CASP004Pipeline(AbstractDataPipeline):
+    """Pipeline for processing CASP004 trial data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initializes the CASP004Pipeline with the given parameters.
+
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+        """
         super().__init__(*args, **kwargs)
-        """Processes the weight and area DataFrames"""
         # We are using the start weight specific to this trial so drop the Start Weight column
         # Start weight is set in preprocess_data
         self.items = self.items.drop("Start Weight", axis=1)
 
-    def load_data(self, data_filepath, sheet_name=0, skiprows=0):
+    def load_data(
+        self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0
+    ) -> pd.DataFrame:
+        """Loads data from the specified Excel file.
+
+        Args:
+            data_filepath (Path): Path to the data file.
+            sheet_name (int, optional): Sheet name or index to load. Defaults to 0.
+            skiprows (int, optional): Number of rows to skip at the start of the file. Defaults to 0.
+
+        Returns:
+            pd.DataFrame: Loaded data.
+        """
         return pd.read_excel(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
 
-    def preprocess_data(self, data):
+    def preprocess_data(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Preprocesses the data.
+
+        This method performs the following steps:
+        - Filters observations to only include the "End" stage.
+        - Excludes bags A-5 and A-6.
+        - Takes the average of three weight observations.
+        - Fills null values with zero (indicating full disintegration).
+        - Maps start weights and item descriptions.
+        - Ensures no null items after mapping.
+
+        Args:
+            data (pd.DataFrame): Data to preprocess.
+
+        Returns:
+            pd.DataFrame: Preprocessed data.
+        """
         # Only use observations at the end
         df = data[data["Stage"] == "End"]
         # Bags A-5 and A-6 were not found
@@ -305,7 +339,18 @@ class CASP004Pipeline(AbstractDataPipeline):
 
         return df
 
-    def calculate_results(self, df):
+    def calculate_results(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Calculates results from the data.
+
+        This method calculates the percentage of residuals by mass and sets
+        residuals by area to None.
+
+        Args:
+            df (pd.DataFrame): Data to calculate results from.
+
+        Returns:
+            pd.DataFrame: Data with calculated results.
+        """
         df["End Weight"] = df[["Weight 1", "Weight 2", "Weight 3"]].mean(axis=1)
         df["End Weight"] = df["End Weight"].fillna(0)
 
