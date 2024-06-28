@@ -1,3 +1,5 @@
+# ruff: noqa
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -285,7 +287,9 @@ def box_and_whisker(
     max_value = max(1, max_value)
 
     # Maintain Material Class I sort order for everything
-    df["Material Class I"] = pd.Categorical(df["Material Class I"], categories=class_I_order, ordered=True)
+    df["Material Class I"] = pd.Categorical(
+        df["Material Class I"], categories=class_I_order, ordered=True
+    )
     df = df.sort_values(by="Material Class I")
     groups = df[groupby].unique()
 
@@ -326,7 +330,12 @@ def box_and_whisker(
         height=height,
         width=width,
         showlegend=False,
-        title=dict(text=title + f" - {num_trials} Trial(s)", x=0.5, xanchor="center", yanchor="top"),
+        title=dict(
+            text=title + f" - {num_trials} Trial(s)",
+            x=0.5,
+            xanchor="center",
+            yanchor="top",
+        ),
         xaxis=dict(
             tickmode="array",
             tickvals=list(range(len(x_labels))),
