@@ -29,8 +29,7 @@ ignore = [
   "ANN101", # deprecated rule
   "ANN102", # deprecated rule
   "B905",    # won't work on python <3.10
-#   "D200"
 ]
 
-[pydocstyle]
+[lint.pydocstyle]
 convention = "google"
