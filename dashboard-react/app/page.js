@@ -40,20 +40,6 @@ const Home = () => {
     fetchOptions();
   }, []);
 
-  const handleSelectionChange = (key) => (event) => {
-    console.log(key, event.target.value);
-    state.setFilterValue(key, event.target.value);
-  };
-
-  const handleCheckboxChange = (key, value) => (event) => {
-    const checked = event.target.checked;
-    if (checked) {
-      state.setFilterValue(key, [...snap.filters[key], value]);
-    } else {
-      state.setFilterValue(key, snap.filters[key].filter(item => item !== value));
-    }
-  };
-
   console.log("snap.data")
   console.log(snap.data)
   const plotData = snap.data.map(d => ({
@@ -63,52 +49,21 @@ const Home = () => {
   }));
 
   return (
-    <main>
-      <h1>CFTP Field Test Results Dashboard</h1>
-      <SelectionControls />
-      <Plot
-        data={plotData}
-        layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
-      />
+    <main style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
+      <div style={{ marginRight: '20px' }}>
+        <h2>Controls</h2>
+        <SelectionControls />
+      </div>
+      <div>
+        <h1>CFTP Field Test Results Dashboard</h1>
+        <Plot
+          data={plotData}
+          layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
+        />
+      </div>
     </main>
   );
-}
+};
 
-//   return (
-//     <main>
-//       <h1>CFTP Field Test Results Dashboard</h1>
-//       <div>
-//         <label htmlFor="columnSelect">Select Column:</label>
-//         <select id="columnSelect" value={snap.filters.aggCol} onChange={handleSelectionChange('aggCol')}>
-//           <option value="Material Class I">Material Class I</option>
-//           <option value="Material Class II">Material Class II</option>
-//           <option value="Material Class III">Material Class III</option>
-//         </select>
-//         <label htmlFor="displayColumnSelect">Select Display Column:</label>
-//         <select id="displayColumnSelect" value={snap.filters.displayCol} onChange={handleSelectionChange('displayCol')}>
-//           <option value="% Residuals (Mass)">% Residuals (Mass)</option>
-//           <option value="% Residuals (Area)">% Residuals (Area)</option>
-//         </select>
-//         <label>Select Test Methods:</label>
-//           {snap.options["Test Method"]?.map(value => (
-//             <div key={value}>
-//               <input
-//                 type="checkbox"
-//                 id={`testMethod-${value}`}
-//                 value={value}
-//                 checked={snap.filters.selectedTestMethods.includes(value)}
-//                 onChange={handleCheckboxChange('selectedTestMethods', value)}
-//               />
-//               <label htmlFor={`testMethod-${value}`}>{value}</label>
-//             </div>
-//           ))}
-//       </div>
-//       <Plot
-//         data={plotData}
-//         layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
-//       />
-//     </main>
-//   );
-// };
 
 export default Home;
