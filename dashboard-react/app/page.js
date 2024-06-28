@@ -53,9 +53,11 @@ const Home = () => {
     }
   };
 
+  console.log("snap.data")
+  console.log(snap.data)
   const plotData = snap.data.map(d => ({
     type: 'box',
-    name: d[snap.filters.aggCol],
+    name: d["aggCol"],
     y: [d.min, d.q1, d.median, d.q3, d.max]
   }));
 
