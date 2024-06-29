@@ -49,9 +49,13 @@ const applyFilters = (data, filters) => {
 };
 
 const prepareData = async (searchParams) => {
+  console.log("searchParams")
+  console.log(searchParams)
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
-  // TODO: Can I split this out somehow and iterate through?
+  const uncapResults = searchParams.get('uncapresults') === 'true' || false;
+  // TODO: How should I handle defaults here? Do it only in state or?
+  // I think I need the defaults here or else I'll get errors parsing
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : [];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
 
@@ -64,8 +68,22 @@ const prepareData = async (searchParams) => {
     ? trialData.filter(d => testMethods.includes(d['Test Method']))
     : trialData;
 
-  console.log("moistureFilter")
-  console.log(moistureFilter)
+  console.log("!uncapResults")
+  console.log(!uncapResults)
+  if (!uncapResults) {
+    console.log("Capping results")
+    filteredData = filteredData.map(d => {
+      if (d[displayCol] > 1) {
+        d[displayCol] = 1;
+      }
+      return d;
+    });
+  }
+  // console.log(filteredData)
+  // console.log(aggCol)
+
+  // console.log("moistureFilter")
+  // console.log(moistureFilter)
 
   // console.log("operatingConditions")
   // console.log(operatingConditions)
@@ -92,8 +110,8 @@ const prepareData = async (searchParams) => {
       filteredTrials.forEach(trial => trialIDs.add(trial['Trial ID']));
     });
 
-    console.log("trialIDs")
-    console.log(trialIDs)
+    // console.log("trialIDs")
+    // console.log(trialIDs)
 
     // Filter the trialData based on the collected Trial IDs
     filteredData = filteredData.filter(data => trialIDs.has(data['Trial ID']));
