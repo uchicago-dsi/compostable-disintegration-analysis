@@ -90,19 +90,17 @@ df_temps = pd.read_excel(
     OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #"
 )
 df_temps.columns = [trial2id[col.replace("*", "")] for col in df_temps.columns]
-df_temps.to_csv(DATA_DIR / "temperatures.csv")
-df_temps.mean().to_frame("Average Temperature (F)").to_csv(DATA_DIR / "avg_temps.csv")
+df_avg_temps = df_temps.mean().to_frame("Average Temperature (F)")
 
-
-TRIAL_DURATION = pd.read_excel(
+df_trial_duration = pd.read_excel(
     OPERATING_CONDITIONS_PATH,
     sheet_name=2,
     skiprows=3,
 )
-TRIAL_DURATION.columns = [
-    col.replace("\n", "").strip() for col in TRIAL_DURATION.columns
+df_trial_duration.columns = [
+    col.replace("\n", "").strip() for col in df_trial_duration.columns
 ]
-TRIAL_DURATION = TRIAL_DURATION[
+df_trial_duration = df_trial_duration[
     ["Facility Designation", "Endpoint Analysis (trial length)"]
 ].rename(
     columns={
@@ -110,20 +108,24 @@ TRIAL_DURATION = TRIAL_DURATION[
         "Endpoint Analysis (trial length)": "Trial Duration",
     }
 )
-TRIAL_DURATION["Trial ID"] = (
-    TRIAL_DURATION["Trial ID"]
-    .str.replace("( ", "(")
-    .str.replace(" )", ")")
+df_trial_duration["Trial ID"] = (
+    df_trial_duration["Trial ID"]
+    .str.replace("( ", "(", regex=False)
+    .str.replace(" )", ")", regex=False)
     .map(trial2id)
 )
-TRIAL_DURATION.set_index("Trial ID").to_csv(DATA_DIR / "trial_durations.csv")
+df_trial_duration = df_trial_duration.set_index("Trial ID")
 
-MOISTURE = pd.read_excel(
+df_moisture = pd.read_excel(
     OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week"
 )
-MOISTURE.columns = [trial2id[col.replace("*", "")] for col in MOISTURE.columns]
-MOISTURE = MOISTURE.mean().to_frame("Average % Moisture (In Field)")
-MOISTURE.to_csv(DATA_DIR / "moisture.csv")
+df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.columns]
+df_moisture = df_moisture.mean().to_frame("Average % Moisture (In Field)")
+
+df_operating_conditions = pd.concat([df_trial_duration, df_avg_temps, df_moisture], axis=1)
+
+operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
+df_operating_conditions.to_csv(operating_conditions_output_path, index_label="Trial ID")
 
 processed_data = []
 
