@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
-import { moistureFilterDict, temperatureFilterDict } from '@/lib/constants';
+import { moistureFilterDict, temperatureFilterDict, trialDurationDict } from '@/lib/constants';
 
 const FilterControls = () => {
   const snap = useSnapshot(state);
@@ -20,20 +20,12 @@ const FilterControls = () => {
     }
   };
 
-    // {/* Show by Residuals Remaining or by Percent Disintegrated */}
-      
-    // {/* Select material type(s) */}
-    // {/* Select technology */}
-
-    // {/* Operating Conditions Filters */}
-    // {/* Select Average Temperature Range */}
-    // {/* Select Trial Duration Range */}
-
   return (
     <>
         <div>
             <h2>Display Options</h2>
             <div>
+                {/* TODO: Generalize this */}
                 <label htmlFor="columnSelect">Select Column:</label>
                 <select id="columnSelect" value={snap.filters.aggCol} onChange={handleSelectionChange('aggCol')}>
                     <option value="Material Class I">Material Class I</option>
@@ -48,6 +40,7 @@ const FilterControls = () => {
                     <option value="% Residuals (Area)">% Residuals (Area)</option>
                 </select>
             </div>
+            {/* Show by Residuals Remaining or by Percent Disintegrated */}
             <div>
             <label htmlFor="capResults">Display All Results:</label>
                 <input
@@ -78,6 +71,8 @@ const FilterControls = () => {
                     </div>
                 ))}
             </div>
+            {/* Select technology */}
+            {/* Select material type(s) */}
             <h2>Operating Conditions Filters</h2>
             <div>
                 <label>Select Average Temperature Range:</label>
@@ -102,6 +97,20 @@ const FilterControls = () => {
                         id={`moisture-${key}`}
                         value={key}
                         onChange={handleCheckboxChange('selectedMoistureLevels', key)}
+                    />
+                    <label htmlFor={`testMethod-${key}`}>{key}</label>
+                    </div>
+                ))}
+            </div>
+            <div>
+                <label>Select Trial Duration Range:</label>
+                {Object.entries(trialDurationDict)?.map(([key, value]) => (
+                    <div key={key}>
+                    <input
+                        type="checkbox"
+                        id={`moisture-${key}`}
+                        value={key}
+                        onChange={handleCheckboxChange('selectedTrialDurations', key)}
                     />
                     <label htmlFor={`testMethod-${key}`}>{key}</label>
                     </div>

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import * as d3 from 'd3';
 import path from 'path';
 import fs from 'fs/promises';
-import { moistureFilterDict, temperatureFilterDict } from '@/lib/constants';
+import { moistureFilterDict, temperatureFilterDict, trialDurationDict } from '@/lib/constants';
 
 const trialDataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
 const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', 'operating_conditions.csv');
@@ -61,6 +61,7 @@ const prepareData = async (searchParams) => {
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : [];
   const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All Temperatures'];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
+  const trialDurations = searchParams.get('trialdurations') ? searchParams.get('trialdurations').split(',') : ['All Durations'];
 
   const trialData = await fetchData(trialDataPath);
   const operatingConditions = await fetchData(operatingConditionsPath);
@@ -82,15 +83,15 @@ const prepareData = async (searchParams) => {
   }
 
   const moistureTrialIDs = filterTrialIDsByConditions('Average % Moisture (In Field)', moistureFilter, operatingConditions, moistureFilterDict);
-  console.log("moistureTrialIDs")
-  console.log(moistureTrialIDs)
   const temperatureTrialIDs = filterTrialIDsByConditions('Average Temperature (F)', temperatureFilter, operatingConditions, temperatureFilterDict);
+  const trialDurationTrialIDs = filterTrialIDsByConditions('Trial Duration', trialDurations, operatingConditions, trialDurationDict);
 
-  const combinedTrialIDs = Array.from(new Set([...moistureTrialIDs, ...temperatureTrialIDs]));
+  const combinedTrialIDs = Array.from(new Set([...moistureTrialIDs, ...temperatureTrialIDs, ...trialDurationTrialIDs]));
 
   console.log("combinedTrialIDs")
   console.log(combinedTrialIDs)
 
+  // TODO: Handle filtering difference between no results and unfiltered data
   if (combinedTrialIDs.length > 0) {
     filteredData = filteredData.filter(d => combinedTrialIDs.includes(d['Trial ID']));
   }
