@@ -52,8 +52,8 @@ const prepareData = async (searchParams) => {
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
   // TODO: Can I split this out somehow and iterate through?
-  const testMethods = searchParams.get('testmethods') || '';
-  const moistureFilter = searchParams.get('moisture') || 'All Moistures';
+  const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : [];
+  const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
 
   const trialData = await fetchData(trialDataPath);
   const operatingConditions = await fetchData(operatingConditionsPath);
@@ -67,38 +67,37 @@ const prepareData = async (searchParams) => {
   console.log("moistureFilter")
   console.log(moistureFilter)
 
-  console.log("operatingConditions")
-  console.log(operatingConditions)
+  // console.log("operatingConditions")
+  // console.log(operatingConditions)
 
-  if (moistureFilter !== 'All Moistures') {
-    const [low, high, inclusive] = moistureDict[moistureFilter];
+  if (!moistureFilter.includes('All Moistures')) {
+    let trialIDs = new Set();
+    
+    moistureFilter.forEach(moistureFilter => {
+      const [low, high, inclusive] = moistureDict[moistureFilter];
 
-    // Filter the operatingConditions data
-    const filteredTrials = operatingConditions.filter(trial => {
-      const moistureValue = trial['Average % Moisture (In Field)'];
-      if (inclusive) {
-        return moistureValue >= low && moistureValue <= high;
-      }
-      return moistureValue > low && moistureValue < high;
+      // Filter the operatingConditions data
+      const filteredTrials = operatingConditions.filter(trial => {
+        const moistureValue = parseFloat(trial['Average % Moisture (In Field)']);
+        if (inclusive) {
+          return moistureValue >= low && moistureValue <= high;
+        }
+        return moistureValue > low && moistureValue < high;
+      });
+
+      console.log("filteredTrials")
+      console.log(filteredTrials)
+
+      // Collect the Trial IDs of the filtered trials
+      filteredTrials.forEach(trial => trialIDs.add(trial['Trial ID']));
     });
 
-    console.log("filteredTrials")
-    console.log(filteredTrials)
-
-    // Extract the Trial IDs of the filtered trials
-    const trialIDs = filteredTrials.map(trial => trial['Trial ID']);
     console.log("trialIDs")
     console.log(trialIDs)
 
-    // Filter the trialData based on the filtered Trial IDs
-    filteredData = filteredData.filter(data => trialIDs.includes(data['Trial ID']));
+    // Filter the trialData based on the collected Trial IDs
+    filteredData = filteredData.filter(data => trialIDs.has(data['Trial ID']));
   }
-
-
-  // const brokenFilteredData = applyFilters(data, {
-  //   'Test Method': selectedTestMethods,
-  // });
-  // console.log(brokenFilteredData)
 
   const grouped = d3.groups(filteredData, d => d[aggCol]);
   return grouped.map(([key, values]) => ({
