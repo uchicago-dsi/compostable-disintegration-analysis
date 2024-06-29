@@ -13,8 +13,13 @@ const Home = () => {
       console.log("Fetching data...");
       let url = new URL("/api/data", window.location.origin);
       let params = new URLSearchParams(url.search);
+      // Display params
       params.append("aggcol", snap.filters.aggCol);
       params.append("displaycol", snap.filters.displayCol);
+      console.log("snap.filters.uncapResults")
+      console.log(snap.filters.uncapResults)
+      params.append("uncapresults", snap.filters.uncapResults);
+      // Filtering params
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
       params.append("moisture", snap.filters.selectedMoistureLevels.join(","));
       url.search = params.toString();

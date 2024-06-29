@@ -8,6 +8,7 @@ const state = proxy({
     state.data = newData;
   },
 
+  // TODO: I don't like this name...
   options: {},
 
   setOptions: (key, newOptions) => {
@@ -20,6 +21,7 @@ const state = proxy({
     selectedTechnologies: [],
     selectedTestMethods: [],
     selectedMoistureLevels: [],
+    uncapResults: false,
   },
 
   setFilterValue: (key, value) => {

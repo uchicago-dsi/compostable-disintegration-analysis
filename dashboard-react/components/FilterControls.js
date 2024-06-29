@@ -21,8 +21,6 @@ const FilterControls = () => {
   };
 
     // {/* Show by Residuals Remaining or by Percent Disintegrated */}
-    // {/* Cap results */}
-
       
     // {/* Select material type(s) */}
     // {/* Select technology */}
@@ -30,10 +28,6 @@ const FilterControls = () => {
     // {/* Operating Conditions Filters */}
     // {/* Select Average Temperature Range */}
     // {/* Select Trial Duration Range */}
-    // {/* Select Average Moisture Content (In Field) Range */}
-
-    // console.log("snap.filters.selectedMoistureLevels")
-    // console.log(snap.filters.selectedMoistureLevels)
 
   return (
     <>
@@ -53,6 +47,20 @@ const FilterControls = () => {
                 <option value="% Residuals (Mass)">% Residuals (Mass)</option>
                 <option value="% Residuals (Area)">% Residuals (Area)</option>
             </select>
+        </div>
+        <div>
+        <label htmlFor="capResults">Display All Results:</label>
+            <input
+                type="checkbox"
+                id="capResults"
+                checked={snap.filters.uncapResults}
+                onChange={() => state.setFilterValue('uncapResults', !snap.filters.uncapResults)}
+            />
+            <p>
+                <i>
+                    Note: There are some results by both mass or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals. Disintegration results are always capped at 0% (no negative disintegration results)
+                </i>
+            </p>
         </div>
         <h2>Filters</h2>
         <div>
@@ -84,13 +92,6 @@ const FilterControls = () => {
             <label htmlFor={`testMethod-${key}`}>{key}</label>
             </div>
         ))}
-        </div>
-        <div>
-            <p>
-                <i>
-                    Note: There are some results by both mass or surface area with over 100% residuals. The dashboard automatically caps these results at 100% residuals (0% disintegration). Check this box to show all results, including over 100% Residuals. Disintegration results are always capped at 0% (no negative disintegration results)
-                </i>
-            </p>
         </div>
         </div>
     </>
