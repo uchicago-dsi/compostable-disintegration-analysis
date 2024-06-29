@@ -13,3 +13,9 @@ export const temperatureFilterDict = {
     "150-160F": [150, 160, true],
     ">160F": [160, Infinity, false],
 }
+
+export const trialDurationDict = {
+    "30-45 Days": [30, 45, true],
+    "45-75 Days": [45, 75, true],
+    ">75 Days": [75, Infinity, false],
+}

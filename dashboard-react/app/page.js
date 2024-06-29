@@ -16,13 +16,13 @@ const Home = () => {
       // Display params
       params.append("aggcol", snap.filters.aggCol);
       params.append("displaycol", snap.filters.displayCol);
-      console.log("snap.filters.uncapResults")
-      console.log(snap.filters.uncapResults)
       params.append("uncapresults", snap.filters.uncapResults);
       // Filtering params
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
       params.append("temperature", snap.filters.selectedTemperatureLevels.join(","));
       params.append("moisture", snap.filters.selectedMoistureLevels.join(","));
+      params.append("trialdurations", snap.filters.selectedTrialDurations.join(","));
+
       url.search = params.toString();
       console.log(params.toString());
 

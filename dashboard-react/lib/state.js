@@ -25,6 +25,7 @@ const state = proxy({
     selectedTestMethods: [],
     selectedMoistureLevels: [],
     selectedTemperatureLevels: [],
+    selectedTrialDurations: []
   },
 
   setFilterValue: (key, value) => {
