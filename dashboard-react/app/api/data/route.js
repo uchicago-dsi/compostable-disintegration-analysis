@@ -5,7 +5,7 @@ import fs from 'fs/promises';
 import { moistureDict } from '@/lib/constants';
 
 const trialDataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
-const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', 'moisture.csv');
+const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', 'operating_conditions.csv');
 
 const fetchData = async (dataPath) => {
   const data = await fs.readFile(dataPath, 'utf8');
@@ -54,8 +54,7 @@ const prepareData = async (searchParams) => {
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
-  // TODO: How should I handle defaults here? Do it only in state or?
-  // I think I need the defaults here or else I'll get errors parsing
+  // TODO: Clean up the handling of defaults
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : [];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
 
