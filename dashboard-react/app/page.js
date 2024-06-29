@@ -21,6 +21,7 @@ const Home = () => {
       params.append("uncapresults", snap.filters.uncapResults);
       // Filtering params
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
+      params.append("temperature", snap.filters.selectedTemperatureLevels.join(","));
       params.append("moisture", snap.filters.selectedMoistureLevels.join(","));
       url.search = params.toString();
       console.log(params.toString());

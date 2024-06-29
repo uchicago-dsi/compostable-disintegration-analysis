@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import * as d3 from 'd3';
 import path from 'path';
 import fs from 'fs/promises';
-import { moistureDict } from '@/lib/constants';
+import { moistureFilterDict, temperatureFilterDict } from '@/lib/constants';
 
 const trialDataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
 const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', 'operating_conditions.csv');
@@ -23,29 +23,32 @@ const calculateQuartiles = (data, key) => {
   };
 };
 
-const getFilteredTrialIDs = (data, col, low, high, inclusive) => {
-return data.filter(d => {
-  const value = parseFloat(d[col]);
-  if (inclusive) {
-    return value >= low && value <= high;
-  }
-  return value > low && value < high;
-}).map(d => d["Trial ID"]);
+const getFilteredTrialIDs = (data, column, low, high, inclusive) => {
+  return data.filter(trial => {
+    const value = parseFloat(trial[column]);
+    console.log("value")
+    console.log(value)
+    if (inclusive) {
+      return value >= low && value <= high;
+    }
+    return value > low && value < high;
+  }).map(trial => trial['Trial ID']);
 };
 
-const applyFilters = (data, filters) => {
-  // console.log(filters)
-  return data.filter(d => {
-    return Object.entries(filters).every(([col, filterValue]) => {
-      // if (!filterValue || filterValue === 'All') {
-      //   return true; // No filter applied for this column
-      // }
-      if (Array.isArray(filterValue)) {
-        return filterValue.some(val => d[col] === val);
-      }
-      return d[col] === filterValue;
-    });
+const filterTrialIDsByConditions = (column, filters, conditions, filterDict) => {
+  const trialIDs = new Set();
+  console.log("filters")
+  console.log(filters)
+  filters.forEach(filter => {
+    if (!filter.includes('All')) {
+        const [low, high, inclusive] = filterDict[filter];
+        console.log("low")
+        console.log(low)
+        const filteredTrialIDs = getFilteredTrialIDs(conditions, column, low, high, inclusive);
+        filteredTrialIDs.forEach(id => trialIDs.add(id));
+    }
   });
+  return Array.from(trialIDs);
 };
 
 const prepareData = async (searchParams) => {
@@ -56,6 +59,7 @@ const prepareData = async (searchParams) => {
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
   // TODO: Clean up the handling of defaults
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : [];
+  const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All Temperatures'];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
 
   const trialData = await fetchData(trialDataPath);
@@ -67,10 +71,8 @@ const prepareData = async (searchParams) => {
     ? trialData.filter(d => testMethods.includes(d['Test Method']))
     : trialData;
 
-  console.log("!uncapResults")
-  console.log(!uncapResults)
+  
   if (!uncapResults) {
-    console.log("Capping results")
     filteredData = filteredData.map(d => {
       if (d[displayCol] > 1) {
         d[displayCol] = 1;
@@ -78,42 +80,19 @@ const prepareData = async (searchParams) => {
       return d;
     });
   }
-  // console.log(filteredData)
-  // console.log(aggCol)
 
-  // console.log("moistureFilter")
-  // console.log(moistureFilter)
+  const moistureTrialIDs = filterTrialIDsByConditions('Average % Moisture (In Field)', moistureFilter, operatingConditions, moistureFilterDict);
+  console.log("moistureTrialIDs")
+  console.log(moistureTrialIDs)
+  const temperatureTrialIDs = filterTrialIDsByConditions('Average Temperature (F)', temperatureFilter, operatingConditions, temperatureFilterDict);
 
-  // console.log("operatingConditions")
-  // console.log(operatingConditions)
+  const combinedTrialIDs = Array.from(new Set([...moistureTrialIDs, ...temperatureTrialIDs]));
 
-  if (!moistureFilter.includes('All Moistures')) {
-    let trialIDs = new Set();
-    
-    moistureFilter.forEach(moistureFilter => {
-      const [low, high, inclusive] = moistureDict[moistureFilter];
+  console.log("combinedTrialIDs")
+  console.log(combinedTrialIDs)
 
-      // Filter the operatingConditions data
-      const filteredTrials = operatingConditions.filter(trial => {
-        const moistureValue = parseFloat(trial['Average % Moisture (In Field)']);
-        if (inclusive) {
-          return moistureValue >= low && moistureValue <= high;
-        }
-        return moistureValue > low && moistureValue < high;
-      });
-
-      console.log("filteredTrials")
-      console.log(filteredTrials)
-
-      // Collect the Trial IDs of the filtered trials
-      filteredTrials.forEach(trial => trialIDs.add(trial['Trial ID']));
-    });
-
-    // console.log("trialIDs")
-    // console.log(trialIDs)
-
-    // Filter the trialData based on the collected Trial IDs
-    filteredData = filteredData.filter(data => trialIDs.has(data['Trial ID']));
+  if (combinedTrialIDs.length > 0) {
+    filteredData = filteredData.filter(d => combinedTrialIDs.includes(d['Trial ID']));
   }
 
   const grouped = d3.groups(filteredData, d => d[aggCol]);
