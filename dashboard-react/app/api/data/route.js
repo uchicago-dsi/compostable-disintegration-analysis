@@ -51,6 +51,16 @@ const filterTrialIDsByConditions = (column, filters, conditions, filterDict) => 
   return Array.from(trialIDs);
 };
 
+const filterData = (data, column, conditions) => {
+  if (conditions.some(condition => condition.includes('All'))) {
+    console.log("all")
+    return data;
+  }
+  console.log("conditions")
+  console.log(conditions)
+  return data.filter(row => conditions.some(condition => row[column] === condition));
+}
+
 const prepareData = async (searchParams) => {
   console.log("searchParams")
   console.log(searchParams)
@@ -58,7 +68,7 @@ const prepareData = async (searchParams) => {
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
   // TODO: Clean up the handling of defaults
-  const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : [];
+  const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : ['All Test Methods'];
   const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All Temperatures'];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
   const trialDurations = searchParams.get('trialdurations') ? searchParams.get('trialdurations').split(',') : ['All Durations'];
@@ -66,11 +76,9 @@ const prepareData = async (searchParams) => {
   const trialData = await fetchData(trialDataPath);
   const operatingConditions = await fetchData(operatingConditionsPath);
 
-  // Filter data on params
-  // TODO: make this generalizable
-  var filteredData = testMethods.length > 0
-    ? trialData.filter(d => testMethods.includes(d['Test Method']))
-    : trialData;
+  var filteredData = [...trialData];
+
+  filteredData = filterData(filteredData, 'Test Method', testMethods);
 
   
   if (!uncapResults) {
