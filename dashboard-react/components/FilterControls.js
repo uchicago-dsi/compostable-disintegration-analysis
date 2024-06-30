@@ -45,7 +45,13 @@ const FilterControls = () => {
                     <option value="% Residuals (Area)">% Residuals (Area)</option>
                 </select>
             </div>
-            {/* Show by Residuals Remaining or by Percent Disintegrated */}
+            <div>
+                <label htmlFor="displayColumnSelect">Show by Residuals Remaining or by Percent Disintegrated:</label>
+                <select id="displayColumnSelect" value={snap.filters.displayResiduals} onChange={handleSelectionChange('displayResiduals')}>
+                    <option value="Residuals">Residuals Remaining</option>
+                    <option value="Disintegrated">Percent Disintegrated</option>
+                </select>
+            </div>
             <div>
             <label htmlFor="capResults">Display All Results:</label>
                 <input

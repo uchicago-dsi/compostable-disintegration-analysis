@@ -17,6 +17,9 @@ const Home = () => {
       params.append("aggcol", snap.filters.aggCol);
       params.append("displaycol", snap.filters.displayCol);
       params.append("uncapresults", snap.filters.uncapResults);
+      console.log("snap.filters.displayResiduals");
+      console.log(snap.filters.displayResiduals);
+      params.append("displayresiduals", snap.filters.displayResiduals === "Residuals" ? true : false);
       // Trial filters
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
       params.append("technologies", snap.filters.selectedTechnologies.join(","));

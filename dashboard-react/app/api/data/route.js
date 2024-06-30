@@ -67,6 +67,7 @@ const prepareData = async (searchParams) => {
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
+  const displayResiduals = searchParams.get('displayresiduals') === 'true';
   // TODO: Clean up the handling of defaults
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : ['All Test Methods'];
   const technologies = searchParams.get('technologies') ? searchParams.get('technologies').split(',') : ['All Technologies'];
@@ -88,6 +89,19 @@ const prepareData = async (searchParams) => {
     filteredData = filteredData.map(d => {
       if (d[displayCol] > 1) {
         d[displayCol] = 1;
+      }
+      return d;
+    });
+  }
+
+  console.log("displayResiduals")
+  console.log(displayResiduals)
+
+  if (!displayResiduals) {
+    filteredData = filteredData.map(d => {
+      d[displayCol] = 1 - d[displayCol];
+      if (d[displayCol] < 0) {
+        d[displayCol] = 0;
       }
       return d;
     });
