@@ -20,9 +20,10 @@ const Home = () => {
       console.log("snap.filters.displayResiduals");
       console.log(snap.filters.displayResiduals);
       params.append("displayresiduals", snap.filters.displayResiduals === "Residuals" ? true : false);
-      // Trial filters
+      // Trial & item filters
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
       params.append("technologies", snap.filters.selectedTechnologies.join(","));
+      params.append("materials", snap.filters.selectedMaterialTypes.join(","));
       // Operating conditions filters
       params.append("temperature", snap.filters.selectedTemperatureLevels.join(","));
       params.append("moisture", snap.filters.selectedMoistureLevels.join(","));

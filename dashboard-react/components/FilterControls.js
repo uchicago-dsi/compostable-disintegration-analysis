@@ -97,8 +97,21 @@ const FilterControls = () => {
                     </div>
                 ))}
             </div>
-            {/* Select technology */}
-            {/* Select material type(s) */}
+            <div>
+                <label>Select Material Type(s):</label>
+                {snap.options["Material Class II"]?.map(value => (
+                    <div key={value}>
+                    <input
+                        type="checkbox"
+                        id={`testMethod-${value}`}
+                        value={value}
+                        checked={snap.filters.selectedMaterialTypes.includes(value)}
+                        onChange={handleCheckboxChange('selectedMaterialTypes', value)}
+                    />
+                    <label htmlFor={`testMethod-${value}`}>{value}</label>
+                    </div>
+                ))}
+            </div>
             <h2>Operating Conditions Filters</h2>
             <div>
                 <label>Select Average Temperature Range:</label>
