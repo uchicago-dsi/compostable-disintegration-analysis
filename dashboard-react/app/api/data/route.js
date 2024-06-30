@@ -64,14 +64,16 @@ const filterData = (data, column, conditions) => {
 const prepareData = async (searchParams) => {
   console.log("searchParams")
   console.log(searchParams)
+  // TODO: Clean up the handling of defaults
+  // Display params
   const aggCol = searchParams.get('aggcol') || 'Material Class I';
   const displayCol = searchParams.get('displaycol') || '% Residuals (Mass)';
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
   const displayResiduals = searchParams.get('displayresiduals') === 'true';
-  // TODO: Clean up the handling of defaults
+  // Trial and item filters
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : ['All Test Methods'];
   const technologies = searchParams.get('technologies') ? searchParams.get('technologies').split(',') : ['All Technologies'];
-
+  const materials = searchParams.get('materials') ? searchParams.get('materials').split(',') : ['All Materials'];
   // Operating conditions filters
   const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All Temperatures'];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
@@ -82,8 +84,10 @@ const prepareData = async (searchParams) => {
 
   var filteredData = [...trialData];
 
+  // Filter on trial and item filters
   filteredData = filterData(filteredData, 'Test Method', testMethods);
   filteredData = filterData(filteredData, 'Technology', technologies);
+  filteredData = filterData(filteredData, 'Material Class II', materials);
   
   if (!uncapResults) {
     filteredData = filteredData.map(d => {

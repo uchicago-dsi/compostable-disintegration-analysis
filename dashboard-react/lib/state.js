@@ -24,6 +24,7 @@ const state = proxy({
     // Trial filters
     selectedTechnologies: [],
     selectedTestMethods: [],
+    selectedMaterialTypes: [],
     // Operating conditions filters
     selectedMoistureLevels: [],
     selectedTemperatureLevels: [],
