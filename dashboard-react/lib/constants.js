@@ -19,3 +19,10 @@ export const trialDurationDict = {
     "45-75 Days": [45, 75, true],
     ">75 Days": [75, Infinity, false],
 }
+
+export const selection2material = {
+    "High-Level Material Categories": "Material Class I",
+    "Generic Material Categories": "Material Class II",
+    "Specific Material Categories": "Material Class III",
+    "Item Types": "Item Format",
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
-import { moistureFilterDict, temperatureFilterDict, trialDurationDict } from '@/lib/constants';
+import { moistureFilterDict, temperatureFilterDict, trialDurationDict, selection2material } from '@/lib/constants';
 
 const FilterControls = () => {
   const snap = useSnapshot(state);
@@ -25,12 +25,17 @@ const FilterControls = () => {
         <div>
             <h2>Display Options</h2>
             <div>
-                {/* TODO: Generalize this */}
                 <label htmlFor="columnSelect">Select Column:</label>
-                <select id="columnSelect" value={snap.filters.aggCol} onChange={handleSelectionChange('aggCol')}>
-                    <option value="Material Class I">Material Class I</option>
-                    <option value="Material Class II">Material Class II</option>
-                    <option value="Material Class III">Material Class III</option>
+                <select
+                    id="columnSelect"
+                    value={snap.filters.aggCol}
+                    onChange={handleSelectionChange('aggCol')}
+                >
+                    {Object.entries(selection2material).map(([key, value]) => (
+                    <option key={key} value={value}>
+                        {key}
+                    </option>
+                    ))}
                 </select>
             </div>
             <div>
