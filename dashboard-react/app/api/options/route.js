@@ -20,7 +20,7 @@ const getUniqueValues = async (columns) => {
 };
 
 export async function GET() {
-  const columns = ['Material Class I', 'Material Class II', 'Material Class III', 'Test Method'];
+  const columns = ['Material Class I', 'Material Class II', 'Material Class III', 'Test Method', 'Technology'];
   const uniqueValues = await getUniqueValues(columns);
   return NextResponse.json(uniqueValues);
 }

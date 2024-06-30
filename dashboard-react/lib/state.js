@@ -20,9 +20,10 @@ const state = proxy({
     aggCol: 'Material Class I',
     displayCol: '% Residuals (Mass)',
     uncapResults: false,
-    // Filters
+    // Trial filters
     selectedTechnologies: [],
     selectedTestMethods: [],
+    // Operating conditions filters
     selectedMoistureLevels: [],
     selectedTemperatureLevels: [],
     selectedTrialDurations: []

@@ -13,12 +13,14 @@ const Home = () => {
       console.log("Fetching data...");
       let url = new URL("/api/data", window.location.origin);
       let params = new URLSearchParams(url.search);
-      // Display params
+      // Display options
       params.append("aggcol", snap.filters.aggCol);
       params.append("displaycol", snap.filters.displayCol);
       params.append("uncapresults", snap.filters.uncapResults);
-      // Filtering params
+      // Trial filters
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
+      params.append("technologies", snap.filters.selectedTechnologies.join(","));
+      // Operating conditions filters
       params.append("temperature", snap.filters.selectedTemperatureLevels.join(","));
       params.append("moisture", snap.filters.selectedMoistureLevels.join(","));
       params.append("trialdurations", snap.filters.selectedTrialDurations.join(","));
@@ -37,14 +39,16 @@ const Home = () => {
   // Document this better — kind of confusing cuz this is what gets the options for the menus
   useEffect(() => {
     const fetchOptions = async () => {
-      // console.log("Fetching options..."); 
       const response = await fetch("/api/options");
       const result = await response.json();
-      // console.log(result);
+      console.log("Fetching options..."); 
+      console.log(result);
       Object.keys(result).forEach(key => {
         state.setOptions(key, result[key]);
       });
     };
+    console.log("state.options");
+    console.log(state.options);
     fetchOptions();
   }, []);
 
