@@ -54,8 +54,31 @@ extra_items = extra_items.set_index("OG Description")["Item ID"].to_dict()
 
 item2id = item2id | extra_items
 
+id2technology = {
+    "WR": "Windrow",
+    "CASP": "Covered or Extended Aerated Static Pile",
+    "EASP": "Covered or Extended Aerated Static Pile",
+    "ASP": "Aerated Static Pile",
+    "IV": "In-Vessel",
+}
+
+
+def map_technology(trial_id: str) -> str:
+    """Maps trial IDs to the technology used in the trial.
+    
+    Args:
+        trial_id: The trial ID.
+    
+    Returns:
+        The technology used in the trial.
+    """
+    for key in id2technology:
+        if key in trial_id:
+            return id2technology[key]
+    return "Unknown"
+
 TRIALS_PATH = DATA_DIR / "CFTP Anonymized Data Compilation Overview - For Sharing.xlsx"
-TRIALS = pd.read_excel(TRIALS_PATH, skiprows=3)
+df_trials = pd.read_excel(TRIALS_PATH, skiprows=3)
 
 trial2id = {
     "Facility 1 (Windrow)": "WR004-01",
@@ -151,7 +174,7 @@ class AbstractDataPipeline(ABC):
         data_filepath: Path,
         items: pd.DataFrame = ITEMS,
         item2id: Dict[str, Any] = item2id,
-        trials: pd.DataFrame = TRIALS,
+        trials: pd.DataFrame = df_trials,
         trial_name: Optional[str] = None,
         sheet_name: int = 0,
         skiprows: int = 0,
@@ -601,6 +624,9 @@ all_trials = all_trials[
 ]
 # Exclude anything over 1000% as outlier
 all_trials = all_trials[all_trials["% Residuals (Mass)"] < OUTLIER_THRESHOLD]
+
+# Map Trial IDs to the technology used in the trial
+all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
 
 all_trials.to_csv(output_filepath, index=False)
 print("Complete!")
