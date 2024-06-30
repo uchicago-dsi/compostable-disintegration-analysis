@@ -76,6 +76,21 @@ const FilterControls = () => {
                     </div>
                 ))}
             </div>
+            <div>
+                <label>Select Technology:</label>
+                {snap.options["Technology"]?.map(value => (
+                    <div key={value}>
+                    <input
+                        type="checkbox"
+                        id={`testMethod-${value}`}
+                        value={value}
+                        checked={snap.filters.selectedTechnologies.includes(value)}
+                        onChange={handleCheckboxChange('selectedTechnologies', value)}
+                    />
+                    <label htmlFor={`testMethod-${value}`}>{value}</label>
+                    </div>
+                ))}
+            </div>
             {/* Select technology */}
             {/* Select material type(s) */}
             <h2>Operating Conditions Filters</h2>

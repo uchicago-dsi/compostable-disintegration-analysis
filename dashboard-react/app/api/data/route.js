@@ -69,6 +69,9 @@ const prepareData = async (searchParams) => {
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
   // TODO: Clean up the handling of defaults
   const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : ['All Test Methods'];
+  const technologies = searchParams.get('technologies') ? searchParams.get('technologies').split(',') : ['All Technologies'];
+
+  // Operating conditions filters
   const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All Temperatures'];
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
   const trialDurations = searchParams.get('trialdurations') ? searchParams.get('trialdurations').split(',') : ['All Durations'];
@@ -79,7 +82,7 @@ const prepareData = async (searchParams) => {
   var filteredData = [...trialData];
 
   filteredData = filterData(filteredData, 'Test Method', testMethods);
-
+  filteredData = filterData(filteredData, 'Technology', technologies);
   
   if (!uncapResults) {
     filteredData = filteredData.map(d => {
