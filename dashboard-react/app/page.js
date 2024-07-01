@@ -52,15 +52,6 @@ const Home = () => {
     fetchOptions();
   }, []);
 
-  console.log("snap.data")
-  console.log(snap.data)
-
-  const plotData = Object.keys(snap.data).length > 0 ? snap.data.map(d => ({
-    type: 'box',
-    name: d["aggCol"],
-    y: [d.min, d.q1, d.median, d.q3, d.max]
-  })) : [];
-
   return (
     <main style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
       <div style={{ marginRight: '20px' }}>
@@ -69,14 +60,6 @@ const Home = () => {
       <div style={{ minWidth: '1000px' }}>
       <h1>CFTP Field Test Results Dashboard</h1>
         <Dashboard />
-        {/* {plotData.length > 0 ? (
-          <Plot
-            data={plotData}
-            layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
-          />
-        ) : (
-          <p>Not enough data</p>
-        )} */}
       </div>
     </main>
   );
