@@ -103,7 +103,6 @@ trial2id = {
     "Facility 10": "WR005-01",
 }
 
-# TODO: Honestly should put the operating conditions all in one file
 OPERATING_CONDITIONS_PATH = (
     DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
 )
@@ -146,9 +145,6 @@ df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.col
 df_moisture = df_moisture.mean().to_frame("Average % Moisture (In Field)")
 
 df_operating_conditions = pd.concat([df_trial_duration, df_avg_temps, df_moisture], axis=1)
-
-operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
-df_operating_conditions.to_csv(operating_conditions_output_path, index_label="Trial ID")
 
 processed_data = []
 
@@ -629,4 +625,12 @@ all_trials = all_trials[all_trials["% Residuals (Mass)"] < OUTLIER_THRESHOLD]
 all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
 
 all_trials.to_csv(output_filepath, index=False)
+
+# Make sure all trial IDs are represented in operating conditions
+unique_trial_ids = pd.DataFrame(all_trials["Trial ID"].unique(), columns=["Trial ID"]).set_index("Trial ID")
+df_operating_conditions = unique_trial_ids.merge(df_operating_conditions, left_index=True, right_index=True, how="left")
+
+operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
+df_operating_conditions.to_csv(operating_conditions_output_path, index_label="Trial ID")
+
 print("Complete!")
