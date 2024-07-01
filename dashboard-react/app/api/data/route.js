@@ -1,13 +1,37 @@
 import { NextResponse } from 'next/server';
+import { Storage } from '@google-cloud/storage';
 import * as d3 from 'd3';
 import path from 'path';
 import fs from 'fs/promises';
 import { moistureFilterDict, temperatureFilterDict, trialDurationDict } from '@/lib/constants';
 
-const trialDataPath = path.join(process.cwd(), 'public', 'data', 'all_trials_processed.csv');
-const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', 'operating_conditions.csv');
+const dataSource = process.env.DATA_SOURCE;
+const bucketName = 'cftp_data';
+const serviceAccountKey = JSON.parse(Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64, 'base64').toString('ascii'));
+const trialsFilename = 'all_trials_processed.csv';
+const operatingConditionsFilename = 'operating_conditions.csv';
 
-const fetchData = async (dataPath) => {
+const trialDataPath = path.join(process.cwd(), 'public', 'data', trialsFilename);
+const operatingConditionsPath = path.join(process.cwd(), 'public', 'data', operatingConditionsFilename);
+
+const fetchCloudData = async (filename, bucketName) => {
+  const storage = new Storage({
+      credentials: serviceAccountKey
+  });
+  const bucket = storage.bucket(bucketName);
+  const file = bucket.file(filename);
+
+  try {
+    const [fileContents] = await file.download();
+    const data = d3.csvParse(fileContents.toString('utf-8'));
+    return data;
+  } catch (error) {
+    console.error('Error downloading file:', error);
+    throw error;
+  }
+}
+
+const fetchLocalData = async (dataPath) => {
   const data = await fs.readFile(dataPath, 'utf8');
   return d3.csvParse(data);
 };
@@ -85,8 +109,18 @@ const prepareData = async (searchParams) => {
   const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All'];
   const trialDurations = searchParams.get('trialdurations') ? searchParams.get('trialdurations').split(',') : ['All'];
 
-  const trialData = await fetchData(trialDataPath);
-  const operatingConditions = await fetchData(operatingConditionsPath);
+  let trialData;
+  let operatingConditions;
+
+  if (dataSource === 'local') {
+    trialData = await fetchLocalData(trialDataPath);
+    operatingConditions = await fetchLocalData(operatingConditionsPath);
+  } else if (dataSource === 'google') {
+    trialData = await fetchCloudData(trialsFilename, bucketName);
+    operatingConditions = await fetchCloudData(operatingConditionsFilename, bucketName);
+  } else {
+    throw new Error('Invalid data source specified');
+  }
 
   var filteredData = [...trialData];
 
