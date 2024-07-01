@@ -131,6 +131,11 @@ const prepareData = async (searchParams) => {
   console.log("filteredData.length")
   console.log(filteredData.length)
 
+  // Not enough data - return empty object
+  if (filteredData.length < 5) {
+    return {};
+  }
+
   const grouped = d3.groups(filteredData, d => d[aggCol]);
   return grouped.map(([key, values]) => ({
     aggCol: key,
