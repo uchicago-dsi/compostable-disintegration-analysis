@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
 import FilterControls from '@/components/FilterControls';
-import Dashboard from '@/components/Dashboard';
+
+import dynamic from 'next/dynamic';
+const Dashboard = dynamic(() => import('@/components/Dashboard'), { ssr: false });
 
 const Home = () => {
   const snap = useSnapshot(state);
