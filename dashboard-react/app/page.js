@@ -29,9 +29,13 @@ const Home = () => {
       url.search = params.toString();
       console.log(params.toString());
 
-      const response = await fetch(url);
-      const result = await response.json();
-      state.setData(result);
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        state.setData(result);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
     };
     fetchData();
   }, [snap.filters]);
