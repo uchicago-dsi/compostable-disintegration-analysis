@@ -30,6 +30,7 @@ const state = proxy({
     selectedMoistureLevels: Object.keys(moistureFilterDict),
     selectedTemperatureLevels: Object.keys(temperatureFilterDict),
     selectedTrialDurations: Object.keys(trialDurationDict),
+    initialized: false
   },
 
   setFilterValue: (key, value) => {
