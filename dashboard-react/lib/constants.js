@@ -26,3 +26,11 @@ export const selection2material = {
     "Specific Material Categories": "Material Class III",
     "Item Types": "Item Format",
 }
+
+// TODO: Maybe set these in config
+{/* <option value="% Residuals (Mass)">% Residuals (Mass)</option>
+<option value="% Residuals (Area)">% Residuals (Area)</option> */}
+
+{/* <select id="displayColumnSelect" value={snap.filters.displayResiduals} onChange={handleSelectionChange('displayResiduals')}>
+<option value="Residuals">Residuals Remaining</option>
+<option value="Disintegrated">Percent Disintegrated</option> */}

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
 import { moistureFilterDict, temperatureFilterDict, trialDurationDict, selection2material } from '@/lib/constants';
@@ -14,12 +14,28 @@ const FilterControls = () => {
 
   const handleCheckboxChange = (key, value) => (event) => {
     const checked = event.target.checked;
+    console.log(`checked for ${key} ${value}`)
+    console.log(checked)
     if (checked) {
       state.setFilterValue(key, [...snap.filters[key], value]);
     } else {
+        console.log("removing")
       state.setFilterValue(key, snap.filters[key].filter(item => item !== value));
     }
   };
+
+  useEffect(() => {
+    if (snap.options["Test Method"] && snap.options["Material Class II"] && snap.options["Technology"] && state.filters.initialized === false) {
+      state.setFilterValue('selectedTestMethods', snap.options["Test Method"]);
+      state.setFilterValue('selectedMaterialTypes', snap.options["Material Class II"]);
+      state.setFilterValue('selectedTechnologies', snap.options["Technology"]);
+      state.setFilterValue('initialized', true);
+    }
+  }, [snap.options]);
+
+  if (!snap.filters.initialized) {
+    return <div>Loading...</div>;
+  }
 
   console.log("snap.options")
   console.log(snap.options);
