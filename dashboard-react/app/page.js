@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
-import Plot from 'react-plotly.js';
 import state from '@/lib/state';
 import FilterControls from '@/components/FilterControls';
+import Dashboard from '@/components/Dashboard';
 
 const Home = () => {
   const snap = useSnapshot(state);
@@ -68,14 +68,15 @@ const Home = () => {
       </div>
       <div style={{ minWidth: '1000px' }}>
       <h1>CFTP Field Test Results Dashboard</h1>
-        {plotData.length > 0 ? (
+        <Dashboard />
+        {/* {plotData.length > 0 ? (
           <Plot
             data={plotData}
             layout={{ width: 1000, height: 700, title: 'Decomposition Data', showlegend: false }}
           />
         ) : (
           <p>Not enough data</p>
-        )}
+        )} */}
       </div>
     </main>
   );
