@@ -10,15 +10,12 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data...");
       let url = new URL("/api/data", window.location.origin);
       let params = new URLSearchParams(url.search);
       // Display options
       params.append("aggcol", snap.filters.aggCol);
       params.append("displaycol", snap.filters.displayCol);
       params.append("uncapresults", snap.filters.uncapResults);
-      console.log("snap.filters.displayResiduals");
-      console.log(snap.filters.displayResiduals);
       params.append("displayresiduals", snap.filters.displayResiduals === "Residuals" ? true : false);
       // Trial & item filters
       params.append("testmethods", snap.filters.selectedTestMethods.join(","));
@@ -34,7 +31,6 @@ const Home = () => {
 
       const response = await fetch(url);
       const result = await response.json();
-      // console.log(result);
       state.setData(result);
     };
     fetchData();
@@ -45,14 +41,10 @@ const Home = () => {
     const fetchOptions = async () => {
       const response = await fetch("/api/options");
       const result = await response.json();
-      console.log("Fetching options..."); 
-      console.log(result);
       Object.keys(result).forEach(key => {
         state.setOptions(key, result[key]);
       });
     };
-    console.log("state.options");
-    console.log(state.options);
     fetchOptions();
   }, []);
 

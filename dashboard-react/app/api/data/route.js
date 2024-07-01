@@ -26,8 +26,6 @@ const calculateQuartiles = (data, key) => {
 const getFilteredTrialIDs = (data, column, low, high, inclusive) => {
   return data.filter(trial => {
     const value = parseFloat(trial[column]);
-    console.log("value")
-    console.log(value)
     if (inclusive) {
       return value >= low && value <= high;
     }
@@ -35,31 +33,39 @@ const getFilteredTrialIDs = (data, column, low, high, inclusive) => {
   }).map(trial => trial['Trial ID']);
 };
 
-const filterTrialIDsByConditions = (column, filters, conditions, filterDict) => {
+const filterTrialIDsByConditions = (column, filters, operatingConditions, filterDict) => {
   const trialIDs = new Set();
+  console.log(`filtering on ${column}`)
   console.log("filters")
   console.log(filters)
   filters.forEach(filter => {
-    if (!filter.includes('All')) {
+    if (filters.includes('All')) {
+      operatingConditions.forEach(condition => trialIDs.add(condition['Trial ID']));
+      return Array.from(trialIDs);
+    }  
+    else {
         const [low, high, inclusive] = filterDict[filter];
         console.log("low")
         console.log(low)
-        const filteredTrialIDs = getFilteredTrialIDs(conditions, column, low, high, inclusive);
+        const filteredTrialIDs = getFilteredTrialIDs(operatingConditions, column, low, high, inclusive);
         filteredTrialIDs.forEach(id => trialIDs.add(id));
     }
   });
-  return Array.from(trialIDs);
+  return trialIDs;
 };
 
 const filterData = (data, column, conditions) => {
   if (conditions.some(condition => condition.includes('All'))) {
-    console.log("all")
     return data;
   }
-  console.log("conditions")
-  console.log(conditions)
   return data.filter(row => conditions.some(condition => row[column] === condition));
 }
+
+const getIntersectingTrialIDs = (...sets) => {
+  if (sets.length === 0) return new Set();
+  const [firstSet, ...restSets] = sets;
+  return [...firstSet].filter(item => restSets.every(set => set.has(item)));
+};
 
 const prepareData = async (searchParams) => {
   console.log("searchParams")
@@ -71,13 +77,13 @@ const prepareData = async (searchParams) => {
   const uncapResults = searchParams.get('uncapresults') === 'true' || false;
   const displayResiduals = searchParams.get('displayresiduals') === 'true';
   // Trial and item filters
-  const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : ['All Test Methods'];
-  const technologies = searchParams.get('technologies') ? searchParams.get('technologies').split(',') : ['All Technologies'];
-  const materials = searchParams.get('materials') ? searchParams.get('materials').split(',') : ['All Materials'];
+  const testMethods = searchParams.get('testmethods') ? searchParams.get('testmethods').split(',') : ['All'];
+  const technologies = searchParams.get('technologies') ? searchParams.get('technologies').split(',') : ['All'];
+  const materials = searchParams.get('materials') ? searchParams.get('materials').split(',') : ['All'];
   // Operating conditions filters
-  const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All Temperatures'];
-  const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All Moistures'];
-  const trialDurations = searchParams.get('trialdurations') ? searchParams.get('trialdurations').split(',') : ['All Durations'];
+  const temperatureFilter = searchParams.get('temperature') ? searchParams.get('temperature').split(',') : ['All'];
+  const moistureFilter = searchParams.get('moisture') ? searchParams.get('moisture').split(',') : ['All'];
+  const trialDurations = searchParams.get('trialdurations') ? searchParams.get('trialdurations').split(',') : ['All'];
 
   const trialData = await fetchData(trialDataPath);
   const operatingConditions = await fetchData(operatingConditionsPath);
@@ -115,15 +121,15 @@ const prepareData = async (searchParams) => {
   const temperatureTrialIDs = filterTrialIDsByConditions('Average Temperature (F)', temperatureFilter, operatingConditions, temperatureFilterDict);
   const trialDurationTrialIDs = filterTrialIDsByConditions('Trial Duration', trialDurations, operatingConditions, trialDurationDict);
 
-  const combinedTrialIDs = Array.from(new Set([...moistureTrialIDs, ...temperatureTrialIDs, ...trialDurationTrialIDs]));
+  const combinedTrialIDs = getIntersectingTrialIDs(moistureTrialIDs, temperatureTrialIDs, trialDurationTrialIDs);
 
   console.log("combinedTrialIDs")
   console.log(combinedTrialIDs)
 
-  // TODO: Handle filtering difference between no results and unfiltered data
-  if (combinedTrialIDs.length > 0) {
-    filteredData = filteredData.filter(d => combinedTrialIDs.includes(d['Trial ID']));
-  }
+  filteredData = filteredData.filter(d => combinedTrialIDs.includes(d['Trial ID']));
+
+  console.log("filteredData.length")
+  console.log(filteredData.length)
 
   const grouped = d3.groups(filteredData, d => d[aggCol]);
   return grouped.map(([key, values]) => ({
