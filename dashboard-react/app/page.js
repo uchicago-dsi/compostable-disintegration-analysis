@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
+import dynamic from 'next/dynamic';
 import FilterControls from '@/components/FilterControls';
 
-import dynamic from 'next/dynamic';
 const Dashboard = dynamic(() => import('@/components/Dashboard'), { ssr: false });
 
 const Home = () => {

@@ -1,5 +1,6 @@
 "use client";
 import { proxy } from "valtio";
+import { moistureFilterDict, temperatureFilterDict, trialDurationDict } from "@/lib/constants";
 
 const state = proxy({
   data: [],
@@ -26,9 +27,9 @@ const state = proxy({
     selectedTestMethods: [],
     selectedMaterialTypes: [],
     // Operating conditions filters
-    selectedMoistureLevels: [],
-    selectedTemperatureLevels: [],
-    selectedTrialDurations: []
+    selectedMoistureLevels: Object.keys(moistureFilterDict),
+    selectedTemperatureLevels: Object.keys(temperatureFilterDict),
+    selectedTrialDurations: Object.keys(trialDurationDict),
   },
 
   setFilterValue: (key, value) => {

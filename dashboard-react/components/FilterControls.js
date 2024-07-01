@@ -21,6 +21,12 @@ const FilterControls = () => {
     }
   };
 
+  console.log("snap.options")
+  console.log(snap.options);
+
+  console.log("snap.filters")
+  console.log(snap.filters);
+
   return (
     <>
         <div>
@@ -70,46 +76,46 @@ const FilterControls = () => {
             <h2>Filters</h2>
             <div>
                 <label>Select Test Methods:</label>
-                {snap.options["Test Method"]?.map(value => (
-                    <div key={value}>
+                {snap.options["Test Method"]?.map(option => (
+                    <div key={option}>
                     <input
                         type="checkbox"
-                        id={`testMethod-${value}`}
-                        value={value}
-                        checked={snap.filters.selectedTestMethods.includes(value)}
-                        onChange={handleCheckboxChange('selectedTestMethods', value)}
+                        id={`testMethod-${option}`}
+                        value={option}
+                        checked={snap.filters.selectedTestMethods.includes(option)}
+                        onChange={handleCheckboxChange('selectedTestMethods', option)}
                     />
-                    <label htmlFor={`testMethod-${value}`}>{value}</label>
+                    <label htmlFor={`testMethod-${option}`}>{option}</label>
                     </div>
                 ))}
             </div>
             <div>
                 <label>Select Technology:</label>
-                {snap.options["Technology"]?.map(value => (
-                    <div key={value}>
+                {snap.options["Technology"]?.map(option => (
+                    <div key={option}>
                     <input
                         type="checkbox"
-                        id={`testMethod-${value}`}
-                        value={value}
-                        checked={snap.filters.selectedTechnologies.includes(value)}
-                        onChange={handleCheckboxChange('selectedTechnologies', value)}
+                        id={`testMethod-${option}`}
+                        value={option}
+                        checked={snap.filters.selectedTechnologies.includes(option)}
+                        onChange={handleCheckboxChange('selectedTechnologies', option)}
                     />
-                    <label htmlFor={`testMethod-${value}`}>{value}</label>
+                    <label htmlFor={`testMethod-${option}`}>{option}</label>
                     </div>
                 ))}
             </div>
             <div>
                 <label>Select Material Type(s):</label>
-                {snap.options["Material Class II"]?.map(value => (
-                    <div key={value}>
+                {snap.options["Material Class II"]?.map(option => (
+                    <div key={option}>
                     <input
                         type="checkbox"
-                        id={`testMethod-${value}`}
-                        value={value}
-                        checked={snap.filters.selectedMaterialTypes.includes(value)}
-                        onChange={handleCheckboxChange('selectedMaterialTypes', value)}
+                        id={`testMethod-${option}`}
+                        value={option}
+                        checked={snap.filters.selectedMaterialTypes.includes(option)}
+                        onChange={handleCheckboxChange('selectedMaterialTypes', option)}
                     />
-                    <label htmlFor={`testMethod-${value}`}>{value}</label>
+                    <label htmlFor={`testMethod-${option}`}>{option}</label>
                     </div>
                 ))}
             </div>
@@ -122,6 +128,7 @@ const FilterControls = () => {
                         type="checkbox"
                         id={`moisture-${key}`}
                         value={key}
+                        checked={snap.filters.selectedTemperatureLevels.includes(key)}
                         onChange={handleCheckboxChange('selectedTemperatureLevels', key)}
                     />
                     <label htmlFor={`testMethod-${key}`}>{key}</label>
@@ -136,6 +143,7 @@ const FilterControls = () => {
                         type="checkbox"
                         id={`moisture-${key}`}
                         value={key}
+                        checked={snap.filters.selectedMoistureLevels.includes(key)}
                         onChange={handleCheckboxChange('selectedMoistureLevels', key)}
                     />
                     <label htmlFor={`testMethod-${key}`}>{key}</label>
@@ -150,6 +158,7 @@ const FilterControls = () => {
                         type="checkbox"
                         id={`moisture-${key}`}
                         value={key}
+                        checked={snap.filters.selectedTrialDurations.includes(key)}
                         onChange={handleCheckboxChange('selectedTrialDurations', key)}
                     />
                     <label htmlFor={`testMethod-${key}`}>{key}</label>
