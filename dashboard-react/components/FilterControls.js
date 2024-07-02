@@ -2,9 +2,10 @@
 import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
+import DropdownCheckbox from '@/components/DropdownCheckbox';  
 import { moistureFilterDict, temperatureFilterDict, trialDurationDict, selection2material } from '@/lib/constants';
 
-const FilterControls = () => {
+export default function FilterControls() {
   const snap = useSnapshot(state);
 
   const handleSelectionChange = (key) => (event) => {
@@ -45,7 +46,7 @@ const FilterControls = () => {
 
   return (
     <>
-        <div>
+        <div className='h-[100vh] overflow-y-auto'>
             <h2>Display Options</h2>
             <div>
                 <label htmlFor="columnSelect">Select Column:</label>
@@ -90,100 +91,44 @@ const FilterControls = () => {
                 </p>
             </div>
             <h2>Filters</h2>
-            <div>
-                <label>Select Test Methods:</label>
-                {snap.options["Test Method"]?.map(option => (
-                    <div key={option}>
-                    <input
-                        type="checkbox"
-                        id={`testMethod-${option}`}
-                        value={option}
-                        checked={snap.filters.selectedTestMethods.includes(option)}
-                        onChange={handleCheckboxChange('selectedTestMethods', option)}
-                    />
-                    <label htmlFor={`testMethod-${option}`}>{option}</label>
-                    </div>
-                ))}
-            </div>
-            <div>
-                <label>Select Technology:</label>
-                {snap.options["Technology"]?.map(option => (
-                    <div key={option}>
-                    <input
-                        type="checkbox"
-                        id={`testMethod-${option}`}
-                        value={option}
-                        checked={snap.filters.selectedTechnologies.includes(option)}
-                        onChange={handleCheckboxChange('selectedTechnologies', option)}
-                    />
-                    <label htmlFor={`testMethod-${option}`}>{option}</label>
-                    </div>
-                ))}
-            </div>
-            <div>
-                <label>Select Material Type(s):</label>
-                {snap.options["Material Class II"]?.map(option => (
-                    <div key={option}>
-                    <input
-                        type="checkbox"
-                        id={`testMethod-${option}`}
-                        value={option}
-                        checked={snap.filters.selectedMaterialTypes.includes(option)}
-                        onChange={handleCheckboxChange('selectedMaterialTypes', option)}
-                    />
-                    <label htmlFor={`testMethod-${option}`}>{option}</label>
-                    </div>
-                ))}
-            </div>
+            <DropdownCheckbox
+                options={snap.options["Test Method"]}
+                selectedOptions={snap.filters.selectedTestMethods}
+                filterKey="selectedTestMethods"
+                title="Select Test Methods"
+            />
+            <DropdownCheckbox
+                options={snap.options["Technology"]}
+                selectedOptions={snap.filters.selectedTechnologies}
+                filterKey="selectedTechnologies"
+                title="Select Technology(ies)"
+            />
+            <DropdownCheckbox
+                options={snap.options["Material Class II"]}
+                selectedOptions={snap.filters.selectedMaterialTypes}
+                filterKey="selectedMaterialTypes"
+                title="Select Material Type(s)"
+            />
             <h2>Operating Conditions Filters</h2>
-            <div>
-                <label>Select Average Temperature Range:</label>
-                {Object.entries(temperatureFilterDict)?.map(([key, value]) => (
-                    <div key={key}>
-                    <input
-                        type="checkbox"
-                        id={`moisture-${key}`}
-                        value={key}
-                        checked={snap.filters.selectedTemperatureLevels.includes(key)}
-                        onChange={handleCheckboxChange('selectedTemperatureLevels', key)}
-                    />
-                    <label htmlFor={`testMethod-${key}`}>{key}</label>
-                    </div>
-                ))}
-            </div>
-            <div>
-                <label>Select Average Moisture Content (In Field) Range:</label>
-                {Object.entries(moistureFilterDict)?.map(([key, value]) => (
-                    <div key={key}>
-                    <input
-                        type="checkbox"
-                        id={`moisture-${key}`}
-                        value={key}
-                        checked={snap.filters.selectedMoistureLevels.includes(key)}
-                        onChange={handleCheckboxChange('selectedMoistureLevels', key)}
-                    />
-                    <label htmlFor={`testMethod-${key}`}>{key}</label>
-                    </div>
-                ))}
-            </div>
-            <div>
-                <label>Select Trial Duration Range:</label>
-                {Object.entries(trialDurationDict)?.map(([key, value]) => (
-                    <div key={key}>
-                    <input
-                        type="checkbox"
-                        id={`moisture-${key}`}
-                        value={key}
-                        checked={snap.filters.selectedTrialDurations.includes(key)}
-                        onChange={handleCheckboxChange('selectedTrialDurations', key)}
-                    />
-                    <label htmlFor={`testMethod-${key}`}>{key}</label>
-                    </div>
-                ))}
-            </div>
+            <DropdownCheckbox
+                options={Object.keys(temperatureFilterDict)}
+                selectedOptions={snap.filters.selectedTemperatureLevels}
+                filterKey="selectedTemperatureLevels"
+                title="Select Temperature Range(s)"
+            />
+            <DropdownCheckbox
+                options={Object.keys(moistureFilterDict)}
+                selectedOptions={snap.filters.selectedMoistureLevels}
+                filterKey="selectedMoistureLevels"
+                title="Select Moisture Content Range(s)"
+            />
+            <DropdownCheckbox
+                options={Object.keys(trialDurationDict)}
+                selectedOptions={snap.filters.selectedTrialDurations}
+                filterKey="selectedTrialDurations"
+                title="Select Trial Duration Range(s)"
+            />
         </div>
     </>
   );
 };
-
-export default FilterControls;
