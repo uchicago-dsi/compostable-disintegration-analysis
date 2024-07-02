@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
 import DropdownCheckbox from '@/components/DropdownCheckbox';  
-import { moistureFilterDict, temperatureFilterDict, trialDurationDict, selection2material } from '@/lib/constants';
+import DropdownSingleSelect from '@/components/DropdownSingleSelect';
+import { moistureFilterDict, temperatureFilterDict, trialDurationDict, selection2material, residualsDisintegratedDict, displayColDict } from '@/lib/constants';
 
 export default function FilterControls() {
   const snap = useSnapshot(state);
@@ -11,18 +12,6 @@ export default function FilterControls() {
   const handleSelectionChange = (key) => (event) => {
     console.log(key, event.target.value);
     state.setFilterValue(key, event.target.value);
-  };
-
-  const handleCheckboxChange = (key, value) => (event) => {
-    const checked = event.target.checked;
-    console.log(`checked for ${key} ${value}`)
-    console.log(checked)
-    if (checked) {
-      state.setFilterValue(key, [...snap.filters[key], value]);
-    } else {
-        console.log("removing")
-      state.setFilterValue(key, snap.filters[key].filter(item => item !== value));
-    }
   };
 
   useEffect(() => {
@@ -48,35 +37,23 @@ export default function FilterControls() {
     <>
         <div className='h-[100vh] overflow-y-auto'>
             <h2>Display Options</h2>
+            <DropdownSingleSelect 
+                options={selection2material}
+                title="Select x-axis Display:"
+                filterKey="aggCol"
+            />
+            <DropdownSingleSelect
+                options={displayColDict}
+                title="Show Results by Mass or by Surface Area:"
+                filterKey="displayCol"
+            />
+            <DropdownSingleSelect
+                options={residualsDisintegratedDict}
+                title="Show by Residuals Remaining or by Percent Disintegrated:"
+                filterKey="displayResiduals"
+            />
             <div>
-                <label htmlFor="columnSelect">Select Column:</label>
-                <select
-                    id="columnSelect"
-                    value={snap.filters.aggCol}
-                    onChange={handleSelectionChange('aggCol')}
-                >
-                    {Object.entries(selection2material).map(([key, value]) => (
-                    <option key={key} value={value}>
-                        {key}
-                    </option>
-                    ))}
-                </select>
-            </div>
-            <div>
-                <label htmlFor="displayColumnSelect">Choose x-axis Display:</label>
-                <select id="displayColumnSelect" value={snap.filters.displayCol} onChange={handleSelectionChange('displayCol')}>
-                    <option value="% Residuals (Mass)">% Residuals (Mass)</option>
-                    <option value="% Residuals (Area)">% Residuals (Area)</option>
-                </select>
-            </div>
-            <div>
-                <label htmlFor="displayColumnSelect">Show by Residuals Remaining or by Percent Disintegrated:</label>
-                <select id="displayColumnSelect" value={snap.filters.displayResiduals} onChange={handleSelectionChange('displayResiduals')}>
-                    <option value="Residuals">Residuals Remaining</option>
-                    <option value="Disintegrated">Percent Disintegrated</option>
-                </select>
-            </div>
-            <div>
+            {/* TODO: Make this look better... */}
             <label htmlFor="capResults">Display All Results:</label>
                 <input
                     type="checkbox"
