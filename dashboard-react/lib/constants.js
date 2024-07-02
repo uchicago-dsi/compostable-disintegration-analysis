@@ -20,6 +20,7 @@ export const trialDurationDict = {
     ">75 Days": [75, Infinity, false],
 }
 
+// TODO: Figure out a better system for naming these and keeping track of which ones are keys and which ones are values
 export const selection2material = {
     "High-Level Material Categories": "Material Class I",
     "Generic Material Categories": "Material Class II",
@@ -27,10 +28,12 @@ export const selection2material = {
     "Item Types": "Item Format",
 }
 
-// TODO: Maybe set these in config
-{/* <option value="% Residuals (Mass)">% Residuals (Mass)</option>
-<option value="% Residuals (Area)">% Residuals (Area)</option> */}
+export const residualsDisintegratedDict = {
+    "Residuals Remaining": "Residuals",
+    "Percent Disintegrated": "Disintegrated",
+}
 
-{/* <select id="displayColumnSelect" value={snap.filters.displayResiduals} onChange={handleSelectionChange('displayResiduals')}>
-<option value="Residuals">Residuals Remaining</option>
-<option value="Disintegrated">Percent Disintegrated</option> */}
+export const displayColDict = {
+    "% Residuals (Mass)": "% Residuals (Mass)",
+    "% Residuals (Area)": "% Residuals (Area)",
+}
