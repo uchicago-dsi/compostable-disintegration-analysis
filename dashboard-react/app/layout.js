@@ -3,6 +3,8 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// TODO: maybe force light mode here — reevaluate after implementing DaisyUI components
+
 export const metadata = {
   title: "Compostable Field Testing Analysis",
   description: "Disintegration Dashboard",

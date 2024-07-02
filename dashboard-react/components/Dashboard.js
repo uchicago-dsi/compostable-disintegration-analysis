@@ -1,11 +1,10 @@
-// PlotComponent.js
 "use client";
 import React from 'react';
 import Plot from 'react-plotly.js';
 import { useSnapshot } from 'valtio';
 import state from '@/lib/state';
 
-const Dashboard = () => {
+export default function Dashboard() {
   const snap = useSnapshot(state);
 
   const plotData = Object.keys(snap.data).length > 0 ? snap.data.map(d => ({
@@ -27,5 +26,3 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;
