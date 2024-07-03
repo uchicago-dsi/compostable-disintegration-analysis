@@ -26,12 +26,39 @@ export default function DropdownCheckbox({
     }
   };
 
+  const selectAll = () => {
+    state.setFilterValue(filterKey, [...options]);
+  };
+
+  const selectNone = () => {
+    state.setFilterValue(filterKey, []);
+  };
+
+  const isAllSelected = selectedOptions.length === options.length;
+
   return (
     <>
       <h2>{title}</h2>
+      <div className="join justify-center">
+        <button
+          className="btn join-item btn-sm normal-case"
+          onClick={selectAll}
+        >
+          All
+        </button>
+        <button
+          className="btn join-item btn-sm normal-case"
+          onClick={selectNone}
+        >
+          None
+        </button>
+      </div>
+      <div className="divider m-0"></div>
       <details className="dropdown">
         <summary className="btn m-1">
-          {selectedOptions.length > 0
+          {isAllSelected
+            ? "All Selected"
+            : selectedOptions.length > 0
             ? selectedOptions.join(", ")
             : "None Selected"}
         </summary>
