@@ -121,9 +121,14 @@ const filterData = (data, column, conditions) => {
 };
 
 const getIntersectingTrialIDs = (...sets) => {
-  if (sets.length === 0) return new Set();
+  if (sets.length === 0 || sets.some((set) => set.size === 0)) {
+    return new Set();
+  }
   const [firstSet, ...restSets] = sets;
-  return [...firstSet].filter((item) => restSets.every((set) => set.has(item)));
+  const intersection = [...firstSet].filter((item) =>
+    restSets.every((set) => set.has(item))
+  );
+  return new Set(intersection);
 };
 
 const prepareData = async (searchParams) => {
@@ -138,23 +143,23 @@ const prepareData = async (searchParams) => {
   // Trial and item filters
   const testMethods = searchParams.get("testmethods")
     ? searchParams.get("testmethods").split(",")
-    : ["All"];
+    : [];
   const technologies = searchParams.get("technologies")
     ? searchParams.get("technologies").split(",")
-    : ["All"];
+    : [];
   const materials = searchParams.get("materials")
     ? searchParams.get("materials").split(",")
-    : ["All"];
+    : [];
   // Operating conditions filters
   const temperatureFilter = searchParams.get("temperature")
     ? searchParams.get("temperature").split(",")
-    : ["All"];
+    : [];
   const moistureFilter = searchParams.get("moisture")
     ? searchParams.get("moisture").split(",")
-    : ["All"];
+    : [];
   const trialDurations = searchParams.get("trialdurations")
     ? searchParams.get("trialdurations").split(",")
-    : ["All"];
+    : [];
 
   let trialData;
   let operatingConditions;
@@ -174,8 +179,11 @@ const prepareData = async (searchParams) => {
 
   var filteredData = [...trialData];
 
-  // Filter on trial and item filters
+  // filter data based on selected filters
+  // TODO: This is wrong!
   filteredData = filterData(filteredData, "Test Method", testMethods);
+  console.log("filteredData.length after test methods");
+  console.log(filteredData.length);
   filteredData = filterData(filteredData, "Technology", technologies);
   filteredData = filterData(filteredData, "Material Class II", materials);
 
@@ -201,12 +209,18 @@ const prepareData = async (searchParams) => {
     });
   }
 
+  console.log("moistureFilter");
+  console.log(moistureFilter);
   const moistureTrialIDs = filterTrialIDsByConditions(
     "Average % Moisture (In Field)",
     moistureFilter,
     operatingConditions,
     moistureFilterDict
   );
+
+  console.log("moistureTrialIDs");
+  console.log(moistureTrialIDs);
+
   const temperatureTrialIDs = filterTrialIDsByConditions(
     "Average Temperature (F)",
     temperatureFilter,
@@ -229,9 +243,13 @@ const prepareData = async (searchParams) => {
   console.log("combinedTrialIDs");
   console.log(combinedTrialIDs);
 
-  filteredData = filteredData.filter((d) =>
-    combinedTrialIDs.includes(d["Trial ID"])
-  );
+  if (combinedTrialIDs.size === 0) {
+    filteredData = [];
+  } else {
+    filteredData = filteredData.filter((d) =>
+      combinedTrialIDs.has(d["Trial ID"])
+    );
+  }
 
   console.log("filteredData.length");
   console.log(filteredData.length);
