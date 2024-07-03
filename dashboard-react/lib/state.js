@@ -1,7 +1,10 @@
 "use client";
 import { proxy, subscribe } from "valtio";
-import { moistureFilterDict, temperatureFilterDict, trialDurationDict } from "@/lib/constants";
-
+import {
+  moistureFilterDict,
+  temperatureFilterDict,
+  trialDurationDict,
+} from "@/lib/constants";
 
 const state = proxy({
   data: [],
@@ -19,8 +22,8 @@ const state = proxy({
 
   filters: {
     // Display options
-    aggCol: 'Material Class I',
-    displayCol: '% Residuals (Mass)',
+    aggCol: "Material Class I",
+    displayCol: "% Residuals (Mass)",
     uncapResults: false,
     displayResiduals: "Residuals",
     // Trial filters
@@ -31,7 +34,7 @@ const state = proxy({
     selectedMoistureLevels: Object.keys(moistureFilterDict),
     selectedTemperatureLevels: Object.keys(temperatureFilterDict),
     selectedTrialDurations: Object.keys(trialDurationDict),
-    initialized: false
+    initialized: false,
   },
 
   setFilterValue: (key, value) => {
@@ -46,15 +49,24 @@ const fetchData = async () => {
   params.append("aggcol", state.filters.aggCol);
   params.append("displaycol", state.filters.displayCol);
   params.append("uncapresults", state.filters.uncapResults);
-  params.append("displayresiduals", state.filters.displayResiduals === "Residuals" ? true : false);
+  params.append(
+    "displayresiduals",
+    state.filters.displayResiduals === "Residuals" ? true : false
+  );
   // Trial & item filters
   params.append("testmethods", state.filters.selectedTestMethods.join(","));
   params.append("technologies", state.filters.selectedTechnologies.join(","));
   params.append("materials", state.filters.selectedMaterialTypes.join(","));
   // Operating conditions filters
-  params.append("temperature", state.filters.selectedTemperatureLevels.join(","));
+  params.append(
+    "temperature",
+    state.filters.selectedTemperatureLevels.join(",")
+  );
   params.append("moisture", state.filters.selectedMoistureLevels.join(","));
-  params.append("trialdurations", state.filters.selectedTrialDurations.join(","));
+  params.append(
+    "trialdurations",
+    state.filters.selectedTrialDurations.join(",")
+  );
 
   url.search = params.toString();
   console.log(params.toString());
