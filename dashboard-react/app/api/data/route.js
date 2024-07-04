@@ -260,10 +260,34 @@ const prepareData = async (searchParams) => {
   }
 
   const grouped = d3.groups(filteredData, (d) => d[aggCol]);
-  return grouped.map(([key, values]) => ({
-    aggCol: key,
-    ...calculateQuartiles(values, displayCol),
-  }));
+
+  const sortedGrouped = grouped.map(([key, values]) => {
+    // TODO: Verify that this is always the same
+    const classIName = values[0]["Material Class I"];
+    const quartiles = calculateQuartiles(values, displayCol);
+
+    return {
+      aggCol: key,
+      "Material Class I": classIName,
+      ...quartiles,
+    };
+  });
+
+  const materialClassIOrder = [
+    "Fiber",
+    "Biopolymer",
+    "Mixed Materials",
+    "Positive Control",
+  ];
+
+  sortedGrouped.sort((a, b) => {
+    return (
+      materialClassIOrder.indexOf(a["Material Class I"]) -
+      materialClassIOrder.indexOf(b["Material Class I"])
+    );
+  });
+
+  return sortedGrouped;
 };
 
 export async function GET(request) {
