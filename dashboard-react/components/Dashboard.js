@@ -15,7 +15,7 @@ export default function Dashboard() {
   };
 
   const plotData =
-    Object.keys(snap.data.data).length > 0
+    Object.keys(snap.data).length > 0
       ? snap.data.data.map((d) => {
           console.log(d);
           const materialClass = d["Material Class I"];
