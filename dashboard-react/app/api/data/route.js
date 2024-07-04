@@ -89,7 +89,7 @@ const filterTrialIDsByConditions = (
   console.log("filters");
   console.log(filters);
   filters.forEach((filter) => {
-    if (filters.includes("All")) {
+    if (filters.length === Object.keys(filterDict).length) {
       operatingConditions.forEach((condition) =>
         trialIDs.add(condition["Trial ID"])
       );
@@ -209,8 +209,9 @@ const prepareData = async (searchParams) => {
     });
   }
 
-  console.log("moistureFilter");
-  console.log(moistureFilter);
+  // TODO: How do we want to handle communicating that not all trials have operating conditions?
+  // console.log("moistureFilter");
+  // console.log(moistureFilter);
   const moistureTrialIDs = filterTrialIDsByConditions(
     "Average % Moisture (In Field)",
     moistureFilter,

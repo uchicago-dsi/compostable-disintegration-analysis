@@ -43,7 +43,7 @@ export default function Dashboard() {
   );
 
   function generateTitle(displayCol, aggCol, num_trials) {
-    return `${aggCol} - ${displayCol} - ${num_trials} Trial(s)`;
+    return `${displayCol} by ${aggCol} - ${num_trials} Trial(s)`;
   }
 
   const title = generateTitle(
