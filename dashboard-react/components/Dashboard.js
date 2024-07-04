@@ -15,20 +15,42 @@ export default function Dashboard() {
   };
 
   const plotData =
-    Object.keys(snap.data).length > 0
-      ? snap.data.map((d) => {
+    Object.keys(snap.data.data).length > 0
+      ? snap.data.data.map((d) => {
           console.log(d);
           const materialClass = d["Material Class I"];
           const color = class2color[materialClass] || "#000";
           return {
             type: "box",
-            name: d["aggCol"],
+            name: `${d["aggCol"]} (n=${d["count"]})`,
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
           };
         })
       : [];
+
+  function generateYAxisTitle(displayCol, cap) {
+    let yAxisTitle = `${displayCol}`;
+    if (cap) {
+      yAxisTitle += " Capped";
+    }
+    return yAxisTitle;
+  }
+  const yAxisTitle = generateYAxisTitle(
+    snap.filters.displayCol,
+    !snap.filters.uncapResults
+  );
+
+  function generateTitle(displayCol, aggCol, num_trials) {
+    return `${aggCol} - ${displayCol} - ${num_trials} Trial(s)`;
+  }
+
+  const title = generateTitle(
+    snap.filters.displayCol,
+    snap.filters.aggCol,
+    snap.data.numTrials
+  );
 
   return (
     <div style={{ minWidth: "1000px" }}>
@@ -38,8 +60,19 @@ export default function Dashboard() {
           layout={{
             width: 1000,
             height: 700,
-            title: "Decomposition Data",
+            title: {
+              text: title,
+              x: 0.5,
+              xanchor: "center",
+              yanchor: "top",
+            },
             showlegend: false,
+            yaxis: {
+              title: {
+                text: yAxisTitle,
+              },
+              tickformat: ".0%",
+            },
           }}
         />
       ) : (

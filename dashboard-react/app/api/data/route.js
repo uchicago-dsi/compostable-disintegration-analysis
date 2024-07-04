@@ -268,6 +268,7 @@ const prepareData = async (searchParams) => {
 
     return {
       aggCol: key,
+      count: values.length,
       "Material Class I": classIName,
       ...quartiles,
     };
@@ -287,7 +288,13 @@ const prepareData = async (searchParams) => {
     );
   });
 
-  return sortedGrouped;
+  console.log("sortedGrouped");
+  console.log(sortedGrouped);
+
+  return {
+    data: sortedGrouped,
+    numTrials: combinedTrialIDs.size,
+  };
 };
 
 export async function GET(request) {
