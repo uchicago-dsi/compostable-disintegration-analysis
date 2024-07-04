@@ -64,7 +64,9 @@ export default function FilterControls() {
         />
         <div>
           {/* TODO: Make this look better... */}
-          <label htmlFor="capResults">Display All Results:</label>
+          <label htmlFor="capResults">
+            Show results with over 100% residuals remaining:
+          </label>
           <input
             type="checkbox"
             id="capResults"
