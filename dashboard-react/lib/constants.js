@@ -20,20 +20,25 @@ export const trialDurationDict = {
   ">75 Days": [75, Infinity, false],
 };
 
-// TODO: Figure out a better system for naming these and keeping track of which ones are keys and which ones are values
-export const selection2material = {
+export const material2col = {
   "High-Level Material Categories": "Material Class I",
   "Generic Material Categories": "Material Class II",
   "Specific Material Categories": "Material Class III",
   "Item Types": "Item Format",
 };
 
-export const residualsDisintegratedDict = {
+export const residuals2col = {
   "Residuals Remaining": "Residuals",
   "Percent Disintegrated": "Disintegrated",
 };
 
-export const displayColDict = {
+export const display2col = {
   "% Residuals (Mass)": "% Residuals (Mass)",
   "% Residuals (Area)": "% Residuals (Area)",
 };
+
+export function invertDictionary(dict) {
+  return Object.fromEntries(
+    Object.entries(dict).map(([key, value]) => [value, key])
+  );
+}

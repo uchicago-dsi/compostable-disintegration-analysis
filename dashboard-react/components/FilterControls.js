@@ -8,9 +8,9 @@ import {
   moistureFilterDict,
   temperatureFilterDict,
   trialDurationDict,
-  selection2material,
-  residualsDisintegratedDict,
-  displayColDict,
+  material2col,
+  residuals2col,
+  display2col,
 } from "@/lib/constants";
 
 export default function FilterControls() {
@@ -48,17 +48,17 @@ export default function FilterControls() {
       <div className="h-[100vh] overflow-y-auto">
         <h2>Display Options</h2>
         <DropdownSingleSelect
-          options={selection2material}
+          options={material2col}
           title="Select x-axis Display:"
           filterKey="aggCol"
         />
         <DropdownSingleSelect
-          options={displayColDict}
+          options={display2col}
           title="Show Results by Mass or by Surface Area:"
           filterKey="displayCol"
         />
         <DropdownSingleSelect
-          options={residualsDisintegratedDict}
+          options={residuals2col}
           title="Show by Residuals Remaining or by Percent Disintegrated:"
           filterKey="displayResiduals"
         />
