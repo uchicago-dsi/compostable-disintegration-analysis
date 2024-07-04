@@ -25,6 +25,7 @@ export default function Dashboard() {
             name: d["aggCol"],
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
+            boxmean: true,
           };
         })
       : [];
@@ -42,7 +43,7 @@ export default function Dashboard() {
           }}
         />
       ) : (
-        <p>Not enough data</p>
+        <p>Not enough data for the selected criteria</p>
       )}
     </div>
   );
