@@ -260,6 +260,9 @@ const prepareData = async (searchParams) => {
     return {};
   }
 
+  const uniqueTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
+  const numTrials = uniqueTrialIDs.size;
+
   const grouped = d3.groups(filteredData, (d) => d[aggCol]);
 
   const sortedGrouped = grouped.map(([key, values]) => {
@@ -294,7 +297,7 @@ const prepareData = async (searchParams) => {
 
   return {
     data: sortedGrouped,
-    numTrials: combinedTrialIDs.size,
+    numTrials: numTrials,
   };
 };
 
