@@ -34,7 +34,6 @@ const Home = () => {
         <FilterControls />
       </div>
       <div style={{ minWidth: "1000px" }}>
-        <h1>CFTP Field Test Results Dashboard</h1>
         <Dashboard />
       </div>
     </main>
