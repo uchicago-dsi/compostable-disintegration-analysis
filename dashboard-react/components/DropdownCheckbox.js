@@ -19,12 +19,12 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
 
   const handleCheckboxChange = (key, value) => (event) => {
     const checked = event.target.checked;
-    // console.log(`checked for ${key} ${value}`);
-    // console.log(checked);
+    console.log(`checked for ${key} ${value}`);
+    console.log(checked);
     if (checked) {
-      state.setFilterValue(key, [...filtersSnap[key], value]);
+      state.setFilterValue(key, [...snap.filters[key], value]);
     } else {
-      // console.log("removing");
+      console.log("removing");
       state.setFilterValue(
         key,
         snap.filters[key].filter((item) => item !== value)
