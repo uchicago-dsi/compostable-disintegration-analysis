@@ -44,9 +44,7 @@ const state = proxy({
   expandedMenu: null,
 
   setExpandedMenu: (menu) => {
-    if (state.expandedMenu !== menu) {
-      state.expandedMenu = menu;
-    }
+    state.expandedMenu = menu;
   },
 });
 

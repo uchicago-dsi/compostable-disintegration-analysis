@@ -1,11 +1,17 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { invertDictionary } from "@/lib/constants";
+import { closeOpenedDetails } from "@/lib/utils";
 
 export default function DropdownSingleSelect({ options, title, filterKey }) {
   const snap = useSnapshot(state);
+  const divRef = useRef(null);
+
+  const onSummaryClick = () => {
+    closeOpenedDetails(`summary-${filterKey}`);
+  };
 
   const handleSelectionChange = (key, value) => {
     console.log(key, value);
@@ -18,7 +24,12 @@ export default function DropdownSingleSelect({ options, title, filterKey }) {
     <>
       <h2>{title}</h2>
       <details className="dropdown">
-        <summary className="btn m-1">
+        <summary
+          className="btn m-1"
+          onClick={onSummaryClick}
+          ref={divRef}
+          id={`summary-${filterKey}`}
+        >
           {col2options[snap.filters[filterKey]]}
         </summary>
         <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
