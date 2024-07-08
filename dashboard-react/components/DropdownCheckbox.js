@@ -1,24 +1,30 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
+import { closeOpenedDetails } from "@/lib/utils";
 
-export default function DropdownCheckbox({
+const DropdownCheckbox = React.memo(function DropdownCheckbox({
   options,
   selectedOptions,
   filterKey,
   title,
 }) {
   const snap = useSnapshot(state);
+  const divRef = useRef(null);
+
+  const onSummaryClick = () => {
+    closeOpenedDetails(`summary-${filterKey}`);
+  };
 
   const handleCheckboxChange = (key, value) => (event) => {
     const checked = event.target.checked;
-    console.log(`checked for ${key} ${value}`);
-    console.log(checked);
+    // console.log(`checked for ${key} ${value}`);
+    // console.log(checked);
     if (checked) {
-      state.setFilterValue(key, [...snap.filters[key], value]);
+      state.setFilterValue(key, [...filtersSnap[key], value]);
     } else {
-      console.log("removing");
+      // console.log("removing");
       state.setFilterValue(
         key,
         snap.filters[key].filter((item) => item !== value)
@@ -55,7 +61,12 @@ export default function DropdownCheckbox({
       </div>
       <div className="divider m-0"></div>
       <details className="dropdown">
-        <summary className="btn m-1">
+        <summary
+          className="btn m-1"
+          onClick={onSummaryClick}
+          ref={divRef}
+          id={`summary-${filterKey}`}
+        >
           {isAllSelected
             ? "All Selected"
             : selectedOptions.length > 0
@@ -81,4 +92,6 @@ export default function DropdownCheckbox({
       </details>
     </>
   );
-}
+});
+
+export default DropdownCheckbox;
