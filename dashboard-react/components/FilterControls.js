@@ -33,17 +33,26 @@ export default function FilterControls() {
     }
   }, [snap.options]);
 
+  useEffect(() => {
+    const summaries = document.querySelectorAll("summary");
+
+    summaries.forEach((summary) => {
+      summary.addEventListener("click", closeOpenedDetails);
+    });
+
+    function closeOpenedDetails() {
+      summaries.forEach((summary) => {
+        let detail = summary.parentNode;
+        if (detail != this.parentNode) {
+          detail.removeAttribute("open");
+        }
+      });
+    }
+  }, [snap.options]);
+
   if (!snap.filters.initialized) {
     return <div>Loading...</div>;
   }
-
-  // console.log("snap.options");
-  // console.log(snap.options);
-
-  // console.log("snap.filters");
-  // console.log(snap.filters);
-
-  console.log("snap.expandedMenu: ", snap.expandedMenu);
 
   return (
     <>
@@ -94,21 +103,18 @@ export default function FilterControls() {
           selectedOptions={snap.filters.selectedTestMethods}
           filterKey="selectedTestMethods"
           title="Select Test Methods"
-          expandedMenu={snap.expandedMenu}
         />
         <DropdownCheckbox
           options={snap.options["Technology"]}
           selectedOptions={snap.filters.selectedTechnologies}
           filterKey="selectedTechnologies"
           title="Select Technology(ies)"
-          expandedMenu={snap.expandedMenu}
         />
         <DropdownCheckbox
           options={snap.options["Material Class II"]}
           selectedOptions={snap.filters.selectedMaterialTypes}
           filterKey="selectedMaterialTypes"
           title="Select Material Type(s)"
-          expandedMenu={snap.expandedMenu}
         />
         <h2>Operating Conditions Filters</h2>
         <DropdownCheckbox
@@ -116,21 +122,18 @@ export default function FilterControls() {
           selectedOptions={snap.filters.selectedTemperatureLevels}
           filterKey="selectedTemperatureLevels"
           title="Select Temperature Range(s)"
-          expandedMenu={snap.expandedMenu}
         />
         <DropdownCheckbox
           options={Object.keys(moistureFilterDict)}
           selectedOptions={snap.filters.selectedMoistureLevels}
           filterKey="selectedMoistureLevels"
           title="Select Moisture Content Range(s)"
-          expandedMenu={snap.expandedMenu}
         />
         <DropdownCheckbox
           options={Object.keys(trialDurationDict)}
           selectedOptions={snap.filters.selectedTrialDurations}
           filterKey="selectedTrialDurations"
           title="Select Trial Duration Range(s)"
-          expandedMenu={snap.expandedMenu}
         />
       </div>
     </>
