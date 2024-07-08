@@ -33,15 +33,26 @@ export default function FilterControls() {
     }
   }, [snap.options]);
 
+  useEffect(() => {
+    const summaries = document.querySelectorAll("summary");
+
+    summaries.forEach((summary) => {
+      summary.addEventListener("click", closeOpenedDetails);
+    });
+
+    function closeOpenedDetails() {
+      summaries.forEach((summary) => {
+        let detail = summary.parentNode;
+        if (detail != this.parentNode) {
+          detail.removeAttribute("open");
+        }
+      });
+    }
+  }, [snap.options]);
+
   if (!snap.filters.initialized) {
     return <div>Loading...</div>;
   }
-
-  console.log("snap.options");
-  console.log(snap.options);
-
-  console.log("snap.filters");
-  console.log(snap.filters);
 
   return (
     <>
