@@ -40,6 +40,14 @@ const state = proxy({
   setFilterValue: (key, value) => {
     state.filters[key] = value;
   },
+
+  expandedMenu: null,
+
+  setExpandedMenu: (menu) => {
+    if (state.expandedMenu !== menu) {
+      state.expandedMenu = menu;
+    }
+  },
 });
 
 const fetchData = async () => {
