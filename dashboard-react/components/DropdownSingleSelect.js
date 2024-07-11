@@ -3,16 +3,11 @@ import React, { useRef } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { invertDictionary } from "@/lib/constants";
-import { onSummaryClick } from "@/lib/utils";
+import { onSummaryClick, handleSingleSelectChange } from "@/lib/utils";
 
 export default function DropdownSingleSelect({ options, title, filterKey }) {
   const snap = useSnapshot(state);
   const divRef = useRef(null);
-
-  const handleSelectionChange = (key, value) => {
-    console.log(key, value);
-    state.setFilterValue(key, value);
-  };
 
   const col2options = invertDictionary(options);
 
@@ -22,7 +17,7 @@ export default function DropdownSingleSelect({ options, title, filterKey }) {
       <details className="dropdown">
         <summary
           className="btn m-1"
-          onClick={onSummaryClick(filterKey)}
+          onClick={() => onSummaryClick(filterKey)}
           ref={divRef}
           id={`summary-${filterKey}`}
         >
@@ -33,7 +28,7 @@ export default function DropdownSingleSelect({ options, title, filterKey }) {
             <li key={key}>
               <a
                 id={`option-${value}`}
-                onClick={() => handleSelectionChange(filterKey, value)}
+                onClick={() => handleSingleSelectChange(filterKey, value)}
               >
                 {key}
               </a>
