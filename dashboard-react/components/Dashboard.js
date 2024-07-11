@@ -8,6 +8,10 @@ import { col2material } from "@/lib/constants";
 export default function Dashboard() {
   const snap = useSnapshot(state);
 
+  if (!snap.data) {
+    return <p>Loading data...</p>;
+  }
+
   const class2color = {
     "Positive Control": "#70AD47",
     "Mixed Materials": "#48646A",
@@ -57,6 +61,8 @@ export default function Dashboard() {
     snap.data.numTrials
   );
 
+  const yMax = Math.max(...snap.data.data.map((d) => d.max), 1);
+
   return (
     <div style={{ minWidth: "1000px" }}>
       {plotData.length > 0 ? (
@@ -77,6 +83,7 @@ export default function Dashboard() {
                 text: yAxisTitle,
               },
               tickformat: ".0%",
+              range: [0, yMax],
             },
           }}
         />
