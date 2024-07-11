@@ -47,7 +47,6 @@ export default function Dashboard() {
     !snap.filters.uncapResults
   );
 
-  // TODO: Change this to display the actual display column name
   function generateTitle(displayCol, aggCol, num_trials) {
     return `${displayCol} by ${col2material[aggCol]} - ${num_trials} Trial(s)`;
   }

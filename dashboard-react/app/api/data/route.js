@@ -134,7 +134,6 @@ const getIntersectingTrialIDs = (...sets) => {
 const prepareData = async (searchParams) => {
   console.log("searchParams");
   console.log(searchParams);
-  // TODO: Clean up the handling of defaults
   // Display params
   const aggCol = searchParams.get("aggcol") || "Material Class I";
   const displayCol = searchParams.get("displaycol") || "% Residuals (Mass)";

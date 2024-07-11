@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
-import { closeOpenedDetails } from "@/lib/utils";
+import { onSummaryClick } from "@/lib/utils";
 
 const DropdownCheckbox = React.memo(function DropdownCheckbox({
   options,
@@ -12,10 +12,6 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
 }) {
   const snap = useSnapshot(state);
   const divRef = useRef(null);
-
-  const onSummaryClick = () => {
-    closeOpenedDetails(`summary-${filterKey}`);
-  };
 
   const handleCheckboxChange = (key, value) => (event) => {
     const checked = event.target.checked;
@@ -49,7 +45,7 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
       <details className="dropdown">
         <summary
           className="btn m-1"
-          onClick={onSummaryClick}
+          onClick={onSummaryClick(filterKey)}
           ref={divRef}
           id={`summary-${filterKey}`}
         >
