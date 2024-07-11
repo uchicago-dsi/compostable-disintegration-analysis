@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import state from "@/lib/state";
 import dynamic from "next/dynamic";
-import FilterControls from "@/components/FilterControls";
+import DashboardControls from "@/components/DashboardControls";
 
 const Dashboard = dynamic(() => import("@/components/Dashboard"), {
   ssr: false,
@@ -23,17 +23,11 @@ const Home = () => {
   }, []);
 
   return (
-    <main
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-start",
-      }}
-    >
-      <div style={{ marginRight: "20px" }}>
-        <FilterControls />
+    <main className="flex flex-row items-start">
+      <div className="mr-5">
+        <DashboardControls />
       </div>
-      <div style={{ minWidth: "1000px" }}>
+      <div className="min-w-[1000px]">
         <Dashboard />
       </div>
     </main>
