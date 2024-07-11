@@ -141,9 +141,7 @@ const prepareData = async (searchParams) => {
   const uncapResults = searchParams.get("uncapresults") === "true" || false;
   const displayResiduals = searchParams.get("displayresiduals") === "true";
   // Trial and item filters
-  const testMethods = searchParams.get("testmethods")
-    ? searchParams.get("testmethods").split(",")
-    : [];
+  const testMethod = searchParams.get("testmethod") || "Mesh Bag";
   const technologies = searchParams.get("technologies")
     ? searchParams.get("technologies").split(",")
     : [];
@@ -180,8 +178,7 @@ const prepareData = async (searchParams) => {
   var filteredData = [...trialData];
 
   // filter data based on selected filters
-  // TODO: This is wrong!
-  filteredData = filterData(filteredData, "Test Method", testMethods);
+  filteredData = filterData(filteredData, "Test Method", [testMethod]);
   console.log("filteredData.length after test methods");
   console.log(filteredData.length);
   filteredData = filterData(filteredData, "Technology", technologies);

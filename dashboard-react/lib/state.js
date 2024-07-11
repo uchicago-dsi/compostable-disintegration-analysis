@@ -26,9 +26,9 @@ const state = proxy({
     displayCol: "% Residuals (Mass)",
     uncapResults: false,
     displayResiduals: "Residuals",
+    testMethod: "Mesh Bag",
     // Trial filters
     selectedTechnologies: [],
-    selectedTestMethods: [],
     selectedMaterialTypes: [],
     // Operating conditions filters
     selectedMoistureLevels: Object.keys(moistureFilterDict),
@@ -60,7 +60,7 @@ const fetchData = async () => {
     state.filters.displayResiduals === "Residuals" ? true : false
   );
   // Trial & item filters
-  params.append("testmethods", state.filters.selectedTestMethods.join(","));
+  params.append("testmethod", state.filters.testMethod);
   params.append("technologies", state.filters.selectedTechnologies.join(","));
   params.append("materials", state.filters.selectedMaterialTypes.join(","));
   // Operating conditions filters

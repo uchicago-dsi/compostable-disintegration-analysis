@@ -7,3 +7,7 @@ export const closeOpenedDetails = (id) => {
     }
   });
 };
+
+export const onSummaryClick = (filterKey) => {
+  closeOpenedDetails(`summary-${filterKey}`);
+};

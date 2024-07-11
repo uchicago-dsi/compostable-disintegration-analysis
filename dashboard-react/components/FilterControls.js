@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import DropdownCheckbox from "@/components/DropdownCheckbox";
@@ -12,6 +12,8 @@ import {
   residuals2col,
   display2col,
 } from "@/lib/constants";
+import { closeOpenedDetails } from "@/lib/utils";
+import { onSummaryClick } from "@/lib/utils";
 
 export default function FilterControls() {
   const snap = useSnapshot(state);
@@ -50,6 +52,17 @@ export default function FilterControls() {
     }
   }, [snap.options]);
 
+  // TODO: Don't actually want this here
+  // const onSummaryClick = () => {
+  //   closeOpenedDetails(`summary-testMethod`);
+  // };
+  const divRef = useRef(null);
+
+  const handleSelectionChange = (key, value) => {
+    console.log(key, value);
+    state.setFilterValue(key, value);
+  };
+
   if (!snap.filters.initialized) {
     return <div>Loading...</div>;
   }
@@ -73,6 +86,30 @@ export default function FilterControls() {
           title="Show by Residuals Remaining or by Percent Disintegrated:"
           filterKey="displayResiduals"
         />
+        <h2>Select Test Method</h2>
+        <div className="divider m-0"></div>
+        <details className="dropdown">
+          <summary
+            className="btn m-1"
+            onClick={onSummaryClick("testMethod")}
+            ref={divRef}
+            id={`summary-testMethod`}
+          >
+            {snap.filters.testMethod}
+          </summary>
+          <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            {snap.options["Test Method"]?.map((option) => (
+              <li key={option}>
+                <a
+                  id={`option-${option}`}
+                  onClick={() => handleSelectionChange("testMethod", option)}
+                >
+                  {option}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
         <div>
           {/* TODO: Make this look better... */}
           <label htmlFor="capResults">
@@ -98,12 +135,6 @@ export default function FilterControls() {
           </p>
         </div>
         <h2>Filters</h2>
-        <DropdownCheckbox
-          options={snap.options["Test Method"]}
-          selectedOptions={snap.filters.selectedTestMethods}
-          filterKey="selectedTestMethods"
-          title="Select Test Methods"
-        />
         <DropdownCheckbox
           options={snap.options["Technology"]}
           selectedOptions={snap.filters.selectedTechnologies}
