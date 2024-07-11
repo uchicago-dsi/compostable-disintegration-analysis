@@ -47,7 +47,7 @@ export default function DashboardControls() {
   }
 
   return (
-    <div className="h-[100vh] overflow-y-auto">
+    <div className="h-[100vh] overflow-y-auto p-10">
       <DashboardDisplayControls />
       <DashboardFilterControls />
     </div>

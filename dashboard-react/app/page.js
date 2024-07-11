@@ -27,7 +27,7 @@ const Home = () => {
       <div className="mr-5">
         <DashboardControls />
       </div>
-      <div className="min-w-[1000px]">
+      <div className="min-w-[1000px] pr-10">
         <Dashboard />
       </div>
     </main>
