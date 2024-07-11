@@ -45,20 +45,6 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
   return (
     <>
       <h2>{title}</h2>
-      <div className="join justify-center">
-        <button
-          className="btn join-item btn-sm normal-case"
-          onClick={selectAll}
-        >
-          All
-        </button>
-        <button
-          className="btn join-item btn-sm normal-case"
-          onClick={selectNone}
-        >
-          None
-        </button>
-      </div>
       <div className="divider m-0"></div>
       <details className="dropdown">
         <summary
@@ -90,6 +76,21 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
           ))}
         </ul>
       </details>
+      <div className="mt-2 flex join justify-left">
+        <button
+          className="btn join-item btn-sm normal-case"
+          onClick={selectAll}
+        >
+          All
+        </button>
+        <button
+          className="btn join-item btn-sm normal-case"
+          onClick={selectNone}
+        >
+          None
+        </button>
+      </div>
+      <div className="divider m-0"></div>
     </>
   );
 });
