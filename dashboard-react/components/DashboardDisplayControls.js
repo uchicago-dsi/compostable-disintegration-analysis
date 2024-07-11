@@ -34,17 +34,18 @@ export default function DashboardDisplayControls() {
         filterKey="testMethod"
       />
       <div>
-        <label htmlFor="capResults">
-          Show results with over 100% residuals remaining:
-        </label>
         <input
           type="checkbox"
           id="capResults"
+          className="mr-2"
           checked={snap.filters.uncapResults}
           onChange={() =>
             state.setFilterValue("uncapResults", !snap.filters.uncapResults)
           }
         />
+        <label htmlFor="capResults">
+          Show results with over 100% residuals remaining
+        </label>
         <p>
           <i>
             Note: There are some results by both mass or surface area with over
