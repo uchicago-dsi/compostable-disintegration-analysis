@@ -3,6 +3,7 @@ import React from "react";
 import Plot from "react-plotly.js";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
+import { col2material } from "@/lib/constants";
 
 export default function Dashboard() {
   const snap = useSnapshot(state);
@@ -20,9 +21,13 @@ export default function Dashboard() {
           console.log(d);
           const materialClass = d["Material Class I"];
           const color = class2color[materialClass] || "#000";
+          const countDisplay =
+            snap.filters["testMethod"] === "Mesh Bag"
+              ? ` (n=${d["count"]})`
+              : "";
           return {
             type: "box",
-            name: `${d["aggCol"]} (n=${d["count"]})`,
+            name: `${d["aggCol"]}${countDisplay}`,
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
@@ -42,8 +47,9 @@ export default function Dashboard() {
     !snap.filters.uncapResults
   );
 
+  // TODO: Change this to display the actual display column name
   function generateTitle(displayCol, aggCol, num_trials) {
-    return `${displayCol} by ${aggCol} - ${num_trials} Trial(s)`;
+    return `${displayCol} by ${col2material[aggCol]} - ${num_trials} Trial(s)`;
   }
 
   const title = generateTitle(
@@ -76,6 +82,7 @@ export default function Dashboard() {
           }}
         />
       ) : (
+        // TODO: make this a more user friendly error message
         <p>Not enough data for the selected criteria</p>
       )}
     </div>
