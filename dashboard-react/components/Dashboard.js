@@ -86,6 +86,9 @@ export default function Dashboard() {
               range: [0, yMax],
             },
           }}
+          config={{
+            displayModeBar: false,
+          }}
         />
       ) : (
         // TODO: make this a more user friendly error message
