@@ -3,15 +3,11 @@ import React, { useRef } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { invertDictionary } from "@/lib/constants";
-import { closeOpenedDetails } from "@/lib/utils";
+import { onSummaryClick } from "@/lib/utils";
 
 export default function DropdownSingleSelect({ options, title, filterKey }) {
   const snap = useSnapshot(state);
   const divRef = useRef(null);
-
-  const onSummaryClick = () => {
-    closeOpenedDetails(`summary-${filterKey}`);
-  };
 
   const handleSelectionChange = (key, value) => {
     console.log(key, value);
@@ -26,7 +22,7 @@ export default function DropdownSingleSelect({ options, title, filterKey }) {
       <details className="dropdown">
         <summary
           className="btn m-1"
-          onClick={onSummaryClick}
+          onClick={onSummaryClick(filterKey)}
           ref={divRef}
           id={`summary-${filterKey}`}
         >

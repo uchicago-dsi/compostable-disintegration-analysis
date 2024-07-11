@@ -12,7 +12,6 @@ import {
   residuals2col,
   display2col,
 } from "@/lib/constants";
-import { closeOpenedDetails } from "@/lib/utils";
 import { onSummaryClick } from "@/lib/utils";
 
 export default function FilterControls() {
@@ -53,9 +52,6 @@ export default function FilterControls() {
   }, [snap.options]);
 
   // TODO: Don't actually want this here
-  // const onSummaryClick = () => {
-  //   closeOpenedDetails(`summary-testMethod`);
-  // };
   const divRef = useRef(null);
 
   const handleSelectionChange = (key, value) => {
