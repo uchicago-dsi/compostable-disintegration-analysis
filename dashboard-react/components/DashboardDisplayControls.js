@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import DropdownSingleSelect from "@/components/DropdownSingleSelect";
+import RadioSingleSelect from "./RadioSingleSelect";
 import { onSummaryClick, handleSingleSelectChange } from "@/lib/utils";
 import { material2col, residuals2col, display2col } from "@/lib/constants";
 import { useSnapshot } from "valtio";
@@ -8,50 +9,30 @@ import state from "@/lib/state";
 
 export default function DashboardDisplayControls() {
   const snap = useSnapshot(state);
-  // TODO: Don't actually want this here
-  const divRef = useRef(null);
 
   return (
     <>
       <h2>Display Options</h2>
-      <DropdownSingleSelect
+      <RadioSingleSelect
         options={material2col}
         title="Select x-axis Display:"
         filterKey="aggCol"
       />
-      <DropdownSingleSelect
+      <RadioSingleSelect
         options={display2col}
         title="Show Results by Mass or by Surface Area:"
         filterKey="displayCol"
       />
-      <DropdownSingleSelect
+      <RadioSingleSelect
         options={residuals2col}
         title="Show by Residuals Remaining or by Percent Disintegrated:"
         filterKey="displayResiduals"
       />
-      <h2>Select Test Method</h2>
-      <details className="dropdown">
-        <summary
-          className="btn m-1"
-          onClick={() => onSummaryClick("testMethod")}
-          ref={divRef}
-          id={`summary-testMethod`}
-        >
-          {snap.filters.testMethod}
-        </summary>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-          {snap.options["Test Method"]?.map((option) => (
-            <li key={option}>
-              <a
-                id={`option-${option}`}
-                onClick={() => handleSingleSelectChange("testMethod", option)}
-              >
-                {option}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </details>
+      <RadioSingleSelect
+        options={{ "Mesh Bag": "Mesh Bag", "Bulk Dose": "Bulk Dose" }}
+        title="Select Test Method:"
+        filterKey="testMethod"
+      />
       <div>
         <label htmlFor="capResults">
           Show results with over 100% residuals remaining:
