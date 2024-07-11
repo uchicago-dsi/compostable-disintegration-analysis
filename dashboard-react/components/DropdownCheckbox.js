@@ -45,7 +45,7 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
       <details className="dropdown">
         <summary
           className="btn m-1"
-          onClick={onSummaryClick(filterKey)}
+          onClick={() => onSummaryClick(filterKey)}
           ref={divRef}
           id={`summary-${filterKey}`}
         >
