@@ -8,7 +8,7 @@ import { col2material } from "@/lib/constants";
 export default function Dashboard() {
   const snap = useSnapshot(state);
 
-  if (!snap.data) {
+  if (!snap.data.data) {
     return <p>Loading data...</p>;
   }
 
