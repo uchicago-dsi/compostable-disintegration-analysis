@@ -8,7 +8,7 @@ import { col2material } from "@/lib/constants";
 export default function Dashboard() {
   const snap = useSnapshot(state);
 
-  if (!snap.data.data) {
+  if (!snap.dataLoaded) {
     return <p>Loading data...</p>;
   }
 
@@ -61,11 +61,21 @@ export default function Dashboard() {
     snap.data.numTrials
   );
 
-  const yMax = Math.max(...snap.data.data.map((d) => d.max), 1);
+  const yMax =
+    snap.data.length > 0 ? Math.max(...snap.data.data.map((d) => d.max), 1) : 1;
+
+  console.log("snap.errorMessage");
+  console.log(snap.errorMessage);
 
   return (
     <div style={{ minWidth: "1000px" }}>
-      {plotData.length > 0 ? (
+      {snap.errorMessage ? (
+        <p>
+          {snap.errorMessage === "Not enough data"
+            ? "Not enough data for the selected criteria."
+            : "Please select something."}
+        </p>
+      ) : (
         <Plot
           data={plotData}
           layout={{
@@ -90,9 +100,6 @@ export default function Dashboard() {
             displayModeBar: false,
           }}
         />
-      ) : (
-        // TODO: make this a more user friendly error message
-        <p>Not enough data for the selected criteria</p>
       )}
     </div>
   );

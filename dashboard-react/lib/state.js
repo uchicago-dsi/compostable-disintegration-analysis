@@ -8,9 +8,11 @@ import {
 
 const state = proxy({
   data: [],
+  dataLoaded: false,
 
   setData: (newData) => {
     state.data = newData;
+    state.dataLoaded = true;
   },
 
   // TODO: I don't like this name...
@@ -18,6 +20,14 @@ const state = proxy({
 
   setOptions: (key, newOptions) => {
     state.options[key] = newOptions;
+  },
+
+  errorMessage: "",
+
+  setErrorMessage: (message) => {
+    console.log("setting error message");
+    console.log(message);
+    state.errorMessage = message;
   },
 
   filters: {
@@ -79,9 +89,17 @@ const fetchData = async () => {
 
   try {
     const response = await fetch(url);
-    const result = await response.json();
-    state.setData(result);
+    const data = await response.json();
+    if (data.message) {
+      state.setErrorMessage(data.message);
+      state.setData([]);
+      return;
+    } else {
+      state.setErrorMessage("");
+      state.setData(data);
+    }
   } catch (error) {
+    state.setErrorMessage("Failed to fetch data");
     console.error("Failed to fetch data:", error);
   }
 };

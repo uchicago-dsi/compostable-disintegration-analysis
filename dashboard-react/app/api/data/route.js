@@ -158,6 +158,17 @@ const prepareData = async (searchParams) => {
     ? searchParams.get("trialdurations").split(",")
     : [];
 
+  const noFiltersSelected =
+    technologies.length === 0 ||
+    materials.length === 0 ||
+    temperatureFilter.length === 0 ||
+    moistureFilter.length === 0 ||
+    trialDurations.length === 0;
+
+  if (noFiltersSelected) {
+    return { message: "None selected" };
+  }
+
   let trialData;
   let operatingConditions;
 
@@ -253,7 +264,7 @@ const prepareData = async (searchParams) => {
 
   // Not enough data - return empty object
   if (filteredData.length < 5) {
-    return {};
+    return { message: "Not enough data" };
   }
 
   const uniqueTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
