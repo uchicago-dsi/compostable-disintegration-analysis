@@ -4,6 +4,7 @@ import Plot from "react-plotly.js";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { col2material } from "@/lib/constants";
+import Alert from "@/components/Alert";
 
 export default function Dashboard() {
   const snap = useSnapshot(state);
@@ -71,9 +72,10 @@ export default function Dashboard() {
     <div style={{ minWidth: "1000px" }}>
       {snap.errorMessage ? (
         <p>
-          {snap.errorMessage === "Not enough data"
+          {/* {snap.errorMessage === "Not enough data"
             ? "Not enough data for the selected criteria."
-            : "Please select something."}
+            : "Please select something."} */}
+          <Alert message={snap.errorMessage} />
         </p>
       ) : (
         <Plot
