@@ -166,7 +166,10 @@ const prepareData = async (searchParams) => {
     trialDurations.length === 0;
 
   if (noFiltersSelected) {
-    return { message: "None selected" };
+    return {
+      message:
+        "None selected for some filtering criteria. Please make sure you have at least one filter selected.",
+    };
   }
 
   let trialData;
@@ -264,7 +267,10 @@ const prepareData = async (searchParams) => {
 
   // Not enough data - return empty object
   if (filteredData.length < 5) {
-    return { message: "Not enough data" };
+    return {
+      message:
+        "Not enough data for the selected criteria. Please select more options.",
+    };
   }
 
   const uniqueTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
