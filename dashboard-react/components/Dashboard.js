@@ -95,9 +95,10 @@ export default function Dashboard() {
               tickformat: ".0%",
               range: [0, yMax],
             },
-            xaxis: {
-              tickangle: 45,
-            },
+            // TODO: This looks bad...
+            // xaxis: {
+            //   tickangle: 45,
+            // },
             margin: {
               b: 300,
             },
