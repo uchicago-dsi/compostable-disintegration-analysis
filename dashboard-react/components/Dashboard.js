@@ -69,12 +69,9 @@ export default function Dashboard() {
   console.log(snap.errorMessage);
 
   return (
-    <div style={{ minWidth: "1000px" }}>
+    <div className="min-w-[1000px] p-20">
       {snap.errorMessage ? (
         <p>
-          {/* {snap.errorMessage === "Not enough data"
-            ? "Not enough data for the selected criteria."
-            : "Please select something."} */}
           <Alert message={snap.errorMessage} />
         </p>
       ) : (
@@ -82,9 +79,9 @@ export default function Dashboard() {
           data={plotData}
           layout={{
             width: 1000,
-            height: 700,
+            height: 800,
             title: {
-              text: title,
+              text: `<b>${title}</b>`,
               x: 0.5,
               xanchor: "center",
               yanchor: "top",
@@ -92,10 +89,16 @@ export default function Dashboard() {
             showlegend: false,
             yaxis: {
               title: {
-                text: yAxisTitle,
+                text: `<b>${yAxisTitle}</b>`,
               },
               tickformat: ".0%",
               range: [0, yMax],
+            },
+            xaxis: {
+              tickangle: 45,
+            },
+            margin: {
+              b: 300,
             },
           }}
           config={{
