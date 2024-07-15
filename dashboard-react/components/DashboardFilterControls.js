@@ -11,8 +11,8 @@ export default function DashboardFilterControls() {
   const snap = useSnapshot(state);
 
   return (
-    <div className="flex">
-      <div className="flex-1 px-3">
+    <div className="flex flex-wrap">
+      <div className="flex-1 mx-2 w-full md:w-1/2">
         <h2 className="text-center">Filters</h2>
         <CheckboxMenu
           options={snap.options["Technology"]}
@@ -27,7 +27,7 @@ export default function DashboardFilterControls() {
           title="Select Material Type(s)"
         />
       </div>
-      <div className="flex-1 px-2">
+      <div className="flex-1 mx-2 w-full lg:w-1/2">
         <h2 className="text-center">Operating Conditions Filters</h2>
         <CheckboxMenu
           options={Object.keys(temperatureFilterDict)}
