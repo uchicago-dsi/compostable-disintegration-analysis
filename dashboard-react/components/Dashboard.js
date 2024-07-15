@@ -63,13 +63,14 @@ export default function Dashboard() {
   );
 
   const yMax =
-    snap.data.length > 0 ? Math.max(...snap.data.data.map((d) => d.max), 1) : 1;
+    snap.data.data.length > 0
+      ? Math.max(...snap.data.data.map((d) => d.max), 1)
+      : 1;
 
-  console.log("snap.errorMessage");
-  console.log(snap.errorMessage);
+  console.log("yMax", yMax);
 
   return (
-    <div className="min-w-[1000px] p-20">
+    <div>
       {snap.errorMessage ? (
         <p>
           <Alert message={snap.errorMessage} />
