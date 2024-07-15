@@ -32,7 +32,7 @@ export default function CheckboxMenu({
 
   return (
     <>
-      <h2>{title}</h2>
+      <h2 className="text-center">{title}</h2>
       <div className="divider m-0"></div>
       <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
         {options?.map((option) => (
@@ -50,7 +50,7 @@ export default function CheckboxMenu({
           </li>
         ))}
       </ul>
-      <div className="mt-2 flex join justify-left">
+      <div className="mt-2 flex join justify-center">
         <button
           className="btn join-item btn-sm normal-case"
           onClick={selectAll}

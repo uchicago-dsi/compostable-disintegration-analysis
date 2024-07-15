@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <main className="flex flex-row items-start h-screen">
-      <div className="mr-5">
+      <div className="mr-5 max-w-[600px]">
         <DashboardControls />
       </div>
       <div className="min-w-[1000px] h-full pr-10">
