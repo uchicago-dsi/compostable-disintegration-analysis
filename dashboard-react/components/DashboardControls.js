@@ -47,9 +47,13 @@ export default function DashboardControls() {
   }
 
   return (
-    <div className="h-[100vh] overflow-y-auto p-10">
-      <DashboardDisplayControls />
-      <DashboardFilterControls />
+    <div className="flex flex-col h-[100vh] overflow-y-auto p-10">
+      <div className="p-5 m-2">
+        <DashboardDisplayControls />
+      </div>
+      <div className="p-5 m-2">
+        <DashboardFilterControls />
+      </div>
     </div>
   );
 }

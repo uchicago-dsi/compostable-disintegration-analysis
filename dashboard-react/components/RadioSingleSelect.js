@@ -1,15 +1,11 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
-import { invertDictionary } from "@/lib/constants";
-import { onSummaryClick, handleSingleSelectChange } from "@/lib/utils";
+import { handleSingleSelectChange } from "@/lib/utils";
 
 export default function RadioSingleSelect({ options, title, filterKey }) {
   const snap = useSnapshot(state);
-  const divRef = useRef(null);
-
-  const col2options = invertDictionary(options);
 
   return (
     <>
@@ -18,7 +14,7 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
         {Object.entries(options).map(([key, value]) => (
           <label
             key={key}
-            className="label cursor-pointer flex items-center space-x-2"
+            className="label cursor-pointer flex flex-col items-center space-x-2 w-1/3 md:w-1/4 lg:w-1/5 space-y-2"
           >
             <input
               type="radio"
