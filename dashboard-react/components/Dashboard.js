@@ -67,7 +67,7 @@ export default function Dashboard() {
       ? Math.max(...snap.data.data.map((d) => d.max), 1)
       : 1;
 
-  console.log("yMax", yMax);
+  const xTickAngle = plotData.length > 6 ? 90 : 0;
 
   return (
     <div>
@@ -95,10 +95,10 @@ export default function Dashboard() {
               tickformat: ".0%",
               range: [0, yMax],
             },
-            // TODO: This looks bad...
-            // xaxis: {
-            //   tickangle: 45,
-            // },
+            xaxis: {
+              tickangle: xTickAngle,
+              ticklen: 10,
+            },
             margin: {
               b: 300,
             },
