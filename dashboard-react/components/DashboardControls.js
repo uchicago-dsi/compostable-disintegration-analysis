@@ -47,7 +47,7 @@ export default function DashboardControls() {
   }
 
   return (
-    <div className="flex flex-col h-[100vh] overflow-y-auto">
+    <div className="flex flex-col h-[100vh] overflow-y-auto px-2">
       <div className="m-2">
         <DashboardDisplayControls />
       </div>
