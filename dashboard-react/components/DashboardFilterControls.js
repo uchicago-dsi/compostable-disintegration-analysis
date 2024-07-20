@@ -11,7 +11,7 @@ export default function DashboardFilterControls() {
   const snap = useSnapshot(state);
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-row">
       <div className="flex-1 mx-2 w-full md:w-1/2">
         <h2 className="text-center">Filters</h2>
         <CheckboxMenu
