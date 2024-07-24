@@ -3,9 +3,15 @@ import React from "react";
 import Plot from "react-plotly.js";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
+import { col2material } from "@/lib/constants";
+import Alert from "@/components/Alert";
 
 export default function Dashboard() {
   const snap = useSnapshot(state);
+
+  if (!snap.dataLoaded) {
+    return <p>Loading data...</p>;
+  }
 
   const class2color = {
     "Positive Control": "#70AD47",
@@ -20,9 +26,13 @@ export default function Dashboard() {
           console.log(d);
           const materialClass = d["Material Class I"];
           const color = class2color[materialClass] || "#000";
+          const countDisplay =
+            snap.filters["testMethod"] === "Mesh Bag"
+              ? ` (n=${d["count"]})`
+              : "";
           return {
             type: "box",
-            name: `${d["aggCol"]} (n=${d["count"]})`,
+            name: `${d["aggCol"]}${countDisplay}`,
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
@@ -43,7 +53,7 @@ export default function Dashboard() {
   );
 
   function generateTitle(displayCol, aggCol, num_trials) {
-    return `${displayCol} by ${aggCol} - ${num_trials} Trial(s)`;
+    return `${displayCol} by ${col2material[aggCol]} - ${num_trials} Trial(s)`;
   }
 
   const title = generateTitle(
@@ -52,16 +62,27 @@ export default function Dashboard() {
     snap.data.numTrials
   );
 
+  const yMax =
+    snap.data.data && snap.data.data.length > 0
+      ? Math.max(...snap.data.data.map((d) => d.max), 1)
+      : 1;
+
+  const xTickAngle = plotData.length > 6 ? 90 : 0;
+
   return (
-    <div style={{ minWidth: "1000px" }}>
-      {plotData.length > 0 ? (
+    <div>
+      {snap.errorMessage ? (
+        <p>
+          <Alert message={snap.errorMessage} />
+        </p>
+      ) : (
         <Plot
           data={plotData}
           layout={{
             width: 1000,
-            height: 700,
+            height: 800,
             title: {
-              text: title,
+              text: `<b>${title}</b>`,
               x: 0.5,
               xanchor: "center",
               yanchor: "top",
@@ -69,14 +90,23 @@ export default function Dashboard() {
             showlegend: false,
             yaxis: {
               title: {
-                text: yAxisTitle,
+                text: `<b>${yAxisTitle}</b>`,
               },
               tickformat: ".0%",
+              range: [0, yMax],
+            },
+            xaxis: {
+              tickangle: xTickAngle,
+              ticklen: 10,
+            },
+            margin: {
+              b: 300,
             },
           }}
+          config={{
+            displayModeBar: false,
+          }}
         />
-      ) : (
-        <p>Not enough data for the selected criteria</p>
       )}
     </div>
   );

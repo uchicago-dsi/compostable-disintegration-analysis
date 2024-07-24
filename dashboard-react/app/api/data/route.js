@@ -134,16 +134,13 @@ const getIntersectingTrialIDs = (...sets) => {
 const prepareData = async (searchParams) => {
   console.log("searchParams");
   console.log(searchParams);
-  // TODO: Clean up the handling of defaults
   // Display params
   const aggCol = searchParams.get("aggcol") || "Material Class I";
   const displayCol = searchParams.get("displaycol") || "% Residuals (Mass)";
   const uncapResults = searchParams.get("uncapresults") === "true" || false;
   const displayResiduals = searchParams.get("displayresiduals") === "true";
   // Trial and item filters
-  const testMethods = searchParams.get("testmethods")
-    ? searchParams.get("testmethods").split(",")
-    : [];
+  const testMethod = searchParams.get("testmethod") || "Mesh Bag";
   const technologies = searchParams.get("technologies")
     ? searchParams.get("technologies").split(",")
     : [];
@@ -160,6 +157,20 @@ const prepareData = async (searchParams) => {
   const trialDurations = searchParams.get("trialdurations")
     ? searchParams.get("trialdurations").split(",")
     : [];
+
+  const noFiltersSelected =
+    technologies.length === 0 ||
+    materials.length === 0 ||
+    temperatureFilter.length === 0 ||
+    moistureFilter.length === 0 ||
+    trialDurations.length === 0;
+
+  if (noFiltersSelected) {
+    return {
+      message:
+        "None selected for some filtering criteria. Please make sure you have at least one filter selected.",
+    };
+  }
 
   let trialData;
   let operatingConditions;
@@ -180,8 +191,7 @@ const prepareData = async (searchParams) => {
   var filteredData = [...trialData];
 
   // filter data based on selected filters
-  // TODO: This is wrong!
-  filteredData = filterData(filteredData, "Test Method", testMethods);
+  filteredData = filterData(filteredData, "Test Method", [testMethod]);
   console.log("filteredData.length after test methods");
   console.log(filteredData.length);
   filteredData = filterData(filteredData, "Technology", technologies);
@@ -257,7 +267,10 @@ const prepareData = async (searchParams) => {
 
   // Not enough data - return empty object
   if (filteredData.length < 5) {
-    return {};
+    return {
+      message:
+        "Not enough data for the selected criteria. Please select more options.",
+    };
   }
 
   const uniqueTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
