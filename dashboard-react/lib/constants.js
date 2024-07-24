@@ -1,3 +1,9 @@
+export function invertDictionary(dict) {
+  return Object.fromEntries(
+    Object.entries(dict).map(([key, value]) => [value, key])
+  );
+}
+
 export const moistureFilterDict = {
   "<40%": [-Infinity, 0.4, false],
   "40-45%": [0.4, 0.45, true],
@@ -24,8 +30,11 @@ export const material2col = {
   "High-Level Material Categories": "Material Class I",
   "Generic Material Categories": "Material Class II",
   "Specific Material Categories": "Material Class III",
+  "Item Brand": "Item Brand",
   "Item Types": "Item Format",
 };
+
+export const col2material = invertDictionary(material2col);
 
 export const residuals2col = {
   "Residuals Remaining": "Residuals",
@@ -36,9 +45,3 @@ export const display2col = {
   "% Residuals (Mass)": "% Residuals (Mass)",
   "% Residuals (Area)": "% Residuals (Area)",
 };
-
-export function invertDictionary(dict) {
-  return Object.fromEntries(
-    Object.entries(dict).map(([key, value]) => [value, key])
-  );
-}
