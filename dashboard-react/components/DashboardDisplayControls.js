@@ -15,7 +15,7 @@ export default function DashboardDisplayControls() {
       <h2>Display Options</h2>
       <RadioSingleSelect
         options={material2col}
-        title="Select x-axis Display:"
+        title="Select X-Axis Display:"
         filterKey="aggCol"
       />
       <RadioSingleSelect

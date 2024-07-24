@@ -14,7 +14,14 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('daisyui'),
-  ],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#038c65", // Set the primary color to CFTP dark green
+        },
+      },
+    ],
+  },
 };
