@@ -7,10 +7,6 @@ from typing import Any, Dict, Optional
 
 import pandas as pd
 
-# TODO: figure out how to handle data folder for debugger
-# TODO: Can I add an assertion to make sure the total number of observations is correct?
-# TODO: figure out the right abstraction for the load items » items should be loaded separately and passed to the class
-
 CURRENT_DIR = Path(__file__).resolve().parent
 DATA_DIR = CURRENT_DIR / "../data/"
 
@@ -20,6 +16,7 @@ TRIAL_COLS = [
     "Test Method",
     "Item ID",
     "Item Format",
+    "Item Brand",
     "Item Name",
     "Item Description Refined",
     "Item Description Refined (Trial)",
@@ -34,17 +31,18 @@ TRIAL_COLS = [
 ITEMS_PATH = DATA_DIR / "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
 EXTRA_ITEMS_PATH = DATA_DIR / "Item IDS for CASP004 CASP003.xlsx"
 
-ITEMS = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
-ITEMS["Start Weight"] = ITEMS["Average Initial Weight, g"]
+df_items = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
+df_items["Start Weight"] = df_items["Average Initial Weight, g"]
 
 old_json = json.load(Path.open(DATA_DIR / "old_items.json"))
-ITEMS["Item ID"] = ITEMS["Item Description Refined"].map(old_json)
+df_items["Item ID"] = df_items["Item Description Refined"].map(old_json)
+df_items = df_items.rename(columns={"Brand": "Item Brand"})
 
 OUTLIER_THRESHOLD = 10
 
 item2id = {
     key.strip(): value
-    for key, value in ITEMS.set_index("Item Description Refined")["Item ID"]
+    for key, value in df_items.set_index("Item Description Refined")["Item ID"]
     .to_dict()
     .items()
 }
@@ -65,10 +63,10 @@ id2technology = {
 
 def map_technology(trial_id: str) -> str:
     """Maps trial IDs to the technology used in the trial.
-    
+
     Args:
         trial_id: The trial ID.
-    
+
     Returns:
         The technology used in the trial.
     """
@@ -76,6 +74,7 @@ def map_technology(trial_id: str) -> str:
         if key in trial_id:
             return id2technology[key]
     return "Unknown"
+
 
 TRIALS_PATH = DATA_DIR / "CFTP Anonymized Data Compilation Overview - For Sharing.xlsx"
 df_trials = pd.read_excel(TRIALS_PATH, skiprows=3)
@@ -144,7 +143,9 @@ df_moisture = pd.read_excel(
 df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.columns]
 df_moisture = df_moisture.mean().to_frame("Average % Moisture (In Field)")
 
-df_operating_conditions = pd.concat([df_trial_duration, df_avg_temps, df_moisture], axis=1)
+df_operating_conditions = pd.concat(
+    [df_trial_duration, df_avg_temps, df_moisture], axis=1
+)
 
 processed_data = []
 
@@ -168,7 +169,7 @@ class AbstractDataPipeline(ABC):
     def __init__(
         self,
         data_filepath: Path,
-        items: pd.DataFrame = ITEMS,
+        items: pd.DataFrame = df_items,
         item2id: Dict[str, Any] = item2id,
         trials: pd.DataFrame = df_trials,
         trial_name: Optional[str] = None,
@@ -627,8 +628,12 @@ all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
 all_trials.to_csv(output_filepath, index=False)
 
 # Make sure all trial IDs are represented in operating conditions
-unique_trial_ids = pd.DataFrame(all_trials["Trial ID"].unique(), columns=["Trial ID"]).set_index("Trial ID")
-df_operating_conditions = unique_trial_ids.merge(df_operating_conditions, left_index=True, right_index=True, how="left")
+unique_trial_ids = pd.DataFrame(
+    all_trials["Trial ID"].unique(), columns=["Trial ID"]
+).set_index("Trial ID")
+df_operating_conditions = unique_trial_ids.merge(
+    df_operating_conditions, left_index=True, right_index=True, how="left"
+)
 
 operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
 df_operating_conditions.to_csv(operating_conditions_output_path, index_label="Trial ID")
