@@ -9,7 +9,7 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
 
   return (
     <>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <div className="flex space-x-4">
         {Object.entries(options).map(([key, value]) => (
           <label

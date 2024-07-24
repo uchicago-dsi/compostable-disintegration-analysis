@@ -34,7 +34,7 @@ export default function CheckboxMenu({
 
   return (
     <div className="my-4">
-      <h2 className="text-center">{title}</h2>
+      <h3 className="text-center">{title}</h3>
       <div className="flex justify-center mt-3">
         <button
           className="btn btn-sm normal-case"
@@ -59,6 +59,8 @@ export default function CheckboxMenu({
                   value={option}
                   checked={selectedOptions.includes(option)}
                   onChange={handleCheckboxChange(filterKey, option)}
+                  className="checkbox checkbox-primary"
+                  // className="checkbox checkbox-primary"
                 />
               </label>
             </li>
