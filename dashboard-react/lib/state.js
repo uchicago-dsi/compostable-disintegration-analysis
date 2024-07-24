@@ -8,9 +8,11 @@ import {
 
 const state = proxy({
   data: [],
+  dataLoaded: false,
 
   setData: (newData) => {
     state.data = newData;
+    state.dataLoaded = true;
   },
 
   // TODO: I don't like this name...
@@ -20,15 +22,23 @@ const state = proxy({
     state.options[key] = newOptions;
   },
 
+  errorMessage: "",
+
+  setErrorMessage: (message) => {
+    console.log("setting error message");
+    console.log(message);
+    state.errorMessage = message;
+  },
+
   filters: {
     // Display options
     aggCol: "Material Class I",
     displayCol: "% Residuals (Mass)",
     uncapResults: false,
     displayResiduals: "Residuals",
+    testMethod: "Mesh Bag",
     // Trial filters
     selectedTechnologies: [],
-    selectedTestMethods: [],
     selectedMaterialTypes: [],
     // Operating conditions filters
     selectedMoistureLevels: Object.keys(moistureFilterDict),
@@ -60,7 +70,7 @@ const fetchData = async () => {
     state.filters.displayResiduals === "Residuals" ? true : false
   );
   // Trial & item filters
-  params.append("testmethods", state.filters.selectedTestMethods.join(","));
+  params.append("testmethod", state.filters.testMethod);
   params.append("technologies", state.filters.selectedTechnologies.join(","));
   params.append("materials", state.filters.selectedMaterialTypes.join(","));
   // Operating conditions filters
@@ -79,9 +89,17 @@ const fetchData = async () => {
 
   try {
     const response = await fetch(url);
-    const result = await response.json();
-    state.setData(result);
+    const data = await response.json();
+    if (data.message) {
+      state.setErrorMessage(data.message);
+      state.setData([]);
+      return;
+    } else {
+      state.setErrorMessage("");
+      state.setData(data);
+    }
   } catch (error) {
+    state.setErrorMessage("Failed to fetch data");
     console.error("Failed to fetch data:", error);
   }
 };

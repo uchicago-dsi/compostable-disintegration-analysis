@@ -1,30 +1,22 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
-import { closeOpenedDetails } from "@/lib/utils";
-
-const DropdownCheckbox = React.memo(function DropdownCheckbox({
+export default function CheckboxMenu({
   options,
   selectedOptions,
   filterKey,
   title,
 }) {
   const snap = useSnapshot(state);
-  const divRef = useRef(null);
-
-  const onSummaryClick = () => {
-    closeOpenedDetails(`summary-${filterKey}`);
-  };
+  // Note: Use local state for the expanded state of the menu
+  const [expanded, setExpanded] = useState(false);
 
   const handleCheckboxChange = (key, value) => (event) => {
     const checked = event.target.checked;
-    console.log(`checked for ${key} ${value}`);
-    console.log(checked);
     if (checked) {
       state.setFilterValue(key, [...snap.filters[key], value]);
     } else {
-      console.log("removing");
       state.setFilterValue(
         key,
         snap.filters[key].filter((item) => item !== value)
@@ -40,26 +32,23 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
     state.setFilterValue(filterKey, []);
   };
 
-  const isAllSelected = selectedOptions.length === options.length;
-
   return (
-    <>
-      <h2>{title}</h2>
-      <div className="divider m-0"></div>
-      <details className="dropdown">
-        <summary
-          className="btn m-1"
-          onClick={onSummaryClick}
-          ref={divRef}
-          id={`summary-${filterKey}`}
+    <div className="my-4">
+      <h2 className="text-center">{title}</h2>
+      <div className="flex justify-center mt-3">
+        <button
+          className="btn btn-sm normal-case"
+          onClick={() => setExpanded((e) => !e)}
         >
-          {isAllSelected
-            ? "All Selected"
-            : selectedOptions.length > 0
-            ? selectedOptions.join(", ")
-            : "None Selected"}
-        </summary>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+          {expanded ? `Collapse Menu` : `Show Menu`}
+        </button>
+      </div>
+      <div
+        className={`overflow-auto flex-grow px-4 ${
+          expanded ? "max-h-[200px]" : "h-0"
+        }`}
+      >
+        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
           {options?.map((option) => (
             <li key={option}>
               <label className="label cursor-pointer">
@@ -75,8 +64,8 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
             </li>
           ))}
         </ul>
-      </details>
-      <div className="mt-2 flex join justify-left">
+      </div>
+      <div className="mt-2 flex join justify-center">
         <button
           className="btn join-item btn-sm normal-case"
           onClick={selectAll}
@@ -91,8 +80,6 @@ const DropdownCheckbox = React.memo(function DropdownCheckbox({
         </button>
       </div>
       <div className="divider m-0"></div>
-    </>
+    </div>
   );
-});
-
-export default DropdownCheckbox;
+}
