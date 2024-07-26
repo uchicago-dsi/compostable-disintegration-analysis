@@ -14,7 +14,7 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
         {Object.entries(options).map(([key, value]) => (
           <label
             key={key}
-            className="label cursor-pointer flex flex-col items-center space-x-2 w-1/3 md:w-1/4 lg:w-1/5 space-y-2"
+            className="label cursor-pointer flex items-center space-x-2 w-1/3 md:w-1/4 lg:w-1/5 space-y-2"
           >
             <input
               type="radio"
@@ -24,7 +24,7 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
               onChange={() => handleSingleSelectChange(filterKey, value)}
               className="radio radio-primary"
             />
-            <span className="label-text">{key}</span>
+            <span className="label-text align-top items-start">{key}</span>
           </label>
         ))}
       </div>
