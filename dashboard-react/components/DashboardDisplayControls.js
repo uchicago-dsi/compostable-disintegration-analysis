@@ -14,9 +14,9 @@ export default function DashboardDisplayControls() {
     <>
       <h2>Display Options</h2>
       <RadioSingleSelect
-        options={material2col}
-        title="Select X-Axis Display:"
-        filterKey="aggCol"
+        options={{ "Mesh Bag": "Mesh Bag", "Bulk Dose": "Bulk Dose" }}
+        title="Select Test Method:"
+        filterKey="testMethod"
       />
       <RadioSingleSelect
         options={display2col}
@@ -24,14 +24,14 @@ export default function DashboardDisplayControls() {
         filterKey="displayCol"
       />
       <RadioSingleSelect
+        options={material2col}
+        title="Select X-Axis Display:"
+        filterKey="aggCol"
+      />
+      <RadioSingleSelect
         options={residuals2col}
         title="Show by Residuals Remaining or by Percent Disintegrated:"
         filterKey="displayResiduals"
-      />
-      <RadioSingleSelect
-        options={{ "Mesh Bag": "Mesh Bag", "Bulk Dose": "Bulk Dose" }}
-        title="Select Test Method:"
-        filterKey="testMethod"
       />
       <div>
         <input
