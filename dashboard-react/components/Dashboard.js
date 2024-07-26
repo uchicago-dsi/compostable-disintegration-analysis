@@ -79,8 +79,8 @@ export default function Dashboard() {
         <Plot
           data={plotData}
           layout={{
-            width: 1000,
-            height: 800,
+            width: 1440,
+            height: 500,
             title: {
               text: `<b>${title}</b>`,
               x: 0.5,
@@ -98,9 +98,6 @@ export default function Dashboard() {
             xaxis: {
               tickangle: xTickAngle,
               ticklen: 10,
-            },
-            margin: {
-              b: 300,
             },
           }}
           config={{
