@@ -30,10 +30,19 @@ export default function DashboardDisplayControls() {
       />
       <RadioSingleSelect
         options={residuals2col}
-        title="Show by Residuals Remaining or by Percent Disintegrated:"
+        title="Show by Percent Residuals Remaining or Disintegrated:"
         filterKey="displayResiduals"
       />
       <div>
+        <p>
+          <i>
+            Note: There are some results by both mass or surface area with over
+            100% residuals. The dashboard automatically caps these results at
+            100% residuals (0% disintegration). Check this box to show all
+            results, including over 100% Residuals. Disintegration results are
+            always capped at 0% (no negative disintegration results)
+          </i>
+        </p>
         <input
           type="checkbox"
           id="capResults"
@@ -46,15 +55,6 @@ export default function DashboardDisplayControls() {
         <label htmlFor="capResults">
           Show results with over 100% residuals remaining
         </label>
-        <p>
-          <i>
-            Note: There are some results by both mass or surface area with over
-            100% residuals. The dashboard automatically caps these results at
-            100% residuals (0% disintegration). Check this box to show all
-            results, including over 100% Residuals. Disintegration results are
-            always capped at 0% (no negative disintegration results)
-          </i>
-        </p>
       </div>
     </>
   );
