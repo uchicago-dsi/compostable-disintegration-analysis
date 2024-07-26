@@ -34,8 +34,8 @@ export default function CheckboxMenu({
 
   return (
     <div className="my-4">
-      <h3 className="text-center">{title}</h3>
-      <div className="flex justify-center mt-3">
+      <h3>{title}</h3>
+      <div className="flex mt-3">
         <button
           className="btn btn-sm normal-case"
           onClick={() => setExpanded((e) => !e)}
@@ -60,14 +60,13 @@ export default function CheckboxMenu({
                   checked={selectedOptions.includes(option)}
                   onChange={handleCheckboxChange(filterKey, option)}
                   className="checkbox checkbox-primary"
-                  // className="checkbox checkbox-primary"
                 />
               </label>
             </li>
           ))}
         </ul>
       </div>
-      <div className="mt-2 flex join justify-center">
+      <div className="mt-2 flex join">
         <button
           className="btn join-item btn-sm normal-case"
           onClick={selectAll}
