@@ -32,6 +32,9 @@ export default function CheckboxMenu({
     state.setFilterValue(filterKey, []);
   };
 
+  const allSelected = selectedOptions.length === options.length;
+  const noneSelected = selectedOptions.length === 0;
+
   return (
     <div className="my-4">
       <h3>{title}</h3>
@@ -68,13 +71,17 @@ export default function CheckboxMenu({
       </div>
       <div className="mt-2 flex join">
         <button
-          className="btn join-item btn-sm normal-case"
+          className={`btn join-item btn-sm normal-case ${
+            allSelected ? "bg-primary" : ""
+          }`}
           onClick={selectAll}
         >
           All
         </button>
         <button
-          className="btn join-item btn-sm normal-case"
+          className={`btn join-item btn-sm normal-case ${
+            noneSelected ? "bg-primary" : ""
+          }`}
           onClick={selectNone}
         >
           None
