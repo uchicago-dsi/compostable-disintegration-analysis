@@ -35,9 +35,17 @@ export default function CheckboxMenu({
   const allSelected = selectedOptions.length === options.length;
   const noneSelected = selectedOptions.length === 0;
 
+  const infoText = `Select one or more options to filter the data by ${title.toLowerCase()}`;
+
   return (
     <div className="my-4">
       <h3>{title}</h3>
+      <div
+        className="tooltip tooltip-primary tooltip-right mx-2 my-1"
+        data-tip={infoText}
+      >
+        <span className="cursor-pointer text-primary">ℹ️</span>
+      </div>
       <div className="flex mt-3">
         <button
           className="btn btn-sm normal-case"
