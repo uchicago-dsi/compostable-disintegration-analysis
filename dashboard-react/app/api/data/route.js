@@ -85,9 +85,6 @@ const filterTrialIDsByConditions = (
   filterDict
 ) => {
   const trialIDs = new Set();
-  console.log(`filtering on ${column}`);
-  console.log("filters");
-  console.log(filters);
   filters.forEach((filter) => {
     if (filters.length === Object.keys(filterDict).length) {
       operatingConditions.forEach((condition) =>
@@ -96,8 +93,6 @@ const filterTrialIDsByConditions = (
       return Array.from(trialIDs);
     } else {
       const [low, high, inclusive] = filterDict[filter];
-      console.log("low");
-      console.log(low);
       const filteredTrialIDs = getFilteredTrialIDs(
         operatingConditions,
         column,
@@ -132,8 +127,7 @@ const getIntersectingTrialIDs = (...sets) => {
 };
 
 const prepareData = async (searchParams) => {
-  console.log("searchParams");
-  console.log(searchParams);
+  console.log("searchParams", searchParams);
   // Display params
   const aggCol = searchParams.get("aggcol") || "Material Class I";
   const displayCol = searchParams.get("displaycol") || "% Residuals (Mass)";
@@ -190,15 +184,15 @@ const prepareData = async (searchParams) => {
 
   var filteredData = [...trialData];
 
-  // Filter out rows where displayCol is null or undefined
-  filteredData = filteredData.filter((d) => d[displayCol] != null);
+  // Filter out rows where displayCol is empty or null
+  filteredData = filteredData.filter(
+    (d) => d[displayCol] !== "" && d[displayCol] !== null
+  );
 
   // filter data based on selected filters
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
   filteredData = filterData(filteredData, "Technology", technologies);
   filteredData = filterData(filteredData, "Material Class II", materials);
-
-  console.log("displayCol", displayCol);
 
   if (!uncapResults) {
     filteredData = filteredData.map((d) => {
@@ -208,9 +202,6 @@ const prepareData = async (searchParams) => {
       return d;
     });
   }
-
-  console.log("displayResiduals");
-  console.log(displayResiduals);
 
   if (!displayResiduals) {
     filteredData = filteredData.map((d) => {
@@ -229,9 +220,6 @@ const prepareData = async (searchParams) => {
     operatingConditions,
     moistureFilterDict
   );
-
-  console.log("moistureTrialIDs");
-  console.log(moistureTrialIDs);
 
   const temperatureTrialIDs = filterTrialIDsByConditions(
     "Average Temperature (F)",
@@ -252,8 +240,7 @@ const prepareData = async (searchParams) => {
     trialDurationTrialIDs
   );
 
-  console.log("combinedTrialIDs");
-  console.log(combinedTrialIDs);
+  console.log("combinedTrialIDs", combinedTrialIDs);
 
   if (combinedTrialIDs.size === 0) {
     filteredData = [];
@@ -263,8 +250,7 @@ const prepareData = async (searchParams) => {
     );
   }
 
-  console.log("filteredData.length");
-  console.log(filteredData.length);
+  console.log("filteredData.length", filteredData.length);
 
   // Not enough data - return empty object
   if (filteredData.length < 5) {
@@ -306,8 +292,7 @@ const prepareData = async (searchParams) => {
     );
   });
 
-  console.log("sortedGrouped");
-  console.log(sortedGrouped);
+  console.log("sortedGrouped", sortedGrouped);
 
   return {
     data: sortedGrouped,
