@@ -190,12 +190,15 @@ const prepareData = async (searchParams) => {
 
   var filteredData = [...trialData];
 
+  // Filter out rows where displayCol is null or undefined
+  filteredData = filteredData.filter((d) => d[displayCol] != null);
+
   // filter data based on selected filters
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
-  console.log("filteredData.length after test methods");
-  console.log(filteredData.length);
   filteredData = filterData(filteredData, "Technology", technologies);
   filteredData = filterData(filteredData, "Material Class II", materials);
+
+  console.log("displayCol", displayCol);
 
   if (!uncapResults) {
     filteredData = filteredData.map((d) => {
@@ -220,8 +223,6 @@ const prepareData = async (searchParams) => {
   }
 
   // TODO: How do we want to handle communicating that not all trials have operating conditions?
-  // console.log("moistureFilter");
-  // console.log(moistureFilter);
   const moistureTrialIDs = filterTrialIDsByConditions(
     "Average % Moisture (In Field)",
     moistureFilter,

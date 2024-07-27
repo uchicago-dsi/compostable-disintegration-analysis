@@ -80,7 +80,7 @@ export default function Dashboard() {
           data={plotData}
           layout={{
             width: 1440,
-            height: 600,
+            height: 800,
             title: {
               text: `<b>${title}</b>`,
               x: 0.5,
@@ -98,6 +98,7 @@ export default function Dashboard() {
             xaxis: {
               tickangle: xTickAngle,
               ticklen: 10,
+              automargin: true,
             },
           }}
           config={{
