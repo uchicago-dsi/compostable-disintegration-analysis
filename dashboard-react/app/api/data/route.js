@@ -162,7 +162,7 @@ const prepareData = async (searchParams) => {
   if (noFiltersSelected) {
     return {
       message:
-        "None selected for some filtering criteria. Please make sure you have at least one filter selected.",
+        "”None” is selected for at least one filtering criteria. Please ensure you have at least one option selected for each filter.",
     };
   }
 
@@ -256,7 +256,7 @@ const prepareData = async (searchParams) => {
   if (filteredData.length < 5) {
     return {
       message:
-        "Not enough data for the selected criteria. Please select more options.",
+        "There is not enough data for the selected options. Please select more options.",
     };
   }
 
