@@ -36,6 +36,7 @@ export default function Dashboard() {
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
+            hoverinfo: "skip",
           };
         })
       : [];
