@@ -37,6 +37,7 @@ export default function Dashboard() {
             marker: { color },
             boxmean: true,
             hoverinfo: "skip",
+            line: { width: 3.25 },
           };
         })
       : [];
