@@ -36,6 +36,8 @@ export default function Dashboard() {
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
+            hoverinfo: "skip",
+            line: { width: 3.25 },
           };
         })
       : [];
@@ -79,7 +81,7 @@ export default function Dashboard() {
         <Plot
           data={plotData}
           layout={{
-            width: 1000,
+            width: 1440,
             height: 800,
             title: {
               text: `<b>${title}</b>`,
@@ -98,9 +100,7 @@ export default function Dashboard() {
             xaxis: {
               tickangle: xTickAngle,
               ticklen: 10,
-            },
-            margin: {
-              b: 300,
+              automargin: true,
             },
           }}
           config={{

@@ -37,3 +37,7 @@ h3 {
 .checkbox-primary {
   --chkfg: white;
 }
+
+.tooltip {
+  --tooltip-text-color: #FFF;
+}
