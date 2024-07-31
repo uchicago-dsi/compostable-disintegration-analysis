@@ -20,6 +20,7 @@ module.exports = {
       {
         mytheme: {
           primary: "#038c65", // Set the primary color to CFTP dark green
+          "primary-focus": "#04a074", // Slightly lighter green for hover
         },
       },
     ],
