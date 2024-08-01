@@ -39,12 +39,14 @@ export default function CheckboxMenu({
 
   return (
     <div className="my-4">
-      <h3>{title}</h3>
-      <div
-        className="tooltip tooltip-primary tooltip-right mx-2 my-1"
-        data-tip={infoText}
-      >
-        <span className="cursor-pointer text-primary">ℹ️</span>
+      <div className="flex flex-center">
+        <h3>{title}</h3>
+        <div
+          className="tooltip tooltip-primary tooltip-right mx-2 my-1"
+          data-tip={infoText}
+        >
+          <span className="cursor-pointer text-primary">ℹ️</span>
+        </div>
       </div>
       <div className="flex mt-3">
         <button
