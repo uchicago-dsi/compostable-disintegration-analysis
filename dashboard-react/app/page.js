@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <main className="flex flex-col items-start h-screen">
-      <div className="max-w-[1440px] max-h-[800px]">
+      <div className="max-w-[1440px] min-h-[800px] max-h-[800px]">
         <Dashboard />
       </div>
       <div className="max-w-[1440px]">

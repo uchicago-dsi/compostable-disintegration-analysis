@@ -74,9 +74,11 @@ export default function Dashboard() {
   return (
     <div>
       {snap.errorMessage ? (
-        <p>
-          <Alert message={snap.errorMessage} />
-        </p>
+        <div className="flex items-center justify-center min-h-screen mx-[200px]">
+          <p>
+            <Alert message={snap.errorMessage} />
+          </p>
+        </div>
       ) : (
         <Plot
           data={plotData}
