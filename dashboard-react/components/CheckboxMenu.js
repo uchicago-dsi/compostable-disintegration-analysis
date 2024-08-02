@@ -39,7 +39,7 @@ export default function CheckboxMenu({
 
   return (
     <div className="my-4">
-      <div className="flex flex-center">
+      <div className="flex flex-center justify-center mx-auto">
         <h3>{title}</h3>
         <div
           className="tooltip tooltip-primary tooltip-right mx-2 my-1"
@@ -48,7 +48,7 @@ export default function CheckboxMenu({
           <span className="cursor-pointer text-primary">ℹ️</span>
         </div>
       </div>
-      <div className="flex mt-3">
+      <div className="flex justify-center mt-3">
         <button
           className="btn btn-sm normal-case"
           onClick={() => setExpanded((e) => !e)}
@@ -79,7 +79,7 @@ export default function CheckboxMenu({
           ))}
         </ul>
       </div>
-      <div className="mt-2 flex join">
+      <div className="mt-2 flex join justify-center">
         <button
           className={`btn join-item btn-sm normal-case ${
             allSelected ? "bg-primary" : ""
