@@ -23,11 +23,11 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="flex flex-col items-start h-[1300px] overflow-hidden">
+    <main className="flex flex-col items-start h-[1200px] overflow-hidden">
       <div className="max-w-[1440px] h-[600px] overflow-hidden mx-auto">
         <Dashboard />
       </div>
-      <div className="max-w-[1440px] h-[700px] mx-auto">
+      <div className="max-w-[1440px] h-[600px] mx-auto">
         <DashboardControls />
       </div>
     </main>
