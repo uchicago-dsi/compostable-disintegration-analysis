@@ -51,7 +51,7 @@ export default function DashboardControls() {
       <div className="m-2 w-1/3">
         <DashboardDisplayControls />
       </div>
-      <div className="m-2 w-2/3">
+      <div className="m-2 w-2/3 ml-10">
         <DashboardFilterControls />
       </div>
     </div>
