@@ -72,17 +72,19 @@ export default function Dashboard() {
   const xTickAngle = plotData.length > 6 ? 90 : 0;
 
   return (
-    <div>
+    <>
       {snap.errorMessage ? (
-        <p>
-          <Alert message={snap.errorMessage} />
-        </p>
+        <div className="flex items-center justify-center h-full mx-[200px]">
+          <p>
+            <Alert message={snap.errorMessage} />
+          </p>
+        </div>
       ) : (
         <Plot
           data={plotData}
           layout={{
             width: 1440,
-            height: 800,
+            height: 600,
             title: {
               text: `<b>${title}</b>`,
               x: 0.5,
@@ -108,6 +110,6 @@ export default function Dashboard() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }

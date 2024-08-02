@@ -12,7 +12,9 @@ export default function DashboardDisplayControls() {
 
   return (
     <>
-      <h2>Display Options</h2>
+      <div className="flex justify-center">
+        <h2>Display Options</h2>
+      </div>
       <RadioSingleSelect
         options={{ "Mesh Bag": "Mesh Bag", "Bulk Dose": "Bulk Dose" }}
         title="Select Test Method:"
