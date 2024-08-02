@@ -12,9 +12,10 @@ export default function DashboardFilterControls() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex-1 mx-2 w-full md:w-1/2">
+      <div className="flex-1 mx-2 w-full min-h-[300px]">
         <h2 className="text-center">Filters</h2>
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row"> */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <CheckboxMenu
             options={snap.options["Technology"]}
             selectedOptions={snap.filters.selectedTechnologies}
@@ -27,11 +28,11 @@ export default function DashboardFilterControls() {
             filterKey="selectedMaterialTypes"
             title="Select Material Type(s)"
           />
-        </div>
-      </div>
-      <div className="flex-1 mx-2 w-full lg:w-1/2">
+          {/* </div> */}
+          {/* </div>
+      <div className="flex-1 mx-2 w-full">
         <h2 className="text-center">Operating Conditions Filters</h2>
-        <div className="flex flex-row">
+        <div className="flex flex-row"> */}
           <CheckboxMenu
             options={Object.keys(temperatureFilterDict)}
             selectedOptions={snap.filters.selectedTemperatureLevels}
