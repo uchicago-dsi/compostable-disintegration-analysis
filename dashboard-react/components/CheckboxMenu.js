@@ -11,8 +11,6 @@ export default function CheckboxMenu({
   title,
 }) {
   const snap = useSnapshot(state);
-  // Note: Use local state for the expanded state of the menu
-  const [expanded, setExpanded] = useState(false);
 
   const handleCheckboxChange = (key, value) => (event) => {
     const checked = event.target.checked;
@@ -41,50 +39,22 @@ export default function CheckboxMenu({
 
   return (
     <div className="my-4">
-      <div className="flex flex-center justify-center mx-auto">
-        <h3>{title}</h3>
-        <div
-          className="tooltip tooltip-primary tooltip-left mx-.75"
-          data-tip={infoText}
-        >
-          <span className="cursor-pointer text-primary">
-            <InformationCircleIcon className="h-5 w-5 text-primary" />
-          </span>
+      <div className="flex justify-center mx-auto">
+        <div className="inline-flex">
+          <h3>
+            <span className="inline">{title}</span>
+            <div
+              className="tooltip tooltip-primary tooltip-left ml-2 inline-flex"
+              data-tip={infoText}
+            >
+              <span className="cursor-pointer text-primary">
+                <InformationCircleIcon className="h-5 w-5 text-primary" />
+              </span>
+            </div>
+          </h3>
         </div>
       </div>
-      {/* <div className="flex justify-center mt-3">
-        <button
-          className="btn btn-sm normal-case"
-          onClick={() => setExpanded((e) => !e)}
-        >
-          {expanded ? `Collapse Menu` : `Show Menu`}
-        </button>
-      </div> */}
-      {/* <div
-        className={`overflow-auto flex-grow px-4 ${
-          expanded ? "max-h-[150px]" : "h-0"
-        }`}
-      > */}
-      <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
-          {options?.map((option) => (
-            <li key={option}>
-              <label className="label cursor-pointer">
-                <span className="label-text">{option}</span>
-                <input
-                  type="checkbox"
-                  id={`option-${option}`}
-                  value={option}
-                  checked={selectedOptions.includes(option)}
-                  onChange={handleCheckboxChange(filterKey, option)}
-                  className="checkbox checkbox-primary"
-                />
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-2 flex join justify-center">
+      <div className="flex join mt-1 justify-center">
         <button
           className={`btn join-item btn-sm normal-case hover:bg-secondary ${
             allSelected ? "bg-primary" : ""
@@ -102,7 +72,26 @@ export default function CheckboxMenu({
           None
         </button>
       </div>
-      <div className="divider m-0"></div>
+      <div className="divider my-1"></div>
+      <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
+        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mb-2 mx-auto shadow-lg">
+          {options?.map((option) => (
+            <li key={option}>
+              <label className="label cursor-pointer">
+                <span className="label-text">{option}</span>
+                <input
+                  type="checkbox"
+                  id={`option-${option}`}
+                  value={option}
+                  checked={selectedOptions.includes(option)}
+                  onChange={handleCheckboxChange(filterKey, option)}
+                  className="checkbox checkbox-primary"
+                />
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
