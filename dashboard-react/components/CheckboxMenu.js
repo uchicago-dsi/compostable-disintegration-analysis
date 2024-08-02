@@ -58,7 +58,7 @@ export default function CheckboxMenu({
       </div>
       <div
         className={`overflow-auto flex-grow px-4 ${
-          expanded ? "max-h-[200px]" : "h-0"
+          expanded ? "max-h-[150px]" : "h-0"
         }`}
       >
         <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
