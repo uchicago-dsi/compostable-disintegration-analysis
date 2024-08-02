@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
@@ -44,7 +44,7 @@ export default function CheckboxMenu({
       <div className="flex flex-center justify-center mx-auto">
         <h3>{title}</h3>
         <div
-          className="tooltip tooltip-primary tooltip-bottom mx-.75"
+          className="tooltip tooltip-primary tooltip-left mx-.75"
           data-tip={infoText}
         >
           <span className="cursor-pointer text-primary">
