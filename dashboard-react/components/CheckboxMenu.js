@@ -54,26 +54,7 @@ export default function CheckboxMenu({
           </h3>
         </div>
       </div>
-      <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
-          {options?.map((option) => (
-            <li key={option}>
-              <label className="label cursor-pointer">
-                <span className="label-text">{option}</span>
-                <input
-                  type="checkbox"
-                  id={`option-${option}`}
-                  value={option}
-                  checked={selectedOptions.includes(option)}
-                  onChange={handleCheckboxChange(filterKey, option)}
-                  className="checkbox checkbox-primary"
-                />
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-2 flex join justify-center">
+      <div className="flex join mt-1 justify-center">
         <button
           className={`btn join-item btn-sm normal-case hover:bg-secondary ${
             allSelected ? "bg-primary" : ""
@@ -91,7 +72,26 @@ export default function CheckboxMenu({
           None
         </button>
       </div>
-      <div className="divider m-0"></div>
+      <div className="divider my-1"></div>
+      <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
+        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mb-2 mx-auto shadow-lg">
+          {options?.map((option) => (
+            <li key={option}>
+              <label className="label cursor-pointer">
+                <span className="label-text">{option}</span>
+                <input
+                  type="checkbox"
+                  id={`option-${option}`}
+                  value={option}
+                  checked={selectedOptions.includes(option)}
+                  onChange={handleCheckboxChange(filterKey, option)}
+                  className="checkbox checkbox-primary"
+                />
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
