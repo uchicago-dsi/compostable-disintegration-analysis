@@ -42,6 +42,6 @@ export const residuals2col = {
 };
 
 export const display2col = {
-  "% Residuals (Mass)": "% Residuals (Mass)",
-  "% Residuals (Area)": "% Residuals (Area)",
+  "Results by Mass": "% Residuals (Mass)",
+  "Results by Surface Area": "% Residuals (Area)",
 };

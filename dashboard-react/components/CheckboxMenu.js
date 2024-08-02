@@ -48,19 +48,20 @@ export default function CheckboxMenu({
           <span className="cursor-pointer text-primary">ℹ️</span>
         </div>
       </div>
-      <div className="flex justify-center mt-3">
+      {/* <div className="flex justify-center mt-3">
         <button
           className="btn btn-sm normal-case"
           onClick={() => setExpanded((e) => !e)}
         >
           {expanded ? `Collapse Menu` : `Show Menu`}
         </button>
-      </div>
-      <div
+      </div> */}
+      {/* <div
         className={`overflow-auto flex-grow px-4 ${
           expanded ? "max-h-[150px]" : "h-0"
         }`}
-      >
+      > */}
+      <div className={"overflow-auto flex-grow px-4 max-h-[150px]"}>
         <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
           {options?.map((option) => (
             <li key={option}>
