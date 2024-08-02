@@ -86,7 +86,7 @@ export default function CheckboxMenu({
       </div>
       <div className="mt-2 flex join justify-center">
         <button
-          className={`btn join-item btn-sm normal-case ${
+          className={`btn join-item btn-sm normal-case hover:bg-secondary ${
             allSelected ? "bg-primary" : ""
           }`}
           onClick={selectAll}
@@ -94,7 +94,7 @@ export default function CheckboxMenu({
           All
         </button>
         <button
-          className={`btn join-item btn-sm normal-case ${
+          className={`btn join-item btn-sm normal-case hover:bg-secondary ${
             noneSelected ? "bg-primary" : ""
           }`}
           onClick={selectNone}
