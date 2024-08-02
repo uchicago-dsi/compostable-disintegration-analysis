@@ -12,7 +12,7 @@ export default function DashboardFilterControls() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex-1 mx-2 w-full md:w-1/2 min-h-[300px]">
+      <div className="flex-1 mx-2 w-full min-h-[300px]">
         <h2 className="text-center">Filters</h2>
         <div className="flex flex-row">
           <CheckboxMenu
@@ -29,7 +29,7 @@ export default function DashboardFilterControls() {
           />
         </div>
       </div>
-      <div className="flex-1 mx-2 w-full lg:w-1/2">
+      <div className="flex-1 mx-2 w-full">
         <h2 className="text-center">Operating Conditions Filters</h2>
         <div className="flex flex-row">
           <CheckboxMenu

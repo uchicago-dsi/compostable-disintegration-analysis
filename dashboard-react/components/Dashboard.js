@@ -84,7 +84,7 @@ export default function Dashboard() {
           data={plotData}
           layout={{
             width: 1440,
-            height: 800,
+            height: 600,
             title: {
               text: `<b>${title}</b>`,
               x: 0.5,
