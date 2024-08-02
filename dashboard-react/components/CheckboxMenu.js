@@ -39,18 +39,20 @@ export default function CheckboxMenu({
 
   return (
     <div className="my-4">
-      <div className="inline-flex">
-        <h3>
-          <span className="inline">{title}</span>
-          <div
-            className="tooltip tooltip-primary tooltip-left ml-2 inline-flex"
-            data-tip={infoText}
-          >
-            <span className="cursor-pointer text-primary">
-              <InformationCircleIcon className="h-5 w-5 text-primary" />
-            </span>
-          </div>
-        </h3>
+      <div className="flex justify-center mx-auto">
+        <div className="inline-flex">
+          <h3>
+            <span className="inline">{title}</span>
+            <div
+              className="tooltip tooltip-primary tooltip-left ml-2 inline-flex"
+              data-tip={infoText}
+            >
+              <span className="cursor-pointer text-primary">
+                <InformationCircleIcon className="h-5 w-5 text-primary" />
+              </span>
+            </div>
+          </h3>
+        </div>
       </div>
       <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
         <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
