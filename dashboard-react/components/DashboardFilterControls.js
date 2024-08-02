@@ -20,36 +20,31 @@ export default function DashboardFilterControls() {
             options={snap.options["Technology"]}
             selectedOptions={snap.filters.selectedTechnologies}
             filterKey="selectedTechnologies"
-            title="Select Technology(ies)"
+            title="Select Technology"
           />
           <CheckboxMenu
             options={snap.options["Material Class II"]}
             selectedOptions={snap.filters.selectedMaterialTypes}
             filterKey="selectedMaterialTypes"
-            title="Select Material Type(s)"
+            title="Select Material Type"
           />
-          {/* </div> */}
-          {/* </div>
-      <div className="flex-1 mx-2 w-full">
-        <h2 className="text-center">Operating Conditions Filters</h2>
-        <div className="flex flex-row"> */}
           <CheckboxMenu
             options={Object.keys(temperatureFilterDict)}
             selectedOptions={snap.filters.selectedTemperatureLevels}
             filterKey="selectedTemperatureLevels"
-            title="Select Temperature Range(s)"
+            title="Select Temperature Range"
           />
           <CheckboxMenu
             options={Object.keys(moistureFilterDict)}
             selectedOptions={snap.filters.selectedMoistureLevels}
             filterKey="selectedMoistureLevels"
-            title="Select Moisture Content Range(s)"
+            title="Select Moisture Content Range"
           />
           <CheckboxMenu
             options={Object.keys(trialDurationDict)}
             selectedOptions={snap.filters.selectedTrialDurations}
             filterKey="selectedTrialDurations"
-            title="Select Trial Duration Range(s)"
+            title="Select Trial Duration Range"
           />
         </div>
       </div>
