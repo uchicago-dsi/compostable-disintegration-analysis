@@ -9,12 +9,12 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
 
   return (
     <div className="flex flex-wrap items-center">
-      <h3 className="mr-4">{title}</h3>
-      <div className="flex flex-wrap items-center">
+      <div className="flex flex-wrap items-center flex-grow">
+        <h4 className="mr-4">{title}</h4>
         {Object.entries(options).map(([key, value]) => (
           <label
             key={key}
-            className="label cursor-pointer flex items-center space-x-2 w-[100px] mb-2 mr-2"
+            className="label cursor-pointer flex items-center space-x-1 max-w-[130px] mb-1 mr-.75"
           >
             <input
               type="radio"
