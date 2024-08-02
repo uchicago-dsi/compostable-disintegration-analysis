@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+
 export default function CheckboxMenu({
   options,
   selectedOptions,
@@ -42,12 +44,20 @@ export default function CheckboxMenu({
       <div className="flex flex-center justify-center mx-auto">
         <h3>{title}</h3>
         <div
-          className="tooltip tooltip-primary tooltip-right mx-2 my-1"
+          className="tooltip tooltip-primary tooltip-right mx-.75"
+          data-tip={infoText}
+        >
+          <span className="cursor-pointer text-primary">
+            <InformationCircleIcon className="h-5 w-5 text-primary" />
+          </span>
+        </div>
+      </div>
+      {/* <div
+          className="tooltip tooltip-primary tooltip-right mx-.75"
           data-tip={infoText}
         >
           <span className="cursor-pointer text-primary">ℹ️</span>
-        </div>
-      </div>
+        </div> */}
       {/* <div className="flex justify-center mt-3">
         <button
           className="btn btn-sm normal-case"
@@ -61,7 +71,7 @@ export default function CheckboxMenu({
           expanded ? "max-h-[150px]" : "h-0"
         }`}
       > */}
-      <div className={"overflow-auto flex-grow px-4 max-h-[150px]"}>
+      <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
         <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mx-auto shadow">
           {options?.map((option) => (
             <li key={option}>
