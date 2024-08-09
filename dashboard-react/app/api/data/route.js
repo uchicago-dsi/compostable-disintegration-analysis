@@ -112,6 +112,12 @@ const prepareData = async (searchParams) => {
   const materials = searchParams.get("materials")
     ? searchParams.get("materials").split(",")
     : [];
+  const formats = searchParams.get("formats")
+    ? searchParams.get("formats").split(",")
+    : [];
+  const brands = searchParams.get("brands")
+    ? searchParams.get("brands").split(",")
+    : [];
   // Operating conditions filters
   const temperatureFilter = searchParams.get("temperature")
     ? searchParams.get("temperature").split(",")
@@ -126,6 +132,8 @@ const prepareData = async (searchParams) => {
   const noFiltersSelected =
     technologies.length === 0 ||
     materials.length === 0 ||
+    brands.length === 0 ||
+    formats.length === 0 ||
     temperatureFilter.length === 0 ||
     moistureFilter.length === 0 ||
     trialDurations.length === 0;
@@ -164,6 +172,8 @@ const prepareData = async (searchParams) => {
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
   filteredData = filterData(filteredData, "Technology", technologies);
   filteredData = filterData(filteredData, "Material Class II", materials);
+  filteredData = filterData(filteredData, "Item Format", formats);
+  filteredData = filterData(filteredData, "Item Brand", brands);
 
   if (!uncapResults) {
     filteredData = filteredData.map((d) => {
