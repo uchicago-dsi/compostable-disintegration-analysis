@@ -8,15 +8,16 @@ import {
   temperatureFilterDict,
   trialDurationDict,
 } from "@/lib/constants";
+import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
 const dataSource = process.env.DATA_SOURCE;
 const bucketName = "cftp_data";
-const serviceAccountKey = JSON.parse(
-  Buffer.from(
-    process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64,
-    "base64"
-  ).toString("ascii")
-);
+// const serviceAccountKey = JSON.parse(
+//   Buffer.from(
+//     process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64,
+//     "base64"
+//   ).toString("ascii")
+// );
 const trialsFilename = "all_trials_processed.csv";
 const operatingConditionsFilename = "operating_conditions.csv";
 
@@ -33,27 +34,27 @@ const operatingConditionsPath = path.join(
   operatingConditionsFilename
 );
 
-const fetchCloudData = async (filename, bucketName) => {
-  const storage = new Storage({
-    credentials: serviceAccountKey,
-  });
-  const bucket = storage.bucket(bucketName);
-  const file = bucket.file(filename);
+// const fetchCloudData = async (filename, bucketName) => {
+//   const storage = new Storage({
+//     credentials: serviceAccountKey,
+//   });
+//   const bucket = storage.bucket(bucketName);
+//   const file = bucket.file(filename);
 
-  try {
-    const [fileContents] = await file.download();
-    const data = d3.csvParse(fileContents.toString("utf-8"));
-    return data;
-  } catch (error) {
-    console.error("Error downloading file:", error);
-    throw error;
-  }
-};
+//   try {
+//     const [fileContents] = await file.download();
+//     const data = d3.csvParse(fileContents.toString("utf-8"));
+//     return data;
+//   } catch (error) {
+//     console.error("Error downloading file:", error);
+//     throw error;
+//   }
+// };
 
-const fetchLocalData = async (dataPath) => {
-  const data = await fs.readFile(dataPath, "utf8");
-  return d3.csvParse(data);
-};
+// const fetchLocalData = async (dataPath) => {
+//   const data = await fs.readFile(dataPath, "utf8");
+//   return d3.csvParse(data);
+// };
 
 const calculateQuartiles = (data, key) => {
   const sorted = data.map((d) => parseFloat(d[key])).sort((a, b) => a - b);
