@@ -38,7 +38,7 @@ export default function DashboardFilterControls() {
             options={Object.keys(moistureFilterDict)}
             selectedOptions={snap.filters.selectedMoistureLevels}
             filterKey="selectedMoistureLevels"
-            title="Select Moisture Content Range"
+            title="Select % Moisture Range"
           />
           <CheckboxMenu
             options={Object.keys(trialDurationDict)}
