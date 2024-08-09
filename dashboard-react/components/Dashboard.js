@@ -30,7 +30,7 @@ export default function Dashboard() {
             snap.filters["testMethod"] === "Mesh Bag"
               ? ` (n=${d["count"]})`
               : "";
-          // Replace "Positive" with "Pos." in the x-axis label
+          // Replace "Positive" with "Pos." in labels and add count
           const name = `${d["aggCol"]}${countDisplay}`.replace(
             "Positive",
             "Pos."
@@ -38,7 +38,7 @@ export default function Dashboard() {
 
           return {
             type: "box",
-            name: `${name}${countDisplay}`,
+            name: name,
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
