@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <main className="flex flex-col items-start h-[1250px] overflow-hidden">
-      <div className="max-w-[1440px] h-[600px] overflow-hidden mx-auto">
+      <div className="max-w-[1440px] h-[600px] overflow-hidden mx-auto mb-3">
         <Dashboard />
       </div>
       <div className="max-w-[1440px] h-[650px] mx-auto">
