@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";

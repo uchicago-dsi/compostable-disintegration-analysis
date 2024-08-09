@@ -3,14 +3,27 @@ import React from "react";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { handleSingleSelectChange } from "@/lib/utils";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
 
 export default function RadioSingleSelect({ options, title, filterKey }) {
   const snap = useSnapshot(state);
 
+  const infoText = `Select display option for ${title.toLowerCase()}`;
+
   return (
     <div className="flex flex-wrap items-center">
       <div className="flex flex-wrap items-center flex-grow">
-        <h4 className="mr-4">{title}</h4>
+        <h3>
+          <span className="inline">{title}</span>
+          <div
+            className="tooltip tooltip-primary tooltip-bottom ml-2 inline-flex"
+            data-tip={infoText}
+          >
+            <span className="cursor-pointer text-primary">
+              <InformationCircleIcon className="h-5 w-5 text-primary" />
+            </span>
+          </div>
+        </h3>
         {Object.entries(options).map(([key, value]) => (
           <label
             key={key}
