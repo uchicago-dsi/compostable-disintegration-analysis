@@ -20,6 +20,8 @@ export default function DashboardControls() {
         "selectedMaterialTypes",
         snap.options["Material Class II"]
       );
+      state.setFilterValue("selectedBrands", snap.options["Item Brand"]);
+      state.setFilterValue("selectedFormats", snap.options["Item Format"]);
       state.setFilterValue("selectedTechnologies", snap.options["Technology"]);
       state.setFilterValue("initialized", true);
     }
