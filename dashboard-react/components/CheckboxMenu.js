@@ -42,7 +42,7 @@ export default function CheckboxMenu({
       <div className="flex justify-center mx-auto">
         <div className="inline-flex">
           <h3>
-            <span className="inline">{title}</span>
+            <span className="inline font-bold">{title}</span>
             <div
               className="tooltip tooltip-primary tooltip-left ml-2 inline-flex"
               data-tip={infoText}
