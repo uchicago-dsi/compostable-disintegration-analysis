@@ -34,6 +34,8 @@ export async function GET() {
     "Material Class III",
     "Test Method",
     "Technology",
+    "Item Brand",
+    "Item Format",
   ];
   const uniqueValues = await getUniqueValues(columns);
   return NextResponse.json(uniqueValues);
