@@ -1,8 +1,6 @@
 "use client";
-import React, { useRef } from "react";
-import DropdownSingleSelect from "@/components/DropdownSingleSelect";
+import React from "react";
 import RadioSingleSelect from "./RadioSingleSelect";
-import { onSummaryClick, handleSingleSelectChange } from "@/lib/utils";
 import { material2col, residuals2col, display2col } from "@/lib/constants";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
