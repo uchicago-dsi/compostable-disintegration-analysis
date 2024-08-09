@@ -65,8 +65,8 @@ export default function Dashboard() {
 
   const yMax =
     snap.data.data && snap.data.data.length > 0
-      ? Math.max(...snap.data.data.map((d) => d.max), 1)
-      : 1;
+      ? Math.max(...snap.data.data.map((d) => d.max), 1.05)
+      : 1.05;
 
   const xTickAngle = plotData.length > 6 ? 90 : 0;
 
