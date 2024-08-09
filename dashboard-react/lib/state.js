@@ -40,6 +40,8 @@ const state = proxy({
     // Trial filters
     selectedTechnologies: [],
     selectedMaterialTypes: [],
+    selectedBrands: [],
+    selectedFormats: [],
     // Operating conditions filters
     selectedMoistureLevels: Object.keys(moistureFilterDict),
     selectedTemperatureLevels: Object.keys(temperatureFilterDict),
@@ -73,6 +75,8 @@ const fetchData = async () => {
   params.append("testmethod", state.filters.testMethod);
   params.append("technologies", state.filters.selectedTechnologies.join(","));
   params.append("materials", state.filters.selectedMaterialTypes.join(","));
+  params.append("brands", state.filters.selectedBrands.join(","));
+  params.append("formats", state.filters.selectedFormats.join(","));
   // Operating conditions filters
   params.append(
     "temperature",

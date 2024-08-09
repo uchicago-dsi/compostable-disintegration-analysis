@@ -29,6 +29,18 @@ export default function DashboardFilterControls() {
             title="Select Material Type"
           />
           <CheckboxMenu
+            options={snap.options["Item Brand"]}
+            selectedOptions={snap.filters.selectedBrands}
+            filterKey="selectedBrands"
+            title="Select Item Brand"
+          />
+          <CheckboxMenu
+            options={snap.options["Item Format"]}
+            selectedOptions={snap.filters.selectedFormats}
+            filterKey="selectedFormats"
+            title="Select Item Type"
+          />
+          <CheckboxMenu
             options={Object.keys(temperatureFilterDict)}
             selectedOptions={snap.filters.selectedTemperatureLevels}
             filterKey="selectedTemperatureLevels"
