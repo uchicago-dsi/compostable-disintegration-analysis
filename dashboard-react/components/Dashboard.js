@@ -20,6 +20,26 @@ export default function Dashboard() {
     Biopolymer: "#FFB600",
   };
 
+  const maxLabelLength = 30;
+
+  function wrapLabel(label) {
+    const words = label.split(" ");
+    let wrappedLabel = "";
+    let line = "";
+
+    for (const word of words) {
+      if ((line + word).length > maxLabelLength) {
+        wrappedLabel += line + "<br>";
+        line = word + " ";
+      } else {
+        line += word + " ";
+      }
+    }
+    wrappedLabel += line.trim(); // Add the last line
+
+    return wrappedLabel.trim();
+  }
+
   const plotData =
     Object.keys(snap.data).length > 0
       ? snap.data.data.map((d) => {
@@ -35,10 +55,11 @@ export default function Dashboard() {
             "Positive",
             "Pos."
           );
+          const wrappedName = wrapLabel(name);
 
           return {
             type: "box",
-            name: name,
+            name: wrappedName,
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
