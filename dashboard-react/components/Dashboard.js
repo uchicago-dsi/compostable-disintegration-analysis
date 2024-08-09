@@ -30,7 +30,7 @@ export default function Dashboard() {
             snap.filters["testMethod"] === "Mesh Bag"
               ? ` (n=${d["count"]})`
               : "";
-          // Replace "Positive" with "Pos." in labels and add count
+          // Replace "Positive" with "Pos." in labels and append count
           const name = `${d["aggCol"]}${countDisplay}`.replace(
             "Positive",
             "Pos."

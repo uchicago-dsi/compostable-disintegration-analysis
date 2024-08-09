@@ -14,7 +14,7 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
     <div className="flex flex-wrap items-center">
       <div className="flex flex-wrap items-center flex-grow w-full">
         <h3>
-          <span className="inline">{title}</span>
+          <span className="inlin font-bold">{title}</span>
           <div
             className="tooltip tooltip-primary tooltip-bottom ml-2 inline-flex"
             data-tip={infoText}
