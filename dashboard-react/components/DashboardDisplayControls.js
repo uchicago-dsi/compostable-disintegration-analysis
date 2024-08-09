@@ -4,6 +4,7 @@ import RadioSingleSelect from "./RadioSingleSelect";
 import { material2col, residuals2col, display2col } from "@/lib/constants";
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
 
 export default function DashboardDisplayControls() {
   const snap = useSnapshot(state);
@@ -34,12 +35,6 @@ export default function DashboardDisplayControls() {
         filterKey="displayResiduals"
       />
       <div>
-        <p>
-          <i>
-            The dashboard automatically caps results at 100% residuals. Click
-            this checkbox to see uncapped data.
-          </i>
-        </p>
         <input
           type="checkbox"
           id="capResults"
@@ -52,6 +47,15 @@ export default function DashboardDisplayControls() {
         <label htmlFor="capResults">
           Show results with over 100% residuals remaining
         </label>
+        <div
+          className="tooltip tooltip-primary tooltip-bottom ml-2 inline-flex"
+          data-tip="The dashboard automatically caps results at 100% residuals. Click
+            this checkbox to see uncapped data."
+        >
+          <span className="cursor-pointer text-primary">
+            <InformationCircleIcon className="h-5 w-5 text-primary" />
+          </span>
+        </div>
       </div>
     </>
   );
