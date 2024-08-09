@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
-import * as d3 from "d3";
 import path from "path";
-import fs from "fs/promises";
+import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
+const bucketName = "cftp_data";
+const trialsFilename = "all_trials_processed.csv";
+
+// TODO: Re-add local data fetching if desired
 const dataPath = path.join(
   process.cwd(),
   "public",
@@ -11,8 +14,8 @@ const dataPath = path.join(
 );
 
 const fetchData = async () => {
-  const data = await fs.readFile(dataPath, "utf8");
-  return d3.csvParse(data);
+  const data = await fetchCloudData(trialsFilename, bucketName);
+  return data;
 };
 
 const getUniqueValues = async (columns) => {
