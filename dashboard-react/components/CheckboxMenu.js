@@ -38,7 +38,7 @@ export default function CheckboxMenu({
   const infoText = `Select one or more options to filter the data by ${title.toLowerCase()}`;
 
   return (
-    <div className="my-4">
+    <div className="my-4 border border-gray-300 rounded-md shadow-sm">
       <div className="flex justify-center mx-auto">
         <div className="inline-flex">
           <h3>
