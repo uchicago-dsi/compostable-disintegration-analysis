@@ -15,7 +15,7 @@ export default function DashboardFilterControls() {
       <div className="flex-1 mx-2 w-full min-h-[300px]">
         <h2 className="text-center">Filters</h2>
         {/* <div className="flex flex-row"> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           <CheckboxMenu
             options={snap.options["Technology"]}
             selectedOptions={snap.filters.selectedTechnologies}

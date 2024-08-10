@@ -40,19 +40,17 @@ export default function CheckboxMenu({
   return (
     <div className="my-4 border border-gray-300 rounded-md shadow-sm">
       <div className="flex justify-center mx-auto">
-        <div className="inline-flex">
-          <h3>
-            <span className="inline font-bold">{title}</span>
-            <div
-              className="tooltip tooltip-primary tooltip-left ml-2 inline-flex"
-              data-tip={infoText}
-            >
-              <span className="cursor-pointer text-primary">
-                <InformationCircleIcon className="h-5 w-5 text-primary" />
-              </span>
-            </div>
-          </h3>
-        </div>
+        <h3 className="text-center inline-block">
+          <span className="font-bold">{title}</span>
+          <div
+            className="tooltip tooltip-primary tooltip-left ml-2 inline-flex"
+            data-tip={infoText}
+          >
+            <span className="cursor-pointer text-primary">
+              <InformationCircleIcon className="h-5 w-5 text-primary" />
+            </span>
+          </div>
+        </h3>
       </div>
       <div className="flex join mt-1 justify-center">
         <button
@@ -72,9 +70,9 @@ export default function CheckboxMenu({
           None
         </button>
       </div>
-      <div className="divider my-1"></div>
+      <div className="my-1 border-t border-gray-300"></div>
       <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 mb-2 mx-auto shadow-lg">
+        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] p-2 mb-2 mx-auto shadow-lg">
           {options?.map((option) => (
             <li key={option}>
               <label className="label cursor-pointer">
