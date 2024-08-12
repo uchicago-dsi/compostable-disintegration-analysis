@@ -28,7 +28,7 @@ export default function RadioSingleSelect({ options, title, filterKey }) {
       {Object.entries(options).map(([key, value]) => (
         <label
           key={key}
-          className="label cursor-pointer flex items-center space-x-1 max-w-[110px] mb-.75 mr-.75"
+          className="label cursor-pointer flex items-center space-x-1 max-w-[114px] mb-.75 mr-.75"
         >
           <input
             type="radio"
