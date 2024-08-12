@@ -76,7 +76,7 @@ export default function CheckboxMenu({
           {options?.map((option) => (
             <li key={option}>
               <label className="label cursor-pointer">
-                <span className="label-text">{option}</span>
+                <span className="label-text text-[.8rem] px-0">{option}</span>
                 <input
                   type="checkbox"
                   id={`option-${option}`}
