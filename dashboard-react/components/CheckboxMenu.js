@@ -91,18 +91,18 @@ export default function CheckboxMenu({
       <div className="my-1 border-t border-gray-300"></div>
       <div>
         {canScrollUp ? (
-          <div className="scroll-arrow up transform translate-x-[50%] text-primary">
+          <div className="scroll-arrow up text-center text-primary shadow-bottom">
             ▲
           </div>
         ) : (
-          <div className="h-6"></div>
+          <div className="h-6 shadow-bottom"></div>
         )}
         <div
           className="overflow-auto flex-grow p-3 h-[150px]"
           ref={scrollRef}
           onScroll={checkScrollPosition}
         >
-          <ul className="menu dropdown-content rounded-box z-[1] mx-auto shadow-lg">
+          <ul className="menu dropdown-content rounded-box z-[1] mx-auto">
             {options?.map((option) => (
               <li key={option}>
                 <label className="label cursor-pointer">
@@ -121,11 +121,11 @@ export default function CheckboxMenu({
           </ul>
         </div>
         {canScrollDown ? (
-          <div className="scroll-arrow down transform translate-x-[50%] h-6 text-primary">
+          <div className="scroll-arrow down text-center h-6 text-primary shadow-top">
             ▼
           </div>
         ) : (
-          <div className="h-6"></div>
+          <div className="h-6 shadow-top"></div>
         )}
       </div>
     </div>
