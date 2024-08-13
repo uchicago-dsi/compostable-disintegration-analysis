@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+// import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+
 import { useSnapshot } from "valtio";
 import state from "@/lib/state";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
@@ -37,6 +39,22 @@ export default function CheckboxMenu({
 
   const infoText = `Select one or more options to filter the data by ${title.toLowerCase()}`;
 
+  const [canScrollUp, setCanScrollUp] = useState(false);
+  const [canScrollDown, setCanScrollDown] = useState(false);
+  const scrollRef = useRef(null);
+
+  const checkScrollPosition = () => {
+    const element = scrollRef.current;
+    setCanScrollUp(element.scrollTop > 0);
+    setCanScrollDown(
+      element.scrollTop < element.scrollHeight - element.clientHeight
+    );
+  };
+
+  useEffect(() => {
+    checkScrollPosition(); // Initial check
+  }, [options]); // Re-check when options change
+
   return (
     <div className="my-4 border border-gray-300 rounded-md shadow-sm">
       <div className="flex justify-center mx-auto">
@@ -71,24 +89,44 @@ export default function CheckboxMenu({
         </button>
       </div>
       <div className="my-1 border-t border-gray-300"></div>
-      <div className={"overflow-auto flex-grow px-4 h-[150px]"}>
-        <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] p-2 mb-2 mx-auto shadow-lg">
-          {options?.map((option) => (
-            <li key={option}>
-              <label className="label cursor-pointer">
-                <span className="label-text text-[.8rem] px-0">{option}</span>
-                <input
-                  type="checkbox"
-                  id={`option-${option}`}
-                  value={option}
-                  checked={selectedOptions.includes(option)}
-                  onChange={handleCheckboxChange(filterKey, option)}
-                  className="checkbox checkbox-primary"
-                />
-              </label>
-            </li>
-          ))}
-        </ul>
+      <div>
+        {canScrollUp ? (
+          <div className="scroll-arrow up transform translate-x-[50%] text-primary">
+            ▲
+          </div>
+        ) : (
+          <div className="h-6"></div>
+        )}
+        <div
+          className="overflow-auto flex-grow px-4 h-[150px]"
+          ref={scrollRef}
+          onScroll={checkScrollPosition}
+        >
+          <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] p-2 mb-2 mx-auto shadow-lg shadow-inner">
+            {options?.map((option) => (
+              <li key={option}>
+                <label className="label cursor-pointer">
+                  <span className="label-text text-[.8rem] px-0">{option}</span>
+                  <input
+                    type="checkbox"
+                    id={`option-${option}`}
+                    value={option}
+                    checked={selectedOptions.includes(option)}
+                    onChange={handleCheckboxChange(filterKey, option)}
+                    className="checkbox checkbox-primary"
+                  />
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {canScrollDown ? (
+          <div className="scroll-arrow down transform translate-x-[50%] h-6 text-primary">
+            ▼
+          </div>
+        ) : (
+          <div className="h-6"></div>
+        )}
       </div>
     </div>
   );
