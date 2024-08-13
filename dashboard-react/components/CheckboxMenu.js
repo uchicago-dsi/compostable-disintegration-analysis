@@ -98,11 +98,11 @@ export default function CheckboxMenu({
           <div className="h-6"></div>
         )}
         <div
-          className="overflow-auto flex-grow px-4 h-[150px]"
+          className="overflow-auto flex-grow p-3 h-[150px]"
           ref={scrollRef}
           onScroll={checkScrollPosition}
         >
-          <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] p-2 mb-2 mx-auto shadow-lg shadow-inner">
+          <ul className="menu dropdown-content rounded-box z-[1] mx-auto shadow-lg">
             {options?.map((option) => (
               <li key={option}>
                 <label className="label cursor-pointer">
