@@ -5,16 +5,19 @@ import state from "@/lib/state";
 import { handleSingleSelectChange } from "@/lib/utils";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 
-export default function RadioSingleSelect({ options, title, filterKey }) {
+export default function RadioSingleSelect({
+  options,
+  title,
+  filterKey,
+  infoText,
+}) {
   const snap = useSnapshot(state);
-
-  const infoText = `Select display option for ${title.toLowerCase()}`;
 
   return (
     <div className="flex flex-wrap items-center">
       <div className="flex flex-wrap items-center flex-grow w-full">
         <h3>
-          <span className="inlin font-bold">{title}</span>
+          <span className="inline font-bold">{title}</span>
           <div
             className="tooltip tooltip-primary tooltip-bottom ml-2 inline-flex"
             data-tip={infoText}
