@@ -242,8 +242,8 @@ const prepareData = async (searchParams) => {
 
   console.log("filteredData.length", filteredData.length);
 
-  // Not enough data - return empty object
-  if (filteredData.length < 5) {
+  // Not enough data - return empty object (ignore for bulk dose since methodology is different)
+  if (testMethod === "bulk dose" && filteredData.length < 5) {
     return {
       message:
         "There is not enough data for the selected options. Please select more options.",
