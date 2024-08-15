@@ -31,7 +31,7 @@ export default function DashboardDisplayControls() {
       />
       <RadioSingleSelect
         options={residuals2col}
-        title="Show by Percent Residuals Remaining or Disintegrated"
+        title="Show by % Residuals Remaining or % Disintegrated"
         filterKey="displayResiduals"
       />
       <div>

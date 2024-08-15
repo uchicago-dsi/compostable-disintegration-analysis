@@ -12,6 +12,9 @@ export default function DashboardControls() {
     if (
       snap.options["Test Method"] &&
       snap.options["Material Class II"] &&
+      snap.options["Material Class III"] &&
+      snap.options["Item Format"] &&
+      snap.options["Item Brand"] &&
       snap.options["Technology"] &&
       state.filters.initialized === false
     ) {
@@ -19,6 +22,10 @@ export default function DashboardControls() {
       state.setFilterValue(
         "selectedMaterialTypes",
         snap.options["Material Class II"]
+      );
+      state.setFilterValue(
+        "selectedSpecificMaterialTypes",
+        snap.options["Material Class III"]
       );
       state.setFilterValue("selectedBrands", snap.options["Item Brand"]);
       state.setFilterValue("selectedFormats", snap.options["Item Format"]);
