@@ -11,6 +11,7 @@ export default function CheckboxMenu({
   selectedOptions,
   filterKey,
   title,
+  infoText,
 }) {
   const snap = useSnapshot(state);
 
@@ -36,8 +37,6 @@ export default function CheckboxMenu({
 
   const allSelected = selectedOptions.length === options.length;
   const noneSelected = selectedOptions.length === 0;
-
-  const infoText = `Select one or more options to filter the data by ${title.toLowerCase()}`;
 
   const [canScrollUp, setCanScrollUp] = useState(false);
   const [canScrollDown, setCanScrollDown] = useState(false);
