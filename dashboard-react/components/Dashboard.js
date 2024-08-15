@@ -130,6 +130,7 @@ export default function Dashboard() {
               ticklen: 10,
               automargin: true,
             },
+            hovermode: "x",
           }}
           config={{
             displayModeBar: false,
