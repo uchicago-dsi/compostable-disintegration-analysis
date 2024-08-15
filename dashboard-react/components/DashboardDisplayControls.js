@@ -18,21 +18,25 @@ export default function DashboardDisplayControls() {
         options={{ "Mesh Bag": "Mesh Bag", "Bulk Dose": "Bulk Dose" }}
         title="Select Test Method"
         filterKey="testMethod"
+        infoText="Choose to see results from either of the two methods for field testing: the mesh bag method, where items are contained in a bag, or bulk dose, where items are loosely loaded into a pile. Results from these two methods are shown separately."
       />
       <RadioSingleSelect
         options={display2col}
         title="Show Results by Mass or by Surface Area"
         filterKey="displayCol"
+        infoText="Disintegration data can be based on the change in weight of a product, or the surface area before and after testing."
       />
       <RadioSingleSelect
         options={material2col}
         title="Select X-Axis Display"
         filterKey="aggCol"
+        infoText="Change the categories the data is grouped by on the X-axis."
       />
       <RadioSingleSelect
         options={residuals2col}
         title="Show by % Residuals Remaining or % Disintegrated"
         filterKey="displayResiduals"
+        infoText="Disintegration data can be shown either of these two ways. % Residuals remaining is the inverse of % disintegrated."
       />
       <div>
         <input
