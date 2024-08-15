@@ -22,7 +22,18 @@ const getUniqueValues = async (columns) => {
   const data = await fetchData();
   const uniqueValues = {};
   columns.forEach((column) => {
-    uniqueValues[column] = [...new Set(data.map((item) => item[column]))];
+    uniqueValues[column] = [...new Set(data.map((item) => item[column]))].sort(
+      (a, b) => {
+        // Sort such that positive controls are always last
+        const aStartsWithPos = a.startsWith("Pos");
+        const bStartsWithPos = b.startsWith("Pos");
+
+        if (aStartsWithPos && !bStartsWithPos) return 1;
+        if (bStartsWithPos && !aStartsWithPos) return -1;
+
+        return a.localeCompare(b);
+      }
+    );
   });
   return uniqueValues;
 };
