@@ -13,7 +13,34 @@ export default function DashboardFilterControls() {
   return (
     <div className="flex flex-col">
       <div className="flex-1 mx-2 w-full min-h-[300px]">
-        <h2 className="text-center"> Core Filters</h2>
+        <h2 className="text-center"> Item Filters</h2>
+        <div className="grid grid-cols-4 gap-2">
+          <CheckboxMenu
+            options={snap.options["Material Class II"]}
+            selectedOptions={snap.filters.selectedMaterialTypes}
+            filterKey="selectedMaterialTypes"
+            title="Select Generic Material"
+          />
+          <CheckboxMenu
+            options={snap.options["Material Class III"]}
+            selectedOptions={snap.filters.selectedSpecificMaterialTypes}
+            filterKey="selectedSpecificMaterialTypes"
+            title="Select Specific Material"
+          />
+          <CheckboxMenu
+            options={snap.options["Item Format"]}
+            selectedOptions={snap.filters.selectedFormats}
+            filterKey="selectedFormats"
+            title="Select Item Type"
+          />
+          <CheckboxMenu
+            options={snap.options["Item Brand"]}
+            selectedOptions={snap.filters.selectedBrands}
+            filterKey="selectedBrands"
+            title="Select Item Brand"
+          />
+        </div>
+        <h2 className="text-center"> Operations</h2>
         <div className="grid grid-cols-4 gap-2">
           <CheckboxMenu
             options={snap.options["Technology"]}
@@ -22,43 +49,22 @@ export default function DashboardFilterControls() {
             title="Select Technology"
           />
           <CheckboxMenu
-            options={snap.options["Material Class II"]}
-            selectedOptions={snap.filters.selectedMaterialTypes}
-            filterKey="selectedMaterialTypes"
-            title="Select Material Type"
-          />
-          <CheckboxMenu
-            options={snap.options["Item Brand"]}
-            selectedOptions={snap.filters.selectedBrands}
-            filterKey="selectedBrands"
-            title="Select Item Brand"
-          />
-          <CheckboxMenu
-            options={snap.options["Item Format"]}
-            selectedOptions={snap.filters.selectedFormats}
-            filterKey="selectedFormats"
-            title="Select Item Type"
-          />
-        </div>
-        <h2 className="text-center"> Operating Conditions Filters</h2>
-        <div className="grid grid-cols-4 gap-2">
-          <CheckboxMenu
             options={Object.keys(temperatureFilterDict)}
             selectedOptions={snap.filters.selectedTemperatureLevels}
             filterKey="selectedTemperatureLevels"
-            title="Select Temperature Range"
+            title="Select Average Temperature"
           />
           <CheckboxMenu
             options={Object.keys(moistureFilterDict)}
             selectedOptions={snap.filters.selectedMoistureLevels}
             filterKey="selectedMoistureLevels"
-            title="Select % Moisture Range"
+            title="Select % Moisture"
           />
           <CheckboxMenu
             options={Object.keys(trialDurationDict)}
             selectedOptions={snap.filters.selectedTrialDurations}
             filterKey="selectedTrialDurations"
-            title="Select Trial Duration Range"
+            title="Select Trial Duration"
           />
         </div>
       </div>
