@@ -44,7 +44,7 @@ export default function DashboardFilterControls() {
             infoText="Select one or more options to filter the data by the brands whose items were tested."
           />
         </div>
-        <h2 className="text-center"> Operations</h2>
+        <h2 className="text-center"> Operations Filters</h2>
         <div className="grid grid-cols-4 gap-2">
           <CheckboxMenu
             options={snap.options["Technology"]}
