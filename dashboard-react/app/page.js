@@ -32,7 +32,7 @@ const Home = () => {
         <div className="h-[600px] overflow-hidden mx-auto mb-3">
           <Dashboard />
         </div>
-        <div className="h-[700px] mx-auto">
+        <div className="h-[700px] mx-auto w-full">
           <DashboardControls />
         </div>
       </div>
