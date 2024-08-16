@@ -1,22 +1,15 @@
 import { NextResponse } from "next/server";
-import { Storage } from "@google-cloud/storage";
 import * as d3 from "d3";
 import path from "path";
-import fs from "fs/promises";
 import {
   moistureFilterDict,
   temperatureFilterDict,
   trialDurationDict,
 } from "@/lib/constants";
+import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
 const dataSource = process.env.DATA_SOURCE;
 const bucketName = "cftp_data";
-const serviceAccountKey = JSON.parse(
-  Buffer.from(
-    process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64,
-    "base64"
-  ).toString("ascii")
-);
 const trialsFilename = "all_trials_processed.csv";
 const operatingConditionsFilename = "operating_conditions.csv";
 
@@ -32,28 +25,6 @@ const operatingConditionsPath = path.join(
   "data",
   operatingConditionsFilename
 );
-
-const fetchCloudData = async (filename, bucketName) => {
-  const storage = new Storage({
-    credentials: serviceAccountKey,
-  });
-  const bucket = storage.bucket(bucketName);
-  const file = bucket.file(filename);
-
-  try {
-    const [fileContents] = await file.download();
-    const data = d3.csvParse(fileContents.toString("utf-8"));
-    return data;
-  } catch (error) {
-    console.error("Error downloading file:", error);
-    throw error;
-  }
-};
-
-const fetchLocalData = async (dataPath) => {
-  const data = await fs.readFile(dataPath, "utf8");
-  return d3.csvParse(data);
-};
 
 const calculateQuartiles = (data, key) => {
   const sorted = data.map((d) => parseFloat(d[key])).sort((a, b) => a - b);
@@ -141,6 +112,15 @@ const prepareData = async (searchParams) => {
   const materials = searchParams.get("materials")
     ? searchParams.get("materials").split(",")
     : [];
+  const specificMaterials = searchParams.get("specificMaterials")
+    ? searchParams.get("specificMaterials").split(",")
+    : [];
+  const formats = searchParams.get("formats")
+    ? searchParams.get("formats").split(",")
+    : [];
+  const brands = searchParams.get("brands")
+    ? searchParams.get("brands").split(",")
+    : [];
   // Operating conditions filters
   const temperatureFilter = searchParams.get("temperature")
     ? searchParams.get("temperature").split(",")
@@ -155,6 +135,9 @@ const prepareData = async (searchParams) => {
   const noFiltersSelected =
     technologies.length === 0 ||
     materials.length === 0 ||
+    specificMaterials.length === 0 ||
+    brands.length === 0 ||
+    formats.length === 0 ||
     temperatureFilter.length === 0 ||
     moistureFilter.length === 0 ||
     trialDurations.length === 0;
@@ -193,6 +176,13 @@ const prepareData = async (searchParams) => {
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
   filteredData = filterData(filteredData, "Technology", technologies);
   filteredData = filterData(filteredData, "Material Class II", materials);
+  filteredData = filterData(
+    filteredData,
+    "Material Class III",
+    specificMaterials
+  );
+  filteredData = filterData(filteredData, "Item Format", formats);
+  filteredData = filterData(filteredData, "Item Brand", brands);
 
   if (!uncapResults) {
     filteredData = filteredData.map((d) => {
@@ -252,8 +242,9 @@ const prepareData = async (searchParams) => {
 
   console.log("filteredData.length", filteredData.length);
 
-  // Not enough data - return empty object
-  if (filteredData.length < 5) {
+  // Not enough data - return empty object (ignore for bulk dose since methodology is different)
+  const dataThreshold = testMethod === "Bulk Dose" ? 1 : 5;
+  if (filteredData.length < dataThreshold) {
     return {
       message:
         "There is not enough data for the selected options. Please select more options.",

@@ -20,6 +20,26 @@ export default function Dashboard() {
     Biopolymer: "#FFB600",
   };
 
+  const maxLabelLength = 30;
+
+  function wrapLabel(label) {
+    const words = label.split(" ");
+    let wrappedLabel = "";
+    let line = "";
+
+    for (const word of words) {
+      if ((line + word).length > maxLabelLength) {
+        wrappedLabel += line + "<br>";
+        line = word + " ";
+      } else {
+        line += word + " ";
+      }
+    }
+    wrappedLabel += line.trim(); // Add the last line
+
+    return wrappedLabel.trim();
+  }
+
   const plotData =
     Object.keys(snap.data).length > 0
       ? snap.data.data.map((d) => {
@@ -30,13 +50,19 @@ export default function Dashboard() {
             snap.filters["testMethod"] === "Mesh Bag"
               ? ` (n=${d["count"]})`
               : "";
+          // Replace "Positive" with "Pos." in labels and append count
+          const name = `${d["aggCol"]}${countDisplay}`.replace(
+            "Positive",
+            "Pos."
+          );
+          const wrappedName = wrapLabel(name);
+
           return {
             type: "box",
-            name: `${d["aggCol"]}${countDisplay}`,
+            name: wrappedName,
             y: [d.min, d.q1, d.median, d.q3, d.max],
             marker: { color },
             boxmean: true,
-            hoverinfo: "skip",
             line: { width: 3.25 },
           };
         })
@@ -66,8 +92,8 @@ export default function Dashboard() {
 
   const yMax =
     snap.data.data && snap.data.data.length > 0
-      ? Math.max(...snap.data.data.map((d) => d.max), 1)
-      : 1;
+      ? Math.max(...snap.data.data.map((d) => d.max + 0.05), 1.05)
+      : 1.05;
 
   const xTickAngle = plotData.length > 6 ? 90 : 0;
 
@@ -104,6 +130,7 @@ export default function Dashboard() {
               ticklen: 10,
               automargin: true,
             },
+            hovermode: "x",
           }}
           config={{
             displayModeBar: false,
