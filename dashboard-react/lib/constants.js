@@ -30,7 +30,6 @@ export const material2col = {
   "High-Level Material Categories": "Material Class I",
   "Generic Material Categories": "Material Class II",
   "Specific Material Categories": "Material Class III",
-  "Item Brand": "Item Brand",
   "Item Types": "Item Format",
 };
 

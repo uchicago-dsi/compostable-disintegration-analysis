@@ -27,11 +27,11 @@ body {
 }
 
 h2 {
-  @apply text-xl font-bold uppercase text-center;
+  @apply text-2xl font-bold uppercase text-center text-primary underline;
 }
 
 h3 {
-  @apply text-lg;
+  @apply text-[14.5px];
 }
 
 .checkbox-primary {
