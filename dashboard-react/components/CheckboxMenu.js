@@ -97,7 +97,7 @@ export default function CheckboxMenu({
           <div className="h-6 shadow-bottom"></div>
         )}
         <div
-          className="overflow-auto flex-grow p-3 h-[150px]"
+          className="overflow-auto flex-grow px-3 h-[150px]"
           ref={scrollRef}
           onScroll={checkScrollPosition}
         >
