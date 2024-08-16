@@ -23,15 +23,15 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="flex flex-col items-start h-[1250px] overflow-hidden">
+    <main className="flex flex-col items-start h-[1300px] overflow-hidden">
       <div className="block lg:hidden p-2">
         Please use a device that is at least 1280 pixels wide to view the
         disintegration dashboard.
       </div>
-      <div className="hidden lg:block max-w-[1280] h-[600px] overflow-hidden mx-auto mb-3">
+      <div className="hidden lg:block h-[600px] overflow-hidden mx-auto mb-3">
         <Dashboard />
       </div>
-      <div className="hidden lg:block max-w-[1280] h-[650px] mx-auto">
+      <div className="hidden lg:block h-[700px] mx-auto">
         <DashboardControls />
       </div>
     </main>
