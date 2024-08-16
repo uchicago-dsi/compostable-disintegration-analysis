@@ -31,7 +31,7 @@ h2 {
 }
 
 h3 {
-  @apply text-base;
+  @apply text-[14.5px];
 }
 
 .checkbox-primary {
