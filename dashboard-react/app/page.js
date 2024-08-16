@@ -28,7 +28,7 @@ const Home = () => {
         Please use a device that is at least 1280 pixels wide to view the
         disintegration dashboard.
       </div>
-      <div className="hidden lg:block h-[1300px]">
+      <div className="hidden lg:block h-[1300px] w-[1280px]">
         <div className="h-[600px] overflow-hidden mx-auto mb-3">
           <Dashboard />
         </div>
