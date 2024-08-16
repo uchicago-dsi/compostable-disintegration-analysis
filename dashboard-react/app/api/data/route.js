@@ -243,7 +243,6 @@ const prepareData = async (searchParams) => {
   console.log("filteredData.length", filteredData.length);
 
   // Not enough data - return empty object (ignore for bulk dose since methodology is different)
-
   const dataThreshold = testMethod === "Bulk Dose" ? 1 : 5;
   if (filteredData.length < dataThreshold) {
     return {
