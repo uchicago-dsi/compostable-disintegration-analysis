@@ -20,14 +20,14 @@ export default function DashboardFilterControls() {
             selectedOptions={snap.filters.selectedMaterialTypes}
             filterKey="selectedMaterialTypes"
             title="Select Generic Material"
-            infoText="Select one or more options to filter the data by the generic material types tested."
+            infoText="Select one or more options to filter the data by the generic type of material tested, e.g. biopolymer or fiber."
           />
           <CheckboxMenu
             options={snap.options["Material Class III"]}
             selectedOptions={snap.filters.selectedSpecificMaterialTypes}
             filterKey="selectedSpecificMaterialTypes"
             title="Select Specific Material"
-            infoText="Select one or more options to filter the data by the specific material types tested."
+            infoText="Select one or more options to filter the data by the specific type of material tested, e.g. PLA or PHA, tree fiber or sugarcane fiber (bagasse)."
           />
           <CheckboxMenu
             options={snap.options["Item Format"]}
