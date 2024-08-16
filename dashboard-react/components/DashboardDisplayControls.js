@@ -48,7 +48,7 @@ export default function DashboardDisplayControls() {
             state.setFilterValue("uncapResults", !snap.filters.uncapResults)
           }
         />
-        <label htmlFor="capResults">
+        <label htmlFor="capResults" className="text-sm">
           Show results with over 100% residuals remaining
         </label>
         <div
