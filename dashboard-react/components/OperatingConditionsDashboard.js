@@ -3,7 +3,11 @@ import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 import { csv } from "d3-fetch";
 
-export default function OperatingConditionsDashboard({ maxDays = 45 }) {
+export default function OperatingConditionsDashboard({
+  maxDays = 45,
+  windowSize = 10,
+}) {
+  // Add windowSize as a prop
   const [dataLoaded, setDataLoaded] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,12 +20,13 @@ export default function OperatingConditionsDashboard({ maxDays = 45 }) {
 
         Object.keys(data[0]).forEach((column) => {
           if (column !== "Day #") {
-            const yData = data.map((d) => parseFloat(d[column]) || null);
-            const interpolatedYData = interpolateData(yData); // Perform interpolation
+            let yData = data.map((d) => parseFloat(d[column]) || null);
+            yData = interpolateData(yData); // Perform interpolation
+            yData = movingAverage(yData, windowSize); // Smooth using moving average
 
             formattedData.push({
               x: days,
-              y: interpolatedYData,
+              y: yData,
               mode: "lines",
               name: column,
             });
@@ -35,7 +40,7 @@ export default function OperatingConditionsDashboard({ maxDays = 45 }) {
         console.error("Error loading CSV data:", error);
         setErrorMessage("Failed to load data.");
       });
-  }, []);
+  }, [windowSize]);
 
   // Linear interpolation function
   function interpolateData(yData) {
@@ -59,6 +64,18 @@ export default function OperatingConditionsDashboard({ maxDays = 45 }) {
     }
 
     return yData;
+  }
+
+  // Moving average function
+  function movingAverage(data, windowSize) {
+    return data.map((_, idx, arr) => {
+      const start = Math.max(0, idx - Math.floor(windowSize / 2));
+      const end = Math.min(arr.length, idx + Math.ceil(windowSize / 2));
+      const window = arr.slice(start, end);
+      const validNumbers = window.filter((n) => n !== null); // Ignore nulls
+      const sum = validNumbers.reduce((acc, num) => acc + num, 0);
+      return validNumbers.length > 0 ? sum / validNumbers.length : null;
+    });
   }
 
   const yAxisTitle = "Temperature";
@@ -101,7 +118,7 @@ export default function OperatingConditionsDashboard({ maxDays = 45 }) {
               tickangle: xTickAngle,
               ticklen: 10,
               automargin: true,
-              range: [0, maxDays],
+              range: [0, maxDays], // Cap x-axis at maxDays
             },
             hovermode: "x",
           }}
