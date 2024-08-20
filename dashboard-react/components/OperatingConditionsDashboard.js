@@ -68,13 +68,19 @@ export default function OperatingConditionsDashboard({
 
   // Moving average function
   function movingAverage(data, windowSize) {
-    return data.map((_, idx, arr) => {
+    return data.map((value, idx, arr) => {
+      // Ignore null values
+      if (value === null) return null;
+
       const start = Math.max(0, idx - Math.floor(windowSize / 2));
       const end = Math.min(arr.length, idx + Math.ceil(windowSize / 2));
       const window = arr.slice(start, end);
-      const validNumbers = window.filter((n) => n !== null); // Ignore nulls
+      const validNumbers = window.filter((n) => n !== null);
+
+      if (validNumbers.length === 0) return null;
+
       const sum = validNumbers.reduce((acc, num) => acc + num, 0);
-      return validNumbers.length > 0 ? sum / validNumbers.length : null;
+      return sum / validNumbers.length;
     });
   }
 
@@ -113,12 +119,14 @@ export default function OperatingConditionsDashboard({
                 text: `<b>${yAxisTitle}</b>`,
               },
               range: [0, yMax],
+              linewidth: 2, // Set y-axis line thickness
             },
             xaxis: {
               tickangle: xTickAngle,
               ticklen: 10,
               automargin: true,
               range: [0, maxDays], // Cap x-axis at maxDays
+              linewidth: 2, // Set x-axis line thickness
             },
             hovermode: "x",
           }}
