@@ -1,109 +1,83 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
-import { useSnapshot } from "valtio";
-import state from "@/lib/state";
-import { col2material } from "@/lib/constants";
-import Alert from "@/components/Alert";
+import { csv } from "d3-fetch";
 
 export default function OperatingConditionsDashboard() {
-  const snap = useSnapshot(state);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [plotData, setPlotData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  if (!snap.dataLoaded) {
-    return <p>Loading data...</p>;
-  }
+  useEffect(() => {
+    // Load the CSV data
+    csv("/data/temperature_data.csv")
+      .then((data) => {
+        const formattedData = [];
+        const days = data.map((d) => d["Day #"]);
 
-  const class2color = {
-    "Positive Control": "#70AD47",
-    "Mixed Materials": "#48646A",
-    Fiber: "#298FC2",
-    Biopolymer: "#FFB600",
-  };
+        Object.keys(data[0]).forEach((column) => {
+          if (column !== "Day #") {
+            const yData = data.map((d) => parseFloat(d[column]) || null);
+            const interpolatedYData = interpolateData(yData); // Perform interpolation
 
-  const maxLabelLength = 30;
+            formattedData.push({
+              x: days,
+              y: interpolatedYData,
+              mode: "lines",
+              name: column,
+            });
+          }
+        });
 
-  function wrapLabel(label) {
-    const words = label.split(" ");
-    let wrappedLabel = "";
-    let line = "";
+        setPlotData(formattedData);
+        setDataLoaded(true);
+      })
+      .catch((error) => {
+        console.error("Error loading CSV data:", error);
+        setErrorMessage("Failed to load data.");
+      });
+  }, []);
 
-    for (const word of words) {
-      if ((line + word).length > maxLabelLength) {
-        wrappedLabel += line + "<br>";
-        line = word + " ";
+  // Linear interpolation function
+  function interpolateData(yData) {
+    let lastValidIndex = null;
+
+    for (let i = 0; i < yData.length; i++) {
+      if (yData[i] === null) {
+        // Find the next valid index
+        const nextValidIndex = yData.slice(i).findIndex((v) => v !== null) + i;
+
+        if (lastValidIndex !== null && nextValidIndex < yData.length) {
+          // Interpolate between the last valid and next valid index
+          const slope =
+            (yData[nextValidIndex] - yData[lastValidIndex]) /
+            (nextValidIndex - lastValidIndex);
+          yData[i] = yData[lastValidIndex] + slope * (i - lastValidIndex);
+        }
       } else {
-        line += word + " ";
+        lastValidIndex = i;
       }
     }
-    wrappedLabel += line.trim(); // Add the last line
 
-    return wrappedLabel.trim();
+    return yData;
   }
 
-  const plotData =
-    Object.keys(snap.data).length > 0
-      ? snap.data.data.map((d) => {
-          console.log(d);
-          const materialClass = d["Material Class I"];
-          const color = class2color[materialClass] || "#000";
-          const countDisplay =
-            snap.filters["testMethod"] === "Mesh Bag"
-              ? ` (n=${d["count"]})`
-              : "";
-          // Replace "Positive" with "Pos." in labels and append count
-          const name = `${d["aggCol"]}${countDisplay}`.replace(
-            "Positive",
-            "Pos."
-          );
-          const wrappedName = wrapLabel(name);
+  const yAxisTitle = "Temperature";
 
-          return {
-            type: "box",
-            name: wrappedName,
-            y: [d.min, d.q1, d.median, d.q3, d.max],
-            marker: { color },
-            boxmean: true,
-            line: { width: 3.25 },
-          };
-        })
-      : [];
-
-  function generateYAxisTitle(displayCol, cap) {
-    let yAxisTitle = `${displayCol}`;
-    if (cap) {
-      yAxisTitle += " Capped";
-    }
-    return yAxisTitle;
-  }
-  const yAxisTitle = generateYAxisTitle(
-    snap.filters.displayCol,
-    !snap.filters.uncapResults
-  );
-
-  function generateTitle(displayCol, aggCol, num_trials) {
-    return `${displayCol} by ${col2material[aggCol]} - ${num_trials} Trial(s)`;
-  }
-
-  const title = generateTitle(
-    snap.filters.displayCol,
-    snap.filters.aggCol,
-    snap.data.numTrials
-  );
+  const title = "Temperature Over Time";
 
   const yMax =
-    snap.data.data && snap.data.data.length > 0
-      ? Math.max(...snap.data.data.map((d) => d.max + 0.05), 1.05)
+    plotData.length > 0
+      ? Math.max(...plotData.flatMap((d) => d.y.map((y) => y + 0.05)), 1.05)
       : 1.05;
 
   const xTickAngle = plotData.length > 6 ? 90 : 0;
 
   return (
     <>
-      {snap.errorMessage ? (
+      {errorMessage ? (
         <div className="flex items-center justify-center h-full mx-[200px]">
-          <p>
-            <Alert message={snap.errorMessage} />
-          </p>
+          <p>{errorMessage}</p>
         </div>
       ) : (
         <Plot
@@ -117,12 +91,11 @@ export default function OperatingConditionsDashboard() {
               xanchor: "center",
               yanchor: "top",
             },
-            showlegend: false,
+            showlegend: true,
             yaxis: {
               title: {
                 text: `<b>${yAxisTitle}</b>`,
               },
-              tickformat: ".0%",
               range: [0, yMax],
             },
             xaxis: {

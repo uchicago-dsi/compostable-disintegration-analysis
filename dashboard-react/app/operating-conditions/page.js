@@ -35,9 +35,11 @@ export default function OperatingConditions() {
         <div className="h-[600px] mx-auto mb-3">
           <OperatingConditionsDashboard />
         </div>
+        {/*
         <div className="h-[700px] mx-auto w-full">
           <DashboardControls />
-        </div>
+        </div> 
+        */}
       </div>
     </main>
   );
