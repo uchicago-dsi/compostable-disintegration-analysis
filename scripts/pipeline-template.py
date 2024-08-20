@@ -101,10 +101,9 @@ trial2id = {
 
 OPERATING_CONDITIONS_PATH = DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
 
-# TODO: Set this up so we can actually plot the full temperature data
 df_temps = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #")
 df_temps.columns = [trial2id[col.replace("*", "")] for col in df_temps.columns]
-df_avg_temps = df_temps.mean().to_frame("Average Temperature (F)")
+df_temps_avg = df_temps.mean().to_frame("Average Temperature (F)")
 
 df_trial_duration = pd.read_excel(
     OPERATING_CONDITIONS_PATH,
@@ -125,9 +124,9 @@ df_trial_duration = df_trial_duration.set_index("Trial ID")
 
 df_moisture = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week")
 df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.columns]
-df_moisture = df_moisture.mean().to_frame("Average % Moisture (In Field)")
+df_moisture_avg = df_moisture.mean().to_frame("Average % Moisture (In Field)")
 
-df_operating_conditions_avg = pd.concat([df_trial_duration, df_avg_temps, df_moisture], axis=1)
+df_operating_conditions_avg = pd.concat([df_trial_duration, df_temps_avg, df_moisture_avg], axis=1)
 
 processed_data = []
 
@@ -591,5 +590,9 @@ df_operating_conditions_avg = unique_trial_ids.merge(
 
 operating_conditions_output_path = DATA_DIR / "operating_conditions_avg.csv"
 df_operating_conditions_avg.to_csv(operating_conditions_output_path, index_label="Trial ID")
+
+# Save full temperature data (TODO: Currently testing this...)
+temperature_output_path = DATA_DIR / "temperature_data.csv"
+df_temps.to_csv(temperature_output_path, index=True)
 
 print("Complete!")
