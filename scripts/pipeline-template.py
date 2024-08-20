@@ -127,7 +127,7 @@ df_moisture = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1,
 df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.columns]
 df_moisture = df_moisture.mean().to_frame("Average % Moisture (In Field)")
 
-df_operating_conditions = pd.concat([df_trial_duration, df_avg_temps, df_moisture], axis=1)
+df_operating_conditions_avg = pd.concat([df_trial_duration, df_avg_temps, df_moisture], axis=1)
 
 processed_data = []
 
@@ -585,11 +585,11 @@ all_trials.to_csv(output_filepath, index=False)
 
 # Make sure all trial IDs are represented in operating conditions
 unique_trial_ids = pd.DataFrame(all_trials["Trial ID"].unique(), columns=["Trial ID"]).set_index("Trial ID")
-df_operating_conditions = unique_trial_ids.merge(
-    df_operating_conditions, left_index=True, right_index=True, how="left"
+df_operating_conditions_avg = unique_trial_ids.merge(
+    df_operating_conditions_avg, left_index=True, right_index=True, how="left"
 )
 
-operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
-df_operating_conditions.to_csv(operating_conditions_output_path, index_label="Trial ID")
+operating_conditions_output_path = DATA_DIR / "operating_conditions_avg.csv"
+df_operating_conditions_avg.to_csv(operating_conditions_output_path, index_label="Trial ID")
 
 print("Complete!")
