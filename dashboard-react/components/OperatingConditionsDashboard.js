@@ -3,13 +3,12 @@ import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 import { csv } from "d3-fetch";
 
-export default function OperatingConditionsDashboard() {
+export default function OperatingConditionsDashboard({ maxDays = 45 }) {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    // Load the CSV data
     csv("/data/temperature_data.csv")
       .then((data) => {
         const formattedData = [];
@@ -102,6 +101,7 @@ export default function OperatingConditionsDashboard() {
               tickangle: xTickAngle,
               ticklen: 10,
               automargin: true,
+              range: [0, maxDays],
             },
             hovermode: "x",
           }}
