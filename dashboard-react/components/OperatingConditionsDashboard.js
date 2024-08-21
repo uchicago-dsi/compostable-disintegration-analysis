@@ -28,7 +28,7 @@ export default function OperatingConditionsDashboard({
               x: days,
               y: yData,
               mode: "lines",
-              name: column,
+              name: mapTrialName(column), // Use mapTrialName to format the legend name
             });
           }
         });
@@ -83,6 +83,24 @@ export default function OperatingConditionsDashboard({
       return sum / validNumbers.length;
     });
   }
+
+  const mapTrialName = (trialName) => {
+    const mappings = {
+      IV: "In-Vessel",
+      CASP: "Covered Aerated Static Pile",
+      WR: "Windrow",
+      EASP: "Extended Aerated Static Pile",
+      ASP: "Aerated Static Pile",
+      AD: "Anaerobic Digestion",
+    };
+
+    // Extract the prefix (e.g., IV, CASP, etc.) and the rest of the trial name
+    const prefix = trialName.match(/^[A-Z]+/)[0]; // Extracts the prefix
+    const rest = trialName.replace(prefix, ""); // Removes the prefix
+
+    // Map the prefix and return the formatted name
+    return mappings[prefix] ? `${mappings[prefix]}: ${rest}` : trialName;
+  };
 
   const yAxisTitle = "Temperature";
 
