@@ -52,6 +52,7 @@ export default function DashboardFilterControls() {
             filterKey="selectedTechnologies"
             title="Technology"
             infoText="Select one or more options to filter the data by the primary technology used by the facility conducting the field test."
+            showInfoIcon={true}
           />
           <CheckboxMenu
             options={Object.keys(temperatureFilterDict)}
