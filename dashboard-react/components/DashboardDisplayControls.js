@@ -11,7 +11,7 @@ export default function DashboardDisplayControls() {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-4">
         <h2>Display Options</h2>
       </div>
       <RadioSingleSelect
