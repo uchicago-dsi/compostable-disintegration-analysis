@@ -41,10 +41,7 @@ df_items = df_items.rename(columns={"Brand": "Item Brand"})
 OUTLIER_THRESHOLD = 10
 
 item2id = {
-    key.strip(): value
-    for key, value in df_items.set_index("Item Description Refined")["Item ID"]
-    .to_dict()
-    .items()
+    key.strip(): value for key, value in df_items.set_index("Item Description Refined")["Item ID"].to_dict().items()
 }
 
 extra_items = pd.read_excel(EXTRA_ITEMS_PATH)
@@ -102,50 +99,34 @@ trial2id = {
     "Facility 10": "WR005-01",
 }
 
-OPERATING_CONDITIONS_PATH = (
-    DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
-)
+OPERATING_CONDITIONS_PATH = DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"
 
-# TODO: Set this up so we can actually plot the full temperature data
-df_temps = pd.read_excel(
-    OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #"
-)
+df_temps = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #")
 df_temps.columns = [trial2id[col.replace("*", "")] for col in df_temps.columns]
-df_avg_temps = df_temps.mean().to_frame("Average Temperature (F)")
+df_temps_avg = df_temps.mean().to_frame("Average Temperature (F)")
 
 df_trial_duration = pd.read_excel(
     OPERATING_CONDITIONS_PATH,
     sheet_name=2,
     skiprows=3,
 )
-df_trial_duration.columns = [
-    col.replace("\n", "").strip() for col in df_trial_duration.columns
-]
-df_trial_duration = df_trial_duration[
-    ["Facility Designation", "Endpoint Analysis (trial length)"]
-].rename(
+df_trial_duration.columns = [col.replace("\n", "").strip() for col in df_trial_duration.columns]
+df_trial_duration = df_trial_duration[["Facility Designation", "Endpoint Analysis (trial length)"]].rename(
     columns={
         "Facility Designation": "Trial ID",
         "Endpoint Analysis (trial length)": "Trial Duration",
     }
 )
 df_trial_duration["Trial ID"] = (
-    df_trial_duration["Trial ID"]
-    .str.replace("( ", "(", regex=False)
-    .str.replace(" )", ")", regex=False)
-    .map(trial2id)
+    df_trial_duration["Trial ID"].str.replace("( ", "(", regex=False).str.replace(" )", ")", regex=False).map(trial2id)
 )
 df_trial_duration = df_trial_duration.set_index("Trial ID")
 
-df_moisture = pd.read_excel(
-    OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week"
-)
+df_moisture = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week")
 df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.columns]
-df_moisture = df_moisture.mean().to_frame("Average % Moisture (In Field)")
+df_moisture_avg = df_moisture.mean().to_frame("Average % Moisture (In Field)")
 
-df_operating_conditions = pd.concat(
-    [df_trial_duration, df_avg_temps, df_moisture], axis=1
-)
+df_operating_conditions_avg = pd.concat([df_trial_duration, df_temps_avg, df_moisture_avg], axis=1)
 
 processed_data = []
 
@@ -195,16 +176,12 @@ class AbstractDataPipeline(ABC):
         self.output_filepath = self.data_filepath.with_name(filename + file_suffix)
 
         # TODO: This is kind of messy and could probably be better
-        self.raw_data = self.load_data(
-            data_filepath, sheet_name=sheet_name, skiprows=skiprows
-        )
+        self.raw_data = self.load_data(data_filepath, sheet_name=sheet_name, skiprows=skiprows)
         self.items = items
         self.item2id = item2id
 
     @abstractmethod
-    def load_data(
-        self, data_filepath: Path, sheet_name: int = 0, skip_rows: int = 0
-    ) -> pd.DataFrame:
+    def load_data(self, data_filepath: Path, sheet_name: int = 0, skip_rows: int = 0) -> pd.DataFrame:
         """Loads data from the specified file.
 
         This method should be implemented by subclasses to load data from the
@@ -301,9 +278,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         # Start weight is set in preprocess_data
         self.items = self.items.drop("Start Weight", axis=1)
 
-    def load_data(
-        self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0
-    ) -> pd.DataFrame:
+    def load_data(self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0) -> pd.DataFrame:
         """Loads data from the specified Excel file.
 
         Args:
@@ -347,12 +322,8 @@ class CASP004Pipeline(AbstractDataPipeline):
         data["End Weight"] = data["End Weight"].fillna(0)
 
         # Ok...we need to do some weird items work arounds here...this might work?
-        casp004_items = pd.read_excel(self.data_filepath, sheet_name=2).drop_duplicates(
-            subset=["Item Name"]
-        )
-        casp004_weights = casp004_items.set_index("Item Name")[
-            "Weight (average)"
-        ].to_dict()
+        casp004_items = pd.read_excel(self.data_filepath, sheet_name=2).drop_duplicates(subset=["Item Name"])
+        casp004_weights = casp004_items.set_index("Item Name")["Weight (average)"].to_dict()
         data["Start Weight"] = data["Product Name"].map(casp004_weights)
         # rename so this matches the other trials
         data["Item Description Refined"] = data["Product Name"]
@@ -360,9 +331,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         # TODO: Some of this should be in the abstract method...
         data["Item ID"] = data["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
-        data = data.rename(
-            columns={"Item Description Refined": "Item Description Refined (Trial)"}
-        )
+        data = data.rename(columns={"Item Description Refined": "Item Description Refined (Trial)"})
         data["Trial ID"] = "CASP004-01"
         if data["Item ID"].isna().sum() > 0:
             raise ValueError("There are null items after mapping")
@@ -389,9 +358,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         return data
 
 
-CASP004_PATH = (
-    DATA_DIR / "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
-)
+CASP004_PATH = DATA_DIR / "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"
 casp004_pipeline = CASP004Pipeline(CASP004_PATH, sheet_name=1, trial_name="casp004")
 processed_data.append(casp004_pipeline.run())
 
@@ -441,9 +408,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
             .reset_index(drop=True)
         )
 
-    def load_data(
-        self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0
-    ) -> pd.DataFrame:
+    def load_data(self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0) -> pd.DataFrame:
         """Loads data from the specified Excel file.
 
         Args:
@@ -492,9 +457,7 @@ processed_data.append(closed_loop_pipeline.run())
 class PDFPipeline(AbstractDataPipeline):
     """Pipeline for processing PDF trial data."""
 
-    def __init__(
-        self, *args: Any, weight_col: str = "Residual Weight - Oven-dry", **kwargs: Any
-    ) -> None:
+    def __init__(self, *args: Any, weight_col: str = "Residual Weight - Oven-dry", **kwargs: Any) -> None:
         """Initializes the PDFPipeline with the given parameters.
 
         Args:
@@ -505,9 +468,7 @@ class PDFPipeline(AbstractDataPipeline):
         super().__init__(*args, **kwargs)
         self.weight_col = weight_col
 
-    def load_data(
-        self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0
-    ) -> pd.DataFrame:
+    def load_data(self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0) -> pd.DataFrame:
         """Loads data from the specified Excel file.
 
         Args:
@@ -535,9 +496,7 @@ class PDFPipeline(AbstractDataPipeline):
         # TODO: Do we want to merge on ID or should we just merge on description if we have it?
         data["Item ID"] = data["Item Description Refined"].str.strip().map(self.item2id)
         # Prevent duplicate columns when merging with items
-        data = data.rename(
-            columns={"Item Description Refined": "Item Description Refined (Trial)"}
-        )
+        data = data.rename(columns={"Item Description Refined": "Item Description Refined (Trial)"})
         drop_cols = ["Item Description From Trial"]
         data = data.drop(drop_cols, axis=1)
         if data["Item ID"].isna().sum() > 0:
@@ -556,9 +515,7 @@ class PDFPipeline(AbstractDataPipeline):
         Returns:
             Data with calculated results.
         """
-        data["% Residuals (Mass)"] = data[self.weight_col] / (
-            data["Start Weight"] * data["Number of Items per bag"]
-        )
+        data["% Residuals (Mass)"] = data[self.weight_col] / (data["Start Weight"] * data["Number of Items per bag"])
         data["% Residuals (Area)"] = None
         data["Trial"] = data["Trial ID"]
         return data
@@ -616,9 +573,7 @@ all_trials = pd.concat(processed_data, ignore_index=True)
 
 # Exclude mixed materials and multi-laminate pouches
 all_trials = all_trials[~(all_trials["Material Class II"] == "Mixed Materials")]
-all_trials = all_trials[
-    ~(all_trials["Item Name"] == "Multi-laminate stand-up pounch with zipper")
-]
+all_trials = all_trials[~(all_trials["Item Name"] == "Multi-laminate stand-up pounch with zipper")]
 # Exclude anything over 1000% as outlier
 all_trials = all_trials[all_trials["% Residuals (Mass)"] < OUTLIER_THRESHOLD]
 
@@ -628,14 +583,16 @@ all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
 all_trials.to_csv(output_filepath, index=False)
 
 # Make sure all trial IDs are represented in operating conditions
-unique_trial_ids = pd.DataFrame(
-    all_trials["Trial ID"].unique(), columns=["Trial ID"]
-).set_index("Trial ID")
-df_operating_conditions = unique_trial_ids.merge(
-    df_operating_conditions, left_index=True, right_index=True, how="left"
+unique_trial_ids = pd.DataFrame(all_trials["Trial ID"].unique(), columns=["Trial ID"]).set_index("Trial ID")
+df_operating_conditions_avg = unique_trial_ids.merge(
+    df_operating_conditions_avg, left_index=True, right_index=True, how="left"
 )
 
-operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
-df_operating_conditions.to_csv(operating_conditions_output_path, index_label="Trial ID")
+operating_conditions_output_path = DATA_DIR / "operating_conditions_avg.csv"
+df_operating_conditions_avg.to_csv(operating_conditions_output_path, index_label="Trial ID")
+
+# Save full temperature data (TODO: Currently testing this...)
+temperature_output_path = DATA_DIR / "temperature_data.csv"
+df_temps.to_csv(temperature_output_path, index=True)
 
 print("Complete!")
