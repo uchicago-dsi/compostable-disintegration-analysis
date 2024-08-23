@@ -18,17 +18,21 @@ export default function OperatingConditionsDashboard({
         const formattedData = [];
         const days = data.map((d) => d["Day #"]);
 
+        const trialCount = {}; // Reset trial count each time data is processed
+
         Object.keys(data[0]).forEach((column) => {
           if (column !== "Day #") {
             let yData = data.map((d) => parseFloat(d[column]) || null);
             yData = interpolateData(yData); // Perform interpolation
             yData = movingAverage(yData, windowSize); // Smooth using moving average
 
+            const trialName = mapTrialName(column, trialCount); // Pass trialCount to mapTrialName
+
             formattedData.push({
               x: days,
               y: yData,
               mode: "lines",
-              name: mapTrialName(column), // Use mapTrialName to format the legend name
+              name: trialName, // Use the mapped trial name
             });
           }
         });
@@ -41,6 +45,37 @@ export default function OperatingConditionsDashboard({
         setErrorMessage("Failed to load data.");
       });
   }, [windowSize]);
+
+  const mapTrialName = (trialName, trialCount) => {
+    const mappings = {
+      IV: "In-Vessel",
+      CASP: "Covered Aerated Static Pile",
+      WR: "Windrow",
+      EASP: "Extended Aerated Static Pile",
+      ASP: "Aerated Static Pile",
+      AD: "Anaerobic Digestion",
+    };
+
+    // Extract the prefix (e.g., IV, CASP, etc.)
+    const prefix = trialName.match(/^[A-Z]+/)[0];
+
+    // Get the mapped name for the prefix
+    const mappedName = mappings[prefix];
+
+    if (mappedName) {
+      // Initialize the count for this trial type if it doesn't exist
+      if (!trialCount[mappedName]) {
+        trialCount[mappedName] = 0;
+      }
+      // Increment the count for this trial type
+      trialCount[mappedName] += 1;
+
+      // Return the formatted name with the count
+      return `${mappedName} #${trialCount[mappedName]}`;
+    }
+
+    return trialName; // Return the original trial name if the prefix is not recognized
+  };
 
   // Linear interpolation function
   function interpolateData(yData) {
@@ -83,24 +118,6 @@ export default function OperatingConditionsDashboard({
       return sum / validNumbers.length;
     });
   }
-
-  const mapTrialName = (trialName) => {
-    const mappings = {
-      IV: "In-Vessel",
-      CASP: "Covered Aerated Static Pile",
-      WR: "Windrow",
-      EASP: "Extended Aerated Static Pile",
-      ASP: "Aerated Static Pile",
-      AD: "Anaerobic Digestion",
-    };
-
-    // Extract the prefix (e.g., IV, CASP, etc.) and the rest of the trial name
-    const prefix = trialName.match(/^[A-Z]+/)[0]; // Extracts the prefix
-    const rest = trialName.replace(prefix, ""); // Removes the prefix
-
-    // Map the prefix and return the formatted name
-    return mappings[prefix] ? `${mappings[prefix]}: ${rest}` : trialName;
-  };
 
   const yAxisTitle = "Temperature";
 
