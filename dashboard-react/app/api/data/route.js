@@ -98,7 +98,7 @@ const getIntersectingTrialIDs = (...sets) => {
 };
 
 const prepareData = async (searchParams) => {
-  console.log("searchParams", searchParams);
+  // console.log("searchParams", searchParams);
   // Display params
   const aggCol = searchParams.get("aggcol") || "Material Class I";
   const displayCol = searchParams.get("displaycol") || "% Residuals (Mass)";
@@ -175,6 +175,22 @@ const prepareData = async (searchParams) => {
   // filter data based on selected filters
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
   filteredData = filterData(filteredData, "Technology", technologies);
+  // Return empty object to preserve privacy if not enough trials
+  const technologyTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
+  console.log("technologyTrialIDs", technologyTrialIDs);
+  console.log(technologies);
+  const trialThreshold = testMethod === "Bulk Dose" ? 1 : 3;
+  if (
+    technologyTrialIDs.size < trialThreshold &&
+    testMethod !== "Bulk Dose"
+    // !(technologies.length === 1 && technologies[0] === "In-Vessel")
+  ) {
+    return {
+      message:
+        "There are not enough trials for the selected technology. Please select more options.",
+    };
+  }
+
   filteredData = filterData(filteredData, "Material Class II", materials);
   filteredData = filterData(
     filteredData,
@@ -242,8 +258,8 @@ const prepareData = async (searchParams) => {
 
   console.log("filteredData.length", filteredData.length);
 
-  // Not enough data - return empty object (ignore for bulk dose since methodology is different)
-  const dataThreshold = testMethod === "Bulk Dose" ? 1 : 5;
+  // Not enough data - return empty object
+  const dataThreshold = 1;
   if (filteredData.length < dataThreshold) {
     return {
       message:
@@ -283,7 +299,7 @@ const prepareData = async (searchParams) => {
     );
   });
 
-  console.log("sortedGrouped", sortedGrouped);
+  // console.log("sortedGrouped", sortedGrouped);
 
   return {
     data: sortedGrouped,
