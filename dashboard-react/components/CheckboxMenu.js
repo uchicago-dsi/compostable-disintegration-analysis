@@ -111,7 +111,7 @@ export default function CheckboxMenu({
                   </span>
                   {showInfoIcon && (
                     <div
-                      className="tooltip tooltip-primary tooltip-bottom ml-2 z-100 inline-flex"
+                      className="tooltip tooltip-primary tooltip-bottom ml-2 inline-flex"
                       data-tip={infoText}
                     >
                       <span className="cursor-pointer text-primary">
