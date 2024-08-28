@@ -175,16 +175,12 @@ const prepareData = async (searchParams) => {
   // filter data based on selected filters
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
   filteredData = filterData(filteredData, "Technology", technologies);
-  // Return empty object to preserve privacy if not enough trials
+  // Return empty object to preserve privacy if not enough trials (Except for Bulk Dose)
   const technologyTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
-  console.log("technologyTrialIDs", technologyTrialIDs);
-  console.log(technologies);
+  // console.log("technologyTrialIDs", technologyTrialIDs);
+  // console.log(technologies);
   const trialThreshold = testMethod === "Bulk Dose" ? 1 : 3;
-  if (
-    technologyTrialIDs.size < trialThreshold &&
-    testMethod !== "Bulk Dose"
-    // !(technologies.length === 1 && technologies[0] === "In-Vessel")
-  ) {
+  if (technologyTrialIDs.size < trialThreshold && testMethod !== "Bulk Dose") {
     return {
       message:
         "There are not enough trials for the selected technology. Please select more options.",

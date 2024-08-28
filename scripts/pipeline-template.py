@@ -104,6 +104,8 @@ OPERATING_CONDITIONS_PATH = DATA_DIR / "Donated Data 2023 - Compiled Facility Co
 df_temps = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=3, skiprows=1, index_col="Day #")
 df_temps.columns = [trial2id[col.replace("*", "")] for col in df_temps.columns]
 df_temps_avg = df_temps.mean().to_frame("Average Temperature (F)")
+df_temps["Operating Condition"] = "Temperature"
+df_temps["Time Unit"] = "Day"
 
 df_trial_duration = pd.read_excel(
     OPERATING_CONDITIONS_PATH,
@@ -123,8 +125,22 @@ df_trial_duration["Trial ID"] = (
 df_trial_duration = df_trial_duration.set_index("Trial ID")
 
 df_moisture = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=4, skiprows=1, index_col="Week")
+# Filter out rows with non-numeric week values
+df_moisture = df_moisture.reset_index()
+df_moisture = df_moisture[pd.to_numeric(df_moisture["Week"], errors="coerce").notna()]
+df_moisture = df_moisture.set_index("Week")
 df_moisture.columns = [trial2id[col.replace("*", "")] for col in df_moisture.columns]
 df_moisture_avg = df_moisture.mean().to_frame("Average % Moisture (In Field)")
+df_moisture["Operating Condition"] = "Moisture"
+df_moisture["Time Unit"] = "Week"
+
+df_o2 = pd.read_excel(OPERATING_CONDITIONS_PATH, sheet_name=6, skiprows=1, index_col="Week")
+df_o2 = df_o2.reset_index()
+df_o2 = df_o2[pd.to_numeric(df_o2["Week"], errors="coerce").notna()]
+df_o2 = df_o2.set_index("Week")
+df_o2.columns = [trial2id[col.replace("*", "")] for col in df_o2.columns]
+df_o2["Operating Condition"] = "Oxygen"
+df_o2["Time Unit"] = "Week"
 
 df_operating_conditions_avg = pd.concat([df_trial_duration, df_temps_avg, df_moisture_avg], axis=1)
 
@@ -588,11 +604,12 @@ df_operating_conditions_avg = unique_trial_ids.merge(
     df_operating_conditions_avg, left_index=True, right_index=True, how="left"
 )
 
-operating_conditions_output_path = DATA_DIR / "operating_conditions_avg.csv"
-df_operating_conditions_avg.to_csv(operating_conditions_output_path, index_label="Trial ID")
+operating_conditions_avg_output_path = DATA_DIR / "operating_conditions_avg.csv"
+df_operating_conditions_avg.to_csv(operating_conditions_avg_output_path, index_label="Trial ID")
 
-# Save full temperature data (TODO: Currently testing this...)
-temperature_output_path = DATA_DIR / "temperature_data.csv"
-df_temps.to_csv(temperature_output_path, index=True)
+# Save full operating conditions data (TODO: Currently testing this...)
+operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
+df_operating_conditions = pd.concat([df_temps, df_moisture, df_o2], axis=0)
+df_operating_conditions.to_csv(operating_conditions_output_path, index=True)
 
 print("Complete!")
