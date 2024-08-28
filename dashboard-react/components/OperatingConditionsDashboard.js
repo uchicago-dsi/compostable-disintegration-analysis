@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Plot from "react-plotly.js";
 import { csv } from "d3-fetch";
+import { useEffect, useState } from "react";
+import Plot from "react-plotly.js";
 
 export default function OperatingConditionsDashboard({
   maxDays = 45,
@@ -13,15 +13,25 @@ export default function OperatingConditionsDashboard({
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    csv("/data/temperature_data.csv")
+    csv("/data/operating_conditions.csv")
       .then((data) => {
         const formattedData = [];
-        const days = data.map((d) => d["Day #"]);
+
+        const filteredData = data.filter(
+          (d) => d["Operating Condition"] === "Temperature"
+        );
+        const days = filteredData.map((d) => d["Time Step"]);
+
+        const nonTrialColumns = [
+          "Time Step",
+          "Operating Condition",
+          "Time Unit",
+        ];
 
         const trialCount = {}; // Reset trial count each time data is processed
 
         Object.keys(data[0]).forEach((column) => {
-          if (column !== "Day #") {
+          if (!nonTrialColumns.includes(column)) {
             let yData = data.map((d) => parseFloat(d[column]) || null);
             yData = interpolateData(yData); // Perform interpolation
             yData = movingAverage(yData, windowSize); // Smooth using moving average
@@ -37,6 +47,7 @@ export default function OperatingConditionsDashboard({
           }
         });
 
+        formattedData.sort((a, b) => a.name.localeCompare(b.name));
         setPlotData(formattedData);
         setDataLoaded(true);
       })
@@ -154,14 +165,14 @@ export default function OperatingConditionsDashboard({
                 text: `<b>${yAxisTitle}</b>`,
               },
               range: [0, yMax],
-              linewidth: 2, // Set y-axis line thickness
+              // linewidth: 2, // Set y-axis line thickness
             },
             xaxis: {
               tickangle: xTickAngle,
               ticklen: 10,
               automargin: true,
               range: [0, maxDays], // Cap x-axis at maxDays
-              linewidth: 2, // Set x-axis line thickness
+              // linewidth: 2, // Set x-axis line thickness
             },
             hovermode: "x",
           }}
