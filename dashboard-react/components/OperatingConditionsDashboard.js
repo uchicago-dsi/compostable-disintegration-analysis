@@ -25,7 +25,9 @@ export default function OperatingConditionsDashboard({
             ? "Temperature"
             : selectedMetric === "% Moisture"
             ? "Moisture"
-            : "Oxygen";
+            : selectedMetric === "O2 in Field"
+            ? "Oxygen"
+            : null;
 
         const filteredData = data.filter(
           (d) => d["Operating Condition"] === selectedColumn
@@ -46,7 +48,7 @@ export default function OperatingConditionsDashboard({
 
         Object.keys(data[0]).forEach((column) => {
           if (!nonTrialColumns.includes(column)) {
-            let yData = data.map((d) => parseFloat(d[column]) || null);
+            let yData = filteredData.map((d) => parseFloat(d[column]) || null);
             yData = interpolateData(yData);
             if (selectedMetric !== "Temperature") {
               windowSize = 3; // Reduce window size for non-temperature metrics
@@ -204,6 +206,7 @@ export default function OperatingConditionsDashboard({
                 ticklen: 10,
                 automargin: true,
                 range: [0, maxDays], // Cap x-axis at maxDays
+                showline: true,
               },
               hovermode: "x",
             }}
