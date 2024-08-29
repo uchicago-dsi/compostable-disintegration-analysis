@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Plot from "react-plotly.js";
 import { csv } from "d3-fetch";
+import { useEffect, useState } from "react";
+import Plot from "react-plotly.js";
 
 export default function OperatingConditionsDashboard({
   maxDays = 45,
@@ -11,32 +11,61 @@ export default function OperatingConditionsDashboard({
   const [dataLoaded, setDataLoaded] = useState(false);
   const [plotData, setPlotData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedMetric, setSelectedMetric] = useState("Temperature");
+
+  const metrics = ["Temperature", "% Moisture", "O2 in Field"];
 
   useEffect(() => {
-    csv("/data/temperature_data.csv")
+    csv("/data/operating_conditions.csv")
       .then((data) => {
         const formattedData = [];
-        const days = data.map((d) => d["Day #"]);
+
+        const selectedColumn =
+          selectedMetric === "Temperature"
+            ? "Temperature"
+            : selectedMetric === "% Moisture"
+            ? "Moisture"
+            : selectedMetric === "O2 in Field"
+            ? "Oxygen"
+            : null;
+
+        const filteredData = data.filter(
+          (d) => d["Operating Condition"] === selectedColumn
+        );
+        let timeSteps = filteredData.map((d) => d["Time Step"]);
+
+        if (selectedMetric !== "Temperature") {
+          timeSteps = timeSteps.map((d) => d * 7); // Convert weeks to days
+        }
+
+        const nonTrialColumns = [
+          "Time Step",
+          "Operating Condition",
+          "Time Unit",
+        ];
 
         const trialCount = {}; // Reset trial count each time data is processed
 
         Object.keys(data[0]).forEach((column) => {
-          if (column !== "Day #") {
-            let yData = data.map((d) => parseFloat(d[column]) || null);
-            yData = interpolateData(yData); // Perform interpolation
-            yData = movingAverage(yData, windowSize); // Smooth using moving average
-
-            const trialName = mapTrialName(column, trialCount); // Pass trialCount to mapTrialName
+          if (!nonTrialColumns.includes(column)) {
+            let yData = filteredData.map((d) => parseFloat(d[column]) || null);
+            yData = interpolateData(yData);
+            if (selectedMetric !== "Temperature") {
+              windowSize = 3; // Reduce window size for non-temperature metrics
+            }
+            yData = movingAverage(yData, windowSize);
+            const trialName = mapTrialName(column, trialCount);
 
             formattedData.push({
-              x: days,
+              x: timeSteps,
               y: yData,
               mode: "lines",
-              name: trialName, // Use the mapped trial name
+              name: trialName,
             });
           }
         });
 
+        formattedData.sort((a, b) => a.name.localeCompare(b.name));
         setPlotData(formattedData);
         setDataLoaded(true);
       })
@@ -44,7 +73,7 @@ export default function OperatingConditionsDashboard({
         console.error("Error loading CSV data:", error);
         setErrorMessage("Failed to load data.");
       });
-  }, [windowSize]);
+  }, [windowSize, selectedMetric]);
 
   const mapTrialName = (trialName, trialCount) => {
     const mappings = {
@@ -119,9 +148,9 @@ export default function OperatingConditionsDashboard({
     });
   }
 
-  const yAxisTitle = "Temperature";
+  const yAxisTitle = `${selectedMetric}`;
 
-  const title = "Temperature Over Time";
+  const title = `${selectedMetric} Over Time`;
 
   const yMax =
     plotData.length > 0
@@ -137,38 +166,55 @@ export default function OperatingConditionsDashboard({
           <p>{errorMessage}</p>
         </div>
       ) : (
-        <Plot
-          data={plotData}
-          layout={{
-            width: 1280,
-            height: 600,
-            title: {
-              text: `<b>${title}</b>`,
-              x: 0.5,
-              xanchor: "center",
-              yanchor: "top",
-            },
-            showlegend: true,
-            yaxis: {
+        <>
+          <div className="flex justify-center my-4">
+            <select
+              className="select select-bordered"
+              value={selectedMetric}
+              onChange={(e) => setSelectedMetric(e.target.value)}
+            >
+              {metrics.map((metric) => (
+                <option key={metric} value={metric}>
+                  {metric}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Plot
+            data={plotData}
+            layout={{
+              width: 1280,
+              height: 600,
               title: {
-                text: `<b>${yAxisTitle}</b>`,
+                text: `<b>${title}</b>`,
+                x: 0.5,
+                xanchor: "center",
+                yanchor: "top",
               },
-              range: [0, yMax],
-              linewidth: 2, // Set y-axis line thickness
-            },
-            xaxis: {
-              tickangle: xTickAngle,
-              ticklen: 10,
-              automargin: true,
-              range: [0, maxDays], // Cap x-axis at maxDays
-              linewidth: 2, // Set x-axis line thickness
-            },
-            hovermode: "x",
-          }}
-          config={{
-            displayModeBar: false,
-          }}
-        />
+              showlegend: true,
+              yaxis: {
+                title: {
+                  text: `<b>${yAxisTitle}</b>`,
+                },
+                range: [0, yMax],
+              },
+              xaxis: {
+                title: {
+                  text: "<b>Days</b>",
+                },
+                tickangle: xTickAngle,
+                ticklen: 10,
+                automargin: true,
+                range: [0, maxDays], // Cap x-axis at maxDays
+                showline: true,
+              },
+              hovermode: "x",
+            }}
+            config={{
+              displayModeBar: false,
+            }}
+          />
+        </>
       )}
     </>
   );
