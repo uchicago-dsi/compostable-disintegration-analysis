@@ -596,7 +596,31 @@ all_trials = all_trials[all_trials["% Residuals (Mass)"] < OUTLIER_THRESHOLD]
 # Map Trial IDs to the technology used in the trial
 all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
 
+# Anonymize brand names
+brand_mapping = {"BÉSICS®": "BÉSICS®"}  # Note: no anonymization for BÉSICS®
+brand_counter = 0
+
+
+def anonymize_brand(brand: str) -> str:
+    """Anonymizes brand names by mapping them to a generic brand. Sorry for the global variable.
+
+    Args:
+        brand: The brand name
+
+    Returns:
+        The anonymized brand name (eg "Brand A")
+    """
+    global brand_counter
+    if brand not in brand_mapping:
+        brand_mapping[brand] = f"Brand {chr(65 + brand_counter)}"
+        brand_counter += 1
+    return brand_mapping[brand]
+
+
+all_trials["Item Brand"] = all_trials["Item Brand"].apply(anonymize_brand)
+
 all_trials.to_csv(output_filepath, index=False)
+
 
 # Make sure all trial IDs are represented in operating conditions
 unique_trial_ids = pd.DataFrame(all_trials["Trial ID"].unique(), columns=["Trial ID"]).set_index("Trial ID")
