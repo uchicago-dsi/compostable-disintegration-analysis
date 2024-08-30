@@ -49,7 +49,9 @@ export default function OperatingConditionsDashboard({
         Object.keys(data[0]).forEach((column) => {
           if (!nonTrialColumns.includes(column)) {
             let yData = filteredData.map((d) => parseFloat(d[column]) || null);
-            yData = interpolateData(yData);
+            if (selectedMetric === "Temperature") {
+              yData = interpolateData(yData);
+            }
             if (selectedMetric !== "Temperature") {
               windowSize = 3; // Reduce window size for non-temperature metrics
             }
@@ -59,7 +61,7 @@ export default function OperatingConditionsDashboard({
             formattedData.push({
               x: timeSteps,
               y: yData,
-              mode: "lines",
+              mode: "lines+markers",
               name: trialName,
             });
           }
