@@ -12,8 +12,11 @@ export default function OperatingConditionsDashboard({
   const [plotData, setPlotData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedMetric, setSelectedMetric] = useState("Temperature");
+  const [ignoreMaxDays, setIgnoreMaxDays] = useState(false);
 
   const metrics = ["Temperature", "% Moisture", "O2 in Field"];
+
+  let effectiveMaxDays = maxDays;
 
   useEffect(() => {
     csv("/data/operating_conditions.csv")
@@ -37,6 +40,11 @@ export default function OperatingConditionsDashboard({
         if (selectedMetric !== "Temperature") {
           timeSteps = timeSteps.map((d) => d * 7); // Convert weeks to days
         }
+
+        let maxDaysFromData = Math.max(...timeSteps);
+        effectiveMaxDays = ignoreMaxDays
+          ? maxDaysFromData
+          : Math.min(maxDays, maxDaysFromData);
 
         const nonTrialColumns = [
           "Time Step",
@@ -65,6 +73,20 @@ export default function OperatingConditionsDashboard({
           }
         });
 
+        if (selectedMetric === "Temperature") {
+          formattedData.push({
+            x: [0, effectiveMaxDays || maxDaysFromData],
+            y: [131, 131],
+            mode: "lines",
+            name: "PFRP",
+            line: {
+              dash: "dot",
+              color: "red",
+              width: 2,
+            },
+          });
+        }
+
         formattedData.sort((a, b) => a.name.localeCompare(b.name));
         setPlotData(formattedData);
         setDataLoaded(true);
@@ -73,7 +95,7 @@ export default function OperatingConditionsDashboard({
         console.error("Error loading CSV data:", error);
         setErrorMessage("Failed to load data.");
       });
-  }, [windowSize, selectedMetric]);
+  }, [windowSize, selectedMetric, ignoreMaxDays]);
 
   const mapTrialName = (trialName, trialCount) => {
     const mappings = {
@@ -180,6 +202,16 @@ export default function OperatingConditionsDashboard({
               ))}
             </select>
           </div>
+          <div className="flex justify-center my-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={ignoreMaxDays}
+                onChange={(e) => setIgnoreMaxDays(e.target.checked)}
+              />
+              Ignore maxDays
+            </label>
+          </div>
           <Plot
             data={plotData}
             layout={{
@@ -205,7 +237,7 @@ export default function OperatingConditionsDashboard({
                 tickangle: xTickAngle,
                 ticklen: 10,
                 automargin: true,
-                range: [0, maxDays],
+                range: ignoreMaxDays ? null : [0, effectiveMaxDays],
                 showline: true,
               },
               hovermode: "x",
