@@ -78,7 +78,7 @@ export default function OperatingConditionsDashboard({
 
         if (selectedMetric === "Temperature") {
           formattedData.push({
-            x: [0, effectiveMaxDays || maxDaysFromData],
+            x: [0, 45],
             y: [131, 131],
             mode: "lines",
             name: "PFRP",
