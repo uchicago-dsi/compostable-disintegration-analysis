@@ -49,9 +49,7 @@ export default function OperatingConditionsDashboard({
         Object.keys(data[0]).forEach((column) => {
           if (!nonTrialColumns.includes(column)) {
             let yData = filteredData.map((d) => parseFloat(d[column]) || null);
-            if (selectedMetric === "Temperature") {
-              yData = interpolateData(yData);
-            }
+            yData = interpolateData(yData);
             if (selectedMetric !== "Temperature") {
               windowSize = 3; // Reduce window size for non-temperature metrics
             }
@@ -156,8 +154,8 @@ export default function OperatingConditionsDashboard({
 
   const yMax =
     plotData.length > 0
-      ? Math.max(...plotData.flatMap((d) => d.y.map((y) => y + 0.05)), 1.05)
-      : 1.05;
+      ? Math.max(...plotData.flatMap((d) => d.y.map((y) => y + 0.05)))
+      : null;
 
   const xTickAngle = plotData.length > 6 ? 90 : 0;
 
@@ -207,7 +205,7 @@ export default function OperatingConditionsDashboard({
                 tickangle: xTickAngle,
                 ticklen: 10,
                 automargin: true,
-                range: [0, maxDays], // Cap x-axis at maxDays
+                range: [0, maxDays],
                 showline: true,
               },
               hovermode: "x",
