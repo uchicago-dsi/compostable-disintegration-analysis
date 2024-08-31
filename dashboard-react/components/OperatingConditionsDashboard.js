@@ -13,6 +13,7 @@ export default function OperatingConditionsDashboard({
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedMetric, setSelectedMetric] = useState("Temperature");
   const [ignoreMaxDays, setIgnoreMaxDays] = useState(false);
+  const [applyMovingAverage, setApplyMovingAverage] = useState(true);
 
   const metrics = ["Temperature", "% Moisture", "O2 in Field"];
 
@@ -61,7 +62,9 @@ export default function OperatingConditionsDashboard({
             if (selectedMetric !== "Temperature") {
               windowSize = 3; // Reduce window size for non-temperature metrics
             }
-            yData = movingAverage(yData, windowSize);
+            if (applyMovingAverage) {
+              yData = movingAverage(yData, windowSize);
+            }
             const trialName = mapTrialName(column, trialCount);
 
             formattedData.push({
@@ -95,7 +98,7 @@ export default function OperatingConditionsDashboard({
         console.error("Error loading CSV data:", error);
         setErrorMessage("Failed to load data.");
       });
-  }, [windowSize, selectedMetric, ignoreMaxDays]);
+  }, [windowSize, selectedMetric, ignoreMaxDays, applyMovingAverage]);
 
   const mapTrialName = (trialName, trialCount) => {
     const mappings = {
@@ -206,10 +209,20 @@ export default function OperatingConditionsDashboard({
             <label>
               <input
                 type="checkbox"
-                checked={ignoreMaxDays}
-                onChange={(e) => setIgnoreMaxDays(e.target.checked)}
+                checked={!ignoreMaxDays}
+                onChange={(e) => setIgnoreMaxDays(!e.target.checked)}
               />
-              Ignore maxDays
+              Cap at 45 Days
+            </label>
+          </div>
+          <div className="flex justify-center my-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={!applyMovingAverage}
+                onChange={(e) => setApplyMovingAverage(!e.target.checked)}
+              />
+              Display Raw Data (No Moving Average)
             </label>
           </div>
           <Plot
