@@ -39,22 +39,6 @@ export default function CheckboxMenu({
   const allSelected = selectedOptions.length === options.length;
   const noneSelected = selectedOptions.length === 0;
 
-  const [canScrollUp, setCanScrollUp] = useState(false);
-  const [canScrollDown, setCanScrollDown] = useState(false);
-  const scrollRef = useRef(null);
-
-  const checkScrollPosition = () => {
-    const element = scrollRef.current;
-    setCanScrollUp(element.scrollTop > 0);
-    setCanScrollDown(
-      element.scrollTop < element.scrollHeight - element.clientHeight
-    );
-  };
-
-  useEffect(() => {
-    checkScrollPosition(); // Initial check
-  }, [options]); // Re-check when options change
-
   return (
     <div className="my-4 border border-gray-300 rounded-md shadow-sm">
       <div className="flex justify-center mx-auto">
@@ -89,19 +73,15 @@ export default function CheckboxMenu({
         </button>
       </div>
       <div className="my-1 border-t border-gray-300"></div>
-      <div>
-        {/* {canScrollUp ? (
-          <div className="scroll-arrow up text-center text-primary shadow-bottom">
-            ▲
-          </div>
-        ) : (
-          <div className="h-6 shadow-bottom"></div>
-        )} */}
+      <div className="relative">
         <div
-          className="overflow-auto flex-grow px-0 h-[150px]"
-          ref={scrollRef}
-          onScroll={checkScrollPosition}
-        >
+          className="absolute top-0 left-0 right-0 h-6 pointer-events-none z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))",
+          }}
+        ></div>{" "}
+        <div className="overflow-auto flex-grow px-0 h-[150px]">
           <ul className="menu dropdown-content rounded-box z-[1] mx-auto">
             {options?.map((option) => (
               <li key={option}>
@@ -132,13 +112,13 @@ export default function CheckboxMenu({
             ))}
           </ul>
         </div>
-        {/* {canScrollDown ? (
-          <div className="scroll-arrow down text-center h-6 text-primary shadow-top">
-            ▼
-          </div>
-        ) : (
-          <div className="h-6 shadow-top"></div>
-        )} */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-6 pointer-events-none z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))",
+          }}
+        ></div>{" "}
       </div>
     </div>
   );
