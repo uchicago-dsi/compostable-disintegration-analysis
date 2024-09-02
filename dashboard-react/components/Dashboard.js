@@ -129,6 +129,9 @@ export default function Dashboard() {
               tickangle: xTickAngle,
               ticklen: 10,
               automargin: true,
+              tickfont: {
+                weight: "bold",
+              },
             },
             hovermode: "x",
           }}
