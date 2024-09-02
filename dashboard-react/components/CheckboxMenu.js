@@ -90,13 +90,13 @@ export default function CheckboxMenu({
       </div>
       <div className="my-1 border-t border-gray-300"></div>
       <div>
-        {canScrollUp ? (
+        {/* {canScrollUp ? (
           <div className="scroll-arrow up text-center text-primary shadow-bottom">
             ▲
           </div>
         ) : (
           <div className="h-6 shadow-bottom"></div>
-        )}
+        )} */}
         <div
           className="overflow-auto flex-grow px-0 h-[150px]"
           ref={scrollRef}
@@ -132,13 +132,13 @@ export default function CheckboxMenu({
             ))}
           </ul>
         </div>
-        {canScrollDown ? (
+        {/* {canScrollDown ? (
           <div className="scroll-arrow down text-center h-6 text-primary shadow-top">
             ▼
           </div>
         ) : (
           <div className="h-6 shadow-top"></div>
-        )}
+        )} */}
       </div>
     </div>
   );
