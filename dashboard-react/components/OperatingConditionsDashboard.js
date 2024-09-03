@@ -32,9 +32,26 @@ export default function OperatingConditionsDashboard({
             ? "Oxygen"
             : null;
 
-        const filteredData = data.filter(
+        let filteredData = data.filter(
           (d) => d["Operating Condition"] === selectedColumn
         );
+
+        const nonTrialColumns = [
+          "Time Step",
+          "Operating Condition",
+          "Time Unit",
+        ];
+
+        filteredData = filteredData.filter((row) => {
+          // Check if all trial columns are empty (null, undefined, or empty string)
+          return Object.keys(row).some(
+            (col) =>
+              !nonTrialColumns.includes(col) &&
+              row[col] !== null &&
+              row[col] !== undefined &&
+              row[col] !== ""
+          );
+        });
 
         console.log("Filtered Data:", filteredData);
 
@@ -45,16 +62,10 @@ export default function OperatingConditionsDashboard({
 
         const maxDaysFromData = Math.max(...timeSteps);
         const calculatedEffectiveMaxDays = ignoreMaxDays
-          ? maxDaysFromData
+          ? maxDaysFromData + 5
           : Math.min(maxDays, maxDaysFromData);
 
         setEffectiveMaxDays(calculatedEffectiveMaxDays); // Update state
-
-        const nonTrialColumns = [
-          "Time Step",
-          "Operating Condition",
-          "Time Unit",
-        ];
 
         const trialCount = {}; // Reset trial count each time data is processed
 
