@@ -17,13 +17,12 @@ export default function OperatingConditionsDashboard({
 
   const metrics = ["Temperature", "% Moisture", "O2 in Field"];
 
-  let effectiveMaxDays = maxDays;
+  const [effectiveMaxDays, setEffectiveMaxDays] = useState(maxDays);
 
   useEffect(() => {
     csv("/data/operating_conditions.csv")
       .then((data) => {
         const formattedData = [];
-
         const selectedColumn =
           selectedMetric === "Temperature"
             ? "Temperature"
@@ -36,16 +35,20 @@ export default function OperatingConditionsDashboard({
         const filteredData = data.filter(
           (d) => d["Operating Condition"] === selectedColumn
         );
-        let timeSteps = filteredData.map((d) => d["Time Step"]);
 
+        console.log("Filtered Data:", filteredData);
+
+        let timeSteps = filteredData.map((d) => d["Time Step"]);
         if (selectedMetric !== "Temperature") {
           timeSteps = timeSteps.map((d) => d * 7); // Convert weeks to days
         }
 
-        let maxDaysFromData = Math.max(...timeSteps);
-        effectiveMaxDays = ignoreMaxDays
+        const maxDaysFromData = Math.max(...timeSteps);
+        const calculatedEffectiveMaxDays = ignoreMaxDays
           ? maxDaysFromData
           : Math.min(maxDays, maxDaysFromData);
+
+        setEffectiveMaxDays(calculatedEffectiveMaxDays); // Update state
 
         const nonTrialColumns = [
           "Time Step",
@@ -192,39 +195,6 @@ export default function OperatingConditionsDashboard({
         </div>
       ) : (
         <>
-          <div className="flex justify-center my-4">
-            <select
-              className="select select-bordered"
-              value={selectedMetric}
-              onChange={(e) => setSelectedMetric(e.target.value)}
-            >
-              {metrics.map((metric) => (
-                <option key={metric} value={metric}>
-                  {metric}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex justify-center my-4">
-            <label>
-              <input
-                type="checkbox"
-                checked={!ignoreMaxDays}
-                onChange={(e) => setIgnoreMaxDays(!e.target.checked)}
-              />
-              Cap at 45 Days
-            </label>
-          </div>
-          <div className="flex justify-center my-4">
-            <label>
-              <input
-                type="checkbox"
-                checked={!applyMovingAverage}
-                onChange={(e) => setApplyMovingAverage(!e.target.checked)}
-              />
-              Display Raw Data (No Moving Average)
-            </label>
-          </div>
           <Plot
             data={plotData}
             layout={{
@@ -242,6 +212,7 @@ export default function OperatingConditionsDashboard({
                   text: `<b>${yAxisTitle}</b>`,
                 },
                 range: [0, yMax],
+                showline: true,
               },
               xaxis: {
                 title: {
@@ -250,7 +221,8 @@ export default function OperatingConditionsDashboard({
                 tickangle: xTickAngle,
                 ticklen: 10,
                 automargin: true,
-                range: ignoreMaxDays ? null : [0, effectiveMaxDays],
+                range: [0, effectiveMaxDays],
+                // range: ignoreMaxDays ? null : [0, effectiveMaxDays],
                 showline: true,
               },
               hovermode: "x",
@@ -259,6 +231,43 @@ export default function OperatingConditionsDashboard({
               displayModeBar: false,
             }}
           />
+          <div className="flex justify-center my-4">
+            <div className="w-1/3 flex justify-center">
+              <select
+                className="select select-bordered"
+                value={selectedMetric}
+                onChange={(e) => setSelectedMetric(e.target.value)}
+              >
+                {metrics.map((metric) => (
+                  <option key={metric} value={metric}>
+                    {metric}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="w-1/3 flex justify-center">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={!ignoreMaxDays}
+                  onChange={(e) => setIgnoreMaxDays(!e.target.checked)}
+                />
+                <span className="ml-2">Cap at 45 Days</span>
+              </label>
+            </div>
+            <div className="w-1/3 flex justify-center">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={!applyMovingAverage}
+                  onChange={(e) => setApplyMovingAverage(!e.target.checked)}
+                />
+                <span className="ml-2">
+                  Display Raw Data (No Moving Average)
+                </span>
+              </label>
+            </div>
+          </div>
         </>
       )}
     </>
