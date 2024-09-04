@@ -58,14 +58,14 @@ export default function DashboardFilterControls() {
             options={Object.keys(temperatureFilterDict)}
             selectedOptions={snap.filters.selectedTemperatureLevels}
             filterKey="selectedTemperatureLevels"
-            title="Average Temperature"
+            title="Mean Temperature"
             infoText="Select one or more options to filter the data by the average temperature range during the field test."
           />
           <CheckboxMenu
             options={Object.keys(moistureFilterDict)}
             selectedOptions={snap.filters.selectedMoistureLevels}
             filterKey="selectedMoistureLevels"
-            title="% Moisture"
+            title="Mean % Moisture"
             infoText="Select one or more options to filter the data by the average % moisture."
           />
           <CheckboxMenu

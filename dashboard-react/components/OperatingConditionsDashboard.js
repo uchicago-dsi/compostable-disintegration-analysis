@@ -12,14 +12,17 @@ export default function OperatingConditionsDashboard({
   const [plotData, setPlotData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedMetric, setSelectedMetric] = useState("Temperature");
+  const [ignoreMaxDays, setIgnoreMaxDays] = useState(false);
+  const [applyMovingAverage, setApplyMovingAverage] = useState(true);
 
   const metrics = ["Temperature", "% Moisture", "O2 in Field"];
+
+  const [effectiveMaxDays, setEffectiveMaxDays] = useState(maxDays);
 
   useEffect(() => {
     csv("/data/operating_conditions.csv")
       .then((data) => {
         const formattedData = [];
-
         const selectedColumn =
           selectedMetric === "Temperature"
             ? "Temperature"
@@ -29,20 +32,40 @@ export default function OperatingConditionsDashboard({
             ? "Oxygen"
             : null;
 
-        const filteredData = data.filter(
+        let filteredData = data.filter(
           (d) => d["Operating Condition"] === selectedColumn
         );
-        let timeSteps = filteredData.map((d) => d["Time Step"]);
-
-        if (selectedMetric !== "Temperature") {
-          timeSteps = timeSteps.map((d) => d * 7); // Convert weeks to days
-        }
 
         const nonTrialColumns = [
           "Time Step",
           "Operating Condition",
           "Time Unit",
         ];
+
+        filteredData = filteredData.filter((row) => {
+          // Check if all trial columns are empty (null, undefined, or empty string)
+          return Object.keys(row).some(
+            (col) =>
+              !nonTrialColumns.includes(col) &&
+              row[col] !== null &&
+              row[col] !== undefined &&
+              row[col] !== ""
+          );
+        });
+
+        console.log("Filtered Data:", filteredData);
+
+        let timeSteps = filteredData.map((d) => d["Time Step"]);
+        if (selectedMetric !== "Temperature") {
+          timeSteps = timeSteps.map((d) => d * 7); // Convert weeks to days
+        }
+
+        const maxDaysFromData = Math.max(...timeSteps);
+        const calculatedEffectiveMaxDays = ignoreMaxDays
+          ? maxDaysFromData + 5
+          : Math.min(maxDays, maxDaysFromData);
+
+        setEffectiveMaxDays(calculatedEffectiveMaxDays); // Update state
 
         const trialCount = {}; // Reset trial count each time data is processed
 
@@ -53,17 +76,33 @@ export default function OperatingConditionsDashboard({
             if (selectedMetric !== "Temperature") {
               windowSize = 3; // Reduce window size for non-temperature metrics
             }
-            yData = movingAverage(yData, windowSize);
+            if (applyMovingAverage) {
+              yData = movingAverage(yData, windowSize);
+            }
             const trialName = mapTrialName(column, trialCount);
 
             formattedData.push({
               x: timeSteps,
               y: yData,
-              mode: "lines",
+              mode: "lines+markers",
               name: trialName,
             });
           }
         });
+
+        if (selectedMetric === "Temperature") {
+          formattedData.push({
+            x: [0, 45],
+            y: [131, 131],
+            mode: "lines",
+            name: "PFRP",
+            line: {
+              dash: "dot",
+              color: "red",
+              width: 2,
+            },
+          });
+        }
 
         formattedData.sort((a, b) => a.name.localeCompare(b.name));
         setPlotData(formattedData);
@@ -73,7 +112,7 @@ export default function OperatingConditionsDashboard({
         console.error("Error loading CSV data:", error);
         setErrorMessage("Failed to load data.");
       });
-  }, [windowSize, selectedMetric]);
+  }, [windowSize, selectedMetric, ignoreMaxDays, applyMovingAverage]);
 
   const mapTrialName = (trialName, trialCount) => {
     const mappings = {
@@ -154,8 +193,8 @@ export default function OperatingConditionsDashboard({
 
   const yMax =
     plotData.length > 0
-      ? Math.max(...plotData.flatMap((d) => d.y.map((y) => y + 0.05)), 1.05)
-      : 1.05;
+      ? Math.max(...plotData.flatMap((d) => d.y.map((y) => y + 0.05)))
+      : null;
 
   const xTickAngle = plotData.length > 6 ? 90 : 0;
 
@@ -167,19 +206,6 @@ export default function OperatingConditionsDashboard({
         </div>
       ) : (
         <>
-          <div className="flex justify-center my-4">
-            <select
-              className="select select-bordered"
-              value={selectedMetric}
-              onChange={(e) => setSelectedMetric(e.target.value)}
-            >
-              {metrics.map((metric) => (
-                <option key={metric} value={metric}>
-                  {metric}
-                </option>
-              ))}
-            </select>
-          </div>
           <Plot
             data={plotData}
             layout={{
@@ -197,6 +223,7 @@ export default function OperatingConditionsDashboard({
                   text: `<b>${yAxisTitle}</b>`,
                 },
                 range: [0, yMax],
+                showline: true,
               },
               xaxis: {
                 title: {
@@ -205,7 +232,8 @@ export default function OperatingConditionsDashboard({
                 tickangle: xTickAngle,
                 ticklen: 10,
                 automargin: true,
-                range: [0, maxDays], // Cap x-axis at maxDays
+                range: [0, effectiveMaxDays],
+                // range: ignoreMaxDays ? null : [0, effectiveMaxDays],
                 showline: true,
               },
               hovermode: "x",
@@ -214,6 +242,43 @@ export default function OperatingConditionsDashboard({
               displayModeBar: false,
             }}
           />
+          <div className="flex justify-center my-4">
+            <div className="w-1/3 flex justify-center">
+              <select
+                className="select select-bordered"
+                value={selectedMetric}
+                onChange={(e) => setSelectedMetric(e.target.value)}
+              >
+                {metrics.map((metric) => (
+                  <option key={metric} value={metric}>
+                    {metric}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="w-1/3 flex justify-center">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={!ignoreMaxDays}
+                  onChange={(e) => setIgnoreMaxDays(!e.target.checked)}
+                />
+                <span className="ml-2">Cap at 45 Days</span>
+              </label>
+            </div>
+            <div className="w-1/3 flex justify-center">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={!applyMovingAverage}
+                  onChange={(e) => setApplyMovingAverage(!e.target.checked)}
+                />
+                <span className="ml-2">
+                  Display Raw Data (No Moving Average)
+                </span>
+              </label>
+            </div>
+          </div>
         </>
       )}
     </>
