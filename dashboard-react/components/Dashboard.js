@@ -10,7 +10,11 @@ export default function Dashboard() {
   const snap = useSnapshot(state);
 
   if (!snap.dataLoaded) {
-    return <p>Loading data...</p>;
+    return (
+      <div className="m-5">
+        <p>Loading data...</p>
+      </div>
+    );
   }
 
   const class2color = {
