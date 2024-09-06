@@ -11,7 +11,7 @@ import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 const dataSource = process.env.DATA_SOURCE;
 const bucketName = "cftp_data";
 const trialsFilename = "all_trials_processed.csv";
-const operatingConditionsFilename = "operating_conditions.csv";
+const operatingConditionsFilename = "operating_conditions_avg.csv";
 
 const trialDataPath = path.join(
   process.cwd(),

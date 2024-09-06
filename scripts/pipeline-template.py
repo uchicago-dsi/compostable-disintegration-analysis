@@ -631,8 +631,8 @@ df_operating_conditions_avg = unique_trial_ids.merge(
 operating_conditions_avg_output_path = DATA_DIR / "operating_conditions_avg.csv"
 df_operating_conditions_avg.to_csv(operating_conditions_avg_output_path, index_label="Trial ID")
 
-# Save full operating conditions data (TODO: Currently testing this...)
-operating_conditions_output_path = DATA_DIR / "operating_conditions.csv"
+# Save full operating conditions data
+operating_conditions_output_path = DATA_DIR / "operating_conditions_full.csv"
 df_operating_conditions = pd.concat([df_temps, df_moisture, df_o2], axis=0)
 df_operating_conditions.to_csv(operating_conditions_output_path, index=True, index_label="Time Step")
 
