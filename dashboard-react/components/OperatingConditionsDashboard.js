@@ -1,5 +1,4 @@
 "use client";
-import { csv } from "d3-fetch";
 import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 
@@ -20,7 +19,13 @@ export default function OperatingConditionsDashboard({
   const [effectiveMaxDays, setEffectiveMaxDays] = useState(maxDays);
 
   useEffect(() => {
-    csv("/data/operating_conditions.csv")
+    fetch("/api/operating-conditions")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch operating conditions from API");
+        }
+        return response.json();
+      })
       .then((data) => {
         const formattedData = [];
         const selectedColumn =
@@ -67,11 +72,10 @@ export default function OperatingConditionsDashboard({
 
         setEffectiveMaxDays(calculatedEffectiveMaxDays); // Update state
 
-        const trialCount = {}; // Reset trial count each time data is processed
-
         Object.keys(data[0]).forEach((column) => {
           if (!nonTrialColumns.includes(column)) {
             let yData = filteredData.map((d) => parseFloat(d[column]) || null);
+            console.log(yData);
             yData = interpolateData(yData);
             if (selectedMetric !== "Temperature") {
               windowSize = 3; // Reduce window size for non-temperature metrics
@@ -79,13 +83,12 @@ export default function OperatingConditionsDashboard({
             if (applyMovingAverage) {
               yData = movingAverage(yData, windowSize);
             }
-            const trialName = mapTrialName(column, trialCount);
 
             formattedData.push({
               x: timeSteps,
               y: yData,
               mode: "lines+markers",
-              name: trialName,
+              name: column,
             });
           }
         });
@@ -114,38 +117,6 @@ export default function OperatingConditionsDashboard({
       });
   }, [windowSize, selectedMetric, ignoreMaxDays, applyMovingAverage]);
 
-  const mapTrialName = (trialName, trialCount) => {
-    const mappings = {
-      IV: "In-Vessel",
-      CASP: "Covered Aerated Static Pile",
-      WR: "Windrow",
-      EASP: "Extended Aerated Static Pile",
-      ASP: "Aerated Static Pile",
-      AD: "Anaerobic Digestion",
-    };
-
-    // Extract the prefix (e.g., IV, CASP, etc.)
-    const prefix = trialName.match(/^[A-Z]+/)[0];
-
-    // Get the mapped name for the prefix
-    const mappedName = mappings[prefix];
-
-    if (mappedName) {
-      // Initialize the count for this trial type if it doesn't exist
-      if (!trialCount[mappedName]) {
-        trialCount[mappedName] = 0;
-      }
-      // Increment the count for this trial type
-      trialCount[mappedName] += 1;
-
-      // Return the formatted name with the count
-      return `${mappedName} #${trialCount[mappedName]}`;
-    }
-
-    return trialName; // Return the original trial name if the prefix is not recognized
-  };
-
-  // Linear interpolation function
   function interpolateData(yData) {
     let lastValidIndex = null;
 
@@ -169,7 +140,6 @@ export default function OperatingConditionsDashboard({
     return yData;
   }
 
-  // Moving average function
   function movingAverage(data, windowSize) {
     return data.map((value, idx, arr) => {
       // Ignore null values
@@ -233,7 +203,6 @@ export default function OperatingConditionsDashboard({
                 ticklen: 10,
                 automargin: true,
                 range: [0, effectiveMaxDays],
-                // range: ignoreMaxDays ? null : [0, effectiveMaxDays],
                 showline: true,
               },
               hovermode: "x",
