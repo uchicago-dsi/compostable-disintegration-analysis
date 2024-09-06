@@ -52,7 +52,7 @@ export default function DashboardControls() {
   }, [snap.options]);
 
   if (!snap.filters.initialized) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (
