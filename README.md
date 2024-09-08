@@ -11,23 +11,26 @@ The DSI will be extending a data pipeline to format data from new experiments in
 ## Pipeline
 The data pipeline for this project does the following standardizes data from multiple facilities for display on a dashboard displaying decomposition rates of different compostable plastics as well as operating conditions of the associated facilities.
 
+Note: The pipeline was set up to handle multiple disparate files with varied input formats. Future data will come in a standardized format. The pipline is left as one script for ease of iteration and refactoring later when the new data format is known.
+
 ### Docker
 The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
 
-### Data Files TODO
-Download the following files into the appropriate locations:
-- Example FSIS data is located in the DSI Google Drive (permission required to access): [MPI Directory by Establishment Name](https://drive.google.com/file/d/1A9CQqe-iXdFPXQ19WCKdtMNvZy7ypkym/view?usp=sharing) | [Establishment Demographic Data](https://drive.google.com/file/d/1FFtM-F0FSUgJfe39HgIXJtdRwctkG-q5/view?usp=sharing)
-    - Save both files to ```data/raw/```
-    - You can also download new data from the [FSIS Inspection site](https://www.fsis.usda.gov/inspection/establishments/meat-poultry-and-egg-product-inspection-directory). Just [update the filepaths config file](#using-different-files)
+### Data Files
+Download the following files from the DSI Google Drive in the [Results Data for DSI - Raw uploads](https://drive.google.com/drive/folders/1B8aRIF1lWDKfeqlDTkG2y1ERZFD-A8JK?usp=sharing) and save them to ```data/```:
+- [CFTP Anonymized Data Compilation Overview - For Sharing](https://docs.google.com/spreadsheets/d/1GsbN9AexDb0j-Hqzz8z3kO4zC5v60ptx/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [Donated Data 2023 - Compiled Facility Conditions for DSI](https://docs.google.com/spreadsheets/d/1iEEb8vlHcB_72TLgYi3IzSzRKgPMh-sK/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [Donated Data 2023 - Compiled Field Results for DSI](https://docs.google.com/spreadsheets/d/1XwYxdEhrpOxS6_nSf9yARWI-mLswrIBv/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [CASP004-01 - Results Pre-Processed for Analysis from PDF Tables](https://docs.google.com/spreadsheets/d/1GfYaqgqx85qq5XM__0D1IfbMomGsLdmQ/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [Compiled Field Results - CFTP Gathered Data](https://docs.google.com/spreadsheets/d/1EqRhb09hcXc9SW99vrj5aVUdYHicmUoU/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 
-### Using Different Files TODO
-If you are using different files (particularly for the FSIS data), just update the filenames in ```pipeline/rafi/config_filepaths.yaml```. Make sure the files are in the expected folder.
+These files are all read directly in ```scripts/pipeline-template.py```
 
 ### Running the Pipeline
 To run the pipeline:
 
 ```
-python scriptes/pipeline-template.py
+python scripts/pipeline-template.py
 ```
 
 Cleaned data files will be output in ```data/```. To update the files displayed on the dashboard, follow the instuctions in [Updating the Dashboard Data](#updating-the-dashboard-data)
@@ -36,20 +39,21 @@ Cleaned data files will be output in ```data/```. To update the files displayed 
 This is a [Next.js](https://nextjs.org/) project.
 
 ### Running the Dashboard
-To run the dashboard locally (do **not** use the dev container!):
+To run the dashboard locally, do **not** use the dev container!
 
+#### Install Packages
 Install packages:
 ```bash
 npm install
 ```
 
-Run the development server from ```dashboard/```:
+#### Set up Environment Variables for Local Deployment
+The dashboard expects a ```.env.local``` file in ```dashboard/``` with a [base64-encoded Google service account JSON](https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-base64-encode-and-decode-from-command-line/) (with permissions to access Cloud Storage buckets):
 
-```bash
-npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+DATA_SOURCE=google
+GOOGLE_APPLICATION_CREDENTIALS_BASE64=<base64-encoded-service-account.json>
+```
 
 ### Deplying the Dashboard
 The dashboard is deployed via Vercel and is hosted on CFTP's site in an iframe.
@@ -57,7 +61,7 @@ The dashboard is deployed via Vercel and is hosted on CFTP's site in an iframe.
 Any update to the ```main``` branch of this repo will update the production deployment of the dashboard.
 
 ### Updating the Dashboard Data
-If you rerun the pipeline, you need to update data files in both Google Cloud Storage and the files packaged with the Vercel deployment from GitHub.
+If you rerun the pipeline, you need to update data files in Google Cloud Storage.
 
 #### Google Cloud Storage
 The dashboard pulls data from Google Cloud Storage via an API. Upload the following files to the root of the ```cftp_data``` storage bucket in the ```compostable``` project in the DSI account:
@@ -65,16 +69,19 @@ The dashboard pulls data from Google Cloud Storage via an API. Upload the follow
 - ```operating_conditions_avg.csv```
 - ```operating_conditions_full.csv```
 
-### Dashboard Structure TODO
+### Dashboard Structure
+
+There are two dashboards. The dashboard located in ```page.js``` is the default one that is displayed on the CFTP site. There is also a proof of concept operating condition dashboard available at ```/operating-conditions```
 
 #### Data
-The dashboard loads data in ```lib/data.js```. This loads the packaged data and the Google Cloud Storage data via API calls.
-
-Data is managed in ```lib/state.js``` and ```lib/useMapData.js```
-
-Both the NETS data and farmer locations are sensitive, so those data files are processed behind api routes located in ```api/```.
+The dashboard loads via an API call in ```lib/data.js```. Data is managed in the same file. Menu options are fetched in ```page.js``` when the dashboard first loads.
 
 #### Components
-The dashboard consists primarily of a map component and a summary stats component.
+The dashboard consists of a [Plotly](https://plotly.com/javascript/) dash and various filters.
 
-The map logic lives in ```components/DeckGLMap.js``` and ```components/ControlPanel.js``` and the summary stats logic lives in ```components/SummaryStats.js``` and the sub-components.
+The main dashboard lives in ```components/Dashboard.js``` and the controls are in ```components/DashboardControls.js```.
+
+The operating conditions dash is in one single component: ```componenents/OperatingConditionsDashboard.js```
+
+#### API
+The data for this project is sensitive, so it is accessed and aggregated via an API. There are endpoints for the trial data (```app/api/data/```), the options for populating the filter menus (```app/api/options```), and for the the operating conditions dash (```app/api/operating-conditions```).
