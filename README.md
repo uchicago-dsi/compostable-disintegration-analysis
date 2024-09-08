@@ -55,6 +55,15 @@ DATA_SOURCE=google
 GOOGLE_APPLICATION_CREDENTIALS_BASE64=<base64-encoded-service-account.json>
 ```
 
+#### Running the Server
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 ### Deplying the Dashboard
 The dashboard is deployed via Vercel and is hosted on CFTP's site in an iframe.
 
