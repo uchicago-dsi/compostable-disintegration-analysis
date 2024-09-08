@@ -8,46 +8,73 @@ The Compost Research & Education Foundation (CREF) researches the disintegration
 
 The DSI will be extending a data pipeline to format data from new experiments into a consistent format and creating visualizations showing disintegration rates for different materials and composting methodology. We will also create a process for importing new trial data that CREF's partner facilities will use in future trials, and start building the infrastructure for a public-facing dashboard of data from composting trials.
 
-## Usage
+## Pipeline
+The data pipeline for this project does the following standardizes data from multiple facilities for display on a dashboard displaying decomposition rates of different compostable plastics as well as operating conditions of the associated facilities.
 
 ### Docker
+The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
 
-### Docker & Make
+### Data Files TODO
+Download the following files into the appropriate locations:
+- Example FSIS data is located in the DSI Google Drive (permission required to access): [MPI Directory by Establishment Name](https://drive.google.com/file/d/1A9CQqe-iXdFPXQ19WCKdtMNvZy7ypkym/view?usp=sharing) | [Establishment Demographic Data](https://drive.google.com/file/d/1FFtM-F0FSUgJfe39HgIXJtdRwctkG-q5/view?usp=sharing)
+    - Save both files to ```data/raw/```
+    - You can also download new data from the [FSIS Inspection site](https://www.fsis.usda.gov/inspection/establishments/meat-poultry-and-egg-product-inspection-directory). Just [update the filepaths config file](#using-different-files)
 
-We use `docker` and `make` to run our code. There are three built-in `make` commands:
+### Using Different Files TODO
+If you are using different files (particularly for the FSIS data), just update the filenames in ```pipeline/rafi/config_filepaths.yaml```. Make sure the files are in the expected folder.
 
-* `make build-only`: This will build the image only. It is useful for testing and making changes to the Dockerfile.
-* `make run-notebooks`: This will run a jupyter server which also mounts the current directory into `\program`.
-* `make run-interactive`: This will create a container (with the current directory mounted as `\program`) and loads an interactive session. 
+### Running the Pipeline
+To run the pipeline:
 
-The file `Makefile` contains information about about the specific commands that are run using when calling each `make` statement.
+```
+python scriptes/pipeline-template.py
+```
 
-### Developing inside a container with VS Code
+Cleaned data files will be output in ```data/```. To update the files displayed on the dashboard, follow the instuctions in [Updating the Dashboard Data](#updating-the-dashboard-data)
 
-If you prefer to develop inside a container with VS Code then do the following steps. Note that this works with both regular scripts as well as jupyter notebooks.
+## Dashboard
+This is a [Next.js](https://nextjs.org/) project.
 
-1. Open the repository in VS Code
-2. At the bottom right a window may appear that says `Folder contains a Dev Container configuration file...`. If it does, select, `Reopen in Container` and you are done. Otherwise proceed to next step. 
-3. Click the blue or green rectangle in the bottom left of VS code (should say something like `><` or `>< WSL`). Options should appear in the top center of your screen. Select `Reopen in Container`.
+### Running the Dashboard
+To run the dashboard locally (do **not** use the dev container!):
 
+Install packages:
+```bash
+npm install
+```
 
+Run the development server from ```dashboard/```:
 
+```bash
+npm run dev
+```
 
-## Repository Structure
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### scripts
-Project python code
+### Deplying the Dashboard
+The dashboard is deployed via Vercel and is hosted on CFTP's site in an iframe.
 
-### notebooks
-Contains short, clean notebooks to demonstrate analysis.
+Any update to the ```main``` branch of this repo will update the production deployment of the dashboard.
 
-### data
+### Updating the Dashboard Data
+If you rerun the pipeline, you need to update data files in both Google Cloud Storage and the files packaged with the Vercel deployment from GitHub.
 
-Contains details of acquiring all raw data used in repository. If data is small (<50MB) then it is okay to save it to the repo, making sure to clearly document how to the data is obtained.
+#### Google Cloud Storage
+The dashboard pulls data from Google Cloud Storage via an API. Upload the following files to the root of the ```cftp_data``` storage bucket in the ```compostable``` project in the DSI account:
+- ```all_trials_processed.csv```
+- ```operating_conditions_avg.csv```
+- ```operating_conditions_full.csv```
 
-If the data is larger than 50MB than you should not add it to the repo and instead document how to get the data in the README.md file in the data directory. 
+### Dashboard Structure TODO
 
-This [README.md file](/data/README.md) should be kept up to date.
+#### Data
+The dashboard loads data in ```lib/data.js```. This loads the packaged data and the Google Cloud Storage data via API calls.
 
-### output
-Should contain work product generated by the analysis. Keep in mind that results should (generally) be excluded from the git repository.
+Data is managed in ```lib/state.js``` and ```lib/useMapData.js```
+
+Both the NETS data and farmer locations are sensitive, so those data files are processed behind api routes located in ```api/```.
+
+#### Components
+The dashboard consists primarily of a map component and a summary stats component.
+
+The map logic lives in ```components/DeckGLMap.js``` and ```components/ControlPanel.js``` and the summary stats logic lives in ```components/SummaryStats.js``` and the sub-components.
