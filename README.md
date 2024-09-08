@@ -8,46 +8,80 @@ The Compost Research & Education Foundation (CREF) researches the disintegration
 
 The DSI will be extending a data pipeline to format data from new experiments into a consistent format and creating visualizations showing disintegration rates for different materials and composting methodology. We will also create a process for importing new trial data that CREF's partner facilities will use in future trials, and start building the infrastructure for a public-facing dashboard of data from composting trials.
 
-## Usage
+## Pipeline
+The data pipeline for this project does the following standardizes data from multiple facilities for display on a dashboard displaying decomposition rates of different compostable plastics as well as operating conditions of the associated facilities.
+
+Note: The pipeline was set up to handle multiple disparate files with varied input formats. Future data will come in a standardized format. The pipline is left as one script for ease of iteration and refactoring later when the new data format is known.
 
 ### Docker
+The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
 
-### Docker & Make
+### Data Files
+Download the following files from the DSI Google Drive in the [Results Data for DSI - Raw uploads](https://drive.google.com/drive/folders/1B8aRIF1lWDKfeqlDTkG2y1ERZFD-A8JK?usp=sharing) and save them to ```data/```:
+- [CFTP Anonymized Data Compilation Overview - For Sharing](https://docs.google.com/spreadsheets/d/1GsbN9AexDb0j-Hqzz8z3kO4zC5v60ptx/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [Donated Data 2023 - Compiled Facility Conditions for DSI](https://docs.google.com/spreadsheets/d/1iEEb8vlHcB_72TLgYi3IzSzRKgPMh-sK/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [Donated Data 2023 - Compiled Field Results for DSI](https://docs.google.com/spreadsheets/d/1XwYxdEhrpOxS6_nSf9yARWI-mLswrIBv/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [CASP004-01 - Results Pre-Processed for Analysis from PDF Tables](https://docs.google.com/spreadsheets/d/1GfYaqgqx85qq5XM__0D1IfbMomGsLdmQ/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [Compiled Field Results - CFTP Gathered Data](https://docs.google.com/spreadsheets/d/1EqRhb09hcXc9SW99vrj5aVUdYHicmUoU/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 
-We use `docker` and `make` to run our code. There are three built-in `make` commands:
+These files are all read directly in ```scripts/pipeline-template.py```
 
-* `make build-only`: This will build the image only. It is useful for testing and making changes to the Dockerfile.
-* `make run-notebooks`: This will run a jupyter server which also mounts the current directory into `\program`.
-* `make run-interactive`: This will create a container (with the current directory mounted as `\program`) and loads an interactive session. 
+### Running the Pipeline
+To run the pipeline:
 
-The file `Makefile` contains information about about the specific commands that are run using when calling each `make` statement.
+```
+python scripts/pipeline-template.py
+```
 
-### Developing inside a container with VS Code
+Cleaned data files will be output in ```data/```. To update the files displayed on the dashboard, follow the instuctions in [Updating the Dashboard Data](#updating-the-dashboard-data)
 
-If you prefer to develop inside a container with VS Code then do the following steps. Note that this works with both regular scripts as well as jupyter notebooks.
+## Dashboard
+This is a [Next.js](https://nextjs.org/) project.
 
-1. Open the repository in VS Code
-2. At the bottom right a window may appear that says `Folder contains a Dev Container configuration file...`. If it does, select, `Reopen in Container` and you are done. Otherwise proceed to next step. 
-3. Click the blue or green rectangle in the bottom left of VS code (should say something like `><` or `>< WSL`). Options should appear in the top center of your screen. Select `Reopen in Container`.
+### Running the Dashboard
+To run the dashboard locally, do **not** use the dev container!
 
+#### Install Packages
+Install packages:
+```bash
+npm install
+```
 
+#### Set up Environment Variables for Local Deployment
+The dashboard expects a ```.env.local``` file in ```dashboard/``` with a [base64-encoded Google service account JSON](https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-base64-encode-and-decode-from-command-line/) (with permissions to access Cloud Storage buckets):
 
+```
+DATA_SOURCE=google
+GOOGLE_APPLICATION_CREDENTIALS_BASE64=<base64-encoded-service-account.json>
+```
 
-## Repository Structure
+### Deplying the Dashboard
+The dashboard is deployed via Vercel and is hosted on CFTP's site in an iframe.
 
-### scripts
-Project python code
+Any update to the ```main``` branch of this repo will update the production deployment of the dashboard.
 
-### notebooks
-Contains short, clean notebooks to demonstrate analysis.
+### Updating the Dashboard Data
+If you rerun the pipeline, you need to update data files in Google Cloud Storage.
 
-### data
+#### Google Cloud Storage
+The dashboard pulls data from Google Cloud Storage via an API. Upload the following files to the root of the ```cftp_data``` storage bucket in the ```compostable``` project in the DSI account:
+- ```all_trials_processed.csv```
+- ```operating_conditions_avg.csv```
+- ```operating_conditions_full.csv```
 
-Contains details of acquiring all raw data used in repository. If data is small (<50MB) then it is okay to save it to the repo, making sure to clearly document how to the data is obtained.
+### Dashboard Structure
 
-If the data is larger than 50MB than you should not add it to the repo and instead document how to get the data in the README.md file in the data directory. 
+There are two dashboards. The dashboard located in ```page.js``` is the default one that is displayed on the CFTP site. There is also a proof of concept operating condition dashboard available at ```/operating-conditions```
 
-This [README.md file](/data/README.md) should be kept up to date.
+#### Data
+The dashboard loads via an API call in ```lib/data.js```. Data is managed in the same file. Menu options are fetched in ```page.js``` when the dashboard first loads.
 
-### output
-Should contain work product generated by the analysis. Keep in mind that results should (generally) be excluded from the git repository.
+#### Components
+The dashboard consists of a [Plotly](https://plotly.com/javascript/) dash and various filters.
+
+The main dashboard lives in ```components/Dashboard.js``` and the controls are in ```components/DashboardControls.js```.
+
+The operating conditions dash is in one single component: ```componenents/OperatingConditionsDashboard.js```
+
+#### API
+The data for this project is sensitive, so it is accessed and aggregated via an API. There are endpoints for the trial data (```app/api/data/```), the options for populating the filter menus (```app/api/options```), and for the the operating conditions dash (```app/api/operating-conditions```).
