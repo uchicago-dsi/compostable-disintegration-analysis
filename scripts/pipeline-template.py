@@ -279,6 +279,99 @@ class AbstractDataPipeline(ABC):
         return data
 
 
+class NewTemplatePipeline(AbstractDataPipeline):
+    """Pipeline for processing data from the new template."""
+
+    def load_data(self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0) -> pd.DataFrame:
+        """Loads data from the specified CSV file.
+
+        Args:
+            data_filepath: Path to the data file.
+            sheet_name: Sheet name or index to load. Defaults to 0.
+            skiprows: Number of rows to skip at the start of the file. Defaults to 0.
+
+        Returns:
+            Loaded data.
+        """
+        # Read the CSV file into a DataFrame
+        data = pd.read_csv(data_filepath)
+
+        # Find the index of the first completely empty row — formatted so there's comments below the data
+        first_empty_row_index = data[data.isna().all(axis=1)].index.min()
+
+        # If an empty row is found, drop all rows below it
+        if pd.notna(first_empty_row_index):
+            data = data[:first_empty_row_index]
+
+        return data
+
+    def preprocess_data(self, data):
+        """Preprocesses the data.
+
+        Args:
+            data: Data to preprocess.
+
+        Returns:
+            The preprocess data.
+        """
+        """
+        Trial
+        Date MM/DD/YYYY
+        Removal Period
+        Bag Set
+        Bag Number
+        Item Name
+        Item Description
+        Number of Fragments Found
+        Photo taken?
+        "Weights take: wet only, dry only, or both? "
+        WET Residuals weight 1 (all fragments)
+        WET Residuals weight 2 (all fragments)
+        WET Residuals weight 3 (all fragments)
+        "Average Residuals Weight, Wet (all fragments)"
+        DRY Residuals weight 1 (all fragments)
+        DRY Residuals weight 2 (all fragments)
+        DRY Residuals weight 3 (all fragments)
+        "Average Residuals Weight, Dry (all fragments)"
+        Item count per bag
+        Start Weight
+        % Residuals (Wet Weight)
+        % Residuals (Dry Weight)
+        "Area, Start"
+        "Area, End"
+        % Residuals (Area)
+        % Residuals (Visual Scale)
+        """
+
+        # TODO: Problems — doesn't have "Item Brand"
+        # Do we use "Item Description" or "Item Description Refined (Trial)"
+        # We should probably join this with an items table rather than including item information here?
+
+        data = data.rename(
+            columns={
+                "Trial": "Trial ID",
+            }
+        )
+        return data
+
+    def join_with_items(self, data):
+        """New data already has item information, so just fill in the "Item ID" column and return the data.
+
+        Args:
+            data: Data to join.
+
+        Returns:
+            The same data
+        """
+        data["Item ID"] = data["Item Description"].str.strip().map(item2id)
+        return data
+
+
+NEW_TEMPLATE_PATH = DATA_DIR / "CFTP_DisintegrationDataInput_Template_sept92024.csv"
+new_template_pipeline = NewTemplatePipeline(NEW_TEMPLATE_PATH)
+processed_data.append(new_template_pipeline.run())
+
+
 class CASP004Pipeline(AbstractDataPipeline):
     """Pipeline for processing CASP004 trial data."""
 
