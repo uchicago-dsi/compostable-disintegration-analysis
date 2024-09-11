@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+import numpy as np
 import pandas as pd
 
 CURRENT_DIR = Path(__file__).resolve().parent
@@ -19,11 +20,11 @@ TRIAL_COLS = [
     "Item Brand",
     "Item Name",
     "Item Description Refined",
-    "Item Description Refined (Trial)",
+    # "Item Description Refined (Trial)",
     "Material Class I",
     "Material Class II",
     "Material Class III",
-    "Start Weight",
+    # "Start Weight",
     "% Residuals (Mass)",
     "% Residuals (Area)",
 ]
@@ -252,6 +253,17 @@ class AbstractDataPipeline(ABC):
         """
         return data
 
+    def merge_with_trials(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Merges the data with trial information.
+
+        Args:
+            data: Data to merge.
+
+        Returns:
+            Data merged with trial information.
+        """
+        return data.merge(self.trials, left_on="Trial ID", right_on="Public Trial ID")
+
     def run(self, save: bool = False) -> pd.DataFrame:
         """Runs the data pipeline.
 
@@ -270,7 +282,7 @@ class AbstractDataPipeline(ABC):
         data = self.preprocess_data(data)
         data = self.join_with_items(data)
         data = self.calculate_results(data)
-        data = data.merge(self.trials, left_on="Trial ID", right_on="Public Trial ID")
+        data = self.merge_with_trials(data)
         data = data[TRIAL_COLS]
         if save:
             data.to_csv(self.output_filepath, index=False)
@@ -314,61 +326,52 @@ class NewTemplatePipeline(AbstractDataPipeline):
         Returns:
             The preprocess data.
         """
-        """
-        Trial
-        Date MM/DD/YYYY
-        Removal Period
-        Bag Set
-        Bag Number
-        Item Name
-        Item Description
-        Number of Fragments Found
-        Photo taken?
-        "Weights take: wet only, dry only, or both? "
-        WET Residuals weight 1 (all fragments)
-        WET Residuals weight 2 (all fragments)
-        WET Residuals weight 3 (all fragments)
-        "Average Residuals Weight, Wet (all fragments)"
-        DRY Residuals weight 1 (all fragments)
-        DRY Residuals weight 2 (all fragments)
-        DRY Residuals weight 3 (all fragments)
-        "Average Residuals Weight, Dry (all fragments)"
-        Item count per bag
-        Start Weight
-        % Residuals (Wet Weight)
-        % Residuals (Dry Weight)
-        "Area, Start"
-        "Area, End"
-        % Residuals (Area)
-        % Residuals (Visual Scale)
-        """
-
-        # TODO: Problems — doesn't have "Item Brand"
-        # Do we use "Item Description" or "Item Description Refined (Trial)"
-        # We should probably join this with an items table rather than including item information here?
-
         data = data.rename(
             columns={
                 "Trial": "Trial ID",
             }
         )
+        percentage_cols = ["% Residuals (Dry Weight)", "% Residuals (Wet Weight)", "% Residuals (Area)"]
+        data[percentage_cols] = data[percentage_cols].replace("no data", np.nan)
+        # TODO: Depending on how the data actually comes in, maybe we don't want to do it this way?
+        data[percentage_cols] = data[percentage_cols].replace("%", "", regex=True).astype(float) / 100
+
+        # Prefer dry weight to wet weight if available
+        data["% Residuals (Mass)"] = data["% Residuals (Dry Weight)"].fillna(data["% Residuals (Wet Weight)"])
+
         return data
 
     def join_with_items(self, data):
-        """New data already has item information, so just fill in the "Item ID" column and return the data.
+        """Join with the items table
 
         Args:
             data: Data to join.
 
         Returns:
-            The same data
+            The joined data
         """
-        data["Item ID"] = data["Item Description"].str.strip().map(item2id)
-        return data
+        return self.items.drop_duplicates(subset="Item Name").merge(data, on="Item Name")
+
+    def merge_with_trials(self, data):
+        """Join with the trials table
+
+        Args:
+            data: Data to join.
+
+        Returns:
+            The joined data
+        """
+        dummy_trial = {
+            "Trial ID": "44547-01-21",
+            "Test Method": "Mesh Bag",
+            "Technology": "Windrow",
+        }
+        self.trials = pd.concat([self.trials, pd.DataFrame(dummy_trial, index=[0])], ignore_index=True)
+        return data.merge(self.trials, on="Trial ID")
 
 
 NEW_TEMPLATE_PATH = DATA_DIR / "CFTP_DisintegrationDataInput_Template_sept92024.csv"
-new_template_pipeline = NewTemplatePipeline(NEW_TEMPLATE_PATH)
+new_template_pipeline = NewTemplatePipeline(NEW_TEMPLATE_PATH, trial_name="Dummy Data for New Template")
 processed_data.append(new_template_pipeline.run())
 
 
