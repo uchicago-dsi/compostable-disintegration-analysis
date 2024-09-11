@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+import numpy as np
 import pandas as pd
 
 CURRENT_DIR = Path(__file__).resolve().parent
@@ -19,11 +20,11 @@ TRIAL_COLS = [
     "Item Brand",
     "Item Name",
     "Item Description Refined",
-    "Item Description Refined (Trial)",
+    # "Item Description Refined (Trial)",
     "Material Class I",
     "Material Class II",
     "Material Class III",
-    "Start Weight",
+    # "Start Weight",
     "% Residuals (Mass)",
     "% Residuals (Area)",
 ]
@@ -252,6 +253,17 @@ class AbstractDataPipeline(ABC):
         """
         return data
 
+    def merge_with_trials(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Merges the data with trial information.
+
+        Args:
+            data: Data to merge.
+
+        Returns:
+            Data merged with trial information.
+        """
+        return data.merge(self.trials, left_on="Trial ID", right_on="Public Trial ID")
+
     def run(self, save: bool = False) -> pd.DataFrame:
         """Runs the data pipeline.
 
@@ -270,13 +282,98 @@ class AbstractDataPipeline(ABC):
         data = self.preprocess_data(data)
         data = self.join_with_items(data)
         data = self.calculate_results(data)
-        data = data.merge(self.trials, left_on="Trial ID", right_on="Public Trial ID")
+        data = self.merge_with_trials(data)
         data = data[TRIAL_COLS]
         if save:
             data.to_csv(self.output_filepath, index=False)
             print(f"Saved to {self.output_filepath}")
         print("Complete!")
         return data
+
+
+class NewTemplatePipeline(AbstractDataPipeline):
+    """Pipeline for processing data from the new template."""
+
+    def load_data(self, data_filepath: Path, sheet_name: int = 0, skiprows: int = 0) -> pd.DataFrame:
+        """Loads data from the specified CSV file.
+
+        Args:
+            data_filepath: Path to the data file.
+            sheet_name: Sheet name or index to load. Defaults to 0.
+            skiprows: Number of rows to skip at the start of the file. Defaults to 0.
+
+        Returns:
+            Loaded data.
+        """
+        # Read the CSV file into a DataFrame
+        data = pd.read_csv(data_filepath)
+
+        # Find the index of the first completely empty row — formatted so there's comments below the data
+        first_empty_row_index = data[data.isna().all(axis=1)].index.min()
+
+        # If an empty row is found, drop all rows below it
+        if pd.notna(first_empty_row_index):
+            data = data[:first_empty_row_index]
+
+        return data
+
+    def preprocess_data(self, data):
+        """Preprocesses the data.
+
+        Args:
+            data: Data to preprocess.
+
+        Returns:
+            The preprocess data.
+        """
+        data = data.rename(
+            columns={
+                "Trial": "Trial ID",
+            }
+        )
+        percentage_cols = ["% Residuals (Dry Weight)", "% Residuals (Wet Weight)", "% Residuals (Area)"]
+        data[percentage_cols] = data[percentage_cols].replace("no data", np.nan)
+        # TODO: Depending on how the data actually comes in, maybe we don't want to do it this way?
+        data[percentage_cols] = data[percentage_cols].replace("%", "", regex=True).astype(float) / 100
+
+        # Prefer dry weight to wet weight if available
+        data["% Residuals (Mass)"] = data["% Residuals (Dry Weight)"].fillna(data["% Residuals (Wet Weight)"])
+
+        return data
+
+    def join_with_items(self, data):
+        """Join with the items table
+
+        Args:
+            data: Data to join.
+
+        Returns:
+            The joined data
+        """
+        return self.items.drop_duplicates(subset="Item Name").merge(data, on="Item Name")
+
+    def merge_with_trials(self, data):
+        """Join with the trials table
+
+        Args:
+            data: Data to join.
+
+        Returns:
+            The joined data
+        """
+        dummy_trial = {
+            "Trial ID": "44547-01-21",
+            "Test Method": "Mesh Bag",
+            "Technology": "Windrow",
+        }
+        self.trials = pd.concat([self.trials, pd.DataFrame(dummy_trial, index=[0])], ignore_index=True)
+        return data.merge(self.trials, on="Trial ID")
+
+
+NEW_TEMPLATE_PATH = DATA_DIR / "CFTP_DisintegrationDataInput_Template_sept92024.csv"
+new_template_pipeline = NewTemplatePipeline(NEW_TEMPLATE_PATH, trial_name="Dummy Data for New Template")
+# TODO: This is commented out so we don't add the dummy data to the "real" data
+# processed_data.append(new_template_pipeline.run())
 
 
 class CASP004Pipeline(AbstractDataPipeline):
