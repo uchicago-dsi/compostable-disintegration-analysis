@@ -23,6 +23,10 @@ Download the following files from the DSI Google Drive in the [Results Data for 
 - [Donated Data 2023 - Compiled Field Results for DSI](https://docs.google.com/spreadsheets/d/1XwYxdEhrpOxS6_nSf9yARWI-mLswrIBv/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 - [CASP004-01 - Results Pre-Processed for Analysis from PDF Tables](https://docs.google.com/spreadsheets/d/1GfYaqgqx85qq5XM__0D1IfbMomGsLdmQ/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 - [Compiled Field Results - CFTP Gathered Data](https://docs.google.com/spreadsheets/d/1EqRhb09hcXc9SW99vrj5aVUdYHicmUoU/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [CFTP Test Item Inventory with Dimensions - All Trials.xlsx'](https://docs.google.com/spreadsheets/d/12deXRBI7_856FIuiu5ZgM_W19llAHD42/edit?usp=drive_link&ouid=102107591581911420296&rtpof=true&sd=true)
+- [old_items.json](https://drive.google.com/file/d/11w1jwuF4Y3ZuBXppYWV11MKiDkXmsvOz/view?usp=sharing)
+- [Item IDS for CASP004 CASP003.xlsx](https://docs.google.com/spreadsheets/d/1U8dds3eiUFNxQNzLYvYay1KxVqd9mpAR/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
+- [CFTP_DisintegrationDataInput_Template_sept92024.csv](https://drive.google.com/file/d/1nRsp9j3VaFacGXpjEEvK4vQx82_SfAGb/view?usp=sharing)
 
 These files are all read directly in ```scripts/pipeline-template.py```
 
@@ -48,7 +52,7 @@ npm install
 ```
 
 #### Set up Environment Variables for Local Deployment
-The dashboard expects a ```.env.local``` file in ```dashboard/``` with a [base64-encoded Google service account JSON](https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-base64-encode-and-decode-from-command-line/) (with permissions to access Cloud Storage buckets):
+The dashboard expects a ```.env.local``` file in ```dashboard/``` with a [base64-encoded Google service account JSON](https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-base64-encode-and-decode-from-command-line/) (with permissions to access Cloud Storage buckets). This can be found in the UChicago Organization, DSI Folder, compostable project on GCP.
 
 ```
 DATA_SOURCE=google
@@ -56,7 +60,10 @@ GOOGLE_APPLICATION_CREDENTIALS_BASE64=<base64-encoded-service-account.json>
 ```
 
 #### Running the Server
-Run the development server:
+
+To run the development server go into the `/dashboard` directory and then install the necessary packages using `npm install`.
+
+Once the packages install you can run the development server using the following command:
 
 ```bash
 npm run dev
