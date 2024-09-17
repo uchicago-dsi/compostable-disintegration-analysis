@@ -1,10 +1,9 @@
 "use client";
-import React from "react";
-import RadioSingleSelect from "./RadioSingleSelect";
-import { material2col, residuals2col, display2col } from "@/lib/constants";
-import { useSnapshot } from "valtio";
+import { display2col, material2col, residuals2col } from "@/lib/constants";
 import state from "@/lib/state";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { useSnapshot } from "valtio";
+import RadioSingleSelect from "./RadioSingleSelect";
 
 export default function DashboardDisplayControls() {
   const snap = useSnapshot(state);

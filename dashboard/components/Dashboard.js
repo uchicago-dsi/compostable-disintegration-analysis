@@ -1,10 +1,9 @@
 "use client";
-import React from "react";
+import Alert from "@/components/Alert";
+import { col2material } from "@/lib/constants";
+import state from "@/lib/state";
 import Plot from "react-plotly.js";
 import { useSnapshot } from "valtio";
-import state from "@/lib/state";
-import { col2material } from "@/lib/constants";
-import Alert from "@/components/Alert";
 
 export default function Dashboard() {
   const snap = useSnapshot(state);
@@ -47,30 +46,33 @@ export default function Dashboard() {
   const plotData =
     Object.keys(snap.data).length > 0
       ? snap.data.data.map((d) => {
-          console.log(d);
-          const materialClass = d["Material Class I"];
-          const color = class2color[materialClass] || "#000";
-          const countDisplay =
-            snap.filters["testMethod"] === "Mesh Bag"
-              ? ` (n=${d["count"]})`
-              : "";
-          // Replace "Positive" with "Pos." in labels and append count
-          const name = `${d["aggCol"]}${countDisplay}`.replace(
-            "Positive",
-            "Pos."
-          );
-          const wrappedName = wrapLabel(name);
+        const materialClass = d["Material Class I"];
+        const color = class2color[materialClass] || "#000";
+        const countDisplay =
+          snap.filters["testMethod"] === "Mesh Bag"
+            ? ` (n=${d["count"]})`
+            : "";
+        // Replace "Positive" with "Pos." in labels and append count
+        const name = `${d["aggCol"]}${countDisplay}`.replace(
+          "Positive",
+          "Pos."
+        );
+        const wrappedName = wrapLabel(name);
 
-          return {
-            type: "box",
-            name: wrappedName,
-            y: [d.min, d.q1, d.median, d.q3, d.max],
-            marker: { color },
-            boxmean: true,
-            line: { width: 3.25 },
-          };
-        })
+        return {
+          type: "box",
+          name: wrappedName,
+          y: [d.min, d.q1, d.median, d.q3, d.max],
+          marker: { color },
+          boxmean: true,
+          line: { width: 3.25 },
+        };
+      })
       : [];
+
+  const cleanDisplayCol = snap.filters.displayResiduals === "Disintegrated"
+    ? snap.filters.displayCol.replace("Residuals", "Disintegrated")
+    : snap.filters.displayCol
 
   function generateYAxisTitle(displayCol, cap) {
     let yAxisTitle = `${displayCol}`;
@@ -80,16 +82,19 @@ export default function Dashboard() {
     return yAxisTitle;
   }
   const yAxisTitle = generateYAxisTitle(
-    snap.filters.displayCol,
+    cleanDisplayCol,
     !snap.filters.uncapResults
   );
 
-  function generateTitle(displayCol, aggCol, num_trials) {
-    return `${displayCol} by ${col2material[aggCol]} - ${num_trials} Trial(s)`;
+
+
+  function generateTitle(cleanDisplayCol, aggCol, num_trial) {
+    return `${cleanDisplayCol} by ${col2material[aggCol]} - ${num_trial} Trial(s)`;
   }
 
+
   const title = generateTitle(
-    snap.filters.displayCol,
+    cleanDisplayCol,
     snap.filters.aggCol,
     snap.data.numTrials
   );
