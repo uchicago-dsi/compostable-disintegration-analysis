@@ -74,6 +74,7 @@ const filterTrialIDsByConditions = (
       filteredTrialIDs.forEach((id) => trialIDs.add(id));
     }
   });
+  console.log(trialIDs)
   return trialIDs;
 };
 
@@ -98,7 +99,6 @@ const getIntersectingTrialIDs = (...sets) => {
 };
 
 const prepareData = async (searchParams) => {
-  // console.log("searchParams", searchParams);
   // Display params
   const aggCol = searchParams.get("aggcol") || "Material Class I";
   const displayCol = searchParams.get("displaycol") || "% Residuals (Mass)";
@@ -177,8 +177,6 @@ const prepareData = async (searchParams) => {
   filteredData = filterData(filteredData, "Technology", technologies);
   // Return empty object to preserve privacy if not enough trials (Except for Bulk Dose)
   const technologyTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
-  // console.log("technologyTrialIDs", technologyTrialIDs);
-  // console.log(technologies);
   const trialThreshold = testMethod === "Bulk Dose" ? 1 : 3;
   if (technologyTrialIDs.size < trialThreshold && testMethod !== "Bulk Dose") {
     return {
@@ -242,8 +240,6 @@ const prepareData = async (searchParams) => {
     trialDurationTrialIDs
   );
 
-  console.log("combinedTrialIDs", combinedTrialIDs);
-
   if (combinedTrialIDs.size === 0) {
     filteredData = [];
   } else {
@@ -251,8 +247,6 @@ const prepareData = async (searchParams) => {
       combinedTrialIDs.has(d["Trial ID"])
     );
   }
-
-  console.log("filteredData.length", filteredData.length);
 
   // Not enough data - return empty object
   const dataThreshold = 1;
