@@ -1,4 +1,5 @@
 .env*
+.local.env
 service-account-key-base64.txt
 compostable-428115-5dde0b40960b.json
 data/*
