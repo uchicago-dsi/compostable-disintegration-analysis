@@ -22,8 +22,8 @@ export const temperatureFilterDict = {
 
 export const trialDurationDict = {
   "40-59 Days": [40, 59, true],
-  "59-89 Days": [59, 89, true],
-  ">89 Days": [89, Infinity, false],
+  "60-90 Days": [59, 89, true],
+  "90+ Days": [89, Infinity, false],
 };
 
 export const material2col = {
