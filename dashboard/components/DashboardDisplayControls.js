@@ -23,7 +23,7 @@ export default function DashboardDisplayControls() {
         options={display2col}
         title="Show Results by Mass or by Surface Area"
         filterKey="displayCol"
-        infoText="Disintegration data can be based on the change in weight of a product, or the surface area before and after testing."
+        infoText="Field testing results can be based on the change in weight of a product, or the surface area before and after testing. The results by mass provided here are a combination of wet and dry weights. Future versions of the dashboard will further divide these data sets."
       />
       <RadioSingleSelect
         options={material2col}

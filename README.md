@@ -11,7 +11,7 @@ The DSI will be extending a data pipeline to format data from new experiments in
 ## Pipeline
 The data pipeline for this project does the following standardizes data from multiple facilities for display on a dashboard displaying decomposition rates of different compostable plastics as well as operating conditions of the associated facilities.
 
-Note: The pipeline was set up to handle multiple disparate files with varied input formats. Future data will come in a standardized format. The pipline is left as one script for ease of iteration and refactoring later when the new data format is known.
+Note: The pipeline was set up to handle multiple disparate files with varied input formats. Future data will come in a standardized format. The pipeline is left as one script for ease of iteration and refactoring later when the new data format is known.
 
 ### Docker
 The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
@@ -37,7 +37,7 @@ To run the pipeline:
 python scripts/pipeline-template.py
 ```
 
-Cleaned data files will be output in ```data/```. To update the files displayed on the dashboard, follow the instuctions in [Updating the Dashboard Data](#updating-the-dashboard-data)
+Cleaned data files will be output in ```data/```. To update the files displayed on the dashboard, follow the instructions in [Updating the Dashboard Data](#updating-the-dashboard-data)
 
 ## Dashboard
 This is a [Next.js](https://nextjs.org/) project.
@@ -71,7 +71,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Deplying the Dashboard
+### Deploying the Dashboard
 The dashboard is deployed via Vercel and is hosted on CFTP's site in an iframe.
 
 Any update to the ```main``` branch of this repo will update the production deployment of the dashboard.
