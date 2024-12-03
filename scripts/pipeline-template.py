@@ -432,7 +432,7 @@ new_template_pipeline = NewTemplatePipeline(
     NEW_TEMPLATE_PATH, trial_name="Dummy Data for New Template"
 )
 # TODO: This is commented out so we don't add the dummy data to the "real" data
-# processed_data.append(new_template_pipeline.run())
+processed_data.append(new_template_pipeline.run())
 
 
 class CASP004Pipeline(AbstractDataPipeline):
