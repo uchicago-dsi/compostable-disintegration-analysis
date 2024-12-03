@@ -29,9 +29,7 @@ TRIAL_COLS = [
     "% Residuals (Area)",
 ]
 
-ITEMS_PATH = (
-    DATA_DIR / "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"
-)
+ITEMS_PATH = DATA_DIR / "CFTP-TestItemInventory-Oct21-2024-FULL.xlsx"
 EXTRA_ITEMS_PATH = DATA_DIR / "Item IDS for CASP004 CASP003.xlsx"
 
 df_items = pd.read_excel(ITEMS_PATH, sheet_name=0, skiprows=3)
@@ -346,7 +344,7 @@ class NewTemplatePipeline(AbstractDataPipeline):
             Loaded data.
         """
         # Read the CSV file into a DataFrame
-        data = pd.read_csv(data_filepath)
+        data = pd.read_csv(data_filepath, encoding="latin1")
 
         # Find the index of the first completely empty row — formatted
         # so there's comments below the data
@@ -426,13 +424,13 @@ class NewTemplatePipeline(AbstractDataPipeline):
 
 
 NEW_TEMPLATE_PATH = (
-    DATA_DIR / "CFTP_DisintegrationDataInput_Template_sept92024.csv"
+    DATA_DIR / "CFTP_DisintegrationDataInput_Oct22-2024-partial.csv"
 )
 new_template_pipeline = NewTemplatePipeline(
-    NEW_TEMPLATE_PATH, trial_name="Dummy Data for New Template"
+    NEW_TEMPLATE_PATH, trial_name="Updated Information"
 )
 # TODO: This is commented out so we don't add the dummy data to the "real" data
-# processed_data.append(new_template_pipeline.run())
+processed_data.append(new_template_pipeline.run())
 
 
 class CASP004Pipeline(AbstractDataPipeline):
@@ -828,6 +826,7 @@ def anonymize_brand(brand: str) -> str:
 
 
 all_trials["Item Brand"] = all_trials["Item Brand"].apply(anonymize_brand)
+
 
 all_trials.to_csv(output_filepath, index=False)
 
