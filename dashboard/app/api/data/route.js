@@ -74,7 +74,6 @@ const filterTrialIDsByConditions = (
       filteredTrialIDs.forEach((id) => trialIDs.add(id));
     }
   });
-  console.log(trialIDs)
   return trialIDs;
 };
 
