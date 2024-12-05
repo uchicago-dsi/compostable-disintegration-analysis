@@ -429,7 +429,7 @@ NEW_TEMPLATE_PATH = (
     DATA_DIR / "CFTP_DisintegrationDataInput_Template_sept92024.csv"
 )
 new_template_pipeline = NewTemplatePipeline(
-    NEW_TEMPLATE_PATH, trial_name="Dummy Data for New Template"
+    NEW_TEMPLATE_PATH, trial_name="44547-01-21"
 )
 # TODO: This is commented out so we don't add the dummy data to the "real" data
 processed_data.append(new_template_pipeline.run())
