@@ -10,8 +10,8 @@ import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
 const dataSource = process.env.DATA_SOURCE;
 const bucketName = "cftp_data";
-const trialsFilename = process.env.DATA_FILENAME
-const operatingConditionsFilename = "operating_conditions_avg.csv";
+const trialsFilename = `all_trials_processed${process.env.DATA_VERSION_ID||''}.csv`
+const operatingConditionsFilename = `operating_conditions_avg${process.env.DATA_VERSION_ID||''}.csv`
 
 const trialDataPath = path.join(
   process.cwd(),
@@ -131,15 +131,18 @@ const prepareData = async (searchParams) => {
     ? searchParams.get("trialdurations").split(",")
     : [];
 
-  const noFiltersSelected =
-    technologies.length === 0 ||
-    materials.length === 0 ||
-    specificMaterials.length === 0 ||
     brands.length === 0 ||
     formats.length === 0 ||
-    temperatureFilter.length === 0 ||
-    moistureFilter.length === 0 ||
-    trialDurations.length === 0;
+  const noFiltersSelected = [
+    technologies,
+    materials,
+    specificMaterials,
+    brands,
+    formats,
+    temperatureFilter,
+    moistureFilter,
+    trialDurations,
+  ].some((f) => f.length === 0);
 
   if (noFiltersSelected) {
     return {
