@@ -131,8 +131,6 @@ const prepareData = async (searchParams) => {
     ? searchParams.get("trialdurations").split(",")
     : [];
 
-    brands.length === 0 ||
-    formats.length === 0 ||
   const noFiltersSelected = [
     technologies,
     materials,
