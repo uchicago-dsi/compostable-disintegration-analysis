@@ -4,7 +4,7 @@ import { col2material } from "@/lib/constants";
 import state from "@/lib/state";
 import Plot from "react-plotly.js";
 import { useSnapshot } from "valtio";
-import {ParentSize} from "@visx/responsive";
+import { ParentSize } from "@visx/responsive";
 import BoxPlot from "./BoxPlot";
 
 export default function Dashboard() {
@@ -17,8 +17,6 @@ export default function Dashboard() {
       </div>
     );
   }
-
-
 
   const maxLabelLength = 30;
 
@@ -40,42 +38,13 @@ export default function Dashboard() {
     return wrappedLabel.trim();
   }
 
-  // const cleanDisplayCol = snap.filters.displayResiduals === "Disintegrated"
-  //   ? snap.filters.displayCol.replace("Residuals", "Disintegrated")
-  //   : snap.filters.displayCol
-
-  // function generateYAxisTitle(displayCol, cap) {
-  //   let yAxisTitle = `${displayCol}`;
-  //   if (cap) {
-  //     yAxisTitle += " Capped";
-  //   }
-  //   return yAxisTitle;
-  // }
-  // const yAxisTitle = generateYAxisTitle(
-  //   cleanDisplayCol,
-  //   !snap.filters.uncapResults
-  // );
-
-
-
-  // function generateTitle(cleanDisplayCol, aggCol, num_trial) {
-  //   return `${cleanDisplayCol} by ${col2material[aggCol]} - ${num_trial} Trial(s)`;
-  // }
-
-
-  // const title = generateTitle(
-  //   cleanDisplayCol,
-  //   snap.filters.aggCol,
-  //   snap.data.numTrials
-  // );
-
-  // const yMax =
-  //   snap.data.data && snap.data.data.length > 0
-  //     ? Math.max(...snap.data.data.map((d) => d.max + 0.05), 1.05)
-  //     : 1.05;
-
-  // const xTickAngle = plotData.length > 6 ? 90 : 0;
-  // console.log("plotData", plotData);
+  const cleanDisplayCol =
+    snap.filters.displayResiduals === "Disintegrated"
+      ? snap.filters.displayCol.replace("Residuals", "Disintegrated")
+      : snap.filters.displayCol;
+  const yAxisTitle = `${cleanDisplayCol}${
+    snap.filters.uncapResults ? "" : " Capped"
+  }`;
   return (
     <>
       {snap.errorMessage ? (
@@ -85,15 +54,23 @@ export default function Dashboard() {
           </p>
         </div>
       ) : (
-        <BoxPlot
-          data={snap.data.data}
-          minWidth={600}
-          minHeight={400}
-          // yMax={yMax}
-          // title={title}
-          // yAxisTitle={yAxisTitle}
-          // xTickAngle={xTickAngle}
-          />
+        <div className="flex flex-col items-center gap-4 py-4">
+          <h1 className="text-2xl font-bold">
+            {cleanDisplayCol} by {col2material[snap.filters.aggCol]} -{" "}
+            {snap.data.numTrials} Trial(s)
+          </h1>
+          <div className="relative w-full" style={{height: '600px'}}>
+            <BoxPlot
+              data={snap.data.data}
+              minWidth={600}
+              minHeight={400}
+              // yMax={yMax}
+              // title={title}
+              yAxisTitle={yAxisTitle}
+              // xTickAngle={xTickAngle}
+            />
+          </div>
+        </div>
         // <Plot
         //   data={plotData}
         //   layout={{

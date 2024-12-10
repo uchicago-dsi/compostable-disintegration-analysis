@@ -19,7 +19,7 @@ export const BoxPlot = ({
   minHeight,
 }) => {
   const { parentRef, width, height } = useParentSize({ debounceTime: 150 });
-  const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+  const margin = { top: 20, right: 20, bottom: 100, left: 80 };
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const xScale = scaleBand({
@@ -51,9 +51,19 @@ export const BoxPlot = ({
     });
   };
 
+  const dataJittered = useMemo(() => {
+    const jitter = 50;
+    return data.map((d) => ({
+      outliers: d.outliers.map((outlier) => 
+      [outlier, jitter * (Math.random() - 0.5)])
+    }));
+  }, [data])
+  console.log("!!!", dataJittered)
+
   return (
     <div
       ref={parentRef}
+      className="flex-grow"
       style={{ minHeight, minWidth, width: "100%", height: "100%" }}
     >
       <svg width={width} height={height}>
@@ -68,11 +78,6 @@ export const BoxPlot = ({
               dy: "0.25em",
             })}
             label={xAxisTitle}
-            labelProps={{
-              fontSize: 14,
-              textAnchor: "middle",
-              dy: "3em",
-            }}
           />
           <AxisLeft
             scale={yScale}
@@ -89,10 +94,11 @@ export const BoxPlot = ({
             })}
             label={yAxisTitle}
             labelProps={{
-              fontSize: 14,
+              fontSize: 20,
+              fontWeight: "bold",
               textAnchor: "middle",
               angle: -90,
-              dx: "-3em",
+              dx: "-1em",
             }}
           />
           <Grid
@@ -148,22 +154,23 @@ export const BoxPlot = ({
                   width={boxWidth}
                   height={q1Y - q3Y}
                   fill={d.color}
-                  fillOpacity={0.3}
+                  fillOpacity={0.5}
                   stroke={d.color}
-                  strokeWidth={3}
+                  strokeWidth={4}
                 />
                 <Line
                   from={{ x, y: medianY }}
                   to={{ x: x + boxWidth, y: medianY }}
                   stroke={d.color}
-                  strokeWidth={2}
+                  strokeWidth={4}
                 />
                 {/* Mean dashed line */}
                 <Line
                   from={{ x, y: meanY }}
                   to={{ x: x + boxWidth, y: meanY }}
                   stroke={d.color}
-                  strokeDasharray="4,2"
+                  strokeDasharray="8,4"
+                  strokeWidth={4}
                 />
                 <Bar
                   x={x}
@@ -175,11 +182,12 @@ export const BoxPlot = ({
                   onMouseOut={hideTooltip}
                 />
                 {/* Outliers */}
-                {d.outliers.map((outlier) => {
-                  const outlierY = yScale(outlier);
+                {dataJittered[i].outliers.map((outlier) => {
+                  const outlierY = yScale(outlier[0]);
+
                   return (
                     <circle
-                      cx={x + boxWidth / 2}
+                      cx={x + boxWidth / 2 + outlier[1]}
                       cy={outlierY}
                       r={2}
                       fill={d.color}
@@ -221,8 +229,10 @@ const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
     const yValues = {};
     tooltipKeys.forEach((key) => {
       const value = tooltipData[key];
-      const dir = value === tooltipData.max ? 1 : -1;
-      yValues[key] = yScale(value) + (valueCounts[value] || 0) * (14 * dir);
+      const prevCount = valueCounts[value] || 0
+      const dir = prevCount % 2 === 0 ? 1 : -1;
+      const dist = prevCount % 2 === 0 ? 10 * dir * prevCount : 10 * dir * (prevCount - 1);
+      yValues[key] = yScale(value) + (valueCounts[value] || 0) + dist;
       if (valueCounts[value]) {
         valueCounts[value] += 1;
       } else {
@@ -233,25 +243,28 @@ const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
   }, [tooltipData]);
 
   return (
-    <Group left={tooltipLeft} top={top} height={height}>
+    <Group left={tooltipLeft} top={top} height={height} style={{pointerEvents:"none"}}>
       {tooltipKeys.map((key) => (
         <React.Fragment key={key}>
           <line
             x1={0}
             y1={yScale(tooltipData[key])}
-            x2={30}
+            x2={40}
             y2={mappedYValues[key]}
-            stroke="black"
+            stroke={tooltipData.color}
             strokeDasharray="4,2"
           />
           <rect
-            x={35}
-            y={mappedYValues[key] - 7}
-            width={80}
-            height={14}
-            fill="white"
+            x={40}
+            y={mappedYValues[key] - 9}
+            width={100}
+            height={22}
+            fill={tooltipData.color}
           />
-          <text x={35} y={mappedYValues[key] + 5} fontSize={10}>
+          {/* <text x={35} y={mappedYValues[key] + 5} fontSize={10} stroke="white" strokeWidth={2}>
+            {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${pctFormat(tooltipData[key])}`}
+          </text> */}
+          <text x={45} y={mappedYValues[key] + 5} fontSize={10} fill="white" fontWeight={"bold"}>
             {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${pctFormat(tooltipData[key])}`}
           </text>
         </React.Fragment>
