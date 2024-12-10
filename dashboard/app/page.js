@@ -4,7 +4,7 @@ import state from "@/lib/state";
 import dynamic from "next/dynamic";
 import DashboardControls from "@/components/DashboardControls";
 
-const Dashboard = dynamic(() => import("@/components/Dashboard"), {
+const Dashboard = dynamic(() => import("@/components/Dashboard.jsx"), {
   ssr: false,
 });
 

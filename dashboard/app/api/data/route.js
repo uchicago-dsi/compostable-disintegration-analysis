@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import * as d3 from "d3";
 import path from "path";
 import {
+  class2color,
   moistureFilterDict,
   temperatureFilterDict,
   trialDurationDict,
@@ -28,12 +29,21 @@ const operatingConditionsPath = path.join(
 
 const calculateQuartiles = (data, key) => {
   const sorted = data.map((d) => parseFloat(d[key])).sort((a, b) => a - b);
+  const q1 = d3.quantile(sorted, 0.25);
+  const q3 = d3.quantile(sorted, 0.75);
+  const outliers = sorted.filter(v => v>q3 || v<q1);
+
   return {
     min: d3.min(sorted),
-    q1: d3.quantile(sorted, 0.25),
+    lowerfence: d3.quantile(sorted, 0.25) - 1.5 * (q3 - d3.quantile(sorted, 0.25)),
+    q1,
     median: d3.quantile(sorted, 0.5),
-    q3: d3.quantile(sorted, 0.75),
+    mean: d3.mean(sorted),
+    q3,
+    upperfence: q3 + 1.5 * (q3 - d3.quantile(sorted, 0.25)),
     max: d3.max(sorted),
+    outliers,
+    color: class2color[data[0]["Material Class I"]],
   };
 };
 
