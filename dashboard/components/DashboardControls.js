@@ -56,8 +56,8 @@ export default function DashboardControls() {
   }
 
   return (
-    <div className="flex flex-row overflow-y-auto px-2">
-      <div className="m-2 w-1/3">
+    <div className="flex flex-col lg:flex-row overflow-y-auto px-2">
+      <div className="m-2">
         <DashboardDisplayControls />
       </div>
       <div className="m-2 w-2/3 ml-10">

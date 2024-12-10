@@ -14,7 +14,7 @@ export default function DashboardFilterControls() {
     <div className="flex flex-col">
       <div className="flex-1 mx-2 w-full min-h-[300px]">
         <h2 className="text-center"> Item Filters</h2>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="flex flex-col lg:grid lg:grid-cols-4 gap-2">
           <CheckboxMenu
             options={snap.options["Material Class II"]}
             selectedOptions={snap.filters.selectedMaterialTypes}

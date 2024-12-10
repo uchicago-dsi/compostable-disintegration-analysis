@@ -32,16 +32,17 @@ const calculateQuartiles = (data, key) => {
   const q1 = d3.quantile(sorted, 0.25);
   const q3 = d3.quantile(sorted, 0.75);
   const outliers = sorted.filter(v => v>q3 || v<q1);
-
+  const max = d3.max(sorted)
+  const min = d3.min(sorted)
   return {
-    min: d3.min(sorted),
-    lowerfence: d3.quantile(sorted, 0.25) - 1.5 * (q3 - d3.quantile(sorted, 0.25)),
+    lowerfence: Math.max(d3.quantile(sorted, 0.25) - 1.5 * (q3 - d3.quantile(sorted, 0.25)), min),
     q1,
-    median: d3.quantile(sorted, 0.5),
-    mean: d3.mean(sorted),
+    median: Math.round(d3.quantile(sorted, 0.5) * 1000)/1000,
+    mean: Math.round(d3.mean(sorted) * 1000)/1000,
     q3,
-    upperfence: q3 + 1.5 * (q3 - d3.quantile(sorted, 0.25)),
-    max: d3.max(sorted),
+    upperfence: Math.min(q3 + 1.5 * (q3 - d3.quantile(sorted, 0.25)), max),
+    max,
+    min,
     outliers,
     color: class2color[data[0]["Material Class I"]],
   };

@@ -1,16 +1,23 @@
-import React from 'react';
-import { scaleBand, scaleLinear } from '@visx/scale';
-import { Group } from '@visx/group';
-import { Line, Bar } from '@visx/shape';
-import { Text } from '@visx/text';
-import { Tooltip, useTooltip } from '@visx/tooltip';
-import { localPoint } from '@visx/event';
-import { useParentSize } from '@visx/responsive';
-import { AxisBottom, AxisLeft } from '@visx/axis';
-import { format } from 'd3-format';
+import React, { useMemo } from "react";
+import { scaleBand, scaleLinear } from "@visx/scale";
+import { Group } from "@visx/group";
+import { Line, Bar } from "@visx/shape";
+import { Text } from "@visx/text";
+import { Tooltip, useTooltip } from "@visx/tooltip";
+import { localPoint } from "@visx/event";
+import { useParentSize } from "@visx/responsive";
+import { AxisBottom, AxisLeft } from "@visx/axis";
+import { format } from "d3-format";
+import { Grid } from "@visx/grid";
 
-const pctFormat = format('.0%')
-export const BoxPlot = ({ xAxisTitle, yAxisTitle, data, minWidth, minHeight }) => {
+const pctFormat = format(".0%");
+export const BoxPlot = ({
+  xAxisTitle,
+  yAxisTitle,
+  data,
+  minWidth,
+  minHeight,
+}) => {
   const { parentRef, width, height } = useParentSize({ debounceTime: 150 });
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
   const xMax = width - margin.left - margin.right;
@@ -22,34 +29,81 @@ export const BoxPlot = ({ xAxisTitle, yAxisTitle, data, minWidth, minHeight }) =
   });
 
   const yScale = scaleLinear({
-    domain: [Math.min(...data.map(d => d.min)), Math.max(...data.map(d => d.max))],
+    domain: [
+      Math.min(...data.map((d) => d.min)),
+      Math.max(...data.map((d) => d.max)),
+    ],
     range: [yMax, 0],
   });
-  
-  const {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip();
+
+  const { tooltipData, tooltipLeft, tooltipTop, showTooltip, hideTooltip } =
+    useTooltip();
 
   const handleMouseOver = (event, datum) => {
     const coords = localPoint(event.target.ownerSVGElement, event);
-    const dataIndex = data.findIndex(d => d === datum);
+    const dataIndex = data.findIndex((d) => d === datum);
     const barWidth = xScale.bandwidth();
-    const xModifier = dataIndex === data.length - 1 ? -1 * barWidth : barWidth;
     showTooltip({
       tooltipData: datum,
-      tooltipLeft:  xScale(data.findIndex(d => d=== datum).toString()) + xModifier,
+      tooltipLeft:
+        xScale(data.findIndex((d) => d === datum).toString()) + barWidth,
       tooltipTop: coords?.y,
     });
   };
-  
+
   return (
-    <div ref={parentRef} style={{minHeight, minWidth, width: "100%", height: "100%"}}>
+    <div
+      ref={parentRef}
+      style={{ minHeight, minWidth, width: "100%", height: "100%" }}
+    >
       <svg width={width} height={height}>
         <Group left={margin.left} top={margin.top}>
+          <AxisBottom
+            scale={xScale}
+            top={yMax}
+            tickFormat={(v) => `${data[v].aggCol} (${data[v].count})`}
+            tickLabelProps={() => ({
+              fontSize: 12,
+              textAnchor: "middle",
+              dy: "0.25em",
+            })}
+            label={xAxisTitle}
+            labelProps={{
+              fontSize: 14,
+              textAnchor: "middle",
+              dy: "3em",
+            }}
+          />
+          <AxisLeft
+            scale={yScale}
+            tickFormat={pctFormat}
+            numTicks={5}
+            hideAxisLine
+            hideTicks
+            left={10}
+            tickLabelProps={() => ({
+              fontSize: 12,
+              textAnchor: "end",
+              dx: "-0.25em",
+              dy: "0.25em",
+            })}
+            label={yAxisTitle}
+            labelProps={{
+              fontSize: 14,
+              textAnchor: "middle",
+              angle: -90,
+              dx: "-3em",
+            }}
+          />
+          <Grid
+            yScale={yScale}
+            numTicksRows={5}
+            xScale={xScale}
+            numTicksColumns={0}
+            width={xMax}
+            height={yMax}
+            strokeWidth={1}
+          />
           {data.map((d, i) => {
             const x = xScale(i.toString());
             const boxWidth = xScale.bandwidth();
@@ -63,39 +117,41 @@ export const BoxPlot = ({ xAxisTitle, yAxisTitle, data, minWidth, minHeight }) =
             return (
               <Group key={`boxplot-${i}`}>
                 {/* Vertical whiskers */}
-                <Line
-                  from={{ x: x + boxWidth / 2, y: yScale(d.min) }}
+                {/* <Line
+                  from={{ x: x + boxWidth / 2, y: yScale(d.q1) }}
                   to={{ x: x + boxWidth / 2, y: lowerFenceY }}
                   stroke={d.color}
-                />
+                  strokeWidth={3}
+                /> */}
                 <Line
-                  from={{ x: x + boxWidth / 2, y: upperFenceY }}
-                  to={{ x: x + boxWidth / 2, y: yScale(d.max) }}
+                  from={{ x: x + boxWidth / 2, y: Math.min(upperFenceY, yMax) }}
+                  to={{ x: x + boxWidth / 2, y: yScale(d.q3) }}
                   stroke={d.color}
+                  strokeWidth={3}
                 />
                 {/* T-lines */}
                 <Line
                   from={{ x: x + boxWidth / 4, y: lowerFenceY }}
                   to={{ x: x + (boxWidth * 3) / 4, y: lowerFenceY }}
                   stroke={d.color}
+                  strokeWidth={3}
                 />
                 <Line
                   from={{ x: x + boxWidth / 4, y: upperFenceY }}
                   to={{ x: x + (boxWidth * 3) / 4, y: upperFenceY }}
                   stroke={d.color}
+                  strokeWidth={3}
                 />
-                {/* Box */}
                 <Bar
                   x={x}
                   y={q3Y}
                   width={boxWidth}
                   height={q1Y - q3Y}
                   fill={d.color}
-                  opacity={0.3}
-                  // onMouseOver={(e) => handleMouseOver(e, d)}
-                  // onMouseOut={hideTooltip}
+                  fillOpacity={0.3}
+                  stroke={d.color}
+                  strokeWidth={3}
                 />
-                {/* Median line */}
                 <Line
                   from={{ x, y: medianY }}
                   to={{ x: x + boxWidth, y: medianY }}
@@ -118,55 +174,89 @@ export const BoxPlot = ({ xAxisTitle, yAxisTitle, data, minWidth, minHeight }) =
                   onMouseOver={(e) => handleMouseOver(e, d)}
                   onMouseOut={hideTooltip}
                 />
+                {/* Outliers */}
+                {d.outliers.map((outlier) => {
+                  const outlierY = yScale(outlier);
+                  return (
+                    <circle
+                      cx={x + boxWidth / 2}
+                      cy={outlierY}
+                      r={2}
+                      fill={d.color}
+                    />
+                  );
+                })}
               </Group>
             );
           })}
-          <AxisBottom scale={xScale} top={yMax} tickFormat={v => `${data[v].aggCol} (${data[v].count})`}/>
-          <AxisLeft scale={yScale} tickFormat={pctFormat}/>
         </Group>
+        {tooltipData && (
+          <CustomTooltip
+            tooltipLeft={tooltipLeft}
+            tooltipData={tooltipData}
+            top={margin.top}
+            yScale={yScale}
+            height={height}
+          />
+        )}
       </svg>
-      {tooltipData && (
-        <Tooltip left={tooltipLeft} top={tooltipTop}>
-          <div>
-            <table className="table table-zebra table-xs">
-              <tr>
-                <td>Minimum</td>
-                <td>{tooltipData.min}</td>
-              </tr>
-              <tr>
-                <td>Lower Fence</td>
-                <td>{tooltipData.lowerfence}</td>
-              </tr>
-              <tr>
-                <td>1st Quartile</td>
-                <td>{tooltipData.q1}</td>
-
-              </tr>
-              <tr>
-                <td>Median</td>
-                <td>{tooltipData.median}</td>
-              </tr>
-              <tr>
-                <td>Mean</td>
-                <td>{tooltipData.mean}</td>
-              </tr>
-              <tr>
-                <td>3rd Quartile</td>
-                <td>{tooltipData.q3}</td>
-              </tr>
-              <tr>
-                <td>Upper Fence</td>
-                <td>{tooltipData.upperfence}</td>
-              </tr>
-              <tr>
-                <td>Max</td>
-                <td>{tooltipData.max}</td>
-              </tr>
-            </table>
-          </div>
-        </Tooltip>
-      )}
     </div>
+  );
+};
+
+const tooltipKeys = [
+  "min",
+  "lowerfence",
+  "q1",
+  "median",
+  "mean",
+  "q3",
+  "upperfence",
+  "max",
+];
+
+const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
+  const mappedYValues = useMemo(() => {
+    const valueCounts = {};
+    const yValues = {};
+    tooltipKeys.forEach((key) => {
+      const value = tooltipData[key];
+      const dir = value === tooltipData.max ? 1 : -1;
+      yValues[key] = yScale(value) + (valueCounts[value] || 0) * (14 * dir);
+      if (valueCounts[value]) {
+        valueCounts[value] += 1;
+      } else {
+        valueCounts[value] = 1;
+      }
+    });
+    return yValues;
+  }, [tooltipData]);
+
+  return (
+    <Group left={tooltipLeft} top={top} height={height}>
+      {tooltipKeys.map((key) => (
+        <React.Fragment key={key}>
+          <line
+            x1={0}
+            y1={yScale(tooltipData[key])}
+            x2={30}
+            y2={mappedYValues[key]}
+            stroke="black"
+            strokeDasharray="4,2"
+          />
+          <rect
+            x={35}
+            y={mappedYValues[key] - 7}
+            width={80}
+            height={14}
+            fill="white"
+          />
+          <text x={35} y={mappedYValues[key] + 5} fontSize={10}>
+            {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${pctFormat(tooltipData[key])}`}
+          </text>
+        </React.Fragment>
+      ))}
+    </Group>
   );
 };
 
