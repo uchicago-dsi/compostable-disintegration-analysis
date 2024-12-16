@@ -28,16 +28,18 @@ Download the following files from the DSI Google Drive in the [Results Data for 
 - [Item IDS for CASP004 CASP003.xlsx](https://docs.google.com/spreadsheets/d/1U8dds3eiUFNxQNzLYvYay1KxVqd9mpAR/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 - [CFTP_DisintegrationDataInput_Template_sept92024.csv](https://drive.google.com/file/d/1nRsp9j3VaFacGXpjEEvK4vQx82_SfAGb/view?usp=sharing)
 
-These files are all read directly in ```scripts/pipeline-template.py```
+File paths for these sheets are all configured in ```scripts/constants.py``` and read in `DefaultDataFrames` in ```scripts/utils.py```
 
 ### Running the Pipeline
 To run the pipeline:
 
 ```
-python scripts/pipeline-template.py
+python scripts/run-pipeline.py
 ```
 
 Cleaned data files will be output in ```data/```. To update the files displayed on the dashboard, follow the instructions in [Updating the Dashboard Data](#updating-the-dashboard-data)
+
+Updated pipeline templates should be added to `scripts/pipeline_templates.py` and added to the main pipeline function in `scripts/run-pipeline.py`
 
 ## Dashboard
 This is a [Next.js](https://nextjs.org/) project.
