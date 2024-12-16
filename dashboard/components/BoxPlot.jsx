@@ -1,3 +1,4 @@
+"use client"
 import React, { useMemo } from "react";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Group } from "@visx/group";
@@ -174,9 +175,10 @@ export const BoxPlot = ({
                   onMouseOut={hideTooltip}
                 />
                 {/* Outliers */}
-                {d.outliers.map((outlier) => {
+                {d.outliers.map((outlier, j) => {
                   return (
                     <circle
+                      key={`outlier-${i}-${j}`}
                       cx={x + boxWidth / 2}
                       cy={yScale(outlier)}
                       r={2}
@@ -265,7 +267,7 @@ const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
       labels.push({ displayValue, value, yValue, key });
     }
     return labels;
-  }, [tooltipData]);
+  }, [tooltipData, yScale]);
 
   return (
     <Group
