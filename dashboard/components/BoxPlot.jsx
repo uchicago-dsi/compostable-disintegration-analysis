@@ -31,7 +31,7 @@ export const BoxPlot = ({
   const yScale = scaleLinear({
     domain: [
       Math.min(...data.map((d) => d.min)),
-      Math.max(...data.map((d) => d.max)),
+      Math.max(Math.max(...data.map((d) => d.max)), 1),
     ],
     range: [yMax, 0],
   });
@@ -50,15 +50,6 @@ export const BoxPlot = ({
       tooltipTop: coords?.y,
     });
   };
-
-  const dataJittered = useMemo(() => {
-    const jitter = 50;
-    return data.map((d) => ({
-      outliers: d.outliers.map((outlier) => 
-      [outlier, jitter * (Math.random() - 0.5)])
-    }));
-  }, [data])
-  console.log("!!!", dataJittered)
 
   return (
     <div
@@ -116,19 +107,19 @@ export const BoxPlot = ({
             const medianY = yScale(d.median);
             const q1Y = yScale(d.q1);
             const q3Y = yScale(d.q3);
-            const lowerFenceY = yScale(d.lowerFence);
+            const lowerFenceY = yScale(d.lowerfence);
             const upperFenceY = yScale(d.upperfence);
             const meanY = yScale(d.mean);
 
             return (
               <Group key={`boxplot-${i}`}>
                 {/* Vertical whiskers */}
-                {/* <Line
+                <Line
                   from={{ x: x + boxWidth / 2, y: yScale(d.q1) }}
                   to={{ x: x + boxWidth / 2, y: lowerFenceY }}
                   stroke={d.color}
                   strokeWidth={3}
-                /> */}
+                />
                 <Line
                   from={{ x: x + boxWidth / 2, y: Math.min(upperFenceY, yMax) }}
                   to={{ x: x + boxWidth / 2, y: yScale(d.q3) }}
@@ -143,6 +134,7 @@ export const BoxPlot = ({
                   strokeWidth={3}
                 />
                 <Line
+                  id="upperfence-h"
                   from={{ x: x + boxWidth / 4, y: upperFenceY }}
                   to={{ x: x + (boxWidth * 3) / 4, y: upperFenceY }}
                   stroke={d.color}
@@ -182,14 +174,13 @@ export const BoxPlot = ({
                   onMouseOut={hideTooltip}
                 />
                 {/* Outliers */}
-                {dataJittered[i].outliers.map((outlier) => {
-                  const outlierY = yScale(outlier[0]);
-
+                {d.outliers.map((outlier) => {
                   return (
                     <circle
-                      cx={x + boxWidth / 2 + outlier[1]}
-                      cy={outlierY}
+                      cx={x + boxWidth / 2}
+                      cy={yScale(outlier)}
                       r={2}
+                      opacity={0.5}
                       fill={d.color}
                     />
                   );
@@ -213,50 +204,89 @@ export const BoxPlot = ({
 };
 
 const tooltipKeys = [
-  "min",
-  "lowerfence",
-  "q1",
-  "median",
-  "mean",
-  "q3",
-  "upperfence",
   "max",
+  "upperfence",
+  "q3",
+  "mean",
+  "median",
+  "q1",
+  "lowerfence",
+  "min",
 ];
 
 const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
-  const mappedYValues = useMemo(() => {
-    const valueCounts = {};
-    const yValues = {};
-    tooltipKeys.forEach((key) => {
+  const mappedLabels = useMemo(() => {
+    let labels = [];
+    for (const key of tooltipKeys) {
       const value = tooltipData[key];
-      const prevCount = valueCounts[value] || 0
-      const dir = prevCount % 2 === 0 ? 1 : -1;
-      const dist = prevCount % 2 === 0 ? 10 * dir * prevCount : 10 * dir * (prevCount - 1);
-      yValues[key] = yScale(value) + (valueCounts[value] || 0) + dist;
-      if (valueCounts[value]) {
-        valueCounts[value] += 1;
-      } else {
-        valueCounts[value] = 1;
+      const yValue = yScale(value);
+      let conflicts = labels.filter(
+        (label) => Math.abs(label.yValue - yValue) < 20
+      );
+      if (conflicts.length > 2) {
+        conflicts.forEach((c) => (c.displayValue = c.displayValue - 20));
+        let conflictFlag = true;
+        while (conflictFlag) {
+          labels
+            .sort((a, b) => a.displayValue - b.displayValue)
+            .forEach((label, i) => {
+              const next = labels[i + 1];
+              const diff = next
+                ? Math.abs(label.displayValue - next.displayValue)
+                : 999;
+              const nextDiffValue = next ? next.value !== label.value : false;
+              const currShouldMove = next ? label.value > next.value : false;
+              const indexToMove = currShouldMove ? i : i + 1;
+              if (nextDiffValue && diff < 30) {
+                labels[indexToMove].displayValue -= 15;
+              } else if (diff < 20) {
+                labels[indexToMove].displayValue -= 20;
+              }
+            });
+          const displayValues = labels.map((label) => label.displayValue);
+          const minDistance = Math.min(
+            ...displayValues.map((v, i) =>
+              Math.min(
+                ...displayValues.map((v2, j) =>
+                  i !== j ? Math.abs(v - v2) : 999
+                )
+              )
+            )
+          );
+          conflictFlag = minDistance < 20;
+        }
       }
-    });
-    return yValues;
+
+      const [min, max] = [
+        Math.min(...conflicts.map((label) => label.displayValue)),
+        Math.max(...conflicts.map((label) => label.displayValue)),
+      ];
+      const displayValue = conflicts.length > 0 ? max + 20 : yValue;
+      labels.push({ displayValue, value, yValue, key });
+    }
+    return labels;
   }, [tooltipData]);
 
   return (
-    <Group left={tooltipLeft} top={top} height={height} style={{pointerEvents:"none"}}>
-      {tooltipKeys.map((key) => (
-        <React.Fragment key={key}>
+    <Group
+      left={tooltipLeft}
+      top={top}
+      height={height}
+      style={{ pointerEvents: "none" }}
+    >
+      {mappedLabels.map((entry) => (
+        <React.Fragment key={entry.key}>
           <line
-            x1={0}
-            y1={yScale(tooltipData[key])}
+            x1={5}
+            y1={entry.yValue}
             x2={40}
-            y2={mappedYValues[key]}
+            y2={entry.displayValue}
             stroke={tooltipData.color}
             strokeDasharray="4,2"
           />
           <rect
             x={40}
-            y={mappedYValues[key] - 9}
+            y={entry.displayValue - 9}
             width={100}
             height={22}
             fill={tooltipData.color}
@@ -264,8 +294,16 @@ const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
           {/* <text x={35} y={mappedYValues[key] + 5} fontSize={10} stroke="white" strokeWidth={2}>
             {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${pctFormat(tooltipData[key])}`}
           </text> */}
-          <text x={45} y={mappedYValues[key] + 5} fontSize={10} fill="white" fontWeight={"bold"}>
-            {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${pctFormat(tooltipData[key])}`}
+          <text
+            x={45}
+            y={entry.displayValue + 5}
+            fontSize={10}
+            fill="white"
+            fontWeight={"bold"}
+          >
+            {`${
+              entry.key.charAt(0).toUpperCase() + entry.key.slice(1)
+            }: ${pctFormat(entry.value)}`}
           </text>
         </React.Fragment>
       ))}

@@ -29,18 +29,20 @@ const operatingConditionsPath = path.join(
 
 const calculateQuartiles = (data, key) => {
   const sorted = data.map((d) => parseFloat(d[key])).sort((a, b) => a - b);
-  const q1 = d3.quantile(sorted, 0.25);
-  const q3 = d3.quantile(sorted, 0.75);
-  const outliers = sorted.filter(v => v>q3 || v<q1);
   const max = d3.max(sorted)
   const min = d3.min(sorted)
+  const q1 = d3.quantile(sorted, 0.25);
+  const q3 = d3.quantile(sorted, 0.75);
+  const upperfence = Math.min(q3 + 1.5 * (q3 - q1), max)
+  const lowerfence = Math.max(q1 - 1.5 * (q3 - q1), min)
+  const outliers = sorted.filter(v => v>upperfence || v<lowerfence)
   return {
-    lowerfence: Math.max(d3.quantile(sorted, 0.25) - 1.5 * (q3 - d3.quantile(sorted, 0.25)), min),
+    lowerfence,
     q1,
     median: Math.round(d3.quantile(sorted, 0.5) * 1000)/1000,
     mean: Math.round(d3.mean(sorted) * 1000)/1000,
     q3,
-    upperfence: Math.min(q3 + 1.5 * (q3 - d3.quantile(sorted, 0.25)), max),
+    upperfence,
     max,
     min,
     outliers,
