@@ -47,18 +47,18 @@ TRIAL_TO_ID_MAP = {
 OUTLIER_THRESHOLD = 10
 
 DATA_SHEET_PATHS = {
-  "ITEMS_PATH":Path.joinpath(DATA_DIR, "CFTP Test Item Inventory with Dimensions - All Trials.xlsx"),
-  "EXTRA_ITEMS_PATH":Path.joinpath(DATA_DIR, "Item IDS for CASP004 CASP003.xlsx"),
-  "TRIALS_PATH":Path.joinpath(DATA_DIR, "CFTP-TrialDetails-Oct22-2024.xlsx"),
-  "OPERATING_CONDITIONS_PATH":Path.joinpath(DATA_DIR, "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx"),
-  "OLD_ITEMS_JSON":Path.joinpath(DATA_DIR, "old_items.json"),
+  "ITEMS_PATH": DATA_DIR / "CFTP Test Item Inventory with Dimensions - All Trials.xlsx",
+  "EXTRA_ITEMS_PATH": DATA_DIR / "Item IDS for CASP004 CASP003.xlsx",
+  "TRIALS_PATH": DATA_DIR / "CFTP-TrialDetails-Oct22-2024.xlsx",
+  "OPERATING_CONDITIONS_PATH": DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx",
+  "OLD_ITEMS_JSON": DATA_DIR / "old_items.json",
 }
 
 TRIAL_DATA_PATHS = {
-  "NEW_TEMPLATE_PATH": Path.joinpath(DATA_DIR, "CFTP_DisintegrationDataInput_Oct22-2024-partial.csv"),
-  "CASP004_PATH": Path.joinpath(DATA_DIR, "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx"),
-  "TEN_TRIALS_PATH": Path.joinpath(DATA_DIR, "Donated Data 2023 - Compiled Field Results for DSI.xlsx"),
-  "PDF_TRIALS": Path.joinpath(DATA_DIR, "Compiled Field Results - CFTP Gathered Data.xlsx")
+  "NEW_TEMPLATE_PATH":  DATA_DIR / "CFTP_DisintegrationDataInput_Oct22-2024-partial.csv",
+  "CASP004_PATH":  DATA_DIR / "CASP004-01 - Results Pre-Processed for Analysis from PDF Tables.xlsx",
+  "TEN_TRIALS_PATH":  DATA_DIR / "Donated Data 2023 - Compiled Field Results for DSI.xlsx",
+  "PDF_TRIALS":  DATA_DIR / "Compiled Field Results - CFTP Gathered Data.xlsx"
 }
 
 ID_TO_TECHNOLOGY_MAP = {
