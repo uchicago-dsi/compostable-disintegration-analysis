@@ -80,10 +80,15 @@ def map_technology(trial_id: str) -> str:
 
 
 TRIALS_PATH = (
-    DATA_DIR / "CFTP Anonymized Data Compilation Overview - For Sharing.xlsx"
+    DATA_DIR / "CFTP-TrialDetails-Oct22-2024.xlsx"
 )
-df_trials = pd.read_excel(TRIALS_PATH, skiprows=3)
 
+df_trials = pd.read_excel(TRIALS_PATH)[[
+    "Public Trial ID",
+    "Test Method",
+    "Technology",
+]]
+# %%
 trial2id = {
     "Facility 1 (Windrow)": "WR004-01",
     "Facility 2 (CASP)": "CASP005-01",
@@ -346,7 +351,8 @@ class NewTemplatePipeline(AbstractDataPipeline):
             Loaded data.
         """
         # Read the CSV file into a DataFrame
-        data = pd.read_csv(data_filepath)
+        # With fix utf-8 encoding issue
+        data = pd.read_csv(data_filepath, encoding="ISO-8859-1")
 
         # Find the index of the first completely empty row — formatted
         # so there's comments below the data
@@ -403,33 +409,11 @@ class NewTemplatePipeline(AbstractDataPipeline):
         return self.items.drop_duplicates(subset="Item Name").merge(
             data, on="Item Name"
         )
-
-    def merge_with_trials(self, data):
-        """Join with the trials table
-
-        Args:
-            data: Data to join.
-
-        Returns:
-            The joined data
-        """
-        dummy_trial = {
-            "Trial ID": "44547-01-21",
-            "Test Method": "Mesh Bag",
-            "Technology": "Windrow",
-        }
-        self.trials = pd.concat(
-            [self.trials, pd.DataFrame(dummy_trial, index=[0])],
-            ignore_index=True,
-        )
-        return data.merge(self.trials, on="Trial ID")
-
-
 NEW_TEMPLATE_PATH = (
-    DATA_DIR / "CFTP_DisintegrationDataInput_Template_sept92024.csv"
+    DATA_DIR / "CFTP_DisintegrationDataInput_Oct22-2024-partial.csv"
 )
 new_template_pipeline = NewTemplatePipeline(
-    NEW_TEMPLATE_PATH, trial_name="44547-01-21"
+    NEW_TEMPLATE_PATH, trial_name="OCT_22_PARTIAL"
 )
 # TODO: This is commented out so we don't add the dummy data to the "real" data
 processed_data.append(new_template_pipeline.run())
