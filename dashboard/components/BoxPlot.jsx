@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useMemo } from "react";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Group } from "@visx/group";
@@ -20,7 +20,7 @@ export const BoxPlot = ({
   minHeight,
 }) => {
   const { parentRef, width, height } = useParentSize({ debounceTime: 150 });
-  const margin = { top: 20, right: 20, bottom: 120, left: 80 };
+  const margin = { top: 80, right: 20, bottom: 120, left: 80 };
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const xScale = scaleBand({
@@ -42,12 +42,10 @@ export const BoxPlot = ({
 
   const handleMouseOver = (event, datum) => {
     const coords = localPoint(event.target.ownerSVGElement, event);
-    const dataIndex = data.findIndex((d) => d === datum);
     const barWidth = xScale.bandwidth();
     showTooltip({
       tooltipData: datum,
-      tooltipLeft:
-        xScale(data.findIndex((d) => d === datum).toString()) + barWidth,
+      tooltipLeft: xScale(data.findIndex((d) => d === datum).toString()) + margin.left + barWidth /2,
       tooltipTop: coords?.y,
     });
   };
@@ -200,6 +198,7 @@ export const BoxPlot = ({
             top={margin.top}
             yScale={yScale}
             height={height}
+            width={width}
           />
         )}
       </svg>
@@ -225,94 +224,108 @@ const CustomTickLabel = ({
   ...props
 }) => {
   if (formattedValue.length > lineLength) {
-    const words = formattedValue.split(' ');
-    let lines = [''];
+    const words = formattedValue.split(" ");
+    let lines = [""];
     let currentLine = 0;
-    
-    words.forEach(word => {
+
+    words.forEach((word) => {
       if ((lines[currentLine] + word).length > lineLength) {
-      currentLine++;
-      lines[currentLine] = '';
+        currentLine++;
+        lines[currentLine] = "";
       }
-      lines[currentLine] += (lines[currentLine] ? ' ' : '') + word;
+      lines[currentLine] += (lines[currentLine] ? " " : "") + word;
     });
-    const offset = -12 * ((lines.length-1)/2);
+    const offset = -12 * ((lines.length - 1) / 2);
 
     return (
       <>
         {lines.map((line, i) => (
-          <Text x={x + (props.angle === -90 ? offset+i*12 : 0)} y={y + (props.angle !== -90 ?offset+i*15: 0)} {...props} key={i}>
+          <Text
+            x={x + (props.angle === -90 ? offset + i * 12 : 0)}
+            y={y + (props.angle !== -90 ? offset + i * 15 : 0)}
+            {...props}
+            key={i}
+          >
             {line}
           </Text>
         ))}
-        </>
+      </>
     );
   } else {
     return (
-      <Text
-      x={x}
-      y={y}
-      {...props}
-      >
-      {formattedValue}
-    </Text>
-  );
-}
-}
+      <Text x={x} y={y} {...props}>
+        {formattedValue}
+      </Text>
+    );
+  }
+};
 
-const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
+const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, width, yScale }) => {
+
   const mappedLabels = useMemo(() => {
-    let labels = [];
-    for (const key of tooltipKeys) {
-      const value = tooltipData[key];
-      const yValue = yScale(value);
-      let conflicts = labels.filter(
-        (label) => Math.abs(label.yValue - yValue) < 20
-      );
-      if (conflicts.length > 2) {
-        conflicts.forEach((c) => (c.displayValue = c.displayValue - 20));
-        let conflictFlag = true;
-        while (conflictFlag) {
-          labels
-            .sort((a, b) => a.displayValue - b.displayValue)
-            .forEach((label, i) => {
-              const next = labels[i + 1];
-              const diff = next
-                ? Math.abs(label.displayValue - next.displayValue)
-                : 999;
-              const nextDiffValue = next ? next.value !== label.value : false;
-              const currShouldMove = next ? label.value > next.value : false;
-              const indexToMove = currShouldMove ? i : i + 1;
-              if (nextDiffValue && diff < 30) {
-                labels[indexToMove].displayValue -= 15;
-              } else if (diff < 20) {
-                labels[indexToMove].displayValue -= 20;
-              }
-            });
-          const displayValues = labels.map((label) => label.displayValue);
-          const minDistance = Math.min(
-            ...displayValues.map((v, i) =>
-              Math.min(
-                ...displayValues.map((v2, j) =>
-                  i !== j ? Math.abs(v - v2) : 999
-                )
-              )
-            )
-          );
-          conflictFlag = minDistance < 20;
+      let countByValue = {};
+      tooltipKeys.forEach((key) => {
+        countByValue[tooltipData[key]] = (countByValue[tooltipData[key]] || 0) + 1
+      })
+      let keyRanges = {}
+      const sortedValues = Object.keys(countByValue).sort((a,b) => +b-+a)
+
+      sortedValues.forEach((key,i) => {
+        let y = yScale(key) - 10
+        // shift up and down 20 for each count
+        let minY = y - countByValue[key]/2 * 20
+        let maxY = y + countByValue[key]/2 * 20 
+
+        keyRanges[key] = {
+          minY, 
+          y,
+          maxY
         }
+      })
+      let areColided = true;
+      let index = 0;
+      let runs = 0
+      while (areColided && runs < 100) {
+        areColided = false
+        for (let i = 0; i < sortedValues.length; i++) {
+          let key = sortedValues[i]
+          let range = keyRanges[key]
+          for (let j = i+1; j < sortedValues.length; j++) {
+            let key2 = sortedValues[j]
+            let range2 = keyRanges[key2]
+            if (range.minY < range2.maxY && range.maxY > range2.minY) {
+              areColided = true
+              let shift = 10
+              keyRanges[key].minY -= shift
+              keyRanges[key].y -= shift
+              keyRanges[key].maxY -= shift
+
+              keyRanges[key2].minY += shift
+              keyRanges[key2].y += shift
+              keyRanges[key2].maxY += shift
+            }
+          }
+        }
+        runs++
       }
 
-      const [min, max] = [
-        Math.min(...conflicts.map((label) => label.displayValue)),
-        Math.max(...conflicts.map((label) => label.displayValue)),
-      ];
-      const displayValue = conflicts.length > 0 ? max + 20 : yValue;
-      labels.push({ displayValue, value, yValue, key });
-    }
-    return labels;
-  }, [tooltipData, yScale]);
+      return tooltipKeys.map((key) => {
+        const value = tooltipData[key]
+        countByValue[value] = countByValue[value] - 1
+        const yValue = yScale(value)
+        const offset = countByValue[value] * 20
+        const displayValue = keyRanges[value].maxY - offset
+        return {
+          yValue,
+          value,
+          displayValue,
+          key
+        };
+      })
 
+  }, [tooltipData, yScale]);
+  const orientation = tooltipLeft > width - 120 ? "left" : "right";
+  const direction = orientation === "left" ? -1 : 1;
   return (
     <Group
       left={tooltipLeft}
@@ -323,28 +336,30 @@ const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
       {mappedLabels.map((entry) => (
         <React.Fragment key={entry.key}>
           <line
-            x1={5}
+            x1={5 * direction}
             y1={entry.yValue}
-            x2={40}
+            x2={20 * direction}
             y2={entry.displayValue}
             stroke={tooltipData.color}
             strokeDasharray="4,2"
           />
           <rect
-            x={40}
+            x={20 * direction + (direction === -1 ? -100 : 0)}
             y={entry.displayValue - 9}
             width={100}
             height={22}
-            fill={tooltipData.color}
+            fill={'white'}
+            stroke={tooltipData.color}
+            strokeWidth={1}
           />
           {/* <text x={35} y={mappedYValues[key] + 5} fontSize={10} stroke="white" strokeWidth={2}>
             {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${pctFormat(tooltipData[key])}`}
           </text> */}
           <text
-            x={45}
+            x={25 * direction + (direction === -1 ? -90 : 0)}
             y={entry.displayValue + 5}
             fontSize={10}
-            fill="white"
+            fill="black"
             fontWeight={"bold"}
           >
             {`${
