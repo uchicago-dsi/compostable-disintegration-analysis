@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Group } from "@visx/group";
 import { Line, Bar } from "@visx/shape";
-import { Text } from "@visx/text";
+import { Text, useText } from "@visx/text";
 import { Tooltip, useTooltip } from "@visx/tooltip";
 import { localPoint } from "@visx/event";
 import { useParentSize } from "@visx/responsive";
@@ -20,7 +20,7 @@ export const BoxPlot = ({
   minHeight,
 }) => {
   const { parentRef, width, height } = useParentSize({ debounceTime: 150 });
-  const margin = { top: 20, right: 20, bottom: 100, left: 80 };
+  const margin = { top: 20, right: 20, bottom: 120, left: 80 };
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const xScale = scaleBand({
@@ -51,7 +51,6 @@ export const BoxPlot = ({
       tooltipTop: coords?.y,
     });
   };
-
   return (
     <div
       ref={parentRef}
@@ -64,11 +63,14 @@ export const BoxPlot = ({
             scale={xScale}
             top={yMax}
             tickFormat={(v) => `${data[v].aggCol} (${data[v].count})`}
+            tickComponent={CustomTickLabel}
             tickLabelProps={() => ({
               fontSize: 12,
-              textAnchor: "middle",
-              dy: "0.25em",
+              textAnchor: data.length > 5 ? "end" : "middle",
+              dy: data.length > 5 ? "-0.25em" : "0.25em",
+              angle: data.length > 5 ? -90 : 0,
             })}
+            numTicks={data.length}
             label={xAxisTitle}
           />
           <AxisLeft
@@ -215,6 +217,48 @@ const tooltipKeys = [
   "lowerfence",
   "min",
 ];
+const CustomTickLabel = ({
+  x,
+  y,
+  formattedValue,
+  lineLength = 16,
+  ...props
+}) => {
+  if (formattedValue.length > lineLength) {
+    const words = formattedValue.split(' ');
+    let lines = [''];
+    let currentLine = 0;
+    
+    words.forEach(word => {
+      if ((lines[currentLine] + word).length > lineLength) {
+      currentLine++;
+      lines[currentLine] = '';
+      }
+      lines[currentLine] += (lines[currentLine] ? ' ' : '') + word;
+    });
+    const offset = -12 * ((lines.length-1)/2);
+
+    return (
+      <>
+        {lines.map((line, i) => (
+          <Text x={x + (props.angle === -90 ? offset+i*12 : 0)} y={y + (props.angle !== -90 ?offset+i*15: 0)} {...props} key={i}>
+            {line}
+          </Text>
+        ))}
+        </>
+    );
+  } else {
+    return (
+      <Text
+      x={x}
+      y={y}
+      {...props}
+      >
+      {formattedValue}
+    </Text>
+  );
+}
+}
 
 const CustomTooltip = ({ tooltipLeft, tooltipData, top, height, yScale }) => {
   const mappedLabels = useMemo(() => {
