@@ -59,7 +59,7 @@ export default function Dashboard() {
             {cleanDisplayCol} by {col2material[snap.filters.aggCol]} -{" "}
             {snap.data.numTrials} Trial(s)
           </h1>
-          <div className="relative w-full" style={{height: '600px'}}>
+          <div className="relative w-full pb-12" style={{height: '720px'}}>
             <BoxPlot
               data={snap.data.data}
               minWidth={600}
