@@ -14,7 +14,7 @@ export default function RadioSingleSelect({
   const snap = useSnapshot(state);
 
   return (
-    <div className="flex flex-wrap items-center">
+    <div className="flex flex-wrap items-center flex-row">
       <div className="flex flex-wrap items-center flex-grow w-full">
         <h3>
           <span className="inline font-bold">{title}</span>

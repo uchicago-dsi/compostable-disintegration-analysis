@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
 const bucketName = "cftp_data";
-const trialsFilename = "operating_conditions_full.csv";
+const trialsFilename = `operating_conditions_full${process.env.DATA_VERSION_ID||''}.csv`;
 
 const mappings = {
   IV: "In-Vessel",

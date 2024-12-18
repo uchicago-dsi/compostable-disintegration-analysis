@@ -6,9 +6,14 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-
+pnpm-lock.yaml
 # testing
 /coverage
+
+
+public/data/all_trials_processed.csv
+public/data/operating_conditions_avg.csv
+public/data/operating_conditions_full.csv
 
 # next.js
 /.next/

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import * as d3 from "d3";
 import path from "path";
 import {
+  class2color,
   moistureFilterDict,
   temperatureFilterDict,
   trialDurationDict,
@@ -10,8 +11,8 @@ import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
 const dataSource = process.env.DATA_SOURCE;
 const bucketName = "cftp_data";
-const trialsFilename = "all_trials_processed.csv";
-const operatingConditionsFilename = "operating_conditions_avg.csv";
+const trialsFilename = `all_trials_processed${process.env.DATA_VERSION_ID||''}.csv`
+const operatingConditionsFilename = `operating_conditions_avg${process.env.DATA_VERSION_ID||''}.csv`
 
 const trialDataPath = path.join(
   process.cwd(),
@@ -28,12 +29,24 @@ const operatingConditionsPath = path.join(
 
 const calculateQuartiles = (data, key) => {
   const sorted = data.map((d) => parseFloat(d[key])).sort((a, b) => a - b);
+  const max = d3.max(sorted)
+  const min = d3.min(sorted)
+  const q1 = d3.quantile(sorted, 0.25);
+  const q3 = d3.quantile(sorted, 0.75);
+  const upperfence = Math.min(q3 + 1.5 * (q3 - q1), max)
+  const lowerfence = Math.max(q1 - 1.5 * (q3 - q1), min)
+  const outliers = sorted.filter(v => v>upperfence || v<lowerfence)
   return {
-    min: d3.min(sorted),
-    q1: d3.quantile(sorted, 0.25),
-    median: d3.quantile(sorted, 0.5),
-    q3: d3.quantile(sorted, 0.75),
-    max: d3.max(sorted),
+    lowerfence,
+    q1,
+    median: Math.round(d3.quantile(sorted, 0.5) * 1000)/1000,
+    mean: Math.round(d3.mean(sorted) * 1000)/1000,
+    q3,
+    upperfence,
+    max,
+    min,
+    outliers,
+    color: class2color[data[0]["Material Class I"]],
   };
 };
 
@@ -131,15 +144,16 @@ const prepareData = async (searchParams) => {
     ? searchParams.get("trialdurations").split(",")
     : [];
 
-  const noFiltersSelected =
-    technologies.length === 0 ||
-    materials.length === 0 ||
-    specificMaterials.length === 0 ||
-    brands.length === 0 ||
-    formats.length === 0 ||
-    temperatureFilter.length === 0 ||
-    moistureFilter.length === 0 ||
-    trialDurations.length === 0;
+  const noFiltersSelected = [
+    technologies,
+    materials,
+    specificMaterials,
+    brands,
+    formats,
+    temperatureFilter,
+    moistureFilter,
+    trialDurations,
+  ].some((f) => f.length === 0);
 
   if (noFiltersSelected) {
     return {

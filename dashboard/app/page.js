@@ -4,7 +4,7 @@ import state from "@/lib/state";
 import dynamic from "next/dynamic";
 import DashboardControls from "@/components/DashboardControls";
 
-const Dashboard = dynamic(() => import("@/components/Dashboard"), {
+const Dashboard = dynamic(() => import("@/components/Dashboard.jsx"), {
   ssr: false,
 });
 
@@ -24,15 +24,11 @@ const Home = () => {
 
   return (
     <main className="flex flex-col items-start">
-      <div className="block lg:hidden p-2 h-[100vh] flex items-center align-center justify-center">
-        Please use a device that is at least 1280 pixels wide to view the
-        disintegration dashboard.
-      </div>
-      <div className="hidden lg:block h-[1300px] w-[1280px] overflow-hidden">
-        <div className="h-[600px] mx-auto mb-3">
+      <div className="w-full">
+        <div className="mx-auto mb-3">
           <Dashboard />
         </div>
-        <div className="h-[700px] mx-auto w-full">
+        <div className="mx-auto w-full">
           <DashboardControls />
         </div>
       </div>
