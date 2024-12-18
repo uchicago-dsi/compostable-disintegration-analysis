@@ -59,6 +59,8 @@ def main():
   # Map Trial IDs to the technology used in the trial
   all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
   all_trials["Item Brand"] = all_trials["Item Brand"].apply(anonymize_brand)
+  # Ensure all Item Format columns are title case
+  all_trials["Item Format"] = all_trials["Item Format"].str.title()
   all_trials.to_csv(output_filepath, index=False)
 
   print(f"Saving average conditions to {operating_conditions_avg_output_path}")
