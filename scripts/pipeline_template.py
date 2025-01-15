@@ -8,7 +8,6 @@ import pandas as pd
 from constants import TRIAL_COLS, TRIAL_TO_ID_MAP
 from utils import DefaultDataFrames
 
-default_dfs = DefaultDataFrames()
 
 
 class AbstractDataPipeline(ABC):
@@ -30,9 +29,9 @@ class AbstractDataPipeline(ABC):
     def __init__(
         self,
         data_filepath: Path,
-        items: pd.DataFrame = default_dfs.df_items,
-        item2id: Dict[str, Any] = default_dfs.item2id,
-        trials: pd.DataFrame = default_dfs.df_trials,
+        items: pd.DataFrame = None,
+        item2id: Dict[str, Any] = None,
+        trials: pd.DataFrame = None,
         trial_name: Optional[str] = None,
         sheet_name: int = 0,
         skiprows: int = 0,
@@ -48,10 +47,13 @@ class AbstractDataPipeline(ABC):
             sheet_name: Sheet name or index to load. Defaults to 0.
             skiprows: Number of rows to skip at the start of the file. Defaults to 0.
         """
+
+        default_dfs = DefaultDataFrames()
+
         self.data_filepath = data_filepath
         filename = self.data_filepath.stem
         self.trial_name = trial_name
-        self.trials = trials
+        self.trials = default_dfs.df_trials if trials is None else trials
         file_suffix = (
             f"_{trial_name}_clean.csv" if self.trial_name else "_clean.csv"
         )
@@ -63,8 +65,8 @@ class AbstractDataPipeline(ABC):
         self.raw_data = self.load_data(
             data_filepath, sheet_name=sheet_name, skiprows=skiprows
         )
-        self.items = items
-        self.item2id = item2id
+        self.items = default_dfs.df_items if items is None else items
+        self.item2id = default_dfs.item2id if item2id is None else item2id
 
     @abstractmethod
     def load_data(

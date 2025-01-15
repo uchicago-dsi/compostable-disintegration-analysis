@@ -7,12 +7,13 @@ from pipeline_template import (
     ClosedLoopPipeline,
     NewTemplatePipeline,
     PDFPipeline,
-    default_dfs,
 )
-from utils import anonymize_brand, map_technology
+from utils import anonymize_brand, map_technology, DefaultDataFrames
 
 
 def main():
+    default_dfs = DefaultDataFrames()
+
     trials_to_run = [
         NewTemplatePipeline(
             TRIAL_DATA_PATHS.get("NEW_TEMPLATE_PATH"),
