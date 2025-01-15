@@ -2,9 +2,7 @@
 import Alert from "@/components/Alert";
 import { col2material } from "@/lib/constants";
 import state from "@/lib/state";
-import Plot from "react-plotly.js";
 import { useSnapshot } from "valtio";
-import { ParentSize } from "@visx/responsive";
 import BoxPlot from "./BoxPlot";
 
 export default function Dashboard() {
@@ -67,43 +65,9 @@ export default function Dashboard() {
               // yMax={yMax}
               // title={title}
               yAxisTitle={yAxisTitle}
-              // xTickAngle={xTickAngle}
             />
           </div>
         </div>
-        // <Plot
-        //   data={plotData}
-        //   layout={{
-        //     width: 1280,
-        //     height: 600,
-        //     title: {
-        //       text: `<b>${title}</b>`,
-        //       x: 0.5,
-        //       xanchor: "center",
-        //       yanchor: "top",
-        //     },
-        //     showlegend: false,
-        //     yaxis: {
-        //       title: {
-        //         text: `<b>${yAxisTitle}</b>`,
-        //       },
-        //       tickformat: ".0%",
-        //       range: [0, yMax],
-        //     },
-        //     xaxis: {
-        //       tickangle: xTickAngle,
-        //       ticklen: 10,
-        //       automargin: true,
-        //       tickfont: {
-        //         weight: "bold",
-        //       },
-        //     },
-        //     hovermode: "x",
-        //   }}
-        //   config={{
-        //     displayModeBar: false,
-        //   }}
-        // />
       )}
     </>
   );
