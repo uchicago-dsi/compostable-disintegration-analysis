@@ -10,6 +10,10 @@ def anonymize_brand(brand: str, brand_mapping) -> str:
     """Anonymizes brand names by mapping them to a generic brand.
         Sorry for the global variable.
 
+    >>> brand_mapping = {"Brand 1": "Brand A"}
+    >>> anonymize_brand("Brand 1", brand_mapping)
+    'Brand A'
+
     Args:
         brand: The brand name
 
@@ -36,6 +40,8 @@ def anonymize_brand(brand: str, brand_mapping) -> str:
 
 def map_technology(trial_id: str) -> str:
     """Maps trial IDs to the technology used in the trial.
+    >>> map_technology('EASP')
+    'Aerated Static Pile'
 
     Args:
         trial_id: The trial ID.
