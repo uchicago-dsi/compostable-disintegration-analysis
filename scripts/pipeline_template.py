@@ -9,7 +9,6 @@ from constants import TRIAL_COLS, TRIAL_TO_ID_MAP
 from utils import DefaultDataFrames
 
 
-
 class AbstractDataPipeline(ABC):
     """An abstract base class for a data pipeline.
 

@@ -8,7 +8,7 @@ from pipeline_template import (
     NewTemplatePipeline,
     PDFPipeline,
 )
-from utils import anonymize_brand, map_technology, DefaultDataFrames
+from utils import DefaultDataFrames, anonymize_brand, map_technology
 
 
 def main():
