@@ -40,7 +40,7 @@ export default function CheckboxMenu({
   const noneSelected = selectedOptions.length === 0;
 
   return (
-    <div className="my-4 border border-gray-300 rounded-md shadow-sm">
+    <div className="my-4 border border-gray-300 rounded-md shadow-sm w-full">
       <div className="flex justify-center mx-auto">
         <h3 className="text-center inline-block">
           <span className="font-bold">{title}</span>

@@ -60,7 +60,7 @@ export default function DashboardControls() {
       <div className="m-2">
         <DashboardDisplayControls />
       </div>
-      <div className="m-2 w-2/3 ml-10">
+      <div className="m-2 lg:w-2/3 lg:ml-10">
         <DashboardFilterControls />
       </div>
     </div>
