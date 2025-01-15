@@ -44,3 +44,10 @@ export const display2col = {
   "Results by Mass": "% Residuals (Mass)",
   "Results by Surface Area": "% Residuals (Area)",
 };
+
+export const class2color = {
+  "Positive Control": "#70AD47",
+  "Mixed Materials": "#48646A",
+  Fiber: "#298FC2",
+  Biopolymer: "#FFB600",
+};
