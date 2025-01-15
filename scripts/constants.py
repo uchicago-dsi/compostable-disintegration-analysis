@@ -63,8 +63,9 @@ TRIAL_DATA_PATHS = {
 
 ID_TO_TECHNOLOGY_MAP = {
     "WR": "Windrow",
-    "CASP": "Covered or Extended Aerated Static Pile",
-    "EASP": "Covered or Extended Aerated Static Pile",
+    # TODO Add note on frontend that ASP incorporates ASP, EASP, and CASP
+    "CASP": "Aerated Static Pile",
+    "EASP": "Aerated Static Pile",
     "ASP": "Aerated Static Pile",
     "IV": "In-Vessel",
 }
