@@ -2,14 +2,14 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, Optional
+
 import numpy as np
 import pandas as pd
-
+from constants import TRIAL_COLS, TRIAL_TO_ID_MAP
 from utils import DefaultDataFrames
-from constants import TRIAL_TO_ID_MAP, TRIAL_COLS
-
 
 default_dfs = DefaultDataFrames()
+
 
 class AbstractDataPipeline(ABC):
     """An abstract base class for a data pipeline.
@@ -163,6 +163,7 @@ class AbstractDataPipeline(ABC):
         print("Complete!")
         return data
 
+
 class NewTemplatePipeline(AbstractDataPipeline):
     """Pipeline for processing data from the new template."""
 
@@ -207,7 +208,6 @@ class NewTemplatePipeline(AbstractDataPipeline):
                 "Trial": "Trial ID",
             }
         )
-        print(f"Found {data["Trial ID"].nunique()} unique trials")
         percentage_cols = [
             "% Residuals (Dry Weight)",
             "% Residuals (Wet Weight)",
@@ -239,6 +239,7 @@ class NewTemplatePipeline(AbstractDataPipeline):
         return self.items.drop_duplicates(subset="Item Name").merge(
             data, on="Item Name"
         )
+
 
 class CASP004Pipeline(AbstractDataPipeline):
     """Pipeline for processing CASP004 trial data."""
@@ -297,7 +298,6 @@ class CASP004Pipeline(AbstractDataPipeline):
         data = data[~data["Bag Id"].isin(["A-5", "A-6"])]
 
         data["Trial"] = data["Trial Id"]
-        print(f"Found {data["Trial Id"].nunique()} unique trials")
 
         # Take the average of the three weight observations
         data["End Weight"] = data[["Weight 1", "Weight 2", "Weight 3"]].mean(
@@ -354,6 +354,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         data["% Residuals (Area)"] = None
         data["% Residuals (Mass)"] = data["End Weight"] / data["Start Weight"]
         return data
+
 
 class ClosedLoopPipeline(AbstractDataPipeline):
     """Pipeline for processing Closed Loop trial data."""
@@ -442,6 +443,7 @@ class ClosedLoopPipeline(AbstractDataPipeline):
         data = data[data["Trial Stage"] == "Second Removal"]
         return data
 
+
 class PDFPipeline(AbstractDataPipeline):
     """Pipeline for processing PDF trial data."""
 
@@ -526,6 +528,7 @@ class PDFPipeline(AbstractDataPipeline):
         data["Trial"] = data["Trial ID"]
         return data
 
+
 class CASP003Pipeline(PDFPipeline):
     """Pipeline for processing CASP003 trial data."""
 
@@ -542,5 +545,3 @@ class CASP003Pipeline(PDFPipeline):
             Preprocessed data.
         """
         return data[data["Trial Bag Colour"] != "Blue"]
-
-
