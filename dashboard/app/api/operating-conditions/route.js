@@ -6,9 +6,9 @@ const trialsFilename = `operating_conditions_full${process.env.DATA_VERSION_ID||
 
 const mappings = {
   IV: "In-Vessel",
-  CASP: "Covered Aerated Static Pile",
+  CASP: "Aerated Static Pile",
   WR: "Windrow",
-  EASP: "Extended Aerated Static Pile",
+  EASP: "Aerated Static Pile",
   ASP: "Aerated Static Pile",
   AD: "Anaerobic Digestion",
 };
