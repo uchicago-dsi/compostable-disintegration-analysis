@@ -1,11 +1,10 @@
-
+# %%
 from pipeline_template import NewTemplatePipeline, CASP004Pipeline, ClosedLoopPipeline, PDFPipeline, CASP003Pipeline, default_dfs
 from constants import TRIAL_DATA_PATHS, DATA_DIR, OUTLIER_THRESHOLD
-from utils import anonymize_brand, map_technology
+from utils import anonymize_brand, map_technology, DefaultDataFrames
 import pandas as pd
 
 def main():
-
   trials_to_run = [
     NewTemplatePipeline(
       TRIAL_DATA_PATHS.get("NEW_TEMPLATE_PATH"), trial_name="OCT_22_PARTIAL"
@@ -58,7 +57,8 @@ def main():
   all_trials = all_trials[all_trials["% Residuals (Mass)"] < OUTLIER_THRESHOLD]
   # Map Trial IDs to the technology used in the trial
   all_trials["Technology"] = all_trials["Trial ID"].apply(map_technology)
-  all_trials["Item Brand"] = all_trials["Item Brand"].apply(anonymize_brand)
+  
+  all_trials["Item Brand"] = all_trials["Item Brand"].apply(lambda brand: anonymize_brand(brand, default_dfs.brand_mapping))
   # Ensure all Item Format columns are title case
   all_trials["Item Format"] = all_trials["Item Format"].str.title()
   all_trials.to_csv(output_filepath, index=False)
@@ -86,3 +86,4 @@ def main():
 
 if __name__ == "__main__":
   main()
+# %%

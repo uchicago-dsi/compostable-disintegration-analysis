@@ -207,6 +207,7 @@ class NewTemplatePipeline(AbstractDataPipeline):
                 "Trial": "Trial ID",
             }
         )
+        print(f"Found {data["Trial ID"].nunique()} unique trials")
         percentage_cols = [
             "% Residuals (Dry Weight)",
             "% Residuals (Wet Weight)",
@@ -296,6 +297,7 @@ class CASP004Pipeline(AbstractDataPipeline):
         data = data[~data["Bag Id"].isin(["A-5", "A-6"])]
 
         data["Trial"] = data["Trial Id"]
+        print(f"Found {data["Trial Id"].nunique()} unique trials")
 
         # Take the average of the three weight observations
         data["End Weight"] = data[["Weight 1", "Weight 2", "Weight 3"]].mean(

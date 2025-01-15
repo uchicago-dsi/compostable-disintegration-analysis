@@ -1,12 +1,10 @@
 # %%
-from constants import DATA_SHEET_PATHS, TRIAL_TO_ID_MAP, ID_TO_TECHNOLOGY_MAP, BRAND_MAPPING
+from constants import DATA_SHEET_PATHS, TRIAL_TO_ID_MAP, ID_TO_TECHNOLOGY_MAP
 import pandas as pd
 import json
 from pathlib import Path
 
-brand_counter = 0
-
-def anonymize_brand(brand: str) -> str:
+def anonymize_brand(brand: str, brand_mapping) -> str:
     """Anonymizes brand names by mapping them to a generic brand.
         Sorry for the global variable.
 
@@ -16,11 +14,22 @@ def anonymize_brand(brand: str) -> str:
     Returns:
         The anonymized brand name (eg "Brand A")
     """
-    global brand_counter
-    if brand not in BRAND_MAPPING:
-        BRAND_MAPPING[brand] = f"Brand {chr(65 + brand_counter)}"
-        brand_counter += 1
-    return BRAND_MAPPING[brand]
+    if brand not in brand_mapping:
+        # get the last alphabeticallly sorted values from the object brand_mapping
+        # take the last value and incremenet the character by one
+        last_brand = sorted(brand_mapping.keys())[-1]
+        # last brand will have a double character eg. AA, BB, CC
+        # increment the last character by one
+        brand_letter = last_brand[1]
+        char_count = len(last_brand.split(" ")[1])
+        if brand_letter == "Z":
+            brand_letter = "A"
+            char_count += 1
+        else:
+            brand_letter = chr(ord(brand_letter) + 1)
+        new_brand = f"Brand {brand_letter * char_count}"
+        brand_mapping[brand] = new_brand
+    return brand_mapping[brand]
 
 def map_technology(trial_id: str) -> str:
     """Maps trial IDs to the technology used in the trial.
@@ -43,6 +52,7 @@ class DefaultDataFrames:
         self.load_items2id()
         self.load_df_trials()
         self.load_operating_conditions()
+        self.load_brand_mapping()
 
     def load_items_df(self):
         df_items = pd.read_excel(
@@ -76,6 +86,14 @@ class DefaultDataFrames:
             "Technology",
         ]]
 
+    def load_brand_mapping(self):
+        # read third sheet
+        brand_mapping_df = pd.read_excel(DATA_SHEET_PATHS.get("BRAND_ANONYMIZATION_PATH"), sheet_name=2)
+        brand_mapping = {}
+        for _, row in brand_mapping_df.iterrows():
+            brand_mapping[row["Brand"]] = row["Brand for Display"]
+        self.brand_mapping = brand_mapping
+    
     def load_operating_conditions(self):
         df_temps = pd.read_excel(
             DATA_SHEET_PATHS.get("OPERATING_CONDITIONS_PATH"), sheet_name=3, skiprows=1, index_col="Day #"

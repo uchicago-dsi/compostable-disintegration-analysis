@@ -52,6 +52,7 @@ DATA_SHEET_PATHS = {
   "TRIALS_PATH": DATA_DIR / "CFTP-TrialDetails-Oct22-2024.xlsx",
   "OPERATING_CONDITIONS_PATH": DATA_DIR / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx",
   "OLD_ITEMS_JSON": DATA_DIR / "old_items.json",
+  "BRAND_ANONYMIZATION_PATH": DATA_DIR / "_PRODUCTION DATA SETS (ACTIVE)" / 'CFTP-TestItemInventory-Jan-2025.xlsx',
 }
 
 TRIAL_DATA_PATHS = {
@@ -69,7 +70,3 @@ ID_TO_TECHNOLOGY_MAP = {
     "ASP": "Aerated Static Pile",
     "IV": "In-Vessel",
 }
-
-# Anonymize brand names
-# Note: no anonymization for BÉSICS®
-BRAND_MAPPING = {"BÉSICS®": "BÉSICS®"}  
