@@ -51,7 +51,7 @@ export default function DashboardFilterControls() {
             selectedOptions={snap.filters.selectedTechnologies}
             filterKey="selectedTechnologies"
             title="Composting Method"
-            infoText="Select one or more options to filter the data by the primary technology used by the facility conducting the field test."
+            infoText="Select one or more options to filter the data by the primary composting method used by the facility conducting the field test. Note that 'Aerated Static Pile' includes versions that are covered or extended."
             showInfoIcon={false}
           />
           <CheckboxMenu
