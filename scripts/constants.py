@@ -71,11 +71,11 @@ TRIAL_DATA_PATHS = {
 
 ID_TO_TECHNOLOGY_MAP = {
     "WR": "Windrow",
-    # TODO Add note on frontend that ASP incorporates ASP, EASP, and CASP
     "CASP": "Aerated Static Pile",
     "EASP": "Aerated Static Pile",
     "ASP": "Aerated Static Pile",
     "IV": "In-Vessel",
+    "AD": "Anaerobic Digestion"
 }
 
 # CANONICAL_COLUMNS = {
