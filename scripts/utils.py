@@ -121,7 +121,8 @@ class DefaultDataFrames:
         df_temps.columns = [
             TRIAL_TO_ID_MAP[col.replace("*", "")] for col in df_temps.columns
         ]
-        df_temps_avg = df_temps.mean().to_frame("Average Temperature (F)")
+        # ONLY USE THE FIRST 45 DAYS
+        df_temps_avg = df_temps.iloc[0:45].mean().to_frame("Average Temperature (F)")
         df_temps["Operating Condition"] = "Temperature"
         df_temps["Time Unit"] = "Day"
 
