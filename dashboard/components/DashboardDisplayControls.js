@@ -27,9 +27,9 @@ export default function DashboardDisplayControls() {
       />
       <RadioSingleSelect
         options={{ Final: "Final", Midpoint: "Midpoint" }}
-        title="Show Midpoint or Final Measurement"
+        title="Select Point of Analysis"
         filterKey="timepoint"
-        infoText="Choose to see the midpoint measurement of disintegration or the final result of the test. The midpoint measurement is taken at the halfway point of the test duration."
+        infoText="Some trials analyzed residuals at a midpoint, around 45 days, before the full composting cycle is complete. Select ‘midpoint’ to view this subset of the data."
       />
       <RadioSingleSelect
         options={material2col}
