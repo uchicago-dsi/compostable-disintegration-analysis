@@ -37,6 +37,7 @@ const state = proxy({
     uncapResults: false,
     displayResiduals: "Residuals",
     testMethod: "Mesh Bag",
+    timepoint: "Final",
     // Trial filters
     selectedTechnologies: [],
     selectedMaterialTypes: [],
@@ -67,6 +68,7 @@ const fetchData = async () => {
   // Display options
   params.append("aggcol", state.filters.aggCol);
   params.append("displaycol", state.filters.displayCol);
+  params.append("timepoint", state.filters.timepoint);
   params.append("uncapresults", state.filters.uncapResults);
   params.append(
     "displayresiduals",

@@ -26,6 +26,12 @@ export default function DashboardDisplayControls() {
         infoText="Field testing results can be based on the change in weight of a product, or the surface area before and after testing. The results by mass provided here are a combination of wet and dry weights. Future versions of the dashboard will further divide these data sets."
       />
       <RadioSingleSelect
+        options={{ Final: "Final", Midpoint: "Midpoint" }}
+        title="Show Midpoint or Final Measurement"
+        filterKey="timepoint"
+        infoText="Choose to see the midpoint measurement of disintegration or the final result of the test. The midpoint measurement is taken at the halfway point of the test duration."
+      />
+      <RadioSingleSelect
         options={material2col}
         title="Select X-Axis Display"
         filterKey="aggCol"
