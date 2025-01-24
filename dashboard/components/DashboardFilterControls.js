@@ -59,7 +59,7 @@ export default function DashboardFilterControls() {
             selectedOptions={snap.filters.selectedTemperatureLevels}
             filterKey="selectedTemperatureLevels"
             title="Mean Temperature"
-            infoText="Select one or more options to filter the data by the average Temperature. Note that temperature measurements are taken in the area surrounding the items being tested"
+            infoText="Select one or more options to filter the data by the average Temperature from the first 45 days of the trial. Note that most temperature measurements are taken in the area surrounding the items being tested."
           />
           <CheckboxMenu
             options={Object.keys(moistureFilterDict)}
