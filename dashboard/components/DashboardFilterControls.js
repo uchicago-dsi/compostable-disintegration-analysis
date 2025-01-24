@@ -50,7 +50,7 @@ export default function DashboardFilterControls() {
             options={snap.options["Technology"]}
             selectedOptions={snap.filters.selectedTechnologies}
             filterKey="selectedTechnologies"
-            title="Technology"
+            title="Composting Method"
             infoText="Select one or more options to filter the data by the primary technology used by the facility conducting the field test."
             showInfoIcon={false}
           />
