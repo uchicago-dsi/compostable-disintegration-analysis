@@ -74,6 +74,7 @@ export default function DashboardFilterControls() {
             filterKey="selectedTrialDurations"
             title="Trial Duration"
             infoText="Select one or more options to filter the data by the duration of the field test."
+            disabled={snap.filters.timepoint !== 'Final'}
           />
         </div>
       </div>

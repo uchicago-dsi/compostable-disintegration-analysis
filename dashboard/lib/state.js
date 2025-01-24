@@ -117,4 +117,12 @@ const fetchData = async () => {
 
 subscribe(state.filters, fetchData);
 
+// When filering for midpoint measurements, include all timesteps
+subscribe(state.filters, (change) => {
+  const timestepChange = change.find(f => f[1].includes('timepoint'))
+  if (timestepChange && timestepChange[2] !== 'Final') {
+    state.setFilterValue('selectedTrialDurations', Object.keys(trialDurationDict));
+  }
+});
+
 export default state;
