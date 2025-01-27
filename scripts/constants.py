@@ -2,6 +2,7 @@ from pathlib import Path
 
 CURRENT_DIR = Path(__file__).resolve().parent
 DATA_DIR = CURRENT_DIR / "../data/"
+PROD_DIR = DATA_DIR / "_PRODUCTION DATA SETS (ACTIVE)"
 
 # TODO: Can also keep bags, etc if we want them
 TRIAL_COLS = [
@@ -47,16 +48,13 @@ TRIAL_TO_ID_MAP = {
 OUTLIER_THRESHOLD = 10
 
 DATA_SHEET_PATHS = {
-    "ITEMS_PATH": DATA_DIR
-    / "CFTP Test Item Inventory with Dimensions - All Trials.xlsx",
+    "ITEMS_PATH": PROD_DIR / "CFTP-TestItemInventory-Jan-2025.xlsx",
     "EXTRA_ITEMS_PATH": DATA_DIR / "Item IDS for CASP004 CASP003.xlsx",
     "TRIALS_PATH": DATA_DIR / "CFTP-TrialDetails-Oct22-2024.xlsx",
     "OPERATING_CONDITIONS_PATH": DATA_DIR
     / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx",
     "OLD_ITEMS_JSON": DATA_DIR / "old_items.json",
-    "BRAND_ANONYMIZATION_PATH": DATA_DIR
-    / "_PRODUCTION DATA SETS (ACTIVE)"
-    / "CFTP-TestItemInventory-Jan-2025.xlsx",
+    "BRAND_ANONYMIZATION_PATH": PROD_DIR/ "CFTP-TestItemInventory-Jan-2025.xlsx",
 }
 
 TRIAL_DATA_PATHS = {
