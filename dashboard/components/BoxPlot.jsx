@@ -20,7 +20,7 @@ export const BoxPlot = ({
   minHeight,
 }) => {
   const { parentRef, width, height } = useParentSize({ debounceTime: 150 });
-  const margin = { top: 80, right: 20, bottom: 120, left: 80 };
+  const margin = { top: 40, right: 20, bottom: 140, left: 80 };
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const xScale = scaleBand({
