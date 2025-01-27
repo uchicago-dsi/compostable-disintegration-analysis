@@ -89,6 +89,12 @@ def main():
     )
     # Ensure all Item Format columns are title case
     all_trials["Item Format"] = all_trials["Item Format"].str.title()
+
+    # TODO incorporate actual data
+    all_trials["Timepoint"] = "Final"
+
+    # CFTP as of 2025 is excluding AD data from the dashboard, may include in future
+    all_trials = all_trials[all_trials["Technology"] != "Anaerobic Digestion"]
     all_trials.to_csv(output_filepath, index=False)
 
     print(

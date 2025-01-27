@@ -13,6 +13,7 @@ export default function CheckboxMenu({
   title,
   infoText,
   showInfoIcon = false,
+  disabled = false,
 }) {
   const snap = useSnapshot(state);
 
@@ -40,7 +41,10 @@ export default function CheckboxMenu({
   const noneSelected = selectedOptions.length === 0;
 
   return (
-    <div className="my-4 border border-gray-300 rounded-md shadow-sm w-full">
+    <div className={`
+      my-4 border border-gray-300 rounded-md shadow-sm w-full
+      ${disabled ? 'opacity-50 pointer-events-none' : ''}
+      `}>
       <div className="flex justify-center mx-auto">
         <h3 className="text-center inline-block">
           <span className="font-bold">{title}</span>
@@ -56,6 +60,7 @@ export default function CheckboxMenu({
       </div>
       <div className="flex join mt-1 justify-center">
         <button
+          disabled={disabled}
           className={`btn join-item btn-sm normal-case hover:bg-secondary ${
             allSelected ? "bg-primary" : ""
           }`}
@@ -64,6 +69,7 @@ export default function CheckboxMenu({
           All
         </button>
         <button
+          disabled={disabled}
           className={`btn join-item btn-sm normal-case hover:bg-secondary ${
             noneSelected ? "bg-primary" : ""
           }`}
@@ -100,6 +106,7 @@ export default function CheckboxMenu({
                     </div>
                   )}
                   <input
+                    disabled={disabled}
                     type="checkbox"
                     id={`option-${option}`}
                     value={option}

@@ -50,8 +50,8 @@ export default function DashboardFilterControls() {
             options={snap.options["Technology"]}
             selectedOptions={snap.filters.selectedTechnologies}
             filterKey="selectedTechnologies"
-            title="Technology"
-            infoText="Select one or more options to filter the data by the primary technology used by the facility conducting the field test."
+            title="Composting Method"
+            infoText="Select one or more options to filter the data by the primary composting method used by the facility conducting the field test. Note that 'Aerated Static Pile' includes versions that are covered or extended."
             showInfoIcon={false}
           />
           <CheckboxMenu
@@ -59,7 +59,7 @@ export default function DashboardFilterControls() {
             selectedOptions={snap.filters.selectedTemperatureLevels}
             filterKey="selectedTemperatureLevels"
             title="Mean Temperature"
-            infoText="Select one or more options to filter the data by the average Temperature. Note that temperature measurements are taken in the area surrounding the items being tested"
+            infoText="Select one or more options to filter the data by the average Temperature from the first 45 days of the trial. Note that most temperature measurements are taken in the area surrounding the items being tested."
           />
           <CheckboxMenu
             options={Object.keys(moistureFilterDict)}
@@ -74,6 +74,7 @@ export default function DashboardFilterControls() {
             filterKey="selectedTrialDurations"
             title="Trial Duration"
             infoText="Select one or more options to filter the data by the duration of the field test."
+            disabled={snap.filters.timepoint !== 'Final'}
           />
         </div>
       </div>

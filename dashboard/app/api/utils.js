@@ -98,6 +98,7 @@ export const prepareData = async (searchParams) => {
   const displayResiduals = searchParams.get("displayresiduals") === "true";
   // Trial and item filters
   const testMethod = searchParams.get("testmethod") || "Mesh Bag";
+  const timepoint = searchParams.get("timepoint") || "Final";
   const technologies = searchParams.get("technologies")
     ? searchParams.get("technologies").split(",")
     : [];
@@ -152,6 +153,7 @@ export const prepareData = async (searchParams) => {
 
   // filter data based on selected filters
   filteredData = filterData(filteredData, "Test Method", [testMethod]);
+  filteredData = filterData(filteredData, "Timepoint", [timepoint]);
   filteredData = filterData(filteredData, "Technology", technologies);
   // Return empty object to preserve privacy if not enough trials (Except for Bulk Dose)
   const technologyTrialIDs = new Set(filteredData.map((d) => d["Trial ID"]));
@@ -289,7 +291,7 @@ export const getUniqueValues = async (columns) => {
         if (aStartsWithPos && !bStartsWithPos) return 1;
         if (bStartsWithPos && !aStartsWithPos) return -1;
 
-        return a.localeCompare(b);
+        return a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'})
       }
     );
   });

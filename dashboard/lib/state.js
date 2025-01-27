@@ -37,6 +37,7 @@ const state = proxy({
     uncapResults: false,
     displayResiduals: "Residuals",
     testMethod: "Mesh Bag",
+    timepoint: "Final",
     // Trial filters
     selectedTechnologies: [],
     selectedMaterialTypes: [],
@@ -67,6 +68,7 @@ const fetchData = async () => {
   // Display options
   params.append("aggcol", state.filters.aggCol);
   params.append("displaycol", state.filters.displayCol);
+  params.append("timepoint", state.filters.timepoint);
   params.append("uncapresults", state.filters.uncapResults);
   params.append(
     "displayresiduals",
@@ -114,5 +116,13 @@ const fetchData = async () => {
 };
 
 subscribe(state.filters, fetchData);
+
+// When filering for midpoint measurements, include all timesteps
+subscribe(state.filters, (change) => {
+  const timestepChange = change.find(f => f[1].includes('timepoint'))
+  if (timestepChange && timestepChange[2] !== 'Final') {
+    state.setFilterValue('selectedTrialDurations', Object.keys(trialDurationDict));
+  }
+});
 
 export default state;
