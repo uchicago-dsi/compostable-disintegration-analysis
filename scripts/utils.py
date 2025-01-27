@@ -24,7 +24,11 @@ def anonymize_brand(brand: str, brand_mapping: dict):
         numeric_brands = [value for value in brand_mapping.values() if type(value) == int]
         max_numeric = max(numeric_brands) if numeric_brands else 0
         brand_mapping[brand] = max_numeric + 1
-    return brand_mapping[brand]
+    anon_brand = brand_mapping[brand]
+    if type(anon_brand) == int:
+        return f"Brand {anon_brand}"
+    else:
+        return anon_brand
 
 
 def map_technology(trial_id: str) -> str:
@@ -56,11 +60,11 @@ class DefaultDataFrames:
 
     def load_items_df(self):
         df_items = pd.read_excel(
-            DATA_SHEET_PATHS.get("ITEMS_PATH"), sheet_name=0, skiprows=3
+            DATA_SHEET_PATHS.get("ITEMS_PATH"), sheet_name="Item Inventory", skiprows=3
         )
         df_items["Start Weight"] = df_items["Average Initial Weight, g"]
         old_json = json.load(Path.open(DATA_SHEET_PATHS.get("OLD_ITEMS_JSON")))
-        df_items["Item ID"] = df_items["Item Description Refined"].map(old_json)
+        df_items["Item ID"] = df_items["Item ID"].fillna(df_items["Item Description Refined"].map(old_json))
         df_items = df_items.rename(columns={"Brand": "Item Brand"})
         self.df_items = df_items
 
