@@ -291,7 +291,7 @@ export const getUniqueValues = async (columns) => {
         if (aStartsWithPos && !bStartsWithPos) return 1;
         if (bStartsWithPos && !aStartsWithPos) return -1;
 
-        return a.localeCompare(b);
+        return a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'})
       }
     );
   });
