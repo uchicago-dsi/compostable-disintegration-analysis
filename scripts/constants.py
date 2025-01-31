@@ -54,7 +54,8 @@ DATA_SHEET_PATHS = {
     "OPERATING_CONDITIONS_PATH": DATA_DIR
     / "Donated Data 2023 - Compiled Facility Conditions for DSI.xlsx",
     "OLD_ITEMS_JSON": DATA_DIR / "old_items.json",
-    "BRAND_ANONYMIZATION_PATH": PROD_DIR/ "CFTP-TestItemInventory-Jan-2025.xlsx",
+    "BRAND_ANONYMIZATION_PATH": PROD_DIR
+    / "CFTP-TestItemInventory-Jan-2025.xlsx",
 }
 
 TRIAL_DATA_PATHS = {
@@ -73,7 +74,7 @@ ID_TO_TECHNOLOGY_MAP = {
     "EASP": "Aerated Static Pile",
     "ASP": "Aerated Static Pile",
     "IV": "In-Vessel",
-    "AD": "Anaerobic Digestion"
+    "AD": "Anaerobic Digestion",
 }
 
 # CANONICAL_COLUMNS = {
