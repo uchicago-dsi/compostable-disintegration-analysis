@@ -1,4 +1,7 @@
 # %%
+# pragma: exclude file
+# This class and functions only work with access to
+# data that are not present in the repo during testing.
 import json
 from pathlib import Path
 
@@ -69,27 +72,7 @@ class DefaultDataFrames:
     load_operating_conditions():
         Loads various operating conditions dataframes
         from an Excel file and processes them.
-    Examples
-    --------
-    >>> ddf = DefaultDataFrames()
-    >>> isinstance(ddf.df_items, pd.DataFrame)
-    True
-    >>> isinstance(ddf.item2id, dict)
-    True
-    >>> isinstance(ddf.df_trials, pd.DataFrame)
-    True
-    >>> isinstance(ddf.brand_mapping, dict)
-    True
-    >>> isinstance(ddf.df_temps, pd.DataFrame)
-    True
-    >>> isinstance(ddf.df_moisture, pd.DataFrame)
-    True
-    >>> isinstance(ddf.df_o2, pd.DataFrame)
-    True
-    >>> isinstance(ddf.df_trial_duration, pd.DataFrame)
-    True
-    >>> isinstance(ddf.df_operating_conditions_avg, pd.DataFrame)
-    True
+
     """
 
     def __init__(self):
