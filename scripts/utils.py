@@ -51,7 +51,46 @@ def map_technology(trial_id: str) -> str:
 
 
 class DefaultDataFrames:
-    """Class to store default dataframes for the pipeline."""
+    """
+    Class to store default dataframes for the pipeline.
+    Methods
+    -------
+    __init__():
+        Initializes the DefaultDataFrames class and loads all dataframes.
+    load_items_df():
+        Loads the items dataframe from an Excel file and processes it.
+    load_items2id():
+        Loads a mapping of item descriptions to item
+        IDs from the items dataframe and an additional Excel file.
+    load_df_trials():
+        Loads the trials dataframe from an Excel file.
+    load_brand_mapping():
+        Loads the brand mapping dataframe from an Excel file and processes it.
+    load_operating_conditions():
+        Loads various operating conditions dataframes
+        from an Excel file and processes them.
+    Examples
+    --------
+    >>> ddf = DefaultDataFrames()
+    >>> isinstance(ddf.df_items, pd.DataFrame)
+    True
+    >>> isinstance(ddf.item2id, dict)
+    True
+    >>> isinstance(ddf.df_trials, pd.DataFrame)
+    True
+    >>> isinstance(ddf.brand_mapping, dict)
+    True
+    >>> isinstance(ddf.df_temps, pd.DataFrame)
+    True
+    >>> isinstance(ddf.df_moisture, pd.DataFrame)
+    True
+    >>> isinstance(ddf.df_o2, pd.DataFrame)
+    True
+    >>> isinstance(ddf.df_trial_duration, pd.DataFrame)
+    True
+    >>> isinstance(ddf.df_operating_conditions_avg, pd.DataFrame)
+    True
+    """
 
     def __init__(self):
         self.load_items_df()
