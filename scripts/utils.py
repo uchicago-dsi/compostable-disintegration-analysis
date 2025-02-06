@@ -142,8 +142,11 @@ class DefaultDataFrames:
             DATA_SHEET_PATHS.get("OPERATING_CONDITIONS_PATH"),
             sheet_name=3,
             skiprows=1,
-            index_col="Day #",
+            index_col="Time Step",
         )
+        df_temps = df_temps[
+            [col for col in df_temps.columns if col in TRIAL_TO_ID_MAP]
+        ]
         df_temps.columns = [
             TRIAL_TO_ID_MAP[col.replace("*", "")] for col in df_temps.columns
         ]
