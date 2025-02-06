@@ -10,10 +10,8 @@ from pipeline_template import (
 )
 from utils import DefaultDataFrames, anonymize_brand, map_technology
 
-SUFFIX = "_jan2025"
 
-
-def main(suffix: str):
+def main(suffix: str = ""):
     default_dfs = DefaultDataFrames()
 
     trials_to_run = [
@@ -130,5 +128,5 @@ def main(suffix: str):
 
 
 if __name__ == "__main__":
-    main(SUFFIX)
+    main()
 # %%
