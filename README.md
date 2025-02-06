@@ -13,11 +13,14 @@ The data pipeline for this project does the following standardizes data from mul
 
 Note: The pipeline was set up to handle multiple disparate files with varied input formats. Future data will come in a standardized format. The pipeline is left as one script for ease of iteration and refactoring later when the new data format is known.
 
-### Docker
-The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
+### Quickstart
 
-### Data Files
+#### Data Files
 Download the following files from the DSI Google Drive in the [Results Data for DSI - Raw uploads](https://drive.google.com/drive/folders/1B8aRIF1lWDKfeqlDTkG2y1ERZFD-A8JK?usp=sharing) and save them to ```data/```:
+
+- [CFTP-TestItemInventory-Jan-2025.xlsx](https://docs.google.com/spreadsheets/d/1GgRFcWWcPEBfH6N4v15wiB_g4pGz_b9y/edit?usp=drive_link&ouid=109596105273405722178&rtpof=true&sd=true)
+- [CFTP-TrialDetails-Oct22-2024.xlsx](https://docs.google.com/spreadsheets/d/1-djc8F_4fdzZOj3tXZSc1vDL0slUK02Q/edit?usp=drive_link&ouid=109596105273405722178&rtpof=true&sd=true)
+- [CFTP_DisintegrationDataInput_Oct22-2024-partial.csv](https://drive.google.com/file/d/1QGCmImE8TIyBzD8JpqGo9TCN68k3Efc6/view?usp=drive_link)
 - [CFTP Anonymized Data Compilation Overview - For Sharing](https://docs.google.com/spreadsheets/d/1GsbN9AexDb0j-Hqzz8z3kO4zC5v60ptx/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 - [Donated Data 2023 - Compiled Facility Conditions for DSI](https://docs.google.com/spreadsheets/d/1iEEb8vlHcB_72TLgYi3IzSzRKgPMh-sK/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
 - [Donated Data 2023 - Compiled Field Results for DSI](https://docs.google.com/spreadsheets/d/1XwYxdEhrpOxS6_nSf9yARWI-mLswrIBv/edit?usp=sharing&ouid=114633865943391212776&rtpof=true&sd=true)
@@ -30,10 +33,18 @@ Download the following files from the DSI Google Drive in the [Results Data for 
 
 File paths for these sheets are all configured in ```scripts/constants.py``` and read in `DefaultDataFrames` in ```scripts/utils.py```
 
-### Running the Pipeline
+#### Docker
+The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
+
+Run the following commands in your terminal from the root of the repo to create a Docker container and start an interactive session:
+```sh
+docker build -t cftp_pipeline -f Dockerfile .
+docker run -it -v .:/project -t cftp_pipeline /bin/bash
+```
+#### Running the Pipeline
 To run the pipeline:
 
-```
+```sh
 python scripts/run-pipeline.py
 ```
 
@@ -43,7 +54,6 @@ Updated pipeline templates should be added to `scripts/pipeline_templates.py` an
 
 ## Dashboard
 This is a [Next.js](https://nextjs.org/) project.
-
 ### Running the Dashboard
 To run the dashboard locally, do **not** use the dev container!
 
@@ -86,6 +96,8 @@ The dashboard pulls data from Google Cloud Storage via an API. Upload the follow
 - ```all_trials_processed.csv```
 - ```operating_conditions_avg.csv```
 - ```operating_conditions_full.csv```
+
+The `/test` page will show a preview of the files in the Google Cloud Storage bucket with the suffix `_test` (eg. `all_trials_processed_test.csv`)
 
 ### Dashboard Structure
 
