@@ -144,3 +144,4 @@ venv.bak/
 
 # data files
 *.avro
+__data

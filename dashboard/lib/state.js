@@ -99,7 +99,12 @@ const fetchData = async () => {
   console.log(params.toString());
 
   try {
-    const response = await fetch(url);
+    const useTestData = window.location.pathname.includes("test");
+    const response = await fetch(url, {
+      headers: {
+        "use-test-data": useTestData,
+      },
+    });
     const data = await response.json();
     if (data.message) {
       state.setErrorMessage(data.message);
@@ -119,9 +124,12 @@ subscribe(state.filters, fetchData);
 
 // When filering for midpoint measurements, include all timesteps
 subscribe(state.filters, (change) => {
-  const timestepChange = change.find(f => f[1].includes('timepoint'))
-  if (timestepChange && timestepChange[2] !== 'Final') {
-    state.setFilterValue('selectedTrialDurations', Object.keys(trialDurationDict));
+  const timestepChange = change.find((f) => f[1].includes("timepoint"));
+  if (timestepChange && timestepChange[2] !== "Final") {
+    state.setFilterValue(
+      "selectedTrialDurations",
+      Object.keys(trialDurationDict)
+    );
   }
 });
 

@@ -16,7 +16,11 @@ export default function OperatingConditions() {
   // TODO: Is there a way to do this only on first load in state.js with Valtio?
   useEffect(() => {
     const fetchOptions = async () => {
-      const response = await fetch("/api/options");
+      const response = await fetch("/api/options", {
+        headers: {
+          "use-test-data": window.location.pathname.includes("test"),
+        },
+      });
       const result = await response.json();
       Object.keys(result).forEach((key) => {
         state.setOptions(key, result[key]);

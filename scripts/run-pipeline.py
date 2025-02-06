@@ -11,7 +11,7 @@ from pipeline_template import (
 from utils import DefaultDataFrames, anonymize_brand, map_technology
 
 
-def main():
+def main(suffix: str = ""):
     default_dfs = DefaultDataFrames()
 
     trials_to_run = [
@@ -55,12 +55,12 @@ def main():
         ),
     ]
 
-    output_filepath = DATA_DIR / "all_trials_processed.csv"
+    output_filepath = DATA_DIR / f"all_trials_processed{suffix}.csv"
     operating_conditions_avg_output_path = (
-        DATA_DIR / "operating_conditions_avg.csv"
+        DATA_DIR / f"operating_conditions_avg{suffix}.csv"
     )
     operating_conditions_output_path = (
-        DATA_DIR / "operating_conditions_full.csv"
+        DATA_DIR / f"operating_conditions_full{suffix}.csv"
     )
 
     print(f"Saving all trials to {output_filepath}")

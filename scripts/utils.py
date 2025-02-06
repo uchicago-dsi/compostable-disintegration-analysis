@@ -1,4 +1,7 @@
 # %%
+# pragma: exclude file
+# This class and functions only work with access to
+# data that are not present in the repo during testing.
 import json
 from pathlib import Path
 
@@ -21,11 +24,13 @@ def anonymize_brand(brand: str, brand_mapping: dict):
         The anonymized brand name (eg "Brand A")
     """
     if brand not in brand_mapping:
-        numeric_brands = [value for value in brand_mapping.values() if type(value) == int]
+        numeric_brands = [
+            value for value in brand_mapping.values() if isinstance(value, int)
+        ]
         max_numeric = max(numeric_brands) if numeric_brands else 0
         brand_mapping[brand] = max_numeric + 1
     anon_brand = brand_mapping[brand]
-    if type(anon_brand) == int:
+    if isinstance(anon_brand, int):
         return f"Brand {anon_brand}"
     else:
         return anon_brand
@@ -49,7 +54,26 @@ def map_technology(trial_id: str) -> str:
 
 
 class DefaultDataFrames:
-    """Class to store default dataframes for the pipeline."""
+    """
+    Class to store default dataframes for the pipeline.
+    Methods
+    -------
+    __init__():
+        Initializes the DefaultDataFrames class and loads all dataframes.
+    load_items_df():
+        Loads the items dataframe from an Excel file and processes it.
+    load_items2id():
+        Loads a mapping of item descriptions to item
+        IDs from the items dataframe and an additional Excel file.
+    load_df_trials():
+        Loads the trials dataframe from an Excel file.
+    load_brand_mapping():
+        Loads the brand mapping dataframe from an Excel file and processes it.
+    load_operating_conditions():
+        Loads various operating conditions dataframes
+        from an Excel file and processes them.
+
+    """
 
     def __init__(self):
         self.load_items_df()
@@ -60,11 +84,15 @@ class DefaultDataFrames:
 
     def load_items_df(self):
         df_items = pd.read_excel(
-            DATA_SHEET_PATHS.get("ITEMS_PATH"), sheet_name="Item Inventory", skiprows=3
+            DATA_SHEET_PATHS.get("ITEMS_PATH"),
+            sheet_name="Item Inventory",
+            skiprows=3,
         )
         df_items["Start Weight"] = df_items["Average Initial Weight, g"]
         old_json = json.load(Path.open(DATA_SHEET_PATHS.get("OLD_ITEMS_JSON")))
-        df_items["Item ID"] = df_items["Item ID"].fillna(df_items["Item Description Refined"].map(old_json))
+        df_items["Item ID"] = df_items["Item ID"].fillna(
+            df_items["Item Description Refined"].map(old_json)
+        )
         df_items = df_items.rename(columns={"Brand": "Item Brand"})
         self.df_items = df_items
 
@@ -90,20 +118,20 @@ class DefaultDataFrames:
             [
                 "Public Trial ID",
                 "Test Method",
-                "Technology",
+                "Display Method",
             ]
         ]
 
     def load_brand_mapping(self):
         # read third sheet
         brand_mapping_df = pd.read_excel(
-            DATA_SHEET_PATHS.get("BRAND_ANONYMIZATION_PATH"), sheet_name="Company Anonymization"
+            DATA_SHEET_PATHS.get("BRAND_ANONYMIZATION_PATH"),
+            sheet_name="Company Anonymization",
         )
-        brand_mapping_df = brand_mapping_df[(
-            brand_mapping_df["Brand for Display"].notna()
-        )& (
-            brand_mapping_df["Brand"].notna()
-        )]
+        brand_mapping_df = brand_mapping_df[
+            (brand_mapping_df["Brand for Display"].notna())
+            & (brand_mapping_df["Brand"].notna())
+        ]
         brand_mapping = {}
         for _, row in brand_mapping_df.iterrows():
             brand_mapping[row["Brand"]] = row["Brand for Display"]
@@ -114,13 +142,18 @@ class DefaultDataFrames:
             DATA_SHEET_PATHS.get("OPERATING_CONDITIONS_PATH"),
             sheet_name=3,
             skiprows=1,
-            index_col="Day #",
+            index_col="Time Step",
         )
+        df_temps = df_temps[
+            [col for col in df_temps.columns if col in TRIAL_TO_ID_MAP]
+        ]
         df_temps.columns = [
             TRIAL_TO_ID_MAP[col.replace("*", "")] for col in df_temps.columns
         ]
         # ONLY USE THE FIRST 45 DAYS
-        df_temps_avg = df_temps.iloc[0:45].mean().to_frame("Average Temperature (F)")
+        df_temps_avg = (
+            df_temps.iloc[0:45].mean().to_frame("Average Temperature (F)")
+        )
         df_temps["Operating Condition"] = "Temperature"
         df_temps["Time Unit"] = "Day"
 

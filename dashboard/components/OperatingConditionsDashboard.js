@@ -19,7 +19,11 @@ export default function OperatingConditionsDashboard({
   const [effectiveMaxDays, setEffectiveMaxDays] = useState(maxDays);
 
   useEffect(() => {
-    fetch("/api/operating-conditions")
+    fetch("/api/operating-conditions", {
+      headers: {
+        "use-test-data": window.location.pathname.includes("test"),
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch operating conditions from API");
