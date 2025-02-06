@@ -90,7 +90,7 @@ const getIntersectingTrialIDs = (...sets) => {
   return new Set(intersection);
 };
 
-export const prepareData = async (searchParams) => {
+export const prepareData = async (searchParams, useTestData=false) => {
   // Display params
   const aggCol = searchParams.get("aggcol") || "Material Class I";
   const displayCol = searchParams.get("displaycol") || "% Residuals (Mass)";
@@ -143,7 +143,7 @@ export const prepareData = async (searchParams) => {
     };
   }
 
-  let { trialData, operatingConditions } = await loadData();
+  let { trialData, operatingConditions } = await loadData(useTestData);
   var filteredData = [...trialData];
 
   // Filter out rows where displayCol is empty or null
@@ -278,8 +278,8 @@ export const prepareData = async (searchParams) => {
 };
 
 
-export const getUniqueValues = async (columns) => {
-  let { trialData: data } = await loadData();
+export const getUniqueValues = async (columns, useTestData=false) => {
+  let { trialData: data } = await loadData(useTestData);
   const uniqueValues = {};
   columns.forEach((column) => {
     uniqueValues[column] = [...new Set(data.map((item) => item[column]))].sort(

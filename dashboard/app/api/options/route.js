@@ -11,7 +11,9 @@ const columns = [
   "Item Format",
 ];
 
-export async function GET() {
-  const uniqueValues = await getUniqueValues(columns);
+
+export async function GET(request) {
+  const useTestData = request.headers.get('use-test-data') === 'true';
+  const uniqueValues = await getUniqueValues(columns, useTestData);
   return NextResponse.json(uniqueValues);
 }

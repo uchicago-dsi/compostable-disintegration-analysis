@@ -12,8 +12,16 @@ const Home = () => {
   // Document this better — kind of confusing cuz this is what gets the options for the menus
   // TODO: Is there a way to do this only on first load in state.js with Valtio?
   useEffect(() => {
+
+    const useTestData = window.location.pathname.includes("test");
     const fetchOptions = async () => {
-      const response = await fetch("/api/options");
+      const response = await fetch("/api/options",
+        {
+          headers: {
+            "use-test-data": useTestData
+          }
+        }
+      );
       const result = await response.json();
       Object.keys(result).forEach((key) => {
         state.setOptions(key, result[key]);
