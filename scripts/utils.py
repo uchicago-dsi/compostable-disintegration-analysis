@@ -118,7 +118,7 @@ class DefaultDataFrames:
             [
                 "Public Trial ID",
                 "Test Method",
-                "Technology",
+                "Display Method",
             ]
         ]
 
