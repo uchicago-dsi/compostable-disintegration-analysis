@@ -31,7 +31,7 @@ export const BoxPlot = ({
 
   const yScale = scaleLinear({
     domain: [
-      Math.min(...data.map((d) => d.min)),
+      0,
       Math.max(Math.max(...data.map((d) => d.max)), 1),
     ],
     range: [yMax, 0],
