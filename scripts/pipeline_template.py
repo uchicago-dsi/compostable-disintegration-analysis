@@ -183,6 +183,7 @@ class NewTemplatePipeline(AbstractDataPipeline):
         """
         # Read the CSV file into a DataFrame
         # With fix utf-8 encoding issue
+        # TODO: Change to Excel
         data = pd.read_csv(data_filepath, encoding="ISO-8859-1")
 
         # Find the index of the first completely empty row — formatted
