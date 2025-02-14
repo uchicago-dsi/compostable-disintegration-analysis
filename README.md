@@ -2,14 +2,14 @@
 
 ## Project Background
 
-The Compost Research & Education Foundation (CREF) researches the disintegration of compostable foodware and packaging to find correlations between different composting methodologies and the rate of disintegration. Through the Compostable Field Testing Program, facilities submit their composting results and CREF analyzes the data to find best composting practices. Facilities submit data in varying formats, so the DSI will help CREF create a database well-suited to the kinds of statistical analysis performed on composting data. CREF will then standardize their data collection process so participating facilities adhere to best practices in both running experiments and in data collection. In the future, CREF will make the data and analysis from their partner facilities available on a public dashboard.
+The Compostable Field Testing Program (CFTP) is an international research platform providing field testing methods and kits for composters throughout North America to assess disintegration of certified compostable packaging and foodware, founded by the Compost Research & Education Foundation and BSIbio Packaging Solutions. The data submitted by facilities includes both disintegration data for the test items and composting conditions; one of the program's goals is to find correlations between different composting methodologies and the level of disintegration to enable education on the composting conditions required to break down compostable items. Facilities have historically submitted data in varying formats, so the DSI will help the CFTP create a database well-suited to the kinds of statistical analysis performed on composting data. CFTP will then standardize their data collection process so participating facilities adhere to best practices in both running experiments and in data collection. DSI has worked wtih CFTP to make the data available on a public results dashboard hosted at compostabletesting.org.
 
 ## Project Goals
 
 The DSI will be extending a data pipeline to format data from new experiments into a consistent format and creating visualizations showing disintegration rates for different materials and composting methodology. We will also create a process for importing new trial data that CREF's partner facilities will use in future trials, and start building the infrastructure for a public-facing dashboard of data from composting trials.
 
 ## Pipeline
-The data pipeline for this project does the following standardizes data from multiple facilities for display on a dashboard displaying decomposition rates of different compostable plastics as well as operating conditions of the associated facilities.
+The data pipeline for this project does the following standardizes data from multiple facilities for display on a dashboard displaying decomposition rates of different compostable materials as well as operating conditions of the associated facilities.
 
 Note: The pipeline was set up to handle multiple disparate files with varied input formats. Future data will come in a standardized format. The pipeline is left as one script for ease of iteration and refactoring later when the new data format is known.
 
@@ -53,6 +53,7 @@ Updated pipeline templates should be added to `scripts/pipeline_templates.py` an
 
 ## Dashboard
 This is a [Next.js](https://nextjs.org/) project.
+
 ### Running the Dashboard
 To run the dashboard locally, do **not** use the dev container!
 
