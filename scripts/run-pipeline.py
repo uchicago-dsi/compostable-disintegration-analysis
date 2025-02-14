@@ -1,6 +1,11 @@
 # %%
 import pandas as pd
-from constants import DATA_DIR, OUTLIER_THRESHOLD, TRIAL_DATA_PATHS
+from constants import (
+    DATA_DIR,
+    EXCLUDED_TECHNOLOGIES,
+    OUTLIER_THRESHOLD,
+    TRIAL_DATA_PATHS,
+)
 from pipeline_template import (
     CASP003Pipeline,
     CASP004Pipeline,
@@ -94,7 +99,7 @@ def main(suffix: str = ""):
     all_trials["Timepoint"] = "Final"
 
     # CFTP as of 2025 is excluding AD data from the dashboard, may include in future
-    all_trials = all_trials[all_trials["Technology"] != "Anaerobic Digestion"]
+    all_trials = all_trials[~all_trials["Technology"] in EXCLUDED_TECHNOLOGIES]
     all_trials.to_csv(output_filepath, index=False)
 
     print(

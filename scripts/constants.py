@@ -76,6 +76,8 @@ ID_TO_TECHNOLOGY_MAP = {
     "AD": "Anaerobic Digestion",
 }
 
+EXCLUDED_TECHNOLOGIES = ["Anaerobic Digestion"]
+
 # CANONICAL_COLUMNS = {
 #   "TRIAL_DETAILS": {
 #     "Technology": "Technology",
