@@ -40,9 +40,10 @@ Run the following command in your terminal from the root of the repo to create D
 ```sh
 docker-compose up
 ```
-In another terminal, run the following command to start an interactive session with the pipeline:
+
+The pipeline will automatically run with the above command. If you want to make changes or run the pipeline interactively, you can do the following: in another terminal, run the following command to start an interactive session with the pipeline:
 ```sh
-docker-compose exec pipeline sh
+docker-compose run pipeline sh
 ```
 
 To stop the session, press `control`/`command` + `c` in the terminal where you ran the first command, `docker-compose up`.
