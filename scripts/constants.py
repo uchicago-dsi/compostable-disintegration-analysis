@@ -2,6 +2,7 @@ from pathlib import Path
 
 CURRENT_DIR = Path(__file__).resolve().parent
 DATA_DIR = CURRENT_DIR / "../data/"
+APP_DATA_DIR = CURRENT_DIR / "../dashboard/data/"
 
 # TODO: Can also keep bags, etc if we want them
 TRIAL_COLS = [

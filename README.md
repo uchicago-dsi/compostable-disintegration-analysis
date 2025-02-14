@@ -32,14 +32,24 @@ Download the following files from the DSI Google Drive in the [Results Data for 
 
 File paths for these sheets are all configured in ```scripts/constants.py``` and read in `DefaultDataFrames` in ```scripts/utils.py```
 
+
 #### Docker
 The pipeline runs in Docker. If you use VS Code, this is set up to run in a [dev container](https://code.visualstudio.com/docs/devcontainers/containers), so build the container the way you normally would. Otherwise, just build the Docker image from the ```Dockerfile``` in the root of the directory.
 
-Run the following commands in your terminal from the root of the repo to create a Docker container and start an interactive session:
+Run the following command in your terminal from the root of the repo to create Docker containers for the pipeline and dashboard:
 ```sh
-docker build -t cftp_pipeline -f Dockerfile .
-docker run -it -v .:/project -t cftp_pipeline /bin/bash
+docker-compose up
 ```
+In another terminal, run the following command to start an interactive session with the pipeline:
+```sh
+docker-compose exec pipeline sh
+```
+
+To stop the session, press `control`/`command` + `c` in the terminal where you ran the first command, `docker-compose up`.
+
+Type `exit` in the terminal where you ran `docker-compose exec pipeline sh` to leave the interactive session.
+
+The dashboard will run on your computer, you can view it by going to `http://localhost:3333/` in your web browser.
 #### Running the Pipeline
 To run the pipeline:
 

@@ -10,10 +10,9 @@ pnpm-lock.yaml
 # testing
 /coverage
 
-
-public/data/all_trials_processed.csv
-public/data/operating_conditions_avg.csv
-public/data/operating_conditions_full.csv
+data/all_trials_processed*.csv
+data/operating_conditions_avg*.csv
+data/operating_conditions_full*.csv
 
 # next.js
 /.next/

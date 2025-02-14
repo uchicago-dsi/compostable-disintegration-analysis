@@ -19,10 +19,9 @@ export const getLocalPaths = (useTestData = false) => {
     useTestData
   );
   return {
-    trialDataPath: path.join(process.cwd(), "public", "data", trialsFilename),
+    trialDataPath: path.join(process.cwd(), "data", trialsFilename),
     operatingConditionsPath: path.join(
       process.cwd(),
-      "public",
       "data",
       operatingConditionsFilename
     ),

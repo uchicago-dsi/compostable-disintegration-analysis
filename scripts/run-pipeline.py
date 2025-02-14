@@ -1,6 +1,7 @@
 # %%
 import pandas as pd
 from constants import (
+    APP_DATA_DIR,
     DATA_DIR,
     EXCLUDED_TECHNOLOGIES,
     OUTLIER_THRESHOLD,
@@ -60,15 +61,6 @@ def main(suffix: str = ""):
         ),
     ]
 
-    output_filepath = DATA_DIR / f"all_trials_processed{suffix}.csv"
-    operating_conditions_avg_output_path = (
-        DATA_DIR / f"operating_conditions_avg{suffix}.csv"
-    )
-    operating_conditions_output_path = (
-        DATA_DIR / f"operating_conditions_full{suffix}.csv"
-    )
-
-    print(f"Saving all trials to {output_filepath}")
     all_trials = pd.concat(
         [trial.run() for trial in trials_to_run], ignore_index=True
     )
@@ -99,12 +91,10 @@ def main(suffix: str = ""):
     all_trials["Timepoint"] = "Final"
 
     # CFTP as of 2025 is excluding AD data from the dashboard, may include in future
-    all_trials = all_trials[~all_trials["Technology"] in EXCLUDED_TECHNOLOGIES]
-    all_trials.to_csv(output_filepath, index=False)
+    all_trials = all_trials[
+        ~all_trials["Technology"].isin(EXCLUDED_TECHNOLOGIES)
+    ]
 
-    print(
-        f"Saving average conditions to {operating_conditions_avg_output_path}"
-    )
     # Make sure all trial IDs are represented in operating conditions
     unique_trial_ids = pd.DataFrame(
         all_trials["Trial ID"].unique(), columns=["Trial ID"]
@@ -115,19 +105,30 @@ def main(suffix: str = ""):
         right_index=True,
         how="left",
     )
-    df_operating_conditions_avg.to_csv(
-        operating_conditions_avg_output_path, index_label="Trial ID"
-    )
-
-    print(f"Saving full conditions data to {operating_conditions_output_path}")
-    # Save full operating conditions data
     df_operating_conditions = pd.concat(
         [default_dfs.df_temps, default_dfs.df_moisture, default_dfs.df_o2],
         axis=0,
     )
-    df_operating_conditions.to_csv(
-        operating_conditions_output_path, index=True, index_label="Time Step"
-    )
+    for OUTPUT_DIR in [APP_DATA_DIR, DATA_DIR]:
+        trials_outpath = OUTPUT_DIR / f"all_trials_processed{suffix}.csv"
+        operating_conditions_avg_outpath = (
+            OUTPUT_DIR / f"operating_conditions_avg{suffix}.csv"
+        )
+        operating_conditions_outpath = (
+            OUTPUT_DIR / f"operating_conditions_full{suffix}.csv"
+        )
+
+        print(f"Saving data to {OUTPUT_DIR}")
+        all_trials.to_csv(trials_outpath, index=False)
+        df_operating_conditions_avg.to_csv(
+            operating_conditions_avg_outpath,
+            index_label="Trial ID",
+        )
+        df_operating_conditions.to_csv(
+            operating_conditions_outpath,
+            index=True,
+            index_label="Time Step",
+        )
 
     print("Complete!")
 

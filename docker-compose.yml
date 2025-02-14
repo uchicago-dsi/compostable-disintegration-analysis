@@ -1,0 +1,28 @@
+services:
+  pipeline:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: cftp_pipeline
+    volumes:
+      - .:/project
+    stdin_open: true
+    tty: true
+    command: ["sh"]
+    depends_on:
+      - dashboard
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: cftp_dashboard
+    volumes:
+      - ./dashboard:/app # Mount the app folder for hot reloading
+    environment:
+      - DATA_SOURCE=local
+      - DATA_VERSION_ID=
+
+    ports:
+      - "3333:3333"
+    command: sh -c "pnpm dev"
