@@ -6,6 +6,7 @@ from constants import (
     EXCLUDED_TECHNOLOGIES,
     OUTLIER_THRESHOLD,
     TRIAL_DATA_PATHS,
+    USE_LEGACY_DATA_FORMATS,
 )
 from pipeline_template import (
     CASP003Pipeline,
@@ -24,42 +25,51 @@ def main(suffix: str = ""):
         NewTemplatePipeline(
             TRIAL_DATA_PATHS.get("NEW_TEMPLATE_PATH"),
             trial_name="OCT_22_PARTIAL",
-        ),
-        CASP004Pipeline(
-            TRIAL_DATA_PATHS.get("CASP004_PATH"),
-            sheet_name=1,
-            trial_name="casp004",
-        ),
-        ClosedLoopPipeline(
-            TRIAL_DATA_PATHS.get("TEN_TRIALS_PATH"), trial_name="closed_loop"
-        ),
-        PDFPipeline(
-            TRIAL_DATA_PATHS.get("PDF_TRIALS"),
-            trial_name="ad001",
-            sheet_name=0,
-            skiprows=1,
-        ),
-        PDFPipeline(
-            TRIAL_DATA_PATHS.get("PDF_TRIALS"), trial_name="wr001", sheet_name=1
-        ),
-        PDFPipeline(
-            TRIAL_DATA_PATHS.get("PDF_TRIALS"),
-            trial_name="casp001",
-            sheet_name=2,
-        ),
-        CASP003Pipeline(
-            TRIAL_DATA_PATHS.get("PDF_TRIALS"),
-            trial_name="casp003",
-            sheet_name=3,
-            weight_col="Final Residual Weight - wet - aggregate",
-        ),
-        PDFPipeline(
-            TRIAL_DATA_PATHS.get("PDF_TRIALS"),
-            trial_name="wr003",
-            sheet_name=4,
-            weight_col="Final Residual Weight - wet",
-        ),
+        )
     ]
+
+    if USE_LEGACY_DATA_FORMATS is True:
+        trials_to_run.extend(
+            [
+                CASP004Pipeline(
+                    TRIAL_DATA_PATHS.get("CASP004_PATH"),
+                    sheet_name=1,
+                    trial_name="casp004",
+                ),
+                ClosedLoopPipeline(
+                    TRIAL_DATA_PATHS.get("TEN_TRIALS_PATH"),
+                    trial_name="closed_loop",
+                ),
+                PDFPipeline(
+                    TRIAL_DATA_PATHS.get("PDF_TRIALS"),
+                    trial_name="ad001",
+                    sheet_name=0,
+                    skiprows=1,
+                ),
+                PDFPipeline(
+                    TRIAL_DATA_PATHS.get("PDF_TRIALS"),
+                    trial_name="wr001",
+                    sheet_name=1,
+                ),
+                PDFPipeline(
+                    TRIAL_DATA_PATHS.get("PDF_TRIALS"),
+                    trial_name="casp001",
+                    sheet_name=2,
+                ),
+                CASP003Pipeline(
+                    TRIAL_DATA_PATHS.get("PDF_TRIALS"),
+                    trial_name="casp003",
+                    sheet_name=3,
+                    weight_col="Final Residual Weight - wet - aggregate",
+                ),
+                PDFPipeline(
+                    TRIAL_DATA_PATHS.get("PDF_TRIALS"),
+                    trial_name="wr003",
+                    sheet_name=4,
+                    weight_col="Final Residual Weight - wet",
+                ),
+            ]
+        )
 
     all_trials = pd.concat(
         [trial.run() for trial in trials_to_run], ignore_index=True

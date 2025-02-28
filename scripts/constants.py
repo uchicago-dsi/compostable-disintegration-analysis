@@ -1,5 +1,6 @@
 from pathlib import Path
 
+USE_LEGACY_DATA_FORMATS = True  # Or False
 CURRENT_DIR = Path(__file__).resolve().parent
 DATA_DIR = CURRENT_DIR / "../data/"
 APP_DATA_DIR = CURRENT_DIR / "../dashboard/data/"
