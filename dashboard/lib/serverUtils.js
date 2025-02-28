@@ -2,14 +2,14 @@ import * as d3 from "d3";
 import { Storage } from "@google-cloud/storage";
 import fs from "fs/promises";
 
-const serviceAccountKey = JSON.parse(
-  Buffer.from(
-    process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64,
-    "base64"
-  ).toString("ascii")
-);
-
 export const fetchCloudData = async (filename, bucketName) => {
+  const serviceAccountKey = JSON.parse(
+    Buffer.from(
+      process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64,
+      "base64"
+    ).toString("ascii")
+  );
+
   const storage = new Storage({
     credentials: serviceAccountKey,
   });

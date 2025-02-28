@@ -1,7 +1,7 @@
 import path from "path";
 import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
 
-export const dataSource = process.env.DATA_SOURCE;
+export const dataSource = process.env.DATA_SOURCE || 'local';
 export const bucketName = "cftp_data";
 export const getFileNames = (useTestData = false) => {
   return {

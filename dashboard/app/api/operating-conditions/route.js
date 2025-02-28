@@ -1,11 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchCloudData, fetchLocalData } from "@/lib/serverUtils";
-
-const bucketName = "cftp_data";
-const getTrialsFilename = (useTestData = false) =>
-  `operating_conditions_full${process.env.DATA_VERSION_ID || ""}${
-    useTestData ? "_test" : ""
-  }.csv`;
+import { loadData } from "../constants";
 
 const mappings = {
   IV: "In-Vessel",
@@ -45,9 +39,8 @@ const replaceTrialNames = (data) => {
 
 export async function GET(request) {
   const useTestData = request.headers.get("use-test-data") === "true";
-  const trialsFilename = getTrialsFilename(useTestData);
   try {
-    let data = await fetchCloudData(trialsFilename, bucketName);
+    let data = await loadData(useTestData).then(r => r.operatingConditions);
     const updatedData = replaceTrialNames(data);
     return NextResponse.json(updatedData);
   } catch (error) {
