@@ -40,7 +40,9 @@ const replaceTrialNames = (data) => {
 export async function GET(request) {
   const useTestData = request.headers.get("use-test-data") === "true";
   try {
-    let data = await loadData(useTestData).then(r => r.operatingConditions);
+    let data = await loadData(useTestData).then(
+      (r) => r.operatingConditionsFull
+    );
     const updatedData = replaceTrialNames(data);
     return NextResponse.json(updatedData);
   } catch (error) {
